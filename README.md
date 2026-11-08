@@ -32,6 +32,20 @@ python3 -m http.server 8000 --directory public
 
 Dann `http://localhost:8000` öffnen. Für den 360°-Viewer wird einmalig die Pannellum-Bibliothek über ein CDN geladen. Solange keine Panoramabilder vorhanden sind, kann man ein lokales equirectangulares Testbild hochladen.
 
+## Interaktive 360°-Testversion (drei Szenen)
+
+Es gibt drei KI-generierte **2:1-Testbilder** als separates ZIP im zugehörigen Chat. Im Repository bleibt der Viewer bis zum Einfügen dieser Bilddateien ohne Panorama. Im ZIP ist außerdem ein vollständig lokaler, CDN-unabhängiger WebGL-Viewer enthalten.
+
+Zum Testen im geklonten Repository:
+
+1. Die drei JPG-Dateien aus dem ZIP nach `public/assets/panoramas/` kopieren.
+2. `python3 -m http.server 8000 --directory public` ausführen.
+3. `http://localhost:8000` öffnen, per Maus drehen/zoomen und **Naht prüfen**.
+
+Schritt-für-Schritt-Anleitung und technische Grenzen: [docs/LOCAL_360_TEST.md](docs/LOCAL_360_TEST.md).
+
+**Ein 360°-Bild ist nicht dasselbe wie ein frei begehbares 3D-Modell.** Die KI-Bilder sind noch nicht auf vollständige 360°-Nahtlosigkeit geprüft und bleiben deshalb Testmaterial (0/60 freigegeben).
+
 ## Auf Vercel bereitstellen (noch nicht deployed)
 
 1. Auf [vercel.com/new](https://vercel.com/new) das private GitHub-Repository `Matteo-Winter/FactoryGuessr` importieren und gegebenenfalls den Zugriff für Vercel erlauben.
