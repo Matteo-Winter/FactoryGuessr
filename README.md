@@ -70,6 +70,22 @@ python3 scripts/generate_skybox.py gb-1840-textile-mill
 
 Das exportiert den Prompt und die Bildvorgaben (**kein API-Aufruf, keine Kosten**). Zur anschließenden manuellen Generierung und Qualitätsprüfung siehe `docs/PANORAMA_PIPELINE.md`. Niemals Zugangsdaten ins Repo oder ins Frontend schreiben.
 
+## 360°-Qualitätskontrolle und nächste Bildpipeline
+
+- [Recherche: native 360°-Generatoren, Preise und 1-Szenen-Testplan](docs/360_GENERATION_OPTIONS_2026-11-08.md)
+- [Aktuelle Arbeitsaufgabe für Claude Code: Issue #3](https://github.com/Matteo-Winter/FactoryGuessr/issues/3)
+- Die Bilder sind weiterhin **nicht** historisch/optisch freigegeben (0/60), obwohl der Viewer technisch funktioniert.
+
+Optionale lokale Diagnostik (Pillow und NumPy, **keine** API-Aufrufe):
+
+```bash
+python3 -m pip install -r requirements-qa.txt
+python3 scripts/check_panorama.py public/assets/panoramas/*.jpg
+python3 -m unittest discover -s tests -p 'test_*.py' -v
+```
+
+Die Ergebnisse zeigen Bildgröße, Farbbruch an der 360°-Naht und Hinweise auf problematische Pole. **Kein Messwert ersetzt die Sichtprüfung im Viewer; das Skript kann Bilder ausdrücklich nicht freigeben.**
+
 ## Arbeitsprinzip
 
 **Zuerst 3 Panoramen erfolgreich generieren und im Browser testen, anschließend auf mindestens 60 skalieren.** Historisch plausible Details sind wichtiger als erfundene Beschilderungen, die sofort die richtige Antwort verraten.
