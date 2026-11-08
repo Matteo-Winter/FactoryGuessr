@@ -18,7 +18,21 @@ Eigener reproduzierter Baseline-Befund mit `scripts/check_panorama.py` (Werte si
 
 ## Kandidaten (Fakten laut Anbieter- und Projektquellen)
 
-### A — Skybox AI, Blockade Labs (bevorzugter erster Praxisversuch)
+### 0 — PanoPulse (kostenloser Vorabtest vor einem Abo)
+
+**Neu geprüft am 08.11.2026.** PanoPulse wirbt mit Text-/Bild-zu-360° und equirectangularem Export sowie *25 kostenlosen Generierungen bei Registrierung, ohne Kreditkarte oder Wasserzeichen*. Die Generatoroberfläche zeigt jedoch **3 Credits pro Aufruf**, während die FAQ von 25 **Generierungen** spricht: Wie diese beiden Angaben zusammenpassen, ist **nicht verifiziert**. Die Tarifseite nennt Basic **$14.90/Monat mit 4K und 1000 Credits**, aber eine **4K-Exportberechtigung im Gratis-Konto ist nicht klar belegt**. Keine Aussage über einen kostenlosen 4K-Export treffen, bevor er tatsächlich heruntergeladen und gemessen wurde.
+
+Der Dienst ist jünger, mit wenig belastbarer unabhängiger QA. Seine AGB garantieren ausdrücklich **weder Bildqualität noch nahtlose Projektion**, und Uploads/Ergebnisse können durch externe Dienstleister verarbeitet werden. Deshalb: nur einen **nicht vertraulichen Textprompt** testen, keine historischen Fremdbilder/privaten Daten hochladen. Ohne Nutzungsbedingungen/Ausgaberechte und 4K-Datei bleibt der Test **unveröffentlicht und ungeprüft**. Claude erstellt keine Accounts ohne direkte Nutzeraktion und autorisiert **keine Zahlung**.
+
+Vorgeschalteter No-Cost-Test: im öffentlichen Generator prüfen, ob Registrierung notwendig ist; bei Zugang genau **eine** britische Textilmühle aus dem bestehenden Briefing als Text-to-360 generieren und, falls kostenlos erlaubt, als Original-equirectangular JPG/PNG exportieren. Falls kostenlos **kein** Export möglich ist: stoppen und Skybox Standard als bevorzugte bezahlte Alternative empfehlen. Das Design-/Qualitätsgate bleibt unverändert.
+
+Quellen:
+- https://panopulse.com/
+- https://panopulse.com/panorama
+- https://panopulse.com/panorama/pricing
+- https://panopulse.com/terms
+
+### A — Skybox AI, Blockade Labs (bevorzugter **bezahlter** Praxisversuch)
 
 - **Modell 4:** nativer 360°-Skybox-Export **4096×2048**, Standard = **3 Credits** pro Bild, Enhanced = **6 Credits**; nur Standard- oder Business-Abo. Modell 4 unterstützt 1K/2K/4K-Exporte, **keinen nativen 8K-Export**. Modell-3-Ausgabe dagegen **8192×4096**, **1 Credit** pro Bild. *Mehr Pixel = nicht automatisch bessere Bildgestaltung.*
 - **Image2Pano:** Seit **13.10.2026** in aktueller **Staging-Dokumentation** erwähnt; Model 4, 3 Credits, Eingabe `image_to_pano_init_image`; `variant_id` darf dabei nicht mitgegeben werden. Produktwebsite bewirbt Image2Pano als verfügbar. **Vor API-Nutzung in Live-Konto/API verifizieren**, ob Feature und Parameter in Production tatsächlich freigeschaltet sind; Produktions-Changelog kann nachhinken.
@@ -56,15 +70,16 @@ Quelle: https://github.com/Tangshitao/MVDiffusion
 
 ## Vorgeschlagene Versuchsanordnung
 
-1. **Nur ein Pilot:** `gb-1840-textile-mill` als Text-to-360 über Skybox Model 4 Standard (nicht die alten fehlerhaften 2:1-Panoramen als vermeintlich korrekte `init_image` benutzen).
-2. Optional ein Model-3-Panorama desselben Briefings als günstigere 8K-Baseline (nur wenn im Account erlaubt und nach Kostenfreigabe).
-3. Optional **Image2Pano** aus einem *gewöhnlichen perspektivischen Foto* (nicht dem alten 2:1-Weitwinkelbild) testen, wenn historische Referenztreue wichtiger als reine sphärische Qualität ist. Vorher verfügbare Produktionsfunktion prüfen.
-4. **Echte heruntergeladene Bilddatei** unabhängig prüfen:
+1. **Ohne Zahlung vorprüfen:** PanoPulse-Selbstaussagen zu Gratis-Generierung, Export und Auflösung praktisch bestätigen; nur wenn eine echte herunterladbare 4K-Datei vorliegt, mit unserem QA-Gate bewerten. Ansonsten **keinen Schein-PASS** aus einem Browser-Preview ableiten.
+2. **Bezahlte Alternative bei ungenügendem Gratis-Test und nach ausdrücklicher Budgetfreigabe:** `gb-1840-textile-mill` als Text-to-360 über Skybox Model 4 Standard (nicht die alten fehlerhaften 2:1-Panoramen als vermeintlich korrekte `init_image` benutzen).
+3. Optional ein Model-3-Panorama desselben Briefings als günstigere 8K-Baseline (nur wenn im Account erlaubt und nach Kostenfreigabe).
+4. Optional **Image2Pano** aus einem *gewöhnlichen perspektivischen Foto* (nicht dem alten 2:1-Weitwinkelbild) testen, wenn historische Referenztreue wichtiger als reine sphärische Qualität ist. Vorher verfügbare Produktionsfunktion prüfen.
+5. **Echte heruntergeladene Bilddatei** unabhängig prüfen:
    - Pixelgröße, equirectangular 2:1.
    - `python3 -m pip install -r requirements-qa.txt` und `python3 scripts/check_panorama.py <pfad> --json`.
    - Pannellum-Rundblick **360°**, Naht bei `±180°`, Zenit `+90°`, Nadir `-90°`, vier Queransichten, Maschinen-/Arbeiterverzerrungen und historischen Realismus *manuell* kontrollieren.
    - Ergebnisdatei, Prompt, Modell/Style, Seed, Ausgabedatum, Ausgaben/Credits, Nutzungsrechte und 6 Screenshots als Nachweis in privater Arbeitsdokumentation speichern.
-5. Nur nach **visuell bestätigter Qualitätsprüfung** Status `ready`; bis dahin `approved_panorama_count=0`.
+6. Nur nach **visuell bestätigter Qualitätsprüfung** Status `ready`; bis dahin `approved_panorama_count=0`.
 
 ### Historisches Text-zu-360-Briefing, Pilot Großbritannien ca. 1840
 
