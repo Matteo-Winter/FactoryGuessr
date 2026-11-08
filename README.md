@@ -16,21 +16,36 @@ Ein historisches GeoGuessr-artiges Lernspiel für die ZuWi-Vertiefung **„Von H
 
 ## Repository
 
-- `data/scenes.json` — Pilot-Szenenkonzepte, Metadaten, Prompts, Bildpfade und Freigabestatus.
+- `public/data/scenes.json` — Pilot-Szenenkonzepte, Metadaten, Prompts, Bildpfade und Freigabestatus.
 - `docs/PANORAMA_PIPELINE.md` — Generierungs- und Qualitätskontrollprozess.
 - `scripts/generate_skybox.py` — lokaler Prompt-/Job-Exporter für eine spätere manuelle Panorama-Generierung (**ohne API-Aufruf und ohne Kosten**).
-- `assets/panoramas/` — später die tatsächlichen JPG/PNG-Panoramen.
-- `index.html` — erster 360°-Browser-Viewer mit Bild-Upload und Probe-Ratefunktion.
+- `public/assets/panoramas/` — später die tatsächlichen JPG/PNG-Panoramen.
+- `public/index.html` — erster 360°-Browser-Viewer mit Bild-Upload und Probe-Ratefunktion.
 
 ## Lokal starten
 
 ```bash
 git clone https://github.com/Matteo-Winter/FactoryGuessr.git
 cd FactoryGuessr
-python3 -m http.server 8000
+python3 -m http.server 8000 --directory public
 ```
 
 Dann `http://localhost:8000` öffnen. Für den 360°-Viewer wird einmalig die Pannellum-Bibliothek über ein CDN geladen. Solange keine Panoramabilder vorhanden sind, kann man ein lokales equirectangulares Testbild hochladen.
+
+## Auf Vercel bereitstellen (noch nicht deployed)
+
+1. Auf [vercel.com/new](https://vercel.com/new) das private GitHub-Repository `Matteo-Winter/FactoryGuessr` importieren und gegebenenfalls den Zugriff für Vercel erlauben.
+2. Einstellungen: **Root Directory:** `./`, **Framework Preset:** `Other`, **Build Command:** leer/kein Build, **Output Directory:** `public`. `vercel.json` definiert Framework und Output Directory bereits.
+3. Auf **Deploy** klicken. Bei späteren Pushes auf `main` kann Vercel automatisch neue Versionen deployen, sobald die Git-Integration eingerichtet ist.
+
+Das Repository wurde lediglich vorbereitet: **Es ist noch kein Deployment ausgeführt worden.** Ohne fertige Bilddateien wird im Viewer die Platzhalteransicht angezeigt.
+
+## Bilder einfügen
+
+- Echte geprüfte 360°-Datei (2:1) nach `public/assets/panoramas/<scene-id>.jpg` speichern.
+- Eintrag in `public/data/scenes.json` ergänzen bzw. nach Prüfung `scene_status` auf `ready` setzen.
+- `panorama_path` bleibt relativ zur Website, z.B. `assets/panoramas/gb-1840-textile-mill.jpg`. Nicht `public/` in den Bild-URL schreiben.
+- `public/assets/thumbnails/` ist für spätere Vorschaubilder vorbereitet.
 
 ## Bilder generieren
 

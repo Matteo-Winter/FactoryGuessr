@@ -15,10 +15,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("scene_id", help="Scene id from data/scenes.json")
+    parser.add_argument("scene_id", help="Scene id from public/data/scenes.json")
     parser.add_argument("--output", type=Path, help="Optional destination for job JSON")
     args = parser.parse_args()
-    data = json.loads((ROOT / "data/scenes.json").read_text(encoding="utf-8"))
+    data = json.loads((ROOT / "public/data/scenes.json").read_text(encoding="utf-8"))
     scenes = {item["id"]: item for item in data["scenes"]}
     if args.scene_id not in scenes:
         parser.error("Unknown scene ID. Choose from: " + ", ".join(scenes))
@@ -29,7 +29,8 @@ def main():
         "projection": "equirectangular",
         "aspect_ratio": "2:1",
         "target_resolution": "4096x2048",
-        "output_path": scene["panorama_path"],
+        "output_path": str(Path("public") / scene["panorama_path"]),
+        "served_url": "/" + scene["panorama_path"],
         "historic_label": scene["historical_status"],
         "status": "manual_generation_required",
         "notice": "No API call was made. Provider setup, cost and license must be verified separately.",

@@ -1,0 +1,15 @@
+# Vercel local project link and credentials
+.vercel/
+
+# Local secrets and temporary files
+.env
+.env.*
+!.env.example
+.DS_Store
+__pycache__/
+*.pyc
+node_modules/
+*.log
+
+# Generated files
+dist/
