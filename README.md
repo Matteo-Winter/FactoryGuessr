@@ -18,7 +18,7 @@ Ein historisches GeoGuessr-artiges Lernspiel für die ZuWi-Vertiefung **„Von H
 
 - `data/scenes.json` — Pilot-Szenenkonzepte, Metadaten, Prompts, Bildpfade und Freigabestatus.
 - `docs/PANORAMA_PIPELINE.md` — Generierungs- und Qualitätskontrollprozess.
-- `scripts/generate_skybox.py` — optionaler API-Generator für Skybox AI, standardmäßig **Dry-Run ohne Kosten**.
+- `scripts/generate_skybox.py` — lokaler Prompt-/Job-Exporter für eine spätere manuelle Panorama-Generierung (**ohne API-Aufruf und ohne Kosten**).
 - `assets/panoramas/` — später die tatsächlichen JPG/PNG-Panoramen.
 - `index.html` — erster 360°-Browser-Viewer mit Bild-Upload und Probe-Ratefunktion.
 
@@ -38,7 +38,7 @@ Dann `http://localhost:8000` öffnen. Für den 360°-Viewer wird einmalig die Pa
 python3 scripts/generate_skybox.py gb-1840-textile-mill
 ```
 
-Das zeigt zuerst nur die geplante Anfrage (**kein API-Aufruf, keine Kosten**). Für echte Generierung siehe `docs/PANORAMA_PIPELINE.md`. Niemals Zugangsdaten ins Repo oder ins Frontend schreiben.
+Das exportiert den Prompt und die Bildvorgaben (**kein API-Aufruf, keine Kosten**). Zur anschließenden manuellen Generierung und Qualitätsprüfung siehe `docs/PANORAMA_PIPELINE.md`. Niemals Zugangsdaten ins Repo oder ins Frontend schreiben.
 
 ## Arbeitsprinzip
 
