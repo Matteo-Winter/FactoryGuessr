@@ -21,13 +21,16 @@
     button:hover{background:#f3c184}h2{font-size:19px;margin:0}#result{background:#27343c;border:1px solid #465b67;padding:15px;border-radius:10px;line-height:1.5;display:none}
     #result.show{display:block}.pill{display:inline-block;font-size:12px;color:#ffdea3;border:1px solid #906e3e;padding:4px 9px;border-radius:20px}
     .small{font-size:13px;color:#bbc4c9;line-height:1.5}.file-input{font-size:12px}
+    #seam{position:absolute;z-index:4;right:18px;bottom:18px;width:auto;background:#182329ec;color:#f0d6a4;border:1px solid #6d7980;font-size:13px;padding:10px 13px}
+    #seam:disabled{opacity:.35;cursor:not-allowed}
+    #stage{overflow:hidden}
     @media(max-width:920px){main{grid-template-columns:1fr}aside{border-left:0;border-top:1px solid #344047}#stage,#panorama{min-height:400px}}
   </style>
 </head>
 <body>
 <header><div><h1>MADE IN TIME</h1><p>Guess where. Guess when.</p></div><span class="pill">360° PILOT · 0/60 FREIGEGEBEN</span></header>
 <main>
-  <section id="stage"><div id="panorama"></div><div id="empty"><div><h2>Noch kein Panorama verfügbar</h2><p class="small">Die ersten drei historischen Szenen sind vorbereitet. Lade ein lokales 360°-Testpanorama (equirectangular, 2:1) hoch, um dich schon jetzt umzusehen.</p></div></div></section>
+  <section id="stage"><div id="panorama"></div><button id="seam" type="button" disabled title="Zum Panorama-Übergang bei 0/360° drehen">Naht prüfen · 180°</button><div id="empty"><div><h2>Noch kein Panorama verfügbar</h2><p class="small">Die ersten drei historischen Szenen sind vorbereitet. Lade ein lokales 360°-Testpanorama (equirectangular, 2:1) hoch, um dich schon jetzt umzusehen.</p></div></div></section>
   <aside>
     <div><label for="scene">Pilot-Szene</label><select id="scene"></select></div>
     <div><label for="upload">Eigenes 360°-Testbild laden</label><input class="file-input" id="upload" type="file" accept="image/jpeg,image/png,image/webp"><p class="small" id="imageStatus">Keine Bilddatei geladen.</p></div>
@@ -46,20 +49,20 @@ const $=id=>document.getElementById(id);
 const periods=[[1600,1749],[1750,1849],[1850,1913],[1914,1945],[1946,1989],[1990,2026]];
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function current(){return scenes.find(s=>s.id===$('scene').value);}
-function showImage(url){if(!window.pannellum){$('imageStatus').textContent='Pannellum konnte nicht geladen werden (Internetverbindung prüfen).';return;}
+function showImage(url){if(!window.pannellum){$('imageStatus').textContent='Pannellum konnte nicht geladen werden (Internetverbindung prüfen).';return false;}
 if(viewer){viewer.destroy();viewer=null;}
 $('empty').style.display='none'; viewer=pannellum.viewer('panorama',{type:'equirectangular',panorama:url,autoLoad:true,showControls:true,compass:false,mouseZoom:true});
-hasImage=true;}
+hasImage=true;$('seam').disabled=false;return true;}
 async function openScene(){
 $('result').classList.remove('show');$('country').value='';$('period').value='';
 if(uploadedUrl){URL.revokeObjectURL(uploadedUrl);uploadedUrl=null;}
-$('upload').value='';hasImage=false;const s=current();if(!s)return;
+$('upload').value='';hasImage=false;$('seam').disabled=true;const s=current();if(!s)return;
 try {const r=await fetch(s.panorama_path,{method:'HEAD'});if(!r.ok)throw new Error('not found');
-showImage(s.panorama_path);$('imageStatus').textContent='Panorama der Szene geladen.';}
+if(showImage(s.panorama_path))$('imageStatus').textContent='Testpanorama geladen – Rundumblick möglich; Naht und Geometrie noch ungeprüft.';}
 catch {if(viewer){viewer.destroy();viewer=null;}$('empty').style.display='flex';$('imageStatus').textContent='Für diese Szene ist noch kein freigegebenes Panorama vorhanden.';}
 }
 try {const r=await fetch('data/scenes.json');if(!r.ok)throw Error('JSON fehlt');const data=await r.json();scenes=data.scenes||[];
-scenes.forEach(s=>{const o=document.createElement('option');o.value=s.id;o.textContent=s.country_de+' · ca. '+s.year+' · '+s.site_type;$('scene').appendChild(o);});
+scenes.forEach((s,i)=>{const o=document.createElement('option');o.value=s.id;o.textContent='Szene '+String(i+1).padStart(2,'0')+' · '+(s.industry||'Produktionsort');$('scene').appendChild(o);});
 $('scene').addEventListener('change',openScene);if(scenes.length)await openScene();}
 catch(e){$('imageStatus').textContent='Szenenliste nicht verfügbar. Bitte lokalen HTTP-Server starten.';}
 $('upload').addEventListener('change',e=>{const f=e.target.files?.[0];if(!f)return;
@@ -68,6 +71,7 @@ const im=new Image();const u=URL.createObjectURL(f);im.onload=()=>{if(im.width!=
 if(uploadedUrl)URL.revokeObjectURL(uploadedUrl);uploadedUrl=u;showImage(u);
 $('imageStatus').textContent='Lokales Testpanorama: '+f.name+' ('+im.width+'×'+im.height+').';};
 im.onerror=()=>{URL.revokeObjectURL(u);$('imageStatus').textContent='Bild konnte nicht gelesen werden.';};im.src=u;});
+$('seam').addEventListener('click',()=>{if(viewer)viewer.setYaw(180);});
 $('guess').addEventListener('click',()=>{const s=current();if(!s)return;
 const p=periods.find(([a,b])=>s.year>=a&&s.year<=b);const entered=$('period').value;
 const countryOk=$('country').value===s.country_de,yearOk=p&&entered===String(p[0]);
