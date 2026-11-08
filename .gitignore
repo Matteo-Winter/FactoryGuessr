@@ -13,3 +13,8 @@ node_modules/
 
 # Generated files
 dist/
+
+# Local panorama QA exports (scripts/export_panorama_views.py)
+qa-output/
+# Unapproved external panorama candidates (see docs/PANORAMA_QA_PROBES.md)
+qa-candidates/
