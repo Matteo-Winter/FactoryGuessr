@@ -21,7 +21,7 @@ Die drei generierten **2:1-Testpanoramen** (1774 × 887 Pixel) sind für einen p
    cd FactoryGuessr
    ```
 
-2. Die drei **JPG-Bilddateien aus dem im Chat bereitgestellten 360°-Test-ZIP** in `public/assets/panoramas/` ablegen. Die Dateien müssen genau so heißen:
+2. Die drei JPG-Testbilder sind bereits im Repository enthalten – kein ZIP-Import nötig:
 
    ```text
    public/assets/panoramas/gb-1840-textile-mill.jpg
@@ -39,7 +39,7 @@ Die drei generierten **2:1-Testpanoramen** (1774 × 887 Pixel) sind für einen p
 
 5. Mit der Maus ziehen, mit dem Mausrad zoomen, `Naht prüfen` drücken und alle 3 Szenen wechseln.
 
-Der im Repository installierte Browser-Viewer nutzt **Pannellum per CDN** (Internetverbindung nötig). Im ZIP liegt **alternativ** eine vollständige, ebenfalls lokale WebGL-Version **ohne CDN**. Die beiden Viewer erfüllen dieselbe Testaufgabe, verwenden aber verschiedene Rendertechniken.
+Der Browser-Viewer im Repository nutzt **Pannellum 2.5.7 per jsDelivr-CDN** (Internetverbindung nötig). Historischer Hinweis: Das ursprünglich im Chat übergebene Test-ZIP enthielt zusätzlich einen alternativen WebGL-Viewer ohne CDN; er ist nicht Teil des Repositorys und nicht mehr der primäre Einstieg.
 
 ## Der entscheidende Unterschied: 360° vs. echtes 3D
 

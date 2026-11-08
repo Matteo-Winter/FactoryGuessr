@@ -12,14 +12,14 @@ Ein historisches GeoGuessr-artiges Lernspiel für die ZuWi-Vertiefung **„Von H
 - Informationen wie Land, Zeitraum und Lernkontext werden getrennt vom KI-Bild geprüft.
 - Keine automatischen Behauptungen über konkrete Unternehmen, die nicht belegt sind.
 
-**Projektstatus:** 3 erste Szenenkonzepte angelegt, **0/60 freigegebene 360°-Bilddateien**. Bilder werden erst nach Sichtprüfung als `ready` markiert.
+**Projektstatus:** 3 erste Szenenkonzepte mit je einem KI-generierten 2:1-Testbild im Repository, **0/60 historisch und geometrisch freigegebene Panoramen**. Bilder werden erst nach Sichtprüfung als `ready` markiert.
 
 ## Repository
 
 - `public/data/scenes.json` — Pilot-Szenenkonzepte, Metadaten, Prompts, Bildpfade und Freigabestatus.
 - `docs/PANORAMA_PIPELINE.md` — Generierungs- und Qualitätskontrollprozess.
 - `scripts/generate_skybox.py` — lokaler Prompt-/Job-Exporter für eine spätere manuelle Panorama-Generierung (**ohne API-Aufruf und ohne Kosten**).
-- `public/assets/panoramas/` — später die tatsächlichen JPG/PNG-Panoramen.
+- `public/assets/panoramas/` — Panoramabilder; derzeit drei KI-generierte 2:1-Testbilder (nicht freigegeben).
 - `public/index.html` — erster 360°-Browser-Viewer mit Bild-Upload und Probe-Ratefunktion.
 
 ## Lokal starten
@@ -30,17 +30,18 @@ cd FactoryGuessr
 python3 -m http.server 8000 --directory public
 ```
 
-Dann `http://localhost:8000` öffnen. Für den 360°-Viewer wird einmalig die Pannellum-Bibliothek über ein CDN geladen. Solange keine Panoramabilder vorhanden sind, kann man ein lokales equirectangulares Testbild hochladen.
+Dann `http://localhost:8000` öffnen. Für den 360°-Viewer wird die Pannellum-Bibliothek (v2.5.7) über das jsDelivr-CDN geladen. Zusätzlich kann man ein eigenes lokales equirectangulares Testbild hochladen.
 
 ## Interaktive 360°-Testversion (drei Szenen)
 
-Es gibt drei KI-generierte **2:1-Testbilder** als separates ZIP im zugehörigen Chat. Im Repository bleibt der Viewer bis zum Einfügen dieser Bilddateien ohne Panorama. Im ZIP ist außerdem ein vollständig lokaler, CDN-unabhängiger WebGL-Viewer enthalten.
+Die drei KI-generierten **2:1-Testbilder** (1774 × 887 px) liegen im Repository unter `public/assets/panoramas/`. Es muss nichts mehr manuell kopiert werden.
 
 Zum Testen im geklonten Repository:
 
-1. Die drei JPG-Dateien aus dem ZIP nach `public/assets/panoramas/` kopieren.
-2. `python3 -m http.server 8000 --directory public` ausführen.
-3. `http://localhost:8000` öffnen, per Maus drehen/zoomen und **Naht prüfen**.
+1. `python3 -m http.server 8000 --directory public` ausführen.
+2. `http://localhost:8000` öffnen, Szene wählen, per Maus drehen/zoomen, Vollbild testen und **Naht prüfen**.
+
+Historischer Hinweis: Die Bilder wurden ursprünglich als ZIP aus dem ChatGPT-Chat übergeben; dieses ZIP enthielt auch einen alternativen, CDN-unabhängigen WebGL-Viewer. Das ZIP ist nicht mehr der Einstieg – maßgeblich ist dieses Repository.
 
 Schritt-für-Schritt-Anleitung und technische Grenzen: [docs/LOCAL_360_TEST.md](docs/LOCAL_360_TEST.md).
 
@@ -52,7 +53,7 @@ Schritt-für-Schritt-Anleitung und technische Grenzen: [docs/LOCAL_360_TEST.md](
 2. Einstellungen: **Root Directory:** `./`, **Framework Preset:** `Other`, **Build Command:** leer/kein Build, **Output Directory:** `public`. `vercel.json` definiert Framework und Output Directory bereits.
 3. Auf **Deploy** klicken. Bei späteren Pushes auf `main` kann Vercel automatisch neue Versionen deployen, sobald die Git-Integration eingerichtet ist.
 
-Das Repository wurde lediglich vorbereitet: **Es ist noch kein Deployment ausgeführt worden.** Ohne fertige Bilddateien wird im Viewer die Platzhalteransicht angezeigt.
+Das Repository wurde lediglich vorbereitet: **Es ist noch kein Deployment ausgeführt worden.** Fehlt für eine Szene die Bilddatei oder kann der Browser sie nicht darstellen, zeigt der Viewer eine Fehlermeldung statt eines Panoramas.
 
 ## Bilder einfügen
 

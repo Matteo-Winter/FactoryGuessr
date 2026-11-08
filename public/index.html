@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Made in Time — Guess where. Guess when.</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.7/build/pannellum.css">
   <style>
     :root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;color-scheme:dark;background:#11171c;color:#f4f1e9}
     *{box-sizing:border-box}body{margin:0}header{padding:22px clamp(16px,4vw,60px);display:flex;justify-content:space-between;gap:20px;align-items:center;border-bottom:1px solid #2d363c}
@@ -41,7 +42,7 @@
     <div class="small">Dies ist ein Test-Viewer, noch keine fertige Partie. Die Pilot-Szenen sind fiktive, historisch inspirierte Kompositszenen. Ein hochgeladenes Testbild ist nicht automatisch die gewählte Szene.</div>
   </aside>
 </main>
-<script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.7/build/pannellum.js"></script>
 <script>
 (async ()=>{
 let scenes=[],viewer=null,uploadedUrl=null,hasImage=false;
@@ -49,27 +50,29 @@ const $=id=>document.getElementById(id);
 const periods=[[1600,1749],[1750,1849],[1850,1913],[1914,1945],[1946,1989],[1990,2026]];
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function current(){return scenes.find(s=>s.id===$('scene').value);}
-function showImage(url){if(!window.pannellum){$('imageStatus').textContent='Pannellum konnte nicht geladen werden (Internetverbindung prüfen).';return false;}
+// Status is only reported after Pannellum's own load/error events, so a missing file or missing WebGL is never shown as "loaded".
+function showImage(url,loadedMsg){if(!window.pannellum){$('imageStatus').textContent='Pannellum konnte nicht geladen werden (Internetverbindung prüfen).';return false;}
 if(viewer){viewer.destroy();viewer=null;}
-$('empty').style.display='none'; viewer=pannellum.viewer('panorama',{type:'equirectangular',panorama:url,autoLoad:true,showControls:true,compass:false,mouseZoom:true});
-hasImage=true;$('seam').disabled=false;return true;}
-async function openScene(){
+hasImage=false;$('seam').disabled=true;$('imageStatus').textContent='Panorama wird geladen …';
+$('empty').style.display='none'; const v=viewer=pannellum.viewer('panorama',{type:'equirectangular',panorama:url,autoLoad:true,showControls:true,compass:false,mouseZoom:true});
+v.on('load',()=>{if(v!==viewer)return;hasImage=true;$('seam').disabled=false;$('imageStatus').textContent=loadedMsg;});
+v.on('error',()=>{if(v!==viewer)return;hasImage=false;$('seam').disabled=true;$('imageStatus').textContent='Panorama konnte nicht angezeigt werden (Datei fehlt oder Browser ohne WebGL).';});
+return true;}
+function openScene(){
 $('result').classList.remove('show');$('country').value='';$('period').value='';
 if(uploadedUrl){URL.revokeObjectURL(uploadedUrl);uploadedUrl=null;}
 $('upload').value='';hasImage=false;$('seam').disabled=true;const s=current();if(!s)return;
-try {const r=await fetch(s.panorama_path,{method:'HEAD'});if(!r.ok)throw new Error('not found');
-if(showImage(s.panorama_path))$('imageStatus').textContent='Testpanorama geladen – Rundumblick möglich; Naht und Geometrie noch ungeprüft.';}
-catch {if(viewer){viewer.destroy();viewer=null;}$('empty').style.display='flex';$('imageStatus').textContent='Für diese Szene ist noch kein freigegebenes Panorama vorhanden.';}
+if(!s.panorama_path){if(viewer){viewer.destroy();viewer=null;}$('empty').style.display='flex';$('imageStatus').textContent='Für diese Szene ist noch kein Panorama vorhanden.';return;}
+showImage(s.panorama_path,'Testpanorama geladen – Rundumblick möglich; Naht und Geometrie noch ungeprüft.');
 }
 try {const r=await fetch('data/scenes.json');if(!r.ok)throw Error('JSON fehlt');const data=await r.json();scenes=data.scenes||[];
 scenes.forEach((s,i)=>{const o=document.createElement('option');o.value=s.id;o.textContent='Szene '+String(i+1).padStart(2,'0')+' · '+(s.industry||'Produktionsort');$('scene').appendChild(o);});
-$('scene').addEventListener('change',openScene);if(scenes.length)await openScene();}
+$('scene').addEventListener('change',openScene);if(scenes.length)openScene();}
 catch(e){$('imageStatus').textContent='Szenenliste nicht verfügbar. Bitte lokalen HTTP-Server starten.';}
 $('upload').addEventListener('change',e=>{const f=e.target.files?.[0];if(!f)return;
 if(!/^image\/(jpeg|png|webp)$/.test(f.type)){$('imageStatus').textContent='Bitte JPG, PNG oder WebP wählen.';return;}
 const im=new Image();const u=URL.createObjectURL(f);im.onload=()=>{if(im.width!==im.height*2){$('imageStatus').textContent='Ungültiges 2:1-Bild ('+im.width+'×'+im.height+'). Es wird kein Panorama angezeigt.';URL.revokeObjectURL(u);return;}
-if(uploadedUrl)URL.revokeObjectURL(uploadedUrl);uploadedUrl=u;showImage(u);
-$('imageStatus').textContent='Lokales Testpanorama: '+f.name+' ('+im.width+'×'+im.height+').';};
+if(uploadedUrl)URL.revokeObjectURL(uploadedUrl);uploadedUrl=u;showImage(u,'Lokales Testpanorama: '+f.name+' ('+im.width+'×'+im.height+').');};
 im.onerror=()=>{URL.revokeObjectURL(u);$('imageStatus').textContent='Bild konnte nicht gelesen werden.';};im.src=u;});
 $('seam').addEventListener('click',()=>{if(viewer)viewer.setYaw(180);});
 $('guess').addEventListener('click',()=>{const s=current();if(!s)return;
