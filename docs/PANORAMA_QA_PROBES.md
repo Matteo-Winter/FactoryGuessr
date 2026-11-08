@@ -161,6 +161,7 @@ Ohne vollständige Herkunft: **keine Freigabe**.
 
 ### 4.3 Automatische Vorprüfung (kostenlos)
 ```bash
+mkdir -p qa-output
 python3 scripts/check_panorama.py qa-candidates/<datei>.jpg --json > qa-output/pilot-check.json
 python3 scripts/export_panorama_views.py qa-candidates/<datei>.jpg --out qa-output/pilot
 python3 scripts/export_panorama_views.py qa-candidates/<datei>.jpg --out qa-output/pilot-extra --only-custom \
