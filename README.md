@@ -7,6 +7,7 @@ Ein historisches GeoGuessr-artiges Lernspiel für die ZuWi-Vertiefung **„Von H
 ## Festgelegter Umfang
 
 - Ziel: **mindestens 60 unterschiedliche spielbare Szenen**, ca. **1600–2026**, aus mehreren Regionen und Industriezweigen.
+- **[Masterplan mit 60 konkreten Szenen, Ländern, Jahren, Produkten und Bildhinweisen](docs/SCENE_MASTERPLAN_60.md)** — Entwurf der Motivliste, keine automatische Bild- oder Geschichtsfreigabe. Vor jedem einzelnen Rendering wird eine geprüfte historische Faktenkarte angelegt.
 - V1 verwendet **360°-Panoramen (equirectangular, 2:1)** mit fester Kameraposition, **keine frei begehbaren 3D-Modelle**.
 - Historische Betriebe dürfen **plausible, KI-generierte Kompositszenen** sein. Diese werden als *Rekonstruktion* gekennzeichnet – nicht als echte historische Fotografien.
 - Informationen wie Land, Zeitraum und Lernkontext werden getrennt vom KI-Bild geprüft.
@@ -89,7 +90,7 @@ Die Ergebnisse zeigen Bildgröße, Farbbruch an der 360°-Naht und Hinweise auf 
 
 ## Arbeitsprinzip
 
-**Zuerst 3 Panoramen erfolgreich generieren und im Browser testen, anschließend auf mindestens 60 skalieren.** Historisch plausible Details sind wichtiger als erfundene Beschilderungen, die sofort die richtige Antwort verraten.
+**Zuerst den 60er-Masterplan als gemeinsame Motivliste verwenden, dann jeweils eine historische Faktenkarte (Produkt, Region, Jahr, passende Maschinen, 2 Orts- und 2 Zeitmerkmale, überprüfbare Quellen) erstellen, dann erst das Bild generieren und QA ausführen.** Die bestehende britische Textilmühle ist als visueller Stilversuch vom Nutzer ausreichend bewertet; das allein ersetzt keine historische oder equirectangulare Freigabe. Bilder sollen sich weltweit und über Epochen unterscheiden und vor der Auflösung keine Ortsnamen/Flaggen als Spoiler zeigen.
 
 Quellen zur Technik:
 - [Blockade Labs: Skybox AI](https://www.blockadelabs.com/)
