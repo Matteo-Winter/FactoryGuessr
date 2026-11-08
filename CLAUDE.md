@@ -25,6 +25,14 @@ Projekt: `Matteo-Winter/FactoryGuessr` (privat), Spieltitel **Made in Time – G
 - Vercel: statisches Hosting über `public/` (`vercel.json`), ohne notwendiges Backend; **kein Deployment ohne expliziten Auftrag**.
 - Keine Secrets committen; keine kostenpflichtigen API-Aufrufe ohne Freigabe.
 
+## Maßgeblicher Motivplan und Produktionsfreigabe (09.11.2026)
+
+- **[docs/SCENE_MASTERPLAN_60.md](docs/SCENE_MASTERPLAN_60.md)** ist der abgestimmte **Entwurf** mit 60 geplanten Produktionsszenen über sechs Epochen. Die Auswahl soll **leicht verständliche Produkte** und faire Orts-/Zeitsignale liefern, keine 60 austauschbaren Fabrikhallen.
+- **Nicht alle 60 Szenen auf einmal generieren.** Pro Motiv zuerst regional und historisch verifizieren (mindestens eine institutionelle/archivarische Quelle, idealerweise zwei unabhängige Quellen), per Faktenkarte festhalten, sichtbares Hauptprodukt, Ort, Jahr, passende Maschinen, Kleidung/Transport/Energiequelle und Anachronismen prüfen. Erst dann Rendering und 360°-QA.
+- Bei den älteren Szenen ist das Rateland der **heutige Staat**, damals abweichende Herrschaftsformen werden nach dem Raten aufgeklärt. Keine zeitfremden Flaggen, Schildaufschriften, geographische Stereotype oder erfundene Firmenbezüge einsetzen.
+- Die bereits vorhandenen 3 Pilot-IDs in `public/data/scenes.json` bleiben erhalten: `gb-1840-textile-mill`, `gt-1910-banana-packing`, `cn-2015-electronics-assembly`. Die Nutzerbewertung „Bild gut genug“ betrifft **nur den visuellen Stil** des jüngsten Textilmühlenkandidaten; noch keine automatische technische/historische Freigabe. `approved_panorama_count` bleibt 0, bis QA und explizite Freigabe erfüllt sind.
+- Die Liste darf gemeinsam angepasst werden, aber **keine `ready`-Statusänderungen, keine neuen produktiven Bildpfade und kein Deployment** ohne eigenen Prüfauftrag.
+
 ## Lokaler Start
 
 ```bash
