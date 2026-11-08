@@ -81,10 +81,11 @@ Optionale lokale Diagnostik (Pillow und NumPy, **keine** API-Aufrufe):
 ```bash
 python3 -m pip install -r requirements-qa.txt
 python3 scripts/check_panorama.py public/assets/panoramas/*.jpg
+python3 scripts/export_panorama_views.py public/assets/panoramas/*.jpg   # Prüfansichten nach qa-output/
 python3 -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
-Die Ergebnisse zeigen Bildgröße, Farbbruch an der 360°-Naht und Hinweise auf problematische Pole. **Kein Messwert ersetzt die Sichtprüfung im Viewer; das Skript kann Bilder ausdrücklich nicht freigeben.**
+Die Ergebnisse zeigen Bildgröße, Farbbruch an der 360°-Naht und Hinweise auf problematische Pole. `export_panorama_views.py` rechnet echte perspektivische Ansichten (yaw 0/90/180/270, Zenit, Nadir, Naht-Nahaufnahme) plus ein Prüfblatt `contact_sheet.jpg`, geometrisch identisch mit dem Pannellum-Viewer. Prüfablauf für einen neuen 4K-Kandidaten: [docs/PANORAMA_QA_PROBES.md](docs/PANORAMA_QA_PROBES.md). **Kein Messwert ersetzt die Sichtprüfung im Viewer; das Skript kann Bilder ausdrücklich nicht freigeben.**
 
 ## Arbeitsprinzip
 
