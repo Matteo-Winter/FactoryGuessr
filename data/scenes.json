@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "project": "Made in Time",
+  "target_scenes": 60,
+  "approved_panorama_count": 0,
+  "note": "Pilotkonzepte. Kein Bild ist generiert oder freigegeben; alle historischen Szenen sind fiktive Komposit-Rekonstruktionen.",
+  "scenes": [
+    {
+      "id": "gb-1840-textile-mill",
+      "country": "United Kingdom",
+      "country_de": "Großbritannien",
+      "year": 1840,
+      "era_start": 1825,
+      "era_end": 1855,
+      "industry": "Textilproduktion",
+      "site_type": "Baumwollspinnerei / Weberei",
+      "historical_status": "composite_reconstruction",
+      "scene_status": "concept",
+      "panorama_path": "assets/panoramas/gb-1840-textile-mill.jpg",
+      "source_image": null,
+      "overview_de": "Eine dampfbetriebene Textilmühle im frühindustriellen Großbritannien. Die dargestellte Halle ist ein historisch plausibles, fiktives Komposit.",
+      "learning_de": "Mechanisierung erhöhte die Produktivität. Baumwollimporte und globale Handelsnetze verbanden britische Textilmühlen mit kolonialen und transatlantischen Wirtschaftsstrukturen.",
+      "visual_clues": [
+        "Dampfenergie und zentrale Wellenantriebe",
+        "mechanische Webstühle oder Spinnmaschinen der ersten Hälfte des 19. Jahrhunderts",
+        "Ziegelarchitektur, hohe Fenster und Fabrikhallen"
+      ],
+      "avoid": [
+        "moderne Elektromotoren",
+        "Leuchtstoffröhren",
+        "moderne Sicherheitsschilder",
+        "lesbare Länder- oder Jahresangaben"
+      ],
+      "prompt_en": "Create one photorealistic historically plausible 360-degree equirectangular panorama, seamless left/right wrap, 2:1 aspect ratio, camera at human eye level in the center of an 1840 British cotton textile mill interior. Rows of period-appropriate mechanical looms and spinning equipment, overhead line shafts with leather transmission belts, tall brick industrial windows, soot, warm natural light, historically plausible workers and clothing. No contemporary equipment, no legible signs, no flags, no dates, no watermark, no giant close-up people. This is a composite historical reconstruction, not a photograph of a named factory."
+    },
+    {
+      "id": "gt-1910-banana-packing",
+      "country": "Guatemala",
+      "country_de": "Guatemala",
+      "year": 1910,
+      "era_start": 1895,
+      "era_end": 1925,
+      "industry": "Agrar- und Exportwirtschaft",
+      "site_type": "Bananen-Packhaus",
+      "historical_status": "composite_reconstruction",
+      "scene_status": "concept",
+      "panorama_path": "assets/panoramas/gt-1910-banana-packing.jpg",
+      "source_image": null,
+      "overview_de": "Fiktives, historisch plausibles Packhaus für Bananenexporte in Guatemala um 1910.",
+      "learning_de": "Plantagenwirtschaft und Exportlogistik waren eng verbunden. Konzessionen, Verkehrswege und die Kontrolle durch ausländische Unternehmen beeinflussten Arbeitsbedingungen und wirtschaftliche Abhängigkeiten.",
+      "visual_clues": [
+        "Holzpackhaus mit tropischer Umgebung",
+        "Bananenbündel, Holzkisten und manuelle Sortierung",
+        "historisch plausible Exportlogistik und Arbeitskleidung"
+      ],
+      "avoid": [
+        "moderne Kunststoffverpackung",
+        "Containerstapel aus der Nachkriegszeit",
+        "lesbare Firmenschilder",
+        "Flaggen",
+        "Jahreszahlen"
+      ],
+      "prompt_en": "Create one photorealistic historically plausible 360-degree equirectangular panorama, seamless left/right wrap, 2:1 aspect ratio, camera at human eye level inside a Guatemalan banana packing house circa 1910. Tropical daylight through wide shutters, wooden roof structure, workers manually handling banana bunches and wooden export crates, early 20th century work clothing, simple rails and carts consistent with the period. Historically plausible not tied to a specific existing company. No plastic film, no modern forklifts, no shipping containers, no legible company labels, no signs revealing country or date, no watermark."
+    },
+    {
+      "id": "cn-2015-electronics-assembly",
+      "country": "China",
+      "country_de": "China",
+      "year": 2015,
+      "era_start": 2005,
+      "era_end": 2026,
+      "industry": "Elektronikfertigung",
+      "site_type": "Elektronik-Montagehalle",
+      "historical_status": "composite_reconstruction",
+      "scene_status": "concept",
+      "panorama_path": "assets/panoramas/cn-2015-electronics-assembly.jpg",
+      "source_image": null,
+      "overview_de": "Fiktive moderne Elektronik-Montagehalle in China um 2015.",
+      "learning_de": "Elektronikproduktion verdeutlicht globale Wertschöpfungsketten, Just-in-Time-Logistik und die Aufteilung von Entwicklung, Fertigung und Vertrieb auf mehrere Länder.",
+      "visual_clues": [
+        "ESD-Arbeitsplätze und Leiterplattenmontage",
+        "Fördertechnik und zeitgenössische Elektronik-Teststationen",
+        "Serienfertigung, Qualitätskontrolle und Schichtorganisation"
+      ],
+      "avoid": [
+        "lesbare Herstellermarken",
+        "Flaggen",
+        "bekannte Smartphone-Logos",
+        "Zukunftsroboter",
+        "Jahreszahlen"
+      ],
+      "prompt_en": "Create one photorealistic 360-degree equirectangular panorama, seamless left/right wrap, 2:1 aspect ratio, eye-level camera in a realistic Chinese electronics assembly hall circa 2015. Clean production lines, ESD workstations with workers in appropriate garments, circuit board inspection equipment, trays, conveyor belts, fluorescent ceiling lighting and quality control stations. Realistic 2015 technology only, no recognizable logos, no readable country signs, no flags, no dates, no watermark. This is a plausible invented composite scene."
+    }
+  ]
+}
