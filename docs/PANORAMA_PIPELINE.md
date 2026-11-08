@@ -8,12 +8,12 @@
 
 - **60 Level sind das Ziel, nicht der bisherige Ist-Stand.**
 - **3 Pilot-Szenenkonzepte** stehen in `public/data/scenes.json`: Großbritannien 1840, Guatemala 1910, China 2015.
-- **0 verifizierte, fertige Panoramen**. Kein Bild ist erzeugt, geprüft oder als historisch authentisch belegt.
-- Die restlichen mindestens 57 Szenenkonzepte werden nach dem Pilot entlang der Epochen 1600–2026 ausgearbeitet.
+- **0 verifizierte, fertige Panoramen**. Drei KI-generierte 2:1-Testbilder liegen im Repository, jedoch keines ist historisch oder panorama-geometrisch freigegeben.
+- **Alle 60 konkreten Szenen** sind als **Entwurf** in [SCENE_MASTERPLAN_60.md](SCENE_MASTERPLAN_60.md) geplant (6/8/14/10/12/10); vor dem Rendering jeder Szene ist historische Quellenprüfung erforderlich.
 
 ## Produktion je Szene
 
-1. **Historisches Briefing** festlegen: Land, ca. Jahr, Branche, typische Architektur, Arbeitsweise, technische Epoche; belastbare historische Referenzen im späteren Quellenmanifest ergänzen.
+1. **Historisches Briefing** erstellen: Land (heute / damaliger Staat), ca. Jahr, klar erkennbares Hauptprodukt, regionale Architektur/Landschaft, reale Maschinen und Arbeitsweise der Zeit; mindestens eine institutionelle/archivarische Bild- oder Sachquelle plus möglichst einen weiteren Beleg **vor der Generierung**. Zwei faire Orts- und zwei Epoche-Hinweise festlegen und Anachronismen explizit ausschließen. [60er-Masterplan](SCENE_MASTERPLAN_60.md).
 2. **Prompts/Referenzen erstellen** und als `concept` speichern. Keine impliziten Behauptungen über bestimmte Unternehmen.
 3. **360°-Panorama erzeugen**, z. B. mit Skybox AI oder anderem Anbieter, der *tatsächliche* equirectangulare Panoramen exportiert. Alternativ können lizenzierte reale Panoramen verwendet werden.
 4. **Export lokal validieren**: tatsächliche Dateidimension 2:1, ausreichende Auflösung, korrekte Projektion, nahtloser 0°/360°-Übergang, keine sichtbar deformierten Personen/Maschinen, keine modernen Gegenstände in historischen Leveln.
@@ -57,4 +57,4 @@ Drittanbieter-Generierung kann kostenpflichtig sein. Die konkreten API-Endpunkte
 | 1946–1989 | 12 | Dekolonisierung, Fertigungsverlagerung |
 | 1990–2026 | 10 | Globale Wertschöpfungsketten, Automatisierung |
 
-Diese Verteilung ist eine **Projektplanung**, keine bereits bestehende Bilddatenbank. Die Herkunft eines KI-Komposits ist die *historisch modellierte Szene*, nicht der reale Aufnahmeort.
+Diese Verteilung ist eine **Projektplanung** mit 60 konkreten Motivvorschlägen in [SCENE_MASTERPLAN_60.md](SCENE_MASTERPLAN_60.md), keine bereits freigegebene Bilddatenbank. Die Herkunft eines KI-Komposits ist die *historisch modellierte Szene*, nicht der reale Aufnahmeort.
