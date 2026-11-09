@@ -42,7 +42,8 @@
     /* Score card above the start button */
     .stats{display:grid;grid-template-columns:1fr 1fr;margin-top:24px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
     .stats[hidden]{display:none}
-    .stats:not([hidden])+#startBtn{margin-top:12px}
+    .stats+#startBtn{margin-top:12px}
+    .stats dd.none{color:#737373;font-weight:500}
     .stats div{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:48px;padding:0 16px}
     .stats div+div{border-left:1px solid var(--line)}
     .stats dt{font-size:13px;font-weight:500;color:var(--muted)}
@@ -136,9 +137,9 @@
         <input id="rounds" name="rounds" type="range" min="1" max="9" step="1" value="5">
         <div class="ticks" aria-hidden="true"><span>Leicht</span><span>Mittel</span><span>Schwer</span></div>
       </div>
-      <dl class="stats" id="stats" hidden>
-        <div><dt>Rekord</dt><dd id="statBest"></dd></div>
-        <div><dt>Letzte Runde</dt><dd id="statLast"></dd></div>
+      <dl class="stats" id="stats">
+        <div><dt>Rekord</dt><dd id="statBest" class="none">–</dd></div>
+        <div><dt>Letzte Runde</dt><dd id="statLast" class="none">–</dd></div>
       </dl>
       <button id="startBtn" type="submit">Spiel starten</button>
     </form>
@@ -233,12 +234,12 @@ function syncStart(){const n=blockInputs.filter(i=>i.checked).length;$('startBtn
 try{const saved=JSON.parse(localStorage.getItem('mit-blocks'));if(Array.isArray(saved)&&saved.length)blockInputs.forEach(i=>i.checked=saved.includes(i.value));}catch(e){}
 blockInputs.forEach(i=>i.addEventListener('change',syncStart));syncStart();
 // Score card: the game will later store mit-best and mit-last-round as {"correct":n,"total":m}.
-// Hidden until a round has been played; ?demo=score shows sample values.
+// Shows dashes until a round has been played; ?demo=score shows sample values.
 (()=>{const read=k=>{try{const v=JSON.parse(localStorage.getItem(k));return v&&Number.isFinite(v.correct)&&v.total>0?v:null;}catch(e){return null;}};
   let best=read('mit-best'),last=read('mit-last-round');
   if(/[?&]demo=score\b/.test(location.search)){best={correct:7,total:9};last={correct:5,total:9};}
   if(!last)return;best=best||last;
-  $('statBest').textContent=best.correct+'/'+best.total;$('statLast').textContent=last.correct+'/'+last.total;$('stats').hidden=false;})();
+  for(const [id,v] of [['statBest',best],['statLast',last]]){$(id).textContent=v.correct+'/'+v.total;$(id).classList.remove('none');}})();
 const rounds=$('rounds');
 function syncRounds(){const v=+rounds.value;rounds.style.setProperty('--p',((v-1)/8*100)+'%');
   $('roundsOut').textContent=v+' · '+(v<=3?'Leicht':v<=6?'Mittel':'Schwer');}
