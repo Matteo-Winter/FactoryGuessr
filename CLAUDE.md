@@ -33,6 +33,13 @@ Projekt: `Matteo-Winter/FactoryGuessr` (privat), Spieltitel **Made in Time – G
 - Die bereits vorhandenen 3 Pilot-IDs in `public/data/scenes.json` bleiben erhalten: `gb-1840-textile-mill`, `gt-1910-banana-packing`, `cn-2015-electronics-assembly`. Die Nutzerbewertung „Bild gut genug“ betrifft **nur den visuellen Stil** des jüngsten Textilmühlenkandidaten; noch keine automatische technische/historische Freigabe. `approved_panorama_count` bleibt 0, bis QA und explizite Freigabe erfüllt sind.
 - Die Liste darf gemeinsam angepasst werden, aber **keine `ready`-Statusänderungen, keine neuen produktiven Bildpfade und kein Deployment** ohne eigenen Prüfauftrag.
 
+## Parallele Szenenproduktion (30/30)
+
+- **[Team-Split](docs/team/SCENE_SPLIT_30_30.md)**, **[ältere Szenen – Projektleitung](docs/team/OLDER_30_LEAD.md)** und **[neuere Szenen – Kollege](docs/team/NEWER_30_COLLEAGUE.md)** sind verbindliche Entwürfe für die Arbeitsteilung. Bei Jahrgleichheit 1925 gehören Paris/Französische Mode (Master-Nr. 32) zum älteren Team und São-Paulo-Kaffee (Nr. 34) zum neueren Team.
+- **[3D-/360°-Produktionsprompt und Quality Gates](docs/team/PRODUCTION_PLAYBOOK_360.md)** ist für beide Teams verpflichtend. Nicht einfach freie 2:1-Bilder als geometrisch korrekt ausgeben. Gerade Maschinen/Balken/Flügel müssen in der **Pannellum-Perspektive** plausibel sein.
+- Die Szene-Sperren beziehen sich auf die **Master-Nummern** (nicht die Zeilennummer nach Sortierung). Claude Code und ChatGPT können reviewen; nur zuständiger Besitzer ändert die Produktionskandidaten. Abstimmung für gemeinsame `public/data/scenes.json`-Änderungen notwendig.
+- Für Kollegen-Repositories pro Szene `colleague/scene-NN-...`-Feature-Branch und PR; für Claude-Code-Aufgaben weiterhin `claude/...`. Keine automatische `ready`-Freigabe und kein Deployment.
+
 ## Lokaler Start
 
 ```bash
