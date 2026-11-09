@@ -1,93 +1,93 @@
-# Bildproduktionsliste – Was fehlt noch? (Made in Time, 30 Szenen)
+# VERBINDLICHER BILDSTATUS – Made in Time, 30 aktive Szenen
 
-**Aktueller verbindlicher Stand: 09.11.2026, nach der visuellen Auswahl durch den Nutzer.** Es gibt **4 ausgewählte Bildreferenzen und 26 fehlende/neu zu erstellende Bildmotive**. **Die 30 Szenen selbst, ihre IDs, Orte, Jahre und Produkte bleiben unverändert.**
+**Quelle: ausdrückliche Bildprüfung des Nutzers vom 09.11.2026.** Dies ist die maßgebliche Liste für die weitere Bildarbeit. **Es gibt 30 aktive Level (16 P + 6 T + 8 E), nicht 36/37.** Der Nutzer hat insgesamt **23 Bilddateien** beurteilt: **17 Bewertungen beziehen sich auf 17 unterschiedliche aktive Szenen**, dazu **6 weitere Varianten/Nebenmotive**.
 
-**[GitHub-Issue #18: 26 Bilder mit Checkliste](https://github.com/Matteo-Winter/FactoryGuessr/issues/18)** · [Gemini-Produktionsprompt](team/GEMINI_IMAGE_HANDOFF_26.md).
+**Ergebnis der aktiven 30 Szenen: 11 × „Passt“, 6 × „Neu machen“, 13 × kein aktuelles Prüfurteil.** Für den Kollegen bleiben **19 aktive Bearbeitungspunkte**: die sechs ausdrücklich abgelehnten Bilder neu generieren und die 13 noch offenen Szenen erstellen bzw. zur Prüfung vorlegen. **„Nicht gelistet“ bedeutet nicht automatisch „abgelehnt“ oder „Datei existiert nicht“.**
 
-**Für den Kollegen:** Nutze zuerst diese Liste und [GEMINI_IMAGE_HANDOFF_26.md](team/GEMINI_IMAGE_HANDOFF_26.md) mit dem Produktionsstandard. Produziere ausschließlich die Zeilen **„Bild NEU erstellen“** (12 P + 6 T + 8 E). Die vier akzeptierten Motive nicht neu generieren.
+**Wichtig:** „Passt“ ist die **ausdrückliche visuelle Nutzerentscheidung**. Sie ersetzt **nicht** eine nachgewiesene 360°-Geometrie-/WebGL-/Historien-/Rechteprüfung und ist keine automatische `scene_status=ready`-Freigabe. Das produktive `public/data/scenes.json` bleibt bei `approved_panorama_count=0` bis zu eigenständiger Abnahme.
 
-## Produktionsstätten – 12 von 16 noch zu erstellen
+**[Gemini-Auftrag für die verbleibenden 19](team/GEMINI_IMAGE_HANDOFF_CURRENT.md)** · **[GitHub-Checkliste](https://github.com/Matteo-Winter/FactoryGuessr/issues/18)** · **[Maschinenlesbare Szenendaten](team/ACTIVE_SCENES_30.json)** · **[Historischer 30er-Plan](SCENE_MASTERPLAN_30.md)**.
 
-| ID | Jahr | Ort | Motiv/Produkt | Bildstatus | Bildproduktion |
+## A. 11 visuell akzeptierte Szenen – Bilder erhalten, nicht automatisch neu generieren
+
+| ID | Jahr | Land / Ort | Motiv | Datei laut Prüfung | Status |
 |---|---:|---|---|---|---|
-| P01 | 1660 | Niederlande, Zaandam/Zaanstreek | Holzbretter | **Bild NEU erstellen** | Kollege (Gemini) |
-| P02 | 1680 | Italien, Murano bei Venedig | Glasgefäße | **Referenz vorhanden** (QA offen) | — |
-| P03 | 1700 | China, Jingdezhen | Porzellan | **Referenz vorhanden** (QA offen) | — |
-| P04 | 1700 | Barbados, St. James / Zuckerrohrgürtel | Rohrzucker | **Bild NEU erstellen** | Kollege (Gemini) |
-| P05 | 1840 | Großbritannien, Manchester / Lancashire (Pilot) | Baumwollgarn und Stoff | **Referenz vorhanden** (QA offen) | — |
-| P06 | 1880 | Japan, Tomioka, Gunma | Rohseide | **Bild NEU erstellen** | Kollege (Gemini) |
-| P07 | 1890 | Deutschland, Ruhrgebiet | Stahl | **Bild NEU erstellen** | Kollege (Gemini) |
-| P08 | 1900 | DR Kongo (heutiges Staatsgebiet), Äquatorregion / Kongobecken | Naturkautschuk | **Bild NEU erstellen** | Kollege (Gemini) |
-| P09 | 1910 | Guatemala, Karibikküste / Puerto-Barrios-Region (Pilot) | Bananen für den Export | **Bild NEU erstellen** | Kollege (Gemini) |
-| P10 | 1913 | USA, Highland Park / Detroit | Automobile | **Referenz vorhanden** (QA offen) | — |
-| P11 | 1970 | Ghana, Takoradi / Tema | Kakaomasse und Kakaobutter | **Bild NEU erstellen** | Kollege (Gemini) |
-| P12 | 1975 | Saudi-Arabien, Ostprovinz / Dhahran | Erdöl | **Bild NEU erstellen** | Kollege (Gemini) |
-| P13 | 2015 | China, Shenzhen / Perlflussdelta (Pilot) | Elektronikgeräte | **Bild NEU erstellen** | Kollege (Gemini) |
-| P14 | 2018 | Bangladesch, Dhaka | T-Shirts und Kleidung | **Bild NEU erstellen** | Kollege (Gemini) |
-| P15 | 2023 | Taiwan, Hsinchu | Halbleiterchips | **Bild NEU erstellen** | Kollege (Gemini) |
-| P16 | 2023 | Chile, Salar de Atacama | Lithiumsalz-Vorprodukte | **Bild NEU erstellen** | Kollege (Gemini) |
+| **P01** | 1660 | Niederlande, Zaandam/Zaanstreek | Holzbretter | `zaandam-saegemuehle.jpg` | **Passt** (technische QA offen) |
+| **P02** | 1680 | Italien, Murano bei Venedig | Glasgefäße | `murano-glas.jpg` | **Passt** (technische QA offen) |
+| **P03** | 1700 | China, Jingdezhen | Porzellan | `jingdezhen-porzellan.jpg` | **Passt** (technische QA offen) |
+| **P04** | 1700 | Barbados, St. James / Zuckerrohrgürtel | Rohrzucker | `barbados-zucker.jpg` | **Passt** (technische QA offen) |
+| **P05** | 1840 | Großbritannien, Manchester / Lancashire (Pilot) | Baumwollgarn und Stoff | `gb-1840-textile-mill.jpg` | **Passt** (technische QA offen) |
+| **P09** | 1910 | Guatemala, Karibikküste / Puerto-Barrios-Region (Pilot) | Bananen für den Export | `gt-1910-banana-packing.jpg` | **Passt** (technische QA offen) |
+| **P10** | 1913 | USA, Highland Park / Detroit | Automobile | `automobilfabrik.png` | **Passt** (technische QA offen) |
+| **P13** | 2015 | China, Shenzhen / Perlflussdelta (Pilot) | Elektronikgeräte | `cn-2015-electronics-assembly.jpg` | **Passt** (technische QA offen) |
+| **T01** | 1670 | Niederlande, Amsterdam/Oostenburg | VOC-Werft und Handel | `amsterdam-voc-werft.png` | **Passt** (technische QA offen) |
+| **T03** | 1780 | Heutiges Indien, Kalkutta/Kolkata, Hooghly | East India Company und Flusshandel | `kalkutta-handel.png` | **Passt** (technische QA offen) |
+| **T04** | 1820 | China, Guangzhou/Kanton | Thirteen Factories / Canton-System | `kanton-handel.png` | **Passt** (technische QA offen) |
 
-## Handels- und Machtzentren – alle 6 neu zu erstellen
+**Zuordnungen der alten Pilot-IDs:** `gb-1840-textile-mill` entspricht **P05**, `gt-1910-banana-packing` entspricht **P09**, `cn-2015-electronics-assembly` entspricht **P13**. Diese Pilot-IDs bleiben in der bisherigen Spieldatei erhalten. Dass die hochgeladenen Namen ähnlich sind, beweist **nicht**, dass die Dateibytes im Repository identisch sind.
 
-| ID | Jahr | Ort | Motiv/Produkt | Bildstatus | Bildproduktion |
+## B. 6 ausdrücklich abgelehnte Bilder – neue Version anfordern
+
+| ID | Jahr | Land / Ort | Motiv | Datei laut Prüfung | Status |
 |---|---:|---|---|---|---|
-| T01 | 1670 | Niederlande, Amsterdam/Oostenburg | VOC-Werft und Handel | **Bild NEU erstellen** | Kollege (Gemini) |
-| T02 | 1750 | Heutiges Ghana, Cape Coast Castle | Atlantische Handelsfestung | **Bild NEU erstellen** | Kollege (Gemini) |
-| T03 | 1780 | Heutiges Indien, Kalkutta/Kolkata, Hooghly | East India Company und Flusshandel | **Bild NEU erstellen** | Kollege (Gemini) |
-| T04 | 1820 | China, Guangzhou/Kanton | Thirteen Factories / Canton-System | **Bild NEU erstellen** | Kollege (Gemini) |
-| T05 | 1975 | Niederlande, Rotterdam/Eemhaven | Containerhafen | **Bild NEU erstellen** | Kollege (Gemini) |
-| T06 | 2015 | Singapur, Pasir Panjang | Globaler Containerumschlag | **Bild NEU erstellen** | Kollege (Gemini) |
+| **T05** | 1975 | Niederlande, Rotterdam/Eemhaven | Containerhafen | `rotterdam-container.webp` | **Neu machen** |
+| **E01** | 1773 | USA, Boston/Griffin's Wharf | Boston Tea Party | `boston-tea-party.jpg` | **Neu machen** |
+| **E03** | 1869 | Ägypten, Suezkanal | Eröffnung des Suezkanals | `suezkanal.png` | **Neu machen** |
+| **E04** | 1929 | USA, New York/Wall Street | Börsencrash | `new-york-boerse.png` | **Neu machen** |
+| **E05** | 1954 | Guatemala, Guatemala-Stadt | Sturz von Jacobo Árbenz | `guatemala-1954.png` | **Neu machen** |
+| **E07** | 2013 | Bangladesch, Savar/Rana Plaza | Einsturz Rana Plaza | `review-rana-plaza.webp` | **Neu machen** |
 
-## Historische Wendepunkte – alle 8 neu zu erstellen
+Diese sechs Bildversionen **nicht** als akzeptierte Versionen integrieren. Die **historischen Motive bleiben** im 30-Szenen-Plan; nur ihre derzeitige Bildfassung muss ersetzt werden.
 
-| ID | Jahr | Ort | Motiv/Produkt | Bildstatus | Bildproduktion |
+## C. 13 aktive Szenen ohne Urteil in der aktuellen Prüfung – offen
+
+| ID | Jahr | Land / Ort | Motiv | Datei laut Prüfung | Status |
 |---|---:|---|---|---|---|
-| E01 | 1773 | USA, Boston/Griffin's Wharf | Boston Tea Party | **Bild NEU erstellen** | Kollege (Gemini) |
-| E02 | 1791 | Heutiges Haiti, Saint-Domingue | Beginn der Haitianischen Revolution | **Bild NEU erstellen** | Kollege (Gemini) |
-| E03 | 1869 | Ägypten, Suezkanal | Eröffnung des Suezkanals | **Bild NEU erstellen** | Kollege (Gemini) |
-| E04 | 1929 | USA, New York/Wall Street | Börsencrash | **Bild NEU erstellen** | Kollege (Gemini) |
-| E05 | 1954 | Guatemala, Guatemala-Stadt | Sturz von Jacobo Árbenz | **Bild NEU erstellen** | Kollege (Gemini) |
-| E06 | 1980 | Polen, Gdańsk/Danzig | Solidarność-Werftstreiks | **Bild NEU erstellen** | Kollege (Gemini) |
-| E07 | 2013 | Bangladesch, Savar/Rana Plaza | Einsturz Rana Plaza | **Bild NEU erstellen** | Kollege (Gemini) |
-| E08 | 2021 | Ägypten, Suezkanal | Ever-Given-Blockade | **Bild NEU erstellen** | Kollege (Gemini) |
+| **P06** | 1880 | Japan, Tomioka, Gunma | Rohseide | — | **Kein aktuelles Prüfurteil** |
+| **P07** | 1890 | Deutschland, Ruhrgebiet | Stahl | — | **Kein aktuelles Prüfurteil** |
+| **P08** | 1900 | DR Kongo (heutiges Staatsgebiet), Äquatorregion / Kongobecken | Naturkautschuk | — | **Kein aktuelles Prüfurteil** |
+| **P11** | 1970 | Ghana, Takoradi / Tema | Kakaomasse und Kakaobutter | — | **Kein aktuelles Prüfurteil** |
+| **P12** | 1975 | Saudi-Arabien, Ostprovinz / Dhahran | Erdöl | — | **Kein aktuelles Prüfurteil** |
+| **P14** | 2018 | Bangladesch, Dhaka | T-Shirts und Kleidung | — | **Kein aktuelles Prüfurteil** |
+| **P15** | 2023 | Taiwan, Hsinchu | Halbleiterchips | — | **Kein aktuelles Prüfurteil** |
+| **P16** | 2023 | Chile, Salar de Atacama | Lithiumsalz-Vorprodukte | — | **Kein aktuelles Prüfurteil** |
+| **T02** | 1750 | Heutiges Ghana, Cape Coast Castle | Atlantische Handelsfestung | — | **Kein aktuelles Prüfurteil** |
+| **T06** | 2015 | Singapur, Pasir Panjang | Globaler Containerumschlag | — | **Kein aktuelles Prüfurteil** |
+| **E02** | 1791 | Heutiges Haiti, Saint-Domingue | Beginn der Haitianischen Revolution | — | **Kein aktuelles Prüfurteil** |
+| **E06** | 1980 | Polen, Gdańsk/Danzig | Solidarność-Werftstreiks | — | **Kein aktuelles Prüfurteil** |
+| **E08** | 2021 | Ägypten, Suezkanal | Ever-Given-Blockade | — | **Kein aktuelles Prüfurteil** |
 
-## Einheitliche Bildsprache („Vibe“)
+**Für diese 13 wurde in der neuen Nachricht kein Dateiname oder Urteil genannt.** Deshalb keine positive oder negative Qualitätsbehauptung. Sie bleiben auf der Kollegenliste, bis ein neues Bild oder eine ausdrückliche Prüfung vorliegt.
 
-Die vier vom Nutzer ausgewählten Beispiele sind der **visuelle Maßstab**, nicht eine starre Vorlage, die kopiert werden soll:
+## D. Separat geprüfte Alternativen und Motive außerhalb der aktiven 30
 
-- **Immersiv und glaubwürdig fotorealistisch**, wie man mitten in einer historisch recherchierten Dokumentarfilm-Szene stehen würde, nicht wie ein Gemälde, Comic, makelloser Showroom oder glattgebügeltes 3D-Spiel.
-- **Erkennbar lebendig:** Beschäftigte, Warenbewegung, Werkzeuge, Schiffe, Maschinen, Proteste oder Schauplatzhandlungen – je nach tatsächlich glaubwürdigem Ort und Jahr. **Keine menschenleeren, steril aufgeräumten Hallen**, wenn es eine laufende Produktion ist. Aber auch keine erfundenen Personen bei historischen Katastrophen.
-- **Atmosphäre:** natürliches Tageslicht, Staub, Dampf, Rauch **nur wo plausibel**, realistische Schatten, Gebrauchsspuren, Spuren von Arbeit. Farbton und Beleuchtung **epochengerecht**; nicht alle Szenen künstlich dunkel-braun färben. Moderne Szenen dürfen kühl, hell, sauber sein, wenn der Ort es verlangt.
-- **Klar erkennbares Zentrum:** Was wird hier produziert, gehandelt oder erlebt? Geschichtliche Orte/Details sollen als 360°-Umgebung neugierig machen. 2–3 glaubwürdige Hinweise auf das Land und 2 Hinweise auf die Epoche, **nicht durch aufgedruckte Länder-/Firmen-/Jahresnamen**.
-- **Eine räumlich kohärente 360°-Kugel**, fixer Standpunkt (~Augenhöhe), **echte 2:1-Equirectangular-Projektion**, die sich mit Pannellum wie Street View drehen lässt: ein vollständig modellierter/abgedeckter Raum, auch hinten, Zenit und Nadir. Nicht nur ein weitwinkliger 2:1-Render oder in zwei Hälften gespiegeltes Bild.
-- **Objekte bleiben geometrisch korrekt:** Gerade Maschinen, Windflügel, Kräne, Dachbalken, Körper und Schiffe müssen **im perspektivischen Viewer** korrekt aussehen, auch beim Hochsehen. Bildränder schließen in Farbe **und Inhalt**, keine doppelten Brücken/Häuser/Personen auf der Rückseite.
-- **Wunschauflösung:** mindestens native 4096 × 2048, falls technisch möglich; ein aus kleiner Datei skaliertes 4K-Bild muss ausdrücklich als **Upscale** gekennzeichnet sein. Die vier bisherigen Referenzen sind **nicht native 4K**, obwohl drei Dateinamen 4096×2048 enthalten.
-- **Historisch verantwortungsvoll:** Nur Details verwenden, die für den Ort/das Jahr mit Museum, Archiv oder verlässlicher Forschung belegbar sind. Koloniale Gewalt, Versklavung, Gewerkschaftsstreiks und Rana Plaza nicht romantisieren oder durch sensationelle erfundene Opferbilder verzerren. KI-Rekonstruktion klar benennen.
+| Aufnahme | Prüfung | Zuordnung | Entscheidung |
+|---|---|---|---|
+| `review-perlfluss-alternative.png` | Passt | T04 | Zweite akzeptierte Bildvariante für T04, kein zusätzliches Level. Finale Variantenauswahl noch nicht dokumentiert. |
+| `review-venedig.webp` | Neu machen | P02 | Die Hauptversion P02/murano-glas.jpg passt bereits; diese Alternativfassung nicht verwenden. |
+| `review-marktplatz-1400.webp` | Neu machen | Kein aktives Level | Kein aktiver 30er-Szeneneintrag; nicht ohne neue Projektentscheidung als Level neu erzeugen. |
+| `review-machu-picchu.webp` | Neu machen | Kein aktives Level | Kein aktiver 30er-Szeneneintrag; nicht ohne neue Projektentscheidung als Level neu erzeugen. |
+| `review-regenwald-2015.webp` | Neu machen | Kein aktives Level | Kein aktiver 30er-Szeneneintrag; nicht ohne neue Projektentscheidung als Level neu erzeugen. |
+| `review-usa-railway.webp` | Neu machen | Kein aktives Level | Kein aktiver 30er-Szeneneintrag; nicht ohne neue Projektentscheidung als Level neu erzeugen. |
 
-## Die vier bereits akzeptierten Bildreferenzen
+- **T04/Kanton:** `kanton-handel.png` ist die akzeptierte Hauptfassung, `review-perlfluss-alternative.png` eine ebenfalls akzeptierte Alternative. **Beide gehören zu T04**; für das Spiel wird später höchstens **eine** als Levelbild ausgewählt, nicht zwei Level.
+- **P02/Murano:** `murano-glas.jpg` ist akzeptiert; die abgelehnte `review-venedig.webp`-Variante **nicht** neu erzeugen, weil der Hauptlevel bereits ein passendes Bild hat, sofern nicht ausdrücklich verlangt.
+- **Marktplatz 1400, Machu Picchu, Regenwald 2015 und Eisenbahnbau USA** sind **keine aktiven 30er-Szenen**. Die Bewertung „Neu machen“ bezieht sich auf ihre Testbilder, **nicht** auf die Erteilung eines neuen Produktionsauftrags.
 
-**Diese vier sollen nicht neu generiert werden**, sofern der Nutzer nicht später eine technische Korrektur verlangt:
+## Stil / Vibe – verbindlich für alle weiteren Gemini-Bilder
 
-| ID | Szene | Originaler Name des Nutzeruploads | Tatsächliche Pixelgröße | Auswahlstatus |
-|---|---|---|---|---|
-| **P02** | Italien, Murano bei Venedig, 1680 | `Murano_1680_V2_One_Canal_UPSCALED_4096x2048(2).jpg` | 2048 × 1024 | **Visuell vom Nutzer akzeptiert; technische QA noch offen** |
-| **P03** | China, Jingdezhen, 1700 | `Jingdezhen_1700_seamfix_UPSCALED_4096x2048(2).jpg` | 2048 × 1024 | **Visuell vom Nutzer akzeptiert; technische QA noch offen** |
-| **P05** | Großbritannien, Manchester / Lancashire (Pilot), 1840 | `gb-1840-textile-mill-v2-upscaled-4096x2048(1).jpg` | 2048 × 1024 | **Visuell vom Nutzer akzeptiert; technische QA noch offen** |
-| **P10** | USA, Highland Park / Detroit, 1913 | `Historische Automobilfabrik im Panorama(1).png` | 1774 × 887 | **Visuell vom Nutzer akzeptiert; technische QA noch offen** |
+- **Fotorealistische historische Dokumentarfilm-Atmosphäre**: Betrachter steht mittendrin, nicht vor einer Bühnenkulisse; glaubwürdige, periodengerechte Objekte, Materialien, Licht und Gebrauchsspuren.
+- **Lebendig und inhaltlich erkennbar:** Menschen bei sinnvoller Arbeit, Transport, Handel oder einer historisch plausiblen Handlung. Arbeiter und Werkzeuge wirklich an Produktionsschritten beteiligt; kein steriler, leerer Hallenraum, aber keine unnötig überfüllte Chaosfantasie.
+- **Nicht alle Szenen in Sepia:** Glasofen/Murano warm, China-Werkstatt erdig, britische Textilhalle mit Staub/Lichtstrahlen; moderne Ports/Reinräume können kühl und funktional sein. Epochen und Orte brauchen eigene Bildsprache.
+- **Historisch korrekt:** Produkte, Architektur, Maschinen, Verkehrsmittel, Kleidung, politische Epoche und lokale Landschaft **vorher recherchieren**; keine Logos/Flaggen/Jahreszahlen als Rätsel-Spoiler.
+- **Echte 360°-Kugel:** ein fester Beobachtungspunkt, **equirectangular 360°×180°**, horizontale Naht **auch inhaltlich** zusammenhängend, Zenit und Nadir ohne Wirbel, Personen/Geräte/Gebäude beim Perspektivwechsel nicht verformt. Keine großen spiegelgleichen Bildhälften zur Nahtreparatur.
+- **Qualitätsziel:** echte native 4096×2048-Auflösung wenn technisch machbar; hochskalierte Fotos **als Upscale kennzeichnen**. Wichtig ist die tatsächliche perspektivische Ansicht im Pannellum-Viewer, nicht nur der 2:1-Bildeindruck.
+- **ZuWi / historischer Kontext:** Nach dem Raten Unternehmensmacht, Handel, Arbeitsbedingungen und Wendepunkte erklären. Kolonialismus, Versklavung, Streiks, Regierungswechsel und Katastrophen respektvoll, sachlich, nicht als fiktive authentische Augenzeugenaufnahme darstellen.
 
-**Verfügbarkeit:** Die Binärdateien waren vom Nutzer **hier im Chat hochgeladen** und sind **nicht automatisch im privaten GitHub-Repo**. Ein zusätzliches Referenz-ZIP `FactoryGuessr_Gemini_4_Referenzbilder.zip` mit den unveränderten vier Dateien, `manifest.json`, echten Größen und SHA-256 liegt als Chat-Download bereit und muss dem Kollegen **separat bereitgestellt** werden, falls er die Stilbilder sehen soll. Keine Repo-URL für die Binärdateien erfinden.
+## Dateiverfügbarkeit und Governance
 
-## Bild- und Freigabestatus nicht verwechseln
+**Diese Bildprüfung enthält Dateinamen und Bewertungen, aber keine neu hochgeladenen Originalbytes der 23 genannten Dateien.** Die Namen liegen jetzt in GitHub, nicht notwendigerweise die Bilder. **Keine aktuellen Bildmaße/Hashes aus früheren Chat-Artefakten auf diese Dateinamen übertragen.** Für technische QA braucht der Kollege / Claude die tatsächlichen Originalbilder, nicht nur diese Liste.
 
-- **Bildauswahl durch Nutzer:** 4/30 vorhanden, 26/30 **neu zu produzieren**.
-- **Formaler Spielstatus:** weiterhin 0/30 `ready` in `public/data/scenes.json`; visuelles Gefallen ist nicht gleich historisch/technisch QA-bestanden.
-- **Abgelehnte historische Bildexperimente:** andere früher erzeugte 2:1-/3D-Fassungen bleiben optional als Archiv/Recherche und zählen **nicht** als vorhandene Bilder.
-- **Alter Rollen-Split aufgehoben:** Der Kollege produziert mit Gemini **auch die noch fehlenden 12 Produktionsszenen P**; nicht nur T/E. Die Projektleitung verantwortet Auswahl und finale Abnahme.
-- **Arbeiten im Repo:** Für den Kollegen [Gemini-Übergabe](team/GEMINI_IMAGE_HANDOFF_26.md) und eine eigene PR je Szene/Batch; kein Merge oder Deployment ohne Freigabe. Nach jedem Resultat 360°-QA dokumentieren.
+Die historische Szenenauswahl und ihre P/T/E-IDs bleiben unverändert. Für jedes neue Bild: Recherche → räumlich kohärente 3D-/360°-Komposition → fotorealistische Ausarbeitung → echter Perspektiv-/Naht-/Pol-Test → Nutzerreview → separater Spiel-Release. Keine automatische `ready`-Markierung, kein ungefragter Merge oder Deployment.
 
-
-## Nachweis / maschinenlesbare Liste
-
-- [ACTIVE_SCENES_30.json](team/ACTIVE_SCENES_30.json) enthält `image_status`, `image_generation_owner`, und bei den vier Referenzen auch echte Bildgröße/Quellname/Prüfsumme.
-- [Historischer Szenenmasterplan](SCENE_MASTERPLAN_30.md) enthält Bildinhalte, ZuWi-Bezug und Quellenanforderungen. **Auch wenn frühere Dokumente eine andere Personenaufteilung nennen, gilt dieser aktuelle Bildstatus.**
-- Die vier Referenzdateien liegen **nur in der Chat-Übergabe**, nicht als eingebundene Produktionsbilder auf GitHub.
+**Noch offen:** 6 Remakes + 13 nicht beurteilte aktive Szenen = 19 Bearbeitungspunkte; **11** aktuelle Bildfassungen visuell akzeptiert; **0** formal veröffentlichte 360°-Level.
