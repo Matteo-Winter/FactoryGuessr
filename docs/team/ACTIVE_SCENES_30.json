@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-09-v6-boston-accepted-suez-candidate-fail",
+  "version": "2026-11-09-v7-wall-street-accepted-guatemala-candidate",
   "project": "Made in Time – Guess where. Guess when.",
   "activeTarget": 30,
   "approvedCount": 0,
@@ -842,14 +842,31 @@
       "source": "https://www.federalreservehistory.org/essays/stock-market-crash-of-1929",
       "caution": "Kein gefälschtes zeitgenössisches Zeitungsfaksimile",
       "category": "turning_point",
-      "owner": "colleague",
-      "status": "review_rejected_new_image_required",
+      "owner": "user",
+      "status": "visual_accepted_not_game_approved",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "redo_requested",
-      "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started_for_replacement",
-      "reference": null,
+      "image_status": "visual_accepted_pending_qa",
+      "image_generation_owner": "none_unless_further_review",
+      "image_qa_status": "pending_independent_360_historical_rights_check",
+      "reference": {
+        "file": "wall_street_im_börsencrash_1929.png",
+        "source": "chat-generated image accepted visually by user",
+        "availableInGitHub": false,
+        "verifiedBytes": false,
+        "width": null,
+        "height": null,
+        "sha256": null
+      },
       "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "passt",
+        "filename": "wall_street_im_börsencrash_1929.png",
+        "source": "user reply 'perfekt, nächstes bild' after E04 Wall Street generation",
+        "scope": "visual_acceptability_only",
+        "actualFileBytesConfirmedInRepository": false,
+        "technical360QA": "not_documented_by_this_review"
+      },
+      "previousRejectedVersion": {
         "reviewDate": "2026-11-09",
         "verdict": "neu_machen",
         "filename": "new-york-boerse.png",
@@ -884,6 +901,19 @@
         "scope": "visual_acceptability_only",
         "actualFileBytesConfirmedInRepository": false,
         "technical360QA": "not_documented_by_this_review"
+      },
+      "newAttempt": {
+        "date": "2026-11-09",
+        "image": "E05_Guatemala_1954_PHOTO_SEAM_CORRECTED_1774x887.png",
+        "upscaledViewer": "E05_Guatemala_1954_VIEWER_UPSCALED_4096x2048.jpg",
+        "reference3D": "E05_Guatemala_1954_3D_REFERENCE_NATIVE_4096x2048.png",
+        "archive": "FactoryGuessr_E05_Guatemala_1954_3D_PHOTO_QA.zip",
+        "archiveSha256": "79475bd15e30fdbcad0fc25e4a36f7b63dd204dd3556495a0d184aa230989a2e",
+        "qaPhotoOriginalRatio": 1.4587,
+        "qaPhotoAfterNarrowColorFixRatio": 0,
+        "qaStatus": "visual_review_pending; not strict geometry/historical approved",
+        "knownIssue": "Photo palace is beige/decorative, actual national palace was greenish and different architectural details",
+        "fileBytesInGitHub": false
       }
     },
     {
@@ -968,15 +998,15 @@
   ],
   "imageProduction": {
     "total": 30,
-    "acceptedVisualReferences": 12,
-    "redoRequested": 5,
+    "acceptedVisualReferences": 13,
+    "redoRequested": 4,
     "openWithoutReview": 13,
-    "remainingActionItems": 18,
+    "remainingActionItems": 17,
     "formalGameApprovals": 0,
     "visualSelectionOwner": "user",
     "remainingOwner": "colleague_using_Gemini",
     "reviewDate": "2026-11-09",
-    "remark": "E01 visually accepted by subsequent user response; E03 Suez attempt still fails rear seam. No change to public game."
+    "remark": "E04 Wall Street accepted visually in follow-up; E05 new 360 candidate awaits user acceptance and historical QA; E03 seam failed"
   },
   "reviewExtras": [
     {
