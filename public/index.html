@@ -113,17 +113,24 @@
     .timeline-head{display:flex;justify-content:space-between;align-items:baseline}
     .timeline-head label{margin:0;font-size:13px;font-weight:500;color:var(--muted)}
     .timeline-head output{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
-    #year{-webkit-appearance:none;appearance:none;display:block;width:100%;height:36px;margin:2px 0 0;padding:0;border:0;background:transparent;cursor:pointer;--p:50%}
-    #year::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(to right,var(--text) var(--p),#404040 var(--p))}
-    #year::-moz-range-track{height:4px;border-radius:2px;background:#404040}
-    #year::-moz-range-progress{height:4px;border-radius:2px;background:var(--text)}
-    #year::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;margin-top:-10px;border-radius:50%;background:var(--text);border:0;transition:transform 120ms cubic-bezier(.2,0,0,1)}
-    #year::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--text);border:0}
-    #year:active::-webkit-slider-thumb{transform:scale(1.1)}
-    #year:focus-visible{outline:2px solid var(--text);outline-offset:4px;border-radius:4px}
-    .years{position:relative;height:16px;margin:0 12px;font-size:12px;color:#737373;font-variant-numeric:tabular-nums}
-    .years span{position:absolute;transform:translateX(-50%)}
-    .years span::before{content:"";position:absolute;left:50%;top:-8px;width:1px;height:5px;background:#404040}
+    .timeline-head span{font-size:13px;font-weight:500;color:var(--muted)}
+    .timeline-head output.empty{font-size:15px;font-weight:500;color:#737373}
+    /* Ruler: vertical ticks every 10 years, longer every 50, labelled every 100 */
+    .ruler{position:relative;height:62px;margin:4px 0 0;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none}
+    .ruler:focus-visible{outline:2px solid var(--text);outline-offset:4px;border-radius:6px}
+    .ruler-track{position:absolute;left:12px;right:12px;top:0;bottom:0}
+    .ruler-track::after{content:"";position:absolute;left:0;right:0;top:32px;height:1px;background:#404040}
+    .tick{position:absolute;top:32px;width:1px;height:8px;margin-top:-8px;background:#525252}
+    .tick.mid{height:14px;margin-top:-14px;background:#737373}
+    .tick.major{height:24px;margin-top:-24px;background:#a3a3a3}
+    .tick-label{position:absolute;top:38px;transform:translateX(-50%);font-size:12px;color:#8a8a8a;font-variant-numeric:tabular-nums}
+    .marker,.ghost{position:absolute;top:0;height:40px;width:2px;margin-left:-1px;pointer-events:none}
+    .marker{background:#ffd43b;border-radius:1px}
+    .marker::before{content:"";position:absolute;left:50%;top:-3px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:#ffd43b}
+    .ghost{background:rgba(250,250,250,.35)}
+    .timeline-head output.preview{color:#737373}
+    .marker[hidden],.ghost[hidden]{display:none}
+    @media(hover:none){.ghost{display:none}}
     .map-slot{position:relative;flex:none;width:200px;height:120px}
     .map{position:absolute;right:0;bottom:0;width:200px;height:120px;overflow:hidden;cursor:crosshair;
       transition:width 240ms cubic-bezier(.2,0,0,1),height 240ms cubic-bezier(.2,0,0,1)}
@@ -190,9 +197,10 @@
   <div class="round-pill" id="roundPill">Bild 1 / 5</div>
   <div class="dock">
     <div class="card timeline">
-      <div class="timeline-head"><label for="year">Wann?</label><output id="yearOut" for="year">1810</output></div>
-      <input id="year" type="range" min="1600" max="2025" step="1" value="1810">
-      <div class="years" aria-hidden="true"></div>
+      <div class="timeline-head"><span id="whenLabel">Wann?</span><output id="yearOut" class="empty">Jahr antippen</output></div>
+      <div class="ruler" id="ruler" role="slider" tabindex="0" aria-labelledby="whenLabel" aria-valuemin="1600" aria-valuemax="2025" aria-valuetext="kein Jahr gewählt">
+        <div class="ruler-track" id="rulerTrack"><div class="ghost" id="ghost" hidden></div><div class="marker" id="marker" hidden></div></div>
+      </div>
     </div>
     <div class="map-slot"><div class="card map" id="map" role="button" tabindex="0" aria-label="Weltkarte: Ort markieren">
       <span class="map-label">Wo?</span>
@@ -255,10 +263,26 @@ async function startGame(){
 addEventListener('resize',()=>{if(!viewer)return;const h=fov();viewer.setHfovBounds([h,h]);viewer.setHfov(h,false);});
 try{const r=await fetch('data/scenes.json');if(r.ok)scenes=(await r.json()).scenes||[];}catch(e){}
 // Timeline
-const year=$('year'),years=document.querySelector('.years');
-for(const y of [1600,1700,1800,1900,2000]){const t=document.createElement('span');t.textContent=y;t.style.left=((y-1600)/425*100)+'%';years.appendChild(t);}
-function syncYear(){year.style.setProperty('--p',((year.value-1600)/425*100)+'%');$('yearOut').textContent=year.value;}
-year.addEventListener('input',syncYear);syncYear();
+// Timeline ruler: click or drag to pick a year; arrow keys ±1, Shift ±10.
+const Y0=1600,Y1=2025,ruler=$('ruler'),track=$('rulerTrack'),marker=$('marker'),ghost=$('ghost');let guessYear=null;
+const pct=y=>(y-Y0)/(Y1-Y0)*100;
+for(let y=Y0;y<=Y1;y+=10){const t=document.createElement('div');t.className='tick'+(y%100===0?' major':y%50===0?' mid':'');t.style.left=pct(y)+'%';track.appendChild(t);
+  if(y%100===0){const l=document.createElement('span');l.className='tick-label';l.textContent=y;l.style.left=pct(y)+'%';track.appendChild(l);}}
+const yearAt=x=>{const r=track.getBoundingClientRect();return Math.round(Y0+Math.min(1,Math.max(0,(x-r.left)/r.width))*(Y1-Y0));};
+const yearOut=$('yearOut');
+// Header shows the chosen year; while hovering it previews the year under the pointer in grey.
+function showYear(preview){if(preview!=null){yearOut.textContent=preview;yearOut.className='preview';return;}
+  if(guessYear==null){yearOut.textContent='Jahr antippen';yearOut.className='empty';}else{yearOut.textContent=guessYear;yearOut.className='';}}
+function setYear(y){guessYear=Math.min(Y1,Math.max(Y0,y));marker.style.left=pct(guessYear)+'%';marker.hidden=false;showYear();
+  ruler.setAttribute('aria-valuenow',guessYear);ruler.setAttribute('aria-valuetext',String(guessYear));}
+let dragging=false;
+ruler.addEventListener('pointerdown',e=>{dragging=true;ghost.hidden=true;ruler.setPointerCapture(e.pointerId);setYear(yearAt(e.clientX));});
+ruler.addEventListener('pointermove',e=>{const y=yearAt(e.clientX);if(dragging){setYear(y);return;}
+  if(e.pointerType!=='mouse')return;ghost.style.left=pct(y)+'%';ghost.hidden=false;showYear(y);});
+ruler.addEventListener('pointerup',()=>{dragging=false;});
+ruler.addEventListener('pointerleave',()=>{ghost.hidden=true;showYear();});
+ruler.addEventListener('keydown',e=>{const d={ArrowRight:1,ArrowUp:1,ArrowLeft:-1,ArrowDown:-1}[e.key];if(!d)return;e.preventDefault();
+  setYear((guessYear??1810)+d*(e.shiftKey?10:1));});
 // Map: hover (or tap on touch) enlarges it, click places the pin. Stored as lon/lat for the guess later.
 const map=$('map'),pin=$('pin'),box=document.querySelector('.pin-box');let guessLL=null;
 function placePin(){if(!guessLL)return;pin.style.left=((guessLL.lon+180)/360*100)+'%';pin.style.top=((84-guessLL.lat)/142*100)+'%';pin.classList.add('show');}
