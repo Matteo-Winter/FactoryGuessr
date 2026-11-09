@@ -1,5 +1,12 @@
 # Made in Time — FactoryGuessr
 
+## Aktueller Bildstatus (nach E04 Wall Street und E05 Guatemala)
+- **13 visuell akzeptiert**, **4 ausdrücklich neu**, **13 ohne aktuelles Review**. Keine finale Spiel-/360°-Freigabe (0/30).
+- E04 Wall Street 1929 nach Nutzerfeedback visuell akzeptiert; E05 Guatemala 1954 neuer, noch ungeprüfter 3D-first-Fotokandidat. [E05 QA](docs/scene-research/E05_Guatemala_1954_3D_photo_QA.md).
+- **[Verbindliche Bildliste](docs/IMAGE_PRODUCTION_STATUS_30.md)** · [Gemini-Briefing (17 offen)](docs/team/GEMINI_IMAGE_HANDOFF_CURRENT.md) · [Issue #18](https://github.com/Matteo-Winter/FactoryGuessr/issues/18).
+- Die neue Fotofassung ist kein native 4K-Foto und nicht streng 3D-geometriegebunden; die exakten Bilddateien liegen im Chat-ZIP, nicht automatisch im Repository.
+
+
 **Guess where. Guess when.**
 
 Ein historisches GeoGuessr-artiges Lernspiel für die ZuWi-Vertiefung **„Von Handelskompanien zu Multinational Corporations“**: In einer drehbaren historischen Produktions-, Handels- oder Ereignisszene erraten Spielende das Land und die Epoche. Danach folgt eine kurze Einordnung zu Arbeitsbedingungen, Industrie, Kolonialismus, Unternehmensmacht oder globalen Lieferketten.
