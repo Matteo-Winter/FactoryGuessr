@@ -41,21 +41,30 @@
     .brand p{margin:20px auto 0;color:var(--muted);font-size:15px;line-height:1.45}
     #start fieldset{border:0;margin:0;padding:0}
     #start legend{padding:0;margin:0 auto 12px;font-size:13px;font-weight:500;color:var(--muted)}
-    .levels{display:flex;flex-direction:column;gap:8px}
-    .level{position:relative;display:flex;align-items:center;justify-content:space-between;min-height:56px;padding:0 18px;
-      border:1px solid var(--line);border-radius:12px;margin:0;color:var(--text);background:var(--bg);font-size:17px;font-weight:500;cursor:pointer;
-      transition:border-color 150ms cubic-bezier(.2,0,0,1),background-color 150ms cubic-bezier(.2,0,0,1)}
-    .level:hover{background:var(--surface)}
-    .level .check{width:22px;height:22px;border-radius:6px;border:1.5px solid #525252;display:grid;place-items:center;color:transparent;
-      transition:background-color 150ms cubic-bezier(.2,0,0,1),border-color 150ms cubic-bezier(.2,0,0,1),color 150ms}
-    .level:has(input:checked) .check{background:var(--text);border-color:var(--text);color:var(--bg)}
+    .themes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .theme{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:104px;padding:14px 6px;margin:0;
+      border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--muted);font-size:15px;font-weight:500;line-height:1.25;text-align:center;cursor:pointer;
+      transition:border-color 150ms cubic-bezier(.2,0,0,1),background-color 150ms cubic-bezier(.2,0,0,1),color 150ms cubic-bezier(.2,0,0,1),transform 120ms cubic-bezier(.2,0,0,1)}
+    .theme:hover{background:var(--surface)}
+    .theme:active{transform:scale(.985)}
+    .theme input{position:absolute;opacity:0;pointer-events:none}
+    .theme:has(input:checked){border-color:var(--line-strong);color:var(--text)}
+    .theme:has(input:focus-visible){outline:2px solid var(--text);outline-offset:2px}
+    .rounds{margin-top:28px}
+    .rounds-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+    .rounds-head label{margin:0;font-size:13px;font-weight:500;color:var(--muted)}
+    .rounds-head output{font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
+    #rounds{-webkit-appearance:none;appearance:none;width:100%;height:44px;margin:0;padding:0;border:0;background:transparent;cursor:pointer;--p:50%}
+    #rounds::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(to right,var(--text) var(--p),#404040 var(--p))}
+    #rounds::-moz-range-track{height:4px;border-radius:2px;background:#404040}
+    #rounds::-moz-range-progress{height:4px;border-radius:2px;background:var(--text)}
+    #rounds::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;margin-top:-10px;border-radius:50%;background:var(--text);border:0;transition:transform 120ms cubic-bezier(.2,0,0,1)}
+    #rounds::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--text);border:0}
+    #rounds:active::-webkit-slider-thumb{transform:scale(1.1)}
+    #rounds:focus-visible{outline:2px solid var(--text);outline-offset:4px;border-radius:4px}
+    .ticks{display:flex;justify-content:space-between;margin-top:-6px;font-size:12px;color:#737373}
     #startBtn:disabled{background:#262626;color:#737373;opacity:1;cursor:not-allowed;transform:none}
-    .level input{position:absolute;opacity:0;pointer-events:none}
-    .level .dot{width:18px;height:18px;border-radius:50%;border:1.5px solid #525252;transition:border 150ms cubic-bezier(.2,0,0,1)}
-    .level:has(input:checked){border-color:var(--line-strong)}
-    .level:has(input:checked) .dot{border:5.5px solid var(--text)}
-    .level:has(input:focus-visible){outline:2px solid var(--text);outline-offset:2px}
-    #startBtn{margin-top:32px;height:56px;border-radius:12px;background:var(--text);color:var(--bg);font:600 17px/1 "Hanken Grotesk",Inter,sans-serif;
+    #startBtn{margin-top:24px;height:56px;border-radius:12px;background:var(--text);color:var(--bg);font:600 17px/1 "Hanken Grotesk",Inter,sans-serif;
       transition:transform 120ms cubic-bezier(.2,0,0,1),opacity 120ms}
     #startBtn:hover{background:var(--text);opacity:.9}
     #startBtn:active{transform:scale(.985)}
@@ -91,7 +100,7 @@
     @media(max-width:639px){#settings{margin:auto 0 0;max-width:none;border-radius:16px 16px 0 0;border-width:1px 0 0;padding-bottom:max(24px,env(safe-area-inset-bottom))}}
     .start-foot{position:relative;z-index:1;margin:32px auto 0;max-width:960px;text-align:center;font-size:14px;line-height:1.45;color:var(--muted);text-wrap:balance}
     @media(min-width:640px){.brand h1{font-size:56px}}
-    @media(max-height:640px){.level{min-height:52px}.brand{margin-bottom:28px}#startBtn{margin-top:24px}.start-foot{margin-top:20px}}
+    @media(max-height:640px){.theme{min-height:92px}.rounds{margin-top:20px}.brand{margin-bottom:28px}#startBtn{margin-top:24px}.start-foot{margin-top:20px}}
     @media(prefers-reduced-motion:reduce){#start *,#settings,#settings *{transition:none!important}#settings[open]{animation:none}}
     @media(max-width:920px){main{grid-template-columns:1fr}aside{border-left:0;border-top:1px solid #344047}#stage,#panorama{min-height:400px}}
   </style>
@@ -105,15 +114,20 @@
   <div class="start-inner">
     <div class="brand"><h1 id="startTitle"><img class="logo" src="assets/logo-wo-und-wann.png" width="1200" height="228" alt="Wo &amp; Wann?"></h1></div>
     <form id="startForm">
-      <!-- Theme blocks (docs/SCENE_MASTERPLAN_30.md) are stored and exposed as body[data-blocks]; scenes are not filtered yet. -->
+      <!-- Theme blocks (docs/SCENE_MASTERPLAN_30.md) and images per round are stored and exposed as body[data-blocks] / body[data-rounds]; gameplay does not use them yet. -->
       <fieldset>
         <legend>Themen</legend>
-        <div class="levels">
-          <label class="level"><input type="checkbox" name="block" value="production" checked>Produktion<span class="check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></label>
-          <label class="level"><input type="checkbox" name="block" value="trade" checked>Handel &amp; Macht<span class="check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></label>
-          <label class="level"><input type="checkbox" name="block" value="events" checked>Wendepunkte<span class="check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></label>
+        <div class="themes">
+          <label class="theme"><input type="checkbox" name="block" value="production" checked><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V9l5 3V9l5 3V9l5 3V4h3v16z"/><path d="M7 16h2M12 16h2"/></svg><span>Produktion</span></label>
+          <label class="theme"><input type="checkbox" name="block" value="trade" checked><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"/><path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/><path d="M12 10v4"/><path d="M12 2v3"/></svg><span>Handel &amp; Macht</span></label>
+          <label class="theme"><input type="checkbox" name="block" value="events" checked><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg><span>Wendepunkte</span></label>
         </div>
       </fieldset>
+      <div class="rounds">
+        <div class="rounds-head"><label for="rounds">Bilder pro Runde</label><output id="roundsOut" for="rounds">5 · Mittel</output></div>
+        <input id="rounds" name="rounds" type="range" min="1" max="9" step="1" value="5">
+        <div class="ticks" aria-hidden="true"><span>Leicht</span><span>Mittel</span><span>Schwer</span></div>
+      </div>
       <button id="startBtn" type="submit">Spiel starten</button>
     </form>
   </div>
@@ -206,9 +220,15 @@ const blockInputs=[...document.querySelectorAll('#startForm input[name=block]')]
 function syncStart(){const n=blockInputs.filter(i=>i.checked).length;$('startBtn').disabled=!n;$('startBtn').textContent=n?'Spiel starten':'Mindestens ein Thema wählen';}
 try{const saved=JSON.parse(localStorage.getItem('mit-blocks'));if(Array.isArray(saved)&&saved.length)blockInputs.forEach(i=>i.checked=saved.includes(i.value));}catch(e){}
 blockInputs.forEach(i=>i.addEventListener('change',syncStart));syncStart();
+const rounds=$('rounds');
+function syncRounds(){const v=+rounds.value;rounds.style.setProperty('--p',((v-1)/8*100)+'%');
+  $('roundsOut').textContent=v+' · '+(v<=3?'Leicht':v<=6?'Mittel':'Schwer');}
+try{const r=+localStorage.getItem('mit-rounds');if(r>=1&&r<=9)rounds.value=r;}catch(e){}
+rounds.addEventListener('input',syncRounds);syncRounds();
 $('startForm').addEventListener('submit',e=>{e.preventDefault();const blocks=new FormData(e.target).getAll('block');if(!blocks.length)return;
 try{localStorage.setItem('mit-blocks',JSON.stringify(blocks));}catch(err){}
-document.body.dataset.blocks=blocks.join(' ');$('start').hidden=true;$('game').hidden=false;if(scenes.length&&!viewer)openScene();});
+document.body.dataset.blocks=blocks.join(' ');document.body.dataset.rounds=rounds.value;
+try{localStorage.setItem('mit-rounds',rounds.value);}catch(err){}$('start').hidden=true;$('game').hidden=false;if(scenes.length&&!viewer)openScene();});
 $('seam').addEventListener('click',()=>{if(viewer)viewer.setYaw(180);});
 $('guess').addEventListener('click',()=>{const s=current();if(!s)return;
 const p=periods.find(([a,b])=>s.year>=a&&s.year<=b);const entered=$('period').value;
