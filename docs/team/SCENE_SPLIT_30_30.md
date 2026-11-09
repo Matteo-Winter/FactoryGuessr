@@ -1,5 +1,8 @@
 # Arbeitsaufteilung — Made in Time (60 Szenen, 2 Personen)
 
+> **ARCHIV – NICHT MEHR AKTUELL (09.11.2026).** Dieses Dokument beschreibt den früheren **60er- bzw. 30/30-Plan** und ist **keine Arbeitsanweisung** für neue Bilder. Aktueller Umfang: **30 Szenen, 16 Produktionsstätten (Nutzer) + 6 Handelsorte und 8 Wendepunkte (Kollege)**. Siehe [aktiver Masterplan](../SCENE_MASTERPLAN_30.md) und [aktueller Kollegen-Prompt](COLLEAGUE_MASTER_PROMPT_14.md). Alte Nummern bleiben nur als Referenz erhalten.
+
+
 **Stand: 09.11.2026.** Quelle: [60-Szenen-Masterplan](../SCENE_MASTERPLAN_60.md). Verbindliche Aufteilung nach **Zieljahr aufsteigend** und bei Jahrgleichheit nach bestehender Master-Nummer. Es wird nicht nach der Tabellenposition aufgeteilt, denn diese war innerhalb einiger Epochen nicht streng chronologisch.
 
 | Bereich | Verantwortung | Anzahl | Zeitspanne | Verbindliche Liste |
