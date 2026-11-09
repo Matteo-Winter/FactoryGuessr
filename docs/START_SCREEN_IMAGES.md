@@ -83,6 +83,6 @@ Was online gespielt wird, steht in `public/data/orte.json`; die Bilder liegen al
 
 **Bildpool einer Runde:** Orte aus `orte.json` plus alle Szenen aus `scenes.json` mit Panorama, gefiltert nach den gewählten Themenblöcken. Nur auf `localhost` kommen zusätzlich Bilder aus `_local/` dazu, die noch nicht in `orte.json` stehen.
 
-**Keine Wiederholungen:** `localStorage` `ww-played` merkt sich, wann jeder Ort (Gruppe) und jedes Bild zuletzt gezeigt wurde. Eine Runde nimmt zuerst nie gezeigte Orte, dann die am längsten nicht gezeigten; innerhalb eines Orts die am längsten nicht gezeigte Variante. Erst wenn alle Orte der gewählten Themen einmal dran waren, kommen Orte wieder – die zuletzt gespielten als letzte.
+**Zufall ohne Wiederholungen:** `localStorage` `ww-played` zählt pro Ort, wie oft und wann er zuletzt gezeigt wurde. Eine Runde nimmt zuerst die am seltensten gezeigten Orte (zuerst nie gezeigte), darin zufällig; Orte der vorigen Runde kommen in ihrer Stufe zuletzt. Die gewählten Themen wechseln sich ab (das am längsten nicht gezeigte zuerst), neue Orte stehen vor Wiederholungen, und zwei Orte desselben Themas folgen nur aufeinander, wenn es nicht anders geht. So kommt jeder Ort der gewählten Themen einmal, bevor einer zum zweiten Mal kommt – auch wenn man zwischendurch die Themen wechselt.
 
 **Einzelner Test:** `?pano=assets/…` testet genau ein Panorama; erlaubt sind nur relative Pfade unter `assets/`.

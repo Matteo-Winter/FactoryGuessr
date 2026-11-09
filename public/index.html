@@ -477,19 +477,37 @@ async function buildPool(blocks){const q=new URLSearchParams(location.search).ge
   // theme filter; scenes without a block are production sites (all current pilots are)
   const f=pool.filter(s=>blocks.includes(s.block||'production'));return f.length?f:pool;}
 function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-// No repeats until everything was seen: localStorage "ww-played" remembers when each Ort (group) and each
-// image was last shown (a running counter). A round takes the Orte never shown first, then the ones shown
-// longest ago; within an Ort the variant shown longest ago. So all Orte of the chosen themes come once
-// before any comes back, and after a full cycle the most recent ones come last again.
-const PLAYED_KEY='ww-played',gkey=s=>s.group||s.id||s.panorama_path;
+// Random rounds, new Orte for as long as possible. localStorage "ww-played" keeps per Ort (group) how often
+// it was shown ("n:") and when last ("g:", a running counter; same for single images with "i:"/"c:").
+// A round is filled tier by tier: Orte shown least often first, so every Ort of the chosen themes comes once
+// before any comes twice. Within a tier the pick is random, Orte from the previous round go last, and the
+// themes take turns, so with several themes a round mixes them. The final order avoids two of the same
+// theme in a row where possible.
+const PLAYED_KEY='ww-played',gkey=s=>s.group||s.id||s.panorama_path,blockOf=s=>s.block||'production';
 function played(){try{return JSON.parse(localStorage.getItem(PLAYED_KEY))||{};}catch(e){return {};}}
-function markPlayed(s){const p=played();p._n=(p._n||0)+1;p['g:'+gkey(s)]=p._n;p['i:'+s.panorama_path]=p._n;try{localStorage.setItem(PLAYED_KEY,JSON.stringify(p));}catch(e){}}
-function pickRound(pool,n){const p=played(),groups=new Map();
+function markPlayed(s){const p=played(),k=gkey(s),i=s.panorama_path;p._n=(p._n||0)+1;
+  p['n:'+k]=(p['n:'+k]??(p['g:'+k]?1:0))+1;p['g:'+k]=p._n;p['b:'+blockOf(s)]=p._n;p['c:'+i]=(p['c:'+i]||0)+1;p['i:'+i]=p._n;
+  try{localStorage.setItem(PLAYED_KEY,JSON.stringify(p));}catch(e){}}
+function pickRound(pool,n){const p=played(),groups=new Map(),recent=(p._n||0)-n;n=Math.max(1,n);
   for(const s of pool){const k=gkey(s);if(!groups.has(k))groups.set(k,[]);groups.get(k).push(s);}
-  const age=k=>p[k]||0; // 0 = never shown
-  const cand=shuffle([...groups]).map(([k,v])=>({last:age('g:'+k),s:shuffle(v).sort((a,b)=>age('i:'+a.panorama_path)-age('i:'+b.panorama_path))[0]}));
-  cand.sort((a,b)=>a.last-b.last); // stable: never-shown Orte stay in random order
-  return shuffle(cand.slice(0,Math.max(1,n)).map(c=>c.s));}
+  const tiers=new Map();
+  for(const [k,v] of groups){
+    // variant: shown least often, then longest ago
+    const s=shuffle(v).sort((a,b)=>((p['c:'+a.panorama_path]||0)-(p['c:'+b.panorama_path]||0))||((p['i:'+a.panorama_path]||0)-(p['i:'+b.panorama_path]||0)))[0];
+    const last=p['g:'+k]||0,t=2*(p['n:'+k]??(last?1:0))+(last&&last>recent?1:0);
+    if(!tiers.has(t))tiers.set(t,[]);tiers.get(t).push(s);}
+  const segs=[];let count=0;
+  for(const t of [...tiers.keys()].sort((a,b)=>a-b)){const seg=[];segs.push(seg);
+    const byBlock=new Map();for(const s of shuffle(tiers.get(t))){const b=blockOf(s);if(!byBlock.has(b))byBlock.set(b,[]);byBlock.get(b).push(s);}
+    // themes take turns, the one shown longest ago first (matters for short rounds)
+    while(count<n&&byBlock.size)for(const b of shuffle([...byBlock.keys()]).sort((x,y)=>(p['b:'+x]||0)-(p['b:'+y]||0))){if(count>=n)break;
+      const a=byBlock.get(b);seg.push(a.pop());count++;if(!a.length)byBlock.delete(b);}
+    if(count>=n)break;}
+  // order: new Orte before repeats; inside that random, but no two of the same theme in a row if avoidable
+  const ord=[];
+  for(const seg of segs){const rest=shuffle(seg);
+    while(rest.length){const prev=ord.length?blockOf(ord[ord.length-1]):null;let j=rest.findIndex(s=>blockOf(s)!==prev);if(j<0)j=0;ord.push(rest.splice(j,1)[0]);}}
+  return ord;}
 function loadImage(i){roundIdx=i;scene=round[i];$('roundPill').textContent='Bild '+(i+1)+' / '+round.length;
   if(!scene||!window.pannellum)return;markPlayed(scene);
   if(round[i+1]){const pre=new Image();pre.src=round[i+1].panorama_path;} // next image loads in the background
