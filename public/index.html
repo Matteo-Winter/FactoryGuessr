@@ -95,7 +95,7 @@
     @media(max-width:639px){#settings{margin:auto 0 0;max-width:none;border-radius:16px 16px 0 0;border-width:1px 0 0;padding-bottom:max(24px,env(safe-area-inset-bottom))}}
     .start-foot{position:relative;z-index:1;margin:32px auto 0;max-width:960px;text-align:center;font-size:14px;line-height:1.45;color:var(--muted);text-wrap:balance}
     @media(min-width:640px){.brand h1{font-size:56px}}
-    @media(max-height:640px){#start{padding-top:64px}.theme{min-height:80px;padding:10px 6px;gap:6px}.brand{margin-bottom:20px}.rounds{margin-top:14px}.start-wrap{margin-top:22px}.start-foot{margin-top:14px}}
+    @media(max-height:640px){.start-tools{margin-top:8px}#start{padding-top:64px}.theme{min-height:80px;padding:10px 6px;gap:6px}.brand{margin-bottom:20px}.rounds{margin-top:14px}.start-wrap{margin-top:22px}.start-foot{margin-top:14px}}
     @media(prefers-reduced-motion:reduce){.score{animation:none}#start *,#settings,#settings *{transition:none!important}#settings[open]{animation:none}}
     /* Game screen: full-screen panorama, dock with timeline + map */
     #game{--bg:#0a0a0a;--text:#fafafa;--muted:#a3a3a3;--line:#262626;--surface:#141414;--card:rgba(10,10,10,.88);
@@ -246,6 +246,43 @@
     .summary li b{font-variant-numeric:tabular-nums}
     #sumDone{width:100%;height:56px;margin-top:20px;border-radius:12px;background:var(--text);color:var(--bg);font-size:17px;font-weight:600;transition:opacity 120ms,transform 120ms cubic-bezier(.2,0,0,1)}
     #sumDone:hover{opacity:.9}#sumDone:active{transform:scale(.985)}#sumDone:focus-visible{outline:2px solid var(--text);outline-offset:3px}
+    /* Start screen: quiet tool link */
+    .start-tools{position:relative;z-index:1;margin:20px 0 0;text-align:center}
+    .link{position:relative;height:32px;padding:0;background:none;color:var(--muted);font-size:14px;font-weight:500}
+    .link::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:1px;background:var(--line)}
+    .link::before{content:"";position:absolute;left:0;bottom:6px;height:1px;width:0;background:var(--text);z-index:1;transition:width 200ms cubic-bezier(.2,0,0,1)}
+    .link:hover,.link:focus-visible{color:var(--text)}.link:hover::before,.link:focus-visible::before{width:100%}
+    .link:focus-visible{outline:none}
+    /* Image review */
+    #review{--bg:#0a0a0a;--text:#fafafa;--muted:#a3a3a3;--line:#262626;--surface:#141414;--card:rgba(10,10,10,.9);
+      position:fixed;inset:0;background:var(--bg);color:var(--text);overflow:hidden}
+    #review[hidden]{display:none}
+    #reviewPano{position:absolute;inset:0}
+    #revBack{left:16px;right:auto;background:var(--card)}
+    .rev-card{position:absolute;z-index:2;left:50%;bottom:max(16px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(560px,calc(100% - 32px));
+      padding:16px;border-radius:16px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+    .rev-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+    .rev-title{display:flex;flex-direction:column;gap:2px;min-width:0}
+    .rev-title b{font-size:16px;font-weight:600}
+    .rev-title small{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+    .rev-title small .warn{color:#ffd43b}
+    .rev-badge{flex:none;height:26px;padding:0 10px;border-radius:13px;display:none;align-items:center;font-size:13px;font-weight:600}
+    .rev-badge.ok{display:flex;background:#fafafa;color:#0a0a0a}.rev-badge.redo{display:flex;background:#ffd43b;color:#0a0a0a}
+    .rev-note{margin:0;font-size:13px;color:#c4c4c4}.rev-note:empty{display:none}
+    .rev-views,.rev-verdict,.rev-nav{display:flex;gap:8px}
+    .rev-views button{flex:1;height:36px;border-radius:10px;background:var(--surface);color:var(--text);border:1px solid var(--line);font-size:14px;transition:background-color 120ms}
+    .rev-views button:hover{background:#1f1f1f}
+    .rev-verdict button{flex:1;height:48px;border-radius:12px;font-size:16px;font-weight:600;border:1px solid var(--line);background:var(--bg);color:var(--text);
+      transition:background-color 150ms cubic-bezier(.2,0,0,1),color 150ms,border-color 150ms,transform 120ms cubic-bezier(.2,0,0,1)}
+    .rev-verdict button:active{transform:scale(.985)}
+    #revOk.on{background:#fafafa;color:#0a0a0a;border-color:#fafafa}
+    #revRedo.on{background:#ffd43b;color:#0a0a0a;border-color:#ffd43b}
+    #revComment{width:100%;height:40px;padding:0 12px;border-radius:10px;background:var(--surface);border:1px solid var(--line);color:var(--text);font:inherit;font-size:14px}
+    #revComment:focus{outline:2px solid var(--text);outline-offset:1px}
+    .rev-nav button{height:44px;border-radius:12px;background:var(--surface);color:var(--text);border:1px solid var(--line);font-size:16px}
+    #revPrev,#revNext{width:56px}#revCopy{flex:1;font-size:15px;font-weight:600}
+    .rev-views button:focus-visible,.rev-verdict button:focus-visible,.rev-nav button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+    @media(max-height:640px){.rev-card{gap:8px;padding:12px}.rev-verdict button{height:42px}.rev-nav button{height:40px}}
     /* medium widths: map + scores side by side, explanation below across both */
     @media(max-width:899px){.result{grid-template-columns:1fr 1fr;gap:20px}.res-explain{grid-column:1/-1;max-height:9.2em}.res-map{aspect-ratio:16/10}}
     /* phones: one column; explanation clamped with "Weiterlesen", expanded text may scroll */
@@ -300,6 +337,7 @@
       </div>
     </form>
   </div>
+  <p class="start-tools"><button type="button" class="link" id="reviewLink">Bilder prüfen</button></p>
   <p class="start-foot">Ein ZuWi Creative Assignment von Matteo Winter &amp; Niklas Meller unter Aufsicht von Wolfgang Gruber</p>
 </section>
 <dialog id="settings" aria-labelledby="settingsTitle">
@@ -367,6 +405,23 @@
     <button type="button" id="sumDone">Zurück zum Start</button>
   </section>
 </div>
+<section id="review" hidden aria-label="Bilder prüfen">
+  <div id="reviewPano"></div>
+  <button class="icon-btn" id="revBack" type="button" aria-label="Zurück zum Start">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+  </button>
+  <div class="round-pill" id="revCount">–</div>
+  <div class="rev-card">
+    <div class="rev-head"><div class="rev-title"><b id="revTitle"></b><small id="revMeta"></small></div><span class="rev-badge" id="revBadge"></span></div>
+    <p class="rev-note" id="revNote"></p>
+    <div class="rev-views" role="group" aria-label="Blickrichtung">
+      <button type="button" data-view="front">Vorne</button><button type="button" data-view="seam">Naht</button><button type="button" data-view="up">Oben</button><button type="button" data-view="down">Unten</button>
+    </div>
+    <div class="rev-verdict"><button type="button" id="revOk">Passt</button><button type="button" id="revRedo">Neu machen</button></div>
+    <input id="revComment" type="text" placeholder="Notiz (optional), z. B. Naht sichtbar" aria-label="Notiz">
+    <div class="rev-nav"><button type="button" id="revPrev" aria-label="Vorheriges Bild">←</button><button type="button" id="revCopy">Liste kopieren</button><button type="button" id="revNext" aria-label="Nächstes Bild">→</button></div>
+  </div>
+</section>
 <script>
 // Start-screen background: historical images (public domain / CC0, see docs/START_SCREEN_IMAGES.md)
 // on the inside of a cylinder.
@@ -613,6 +668,46 @@ function endPointer(e){if(!pointers.has(e.pointerId))return;pointers.delete(e.po
 stage.addEventListener('pointerup',endPointer);stage.addEventListener('pointercancel',endPointer);
 addEventListener('resize',()=>{sizes();commit();});
 $('backBtn').addEventListener('click',()=>{resetGuess();$('result').hidden=true;$('summary').hidden=true;$('game').classList.remove('resolved');$('game').hidden=true;$('start').hidden=false;});
+// ---------- Image review (start screen → "Bilder prüfen") ----------
+// Walks through every Ort (scenes.json + local) and extra local candidates (_local/review.json).
+// Verdicts and notes are kept in this browser (localStorage "ww-review") and can be copied as a list.
+let revList=[],revIdx=0,revViewer=null;const REV_KEY='ww-review';
+const revStore=()=>{try{return JSON.parse(localStorage.getItem(REV_KEY))||{};}catch(e){return {};}};
+function revSave(path,patch){const st=revStore();st[path]={...(st[path]||{}),...patch};try{localStorage.setItem(REV_KEY,JSON.stringify(st));}catch(e){}}
+const imgSize={};
+function sizeOf(url){return imgSize[url]||(imgSize[url]=new Promise(res=>{const i=new Image();i.onload=()=>res([i.naturalWidth,i.naturalHeight]);i.onerror=()=>res(null);i.src=url;}));}
+async function buildReviewList(){const pool=await buildPool(['production','trade','events']);
+  const BL={production:'Produktion',trade:'Handel & Macht',events:'Wendepunkte'};
+  const list=pool.map(s=>({path:s.panorama_path,title:s.title_de||[s.site_type||s.industry,s.year].filter(Boolean).join(', ')||s.panorama_path.split('/').pop(),
+    id:(s.id||'').replace(/-local(-test)?$/,''),block:BL[s.block||'production'],note:s.panorama_path.includes('/_local/')?'':'Pilotszene aus scenes.json'}));
+  try{const r=await fetch(LOCAL_DIR+'review.json');if(r.ok)for(const x of await r.json())if(/^[\w.-]+\.(jpe?g|png|webp)$/i.test(x.file||''))
+    list.push({path:LOCAL_DIR+x.file,title:x.title||x.file,id:'',block:'nicht spielbar',note:x.note||''});}catch(e){}
+  return list;}
+function revShow(i){revIdx=(i+revList.length)%revList.length;const it=revList[revIdx],st=revStore()[it.path]||{};
+  $('revCount').textContent=(revIdx+1)+' / '+revList.length;$('revTitle').textContent=(it.id?it.id+' · ':'')+it.title;
+  $('revNote').textContent=it.note;$('revComment').value=st.note||'';
+  $('revOk').classList.toggle('on',st.v==='ok');$('revRedo').classList.toggle('on',st.v==='redo');
+  const b=$('revBadge');b.className='rev-badge'+(st.v?' '+st.v:'');b.textContent=st.v==='ok'?'Passt':st.v==='redo'?'Neu machen':'';
+  const meta=$('revMeta'),file=it.path.split('/').pop();meta.textContent=it.block+' · '+file;
+  sizeOf(it.path).then(sz=>{if(revList[revIdx]!==it||!sz)return;const [w,h]=sz,warn=[];if(w<4096)warn.push('unter 4K');if(Math.abs(w/h-2)>.01)warn.push('nicht 2:1');
+    meta.textContent=it.block+' · '+file+' · '+w+'×'+h;if(warn.length){const sp=document.createElement('span');sp.className='warn';sp.textContent=' · '+warn.join(', ');meta.appendChild(sp);}});
+  if(revViewer){revViewer.destroy();revViewer=null;}
+  if(window.pannellum)revViewer=pannellum.viewer('reviewPano',{type:'equirectangular',panorama:it.path,autoLoad:true,showControls:false,compass:false,hfov:100,minHfov:30,maxHfov:120});}
+$('reviewLink').addEventListener('click',async()=>{revList=await buildReviewList();if(!revList.length)return;$('start').hidden=true;$('review').hidden=false;revShow(0);$('revNext').focus();});
+$('revBack').addEventListener('click',()=>{if(revViewer){revViewer.destroy();revViewer=null;}$('review').hidden=true;$('start').hidden=false;});
+$('revPrev').addEventListener('click',()=>revShow(revIdx-1));$('revNext').addEventListener('click',()=>revShow(revIdx+1));
+for(const [id,v] of [['revOk','ok'],['revRedo','redo']])$(id).addEventListener('click',()=>{const it=revList[revIdx],cur=(revStore()[it.path]||{}).v;revSave(it.path,{v:cur===v?null:v});revShow(revIdx);});
+$('revComment').addEventListener('input',e=>revSave(revList[revIdx].path,{note:e.target.value}));
+for(const b of document.querySelectorAll('.rev-views button'))b.addEventListener('click',()=>{if(!revViewer)return;
+  const v={front:[0,0],seam:[0,180],up:[90,0],down:[-90,0]}[b.dataset.view];revViewer.lookAt(v[0],v[1],100,600);});
+document.addEventListener('keydown',e=>{if($('review').hidden||e.target.tagName==='INPUT')return;
+  if(e.key==='ArrowRight')revShow(revIdx+1);else if(e.key==='ArrowLeft')revShow(revIdx-1);else if(e.key==='1')$('revOk').click();else if(e.key==='2')$('revRedo').click();});
+$('revCopy').addEventListener('click',async()=>{const st=revStore();
+  const lines=revList.map(it=>{const r=st[it.path]||{};return [(it.id||'–'),it.title,it.path.split('/').pop(),r.v==='ok'?'Passt':r.v==='redo'?'Neu machen':'offen',r.note||''].join(' | ');});
+  const txt='Bildprüfung '+new Date().toLocaleDateString('de-DE')+'\n'+lines.join('\n');
+  let ok=false;try{await navigator.clipboard.writeText(txt);ok=true;}catch(e){}
+  if(!ok){const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{ok=document.execCommand('copy');}catch(e){}t.remove();}
+  const b=$('revCopy');b.textContent=ok?'Kopiert ✓':'Kopieren nicht möglich';setTimeout(()=>b.textContent='Liste kopieren',1600);});
 const blockInputs=[...document.querySelectorAll('#startForm input[name=block]')];
 function syncStart(){const n=blockInputs.filter(i=>i.checked).length;$('startBtn').disabled=!n;$('startBtn').textContent=n?'Spiel starten':'Mindestens ein Thema wählen';}
 try{const saved=JSON.parse(localStorage.getItem('mit-blocks'));if(Array.isArray(saved)&&saved.length)blockInputs.forEach(i=>i.checked=saved.includes(i.value));}catch(e){}
