@@ -10,36 +10,36 @@
 
 **Spiel:** Ein fester 360°-Standpunkt, freies Umsehen wie Street View. Erst heutiges Land und historische Epoche schätzen, optional eine dritte Frage nach dem Ereignis / der Machtstruktur. Die komplexen Fakten folgen **nach** der Auflösung, nicht als notwendige Voraussetzung fürs einfache Raten.
 
-## AKTUELLE Bildaufträge (nach vier vom Nutzer akzeptierten Referenzbildern)
+## AKTUELLE Bildprüfung vom 09.11.2026 (ersetzt frühere 4/26-Bildaufteilung)
 
-**Verbindliche Liste:** [IMAGE_PRODUCTION_STATUS_30.md](IMAGE_PRODUCTION_STATUS_30.md) · [Gemini-Anleitung für Kollegen](team/GEMINI_IMAGE_HANDOFF_26.md) · [Maschinenlesbare Bildstatusliste](team/ACTIVE_SCENES_30.json).
+**[Verbindliche Bildstatusliste mit Dateinamen](IMAGE_PRODUCTION_STATUS_30.md)** · **[Gemini-Auftrag für 6 Remakes + 13 offene](team/GEMINI_IMAGE_HANDOFF_CURRENT.md)** · **[maschinenlesbares Manifest](team/ACTIVE_SCENES_30.json)**.
 
-**4 Bildreferenzen vorhanden:** `P02` Murano, `P03` Jingdezhen, `P05` GB-Textilfabrik, `P10` Detroit-Autofabrik. Die vier vom Nutzer im Chat ausgewählten Rasterbilder gelten **nur als visuell akzeptiert**; formale historische/technische QA und Integration in den Viewer sind noch offen. **0/30 Spielbilder freigegeben.**
+- **11 Bildversionen visuell vom Nutzer akzeptiert:** P01, P02, P03, P04, P05, P09, P10, P13, T01, T03, T04.
+- **6 ausdrücklich neu zu erstellen:** E01, E03, E04, E05, E07, T05.
+- **13 weitere aktive Szenen ohne Urteil im aktuellen Review:** P06, P07, P08, P11, P12, P14, P15, P16, T02, T06, E02, E06, E08.
+- **19 offene Bildarbeiten beim Kollegen mit Gemini.** Die historische Auswahl von 30 Motiven bleibt gleich. Zusätzliche Review-Files (Kanton-Alternative, abgelehnte Murano-Alternative, Marktplatz/Machu Picchu/Regenwald/Eisenbahnbau) werden **nicht** zu eigenständigen Leveln.
+- **Kein Bild automatisch `ready`:** Nutzerwert „Passt“ betrifft nur visuelle Auswahl; vollständige 360°-, Historien-, Quellen- und Browser-Tests bleiben gesondert nachzuweisen.
 
-**26 Bilder noch zu erstellen – alle für den Kollegen mit Gemini:** `P01,P04,P06,P07,P08,P09,P11,P12,P13,P14,P15,P16` (12 weitere Produktion) sowie `T01–T06` (6 Handel/Macht) und `E01–E08` (8 Ereignisse). Die bisherige Zuordnung „Projektleitung macht alle 16 P-Bilder“ ist für **Bildgenerierung** aufgehoben; die Projektleitung bleibt für Auswahl, QA und endgültige Freigabe verantwortlich. Vorhandene, vom Nutzer nicht gewählte P-Kandidaten zählen **nicht** als erledigte Bilder.
-
-Die **30 historischen Motive und IDs** bleiben unverändert; alle Fotoreferenzen sind historische **KI-Kompositrekonstruktionen**, keine echten zeitgenössischen Fotos. Quellenprüfung, 360°-Viewer-QA und Review sind pro Szene Pflicht.
-
-## A. 16 Produktionsstätten – 4 Referenzen vorhanden, 12 Bilder neu
+## A. 16 Produktionsstätten – 8 visuell akzeptiert, 8 noch offen
 
 | Neue ID | Alte Master-Nr. | Jahr | Land und Region | Hauptprodukt | Was auf dem Bild erkennbar sein soll | Stand |
 |---|---:|---:|---|---|---|---|
-| P01 | **01** | 1660 | Niederlande, Zaandam/Zaanstreek | Holzbretter | Windgetriebenes Sägewerk, Baumstämme im Kanal, flaches Polderland, Segelschiffe | **Gemini-Neubild benötigt** |
-| P02 | **02** | 1680 | Italien, Murano bei Venedig | Glasgefäße | Glasbläser am Ofen, glühende Glasmasse, Laguneninsel mit Werkstätten | **Referenz vom Nutzer akzeptiert; technische QA offen** |
-| P03 | **03** | 1700 | China, Jingdezhen | Porzellan | Blau-weißes Geschirr, Tonformen, Holzbrennöfen, chinesischer Werkstatthof | **Referenz vom Nutzer akzeptiert; technische QA offen** |
-| P04 | **04** | 1700 | Barbados, St. James / Zuckerrohrgürtel | Rohrzucker | Zuckerrohr, walzenbetriebene Presse, große Kochkessel, tropische Felder | **Gemini-Neubild benötigt** |
-| P05 | **07** | 1840 | Großbritannien, Manchester / Lancashire (Pilot) | Baumwollgarn und Stoff | Eisenstützen, Spinnmaschinen, Riemenantrieb, Backsteinhalle, Baumwollballen | **Referenz vom Nutzer akzeptiert; technische QA offen** |
-| P06 | **18** | 1880 | Japan, Tomioka, Gunma | Rohseide | Seidenkokons, Haspelmaschinen, Ziegel-/Holzarchitektur aus Meiji-Zeit | **Gemini-Neubild benötigt** |
-| P07 | **15** | 1890 | Deutschland, Ruhrgebiet | Stahl | Hochöfen, Gießpfannen, Schienen, Schornsteine, Backsteinindustrie | **Gemini-Neubild benötigt** |
-| P08 | **20** | 1900 | DR Kongo (heutiges Staatsgebiet), Äquatorregion / Kongobecken | Naturkautschuk | Wald-Kautschukranken, Latexgefäße, Sammelstellen am Fluss; **keine** Plantagenreihen aus Südostasien | **Gemini-Neubild benötigt** |
-| P09 | **17** | 1910 | Guatemala, Karibikküste / Puerto-Barrios-Region (Pilot) | Bananen für den Export | Bananenstauden, Waschbecken, Holzkisten, kleine Bahngleise und tropische Landschaft | **Gemini-Neubild benötigt** |
-| P10 | **16** | 1913 | USA, Highland Park / Detroit | Automobile | Frühe Model-T-artige Autos, bewegtes Montageband, Tageslicht-Fabrikhalle | **Referenz vom Nutzer akzeptiert; technische QA offen** |
-| P11 | **44** | 1970 | Ghana, Takoradi / Tema | Kakaomasse und Kakaobutter | Kakaoschoten und Bohnen, Röst-/Mahlmaschinen, tropischer Fabrikhof | **Gemini-Neubild benötigt** |
-| P12 | **42** | 1975 | Saudi-Arabien, Ostprovinz / Dhahran | Erdöl | Ölförderanlagen, Pipeline, Wüstenhorizont, schwere Fahrzeuge der 1970er | **Gemini-Neubild benötigt** |
-| P13 | **51** | 2015 | China, Shenzhen / Perlflussdelta (Pilot) | Elektronikgeräte | Leiterplatten, ESD-Arbeitsplätze, optische Qualitätskontrolle, moderne Fließbänder | **Gemini-Neubild benötigt** |
-| P14 | **52** | 2018 | Bangladesch, Dhaka | T-Shirts und Kleidung | Große Nähhallen, Stoffzuschnitt, Packtische, urbane Umgebung | **Gemini-Neubild benötigt** |
-| P15 | **53** | 2023 | Taiwan, Hsinchu | Halbleiterchips | Wafer und Reinraum, Robotik, Halbleiterfertigung; keine beliebigen Laptop-Montagen | **Gemini-Neubild benötigt** |
-| P16 | **55** | 2023 | Chile, Salar de Atacama | Lithiumsalz-Vorprodukte | Türkisfarbene Solebecken, Salzfläche, Anden, Pumpstationen | **Gemini-Neubild benötigt** |
+| P01 | **01** | 1660 | Niederlande, Zaandam/Zaanstreek | Holzbretter | Windgetriebenes Sägewerk, Baumstämme im Kanal, flaches Polderland, Segelschiffe | **Passt (visuell), QA offen** |
+| P02 | **02** | 1680 | Italien, Murano bei Venedig | Glasgefäße | Glasbläser am Ofen, glühende Glasmasse, Laguneninsel mit Werkstätten | **Passt (visuell), QA offen** |
+| P03 | **03** | 1700 | China, Jingdezhen | Porzellan | Blau-weißes Geschirr, Tonformen, Holzbrennöfen, chinesischer Werkstatthof | **Passt (visuell), QA offen** |
+| P04 | **04** | 1700 | Barbados, St. James / Zuckerrohrgürtel | Rohrzucker | Zuckerrohr, walzenbetriebene Presse, große Kochkessel, tropische Felder | **Passt (visuell), QA offen** |
+| P05 | **07** | 1840 | Großbritannien, Manchester / Lancashire (Pilot) | Baumwollgarn und Stoff | Eisenstützen, Spinnmaschinen, Riemenantrieb, Backsteinhalle, Baumwollballen | **Passt (visuell), QA offen** |
+| P06 | **18** | 1880 | Japan, Tomioka, Gunma | Rohseide | Seidenkokons, Haspelmaschinen, Ziegel-/Holzarchitektur aus Meiji-Zeit | **Offen, kein aktuelles Review** |
+| P07 | **15** | 1890 | Deutschland, Ruhrgebiet | Stahl | Hochöfen, Gießpfannen, Schienen, Schornsteine, Backsteinindustrie | **Offen, kein aktuelles Review** |
+| P08 | **20** | 1900 | DR Kongo (heutiges Staatsgebiet), Äquatorregion / Kongobecken | Naturkautschuk | Wald-Kautschukranken, Latexgefäße, Sammelstellen am Fluss; **keine** Plantagenreihen aus Südostasien | **Offen, kein aktuelles Review** |
+| P09 | **17** | 1910 | Guatemala, Karibikküste / Puerto-Barrios-Region (Pilot) | Bananen für den Export | Bananenstauden, Waschbecken, Holzkisten, kleine Bahngleise und tropische Landschaft | **Passt (visuell), QA offen** |
+| P10 | **16** | 1913 | USA, Highland Park / Detroit | Automobile | Frühe Model-T-artige Autos, bewegtes Montageband, Tageslicht-Fabrikhalle | **Passt (visuell), QA offen** |
+| P11 | **44** | 1970 | Ghana, Takoradi / Tema | Kakaomasse und Kakaobutter | Kakaoschoten und Bohnen, Röst-/Mahlmaschinen, tropischer Fabrikhof | **Offen, kein aktuelles Review** |
+| P12 | **42** | 1975 | Saudi-Arabien, Ostprovinz / Dhahran | Erdöl | Ölförderanlagen, Pipeline, Wüstenhorizont, schwere Fahrzeuge der 1970er | **Offen, kein aktuelles Review** |
+| P13 | **51** | 2015 | China, Shenzhen / Perlflussdelta (Pilot) | Elektronikgeräte | Leiterplatten, ESD-Arbeitsplätze, optische Qualitätskontrolle, moderne Fließbänder | **Passt (visuell), QA offen** |
+| P14 | **52** | 2018 | Bangladesch, Dhaka | T-Shirts und Kleidung | Große Nähhallen, Stoffzuschnitt, Packtische, urbane Umgebung | **Offen, kein aktuelles Review** |
+| P15 | **53** | 2023 | Taiwan, Hsinchu | Halbleiterchips | Wafer und Reinraum, Robotik, Halbleiterfertigung; keine beliebigen Laptop-Montagen | **Offen, kein aktuelles Review** |
+| P16 | **55** | 2023 | Chile, Salar de Atacama | Lithiumsalz-Vorprodukte | Türkisfarbene Solebecken, Salzfläche, Anden, Pumpstationen | **Offen, kein aktuelles Review** |
 
 **Auswahlprinzip:** Enthält die bereits vorbereiteten sieben Bildmotive und neun weitere mit starken Verbindungen zu Kolonialarbeit, Mechanisierung, multinationalen Lieferketten und Rohstoffmacht. Bewusst **keine** 16 nahezu identischen Fabrikhallen.
 
@@ -96,8 +96,8 @@ Die **30 historischen Motive und IDs** bleiben unverändert; alle Fotoreferenzen
 - **E07:** [Historischer Einstieg](https://www.ilo.org/resource/chronology-recent-events-bangladesh-ready-made-garment-rmg-sector) — konkrete Bildkomposition und Details gegen Quellen prüfen. **Warnung:** Keine Verletzten/Toten zeigen, keine identifizierbaren Opfer erfinden, kein Fotodokument behaupten
 - **E08:** [Historischer Einstieg](https://www.suezcanal.gov.eg/English/MediaCenter/News/Pages/nav_29-03-2021.aspx) — konkrete Bildkomposition und Details gegen Quellen prüfen. **Warnung:** Keine falschen Erklärungen für Unfallursache oder frei erfundene Markenlogos
 
-## Nächster Schritt – aktueller Auftrag
+## Nächster Schritt – nach Bildprüfung
 
-- Kollege erstellt die **26 offenen Bilder** gemäß [Bildliste](IMAGE_PRODUCTION_STATUS_30.md) und [Gemini-Briefing](team/GEMINI_IMAGE_HANDOFF_26.md); alte P-Bildkandidaten, die der Nutzer abgelehnt hat, sollen **neu produziert** werden.
-- Projektleitung teilt die vier Referenzdateien aus dem Chat mit dem Kollegen und prüft jede neue Szene auf Stil, Geschichte und echte 360°-Qualität.
-- Bestehende technische Pilotdateien und `public/data/scenes.json` bis QA/Review unverändert lassen. Keine `ready`-Behauptungen ohne Abnahme.
+- Kollege arbeitet laut [aktueller Gemini-Liste](team/GEMINI_IMAGE_HANDOFF_CURRENT.md): **sechs abgelehnte Bilder neu erzeugen; 13 nicht beurteilte Szenen zur Prüfung bringen**. Die elf akzeptierten Hauptversionen nicht ohne Auftrag neu produzieren.
+- Bilder im Nutzer-Review sind nach Dateinamen dokumentiert, **ihre tatsächlichen Binärdateien sind nicht automatisch im GitHub-Repo**.
+- Entwickler/Projektleitung: Nutzerakzeptanz, technische sphärische QA, historischer Quellenabgleich, Lizenzprüfung und formale Spielfreigabe getrennt behandeln. `approved_panorama_count=0` bleibt unverändert.
