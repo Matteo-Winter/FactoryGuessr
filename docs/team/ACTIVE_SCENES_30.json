@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-09-v4-image-selection",
+  "version": "2026-11-09-v5-reviewed-23-entries",
   "project": "Made in Time – Guess where. Guess when.",
   "activeTarget": 30,
   "approvedCount": 0,
@@ -9,10 +9,10 @@
     "turningPoints": 8
   },
   "assignment": {
-    "lead": "Visual selection and final QA for all 30; 4 reference images accepted for now",
-    "colleague": "Create/recreate all 26 scenes without an accepted visual reference: P, T and E"
+    "lead": "Visual review, historical and 360-degree acceptance of all 30 scenes; 11 images visually accepted",
+    "colleague": "Redo 6 rejected scene images and resolve 13 open/unreviewed scenes using Gemini; do not duplicate the 11 accepted scenes"
   },
-  "statusNotes": "All entries are plans or existing unapproved candidates. Retain source files and original legacy numbers.",
+  "statusNotes": "Accepted means user visual assessment only, NOT approved 360/historical rights. Source filenames are based on user review, bytes not verified in GitHub.",
   "scenes": [
     {
       "oldMasterNumber": 1,
@@ -23,13 +23,30 @@
       "difficulty": "M",
       "id": "P01",
       "category": "production",
-      "owner": "colleague",
-      "status": "image_to_generate",
+      "owner": "user",
+      "status": "visual_accepted_not_game_approved",
       "previousPlanningStatus": "candidate_existing_requires_qa",
-      "image_status": "needed",
-      "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_status": "visual_accepted_pending_qa",
+      "image_generation_owner": "none_unless_further_review",
+      "image_qa_status": "pending_independent_360_historical_rights_check",
+      "reference": {
+        "file": "zaandam-saegemuehle.jpg",
+        "source": "filename_from_user_review_not_uploaded",
+        "availableInGitHub": false,
+        "verifiedBytes": false,
+        "width": null,
+        "height": null,
+        "sha256": null
+      },
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "passt",
+        "filename": "zaandam-saegemuehle.jpg",
+        "source": "user-provided image review 09.11.2026",
+        "scope": "visual_acceptability_only",
+        "actualFileBytesConfirmedInRepository": false,
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "oldMasterNumber": 2,
@@ -41,12 +58,40 @@
       "id": "P02",
       "category": "production",
       "owner": "user",
-      "status": "user_accepted_visual_reference_pending_technical_qa",
+      "status": "visual_accepted_not_game_approved",
       "previousPlanningStatus": "candidate_existing_requires_qa",
-      "image_status": "reference_selected",
-      "image_generation_owner": "none_currently",
-      "image_qa_status": "not_finally_verified",
+      "image_status": "visual_accepted_pending_qa",
+      "image_generation_owner": "none_unless_further_review",
+      "image_qa_status": "pending_independent_360_historical_rights_check",
       "reference": {
+        "file": "murano-glas.jpg",
+        "source": "filename_from_user_review_not_uploaded",
+        "availableInGitHub": false,
+        "verifiedBytes": false,
+        "width": null,
+        "height": null,
+        "sha256": null
+      },
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "passt",
+        "filename": "murano-glas.jpg",
+        "source": "user-provided image review 09.11.2026",
+        "scope": "visual_acceptability_only",
+        "actualFileBytesConfirmedInRepository": false,
+        "technical360QA": "not_documented_by_this_review"
+      },
+      "alternativeImageReviews": [
+        {
+          "id": "P02",
+          "filename": "review-venedig.webp",
+          "subject": "Venedig / Murano – Kollegen-Fassung",
+          "verdict": "neu_machen",
+          "role": "rejected_alternate",
+          "note": "Die Hauptversion P02/murano-glas.jpg passt bereits; diese Alternativfassung nicht verwenden."
+        }
+      ],
+      "priorReferenceMetadata": {
         "file": "Murano_1680_V2_One_Canal_UPSCALED_4096x2048(2).jpg",
         "width": 2048,
         "height": 1024,
@@ -54,7 +99,8 @@
         "style": "warm flackerndes Ofenlicht, venezianische Ziegelbögen und Kanal, Glasbläser an der Arbeit",
         "source": "user-uploaded chat attachment",
         "availableInGitHub": false,
-        "referenceZipName": "FactoryGuessr_Gemini_4_Referenzbilder.zip"
+        "referenceZipName": "FactoryGuessr_Gemini_4_Referenzbilder.zip",
+        "relationToNewFilename": "not_verified_do_not_copy_hash_or_resolution"
       }
     },
     {
@@ -67,12 +113,30 @@
       "id": "P03",
       "category": "production",
       "owner": "user",
-      "status": "user_accepted_visual_reference_pending_technical_qa",
+      "status": "visual_accepted_not_game_approved",
       "previousPlanningStatus": "candidate_existing_requires_qa",
-      "image_status": "reference_selected",
-      "image_generation_owner": "none_currently",
-      "image_qa_status": "not_finally_verified",
+      "image_status": "visual_accepted_pending_qa",
+      "image_generation_owner": "none_unless_further_review",
+      "image_qa_status": "pending_independent_360_historical_rights_check",
       "reference": {
+        "file": "jingdezhen-porzellan.jpg",
+        "source": "filename_from_user_review_not_uploaded",
+        "availableInGitHub": false,
+        "verifiedBytes": false,
+        "width": null,
+        "height": null,
+        "sha256": null
+      },
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "passt",
+        "filename": "jingdezhen-porzellan.jpg",
+        "source": "user-provided image review 09.11.2026",
+        "scope": "visual_acceptability_only",
+        "actualFileBytesConfirmedInRepository": false,
+        "technical360QA": "not_documented_by_this_review"
+      },
+      "priorReferenceMetadata": {
         "file": "Jingdezhen_1700_seamfix_UPSCALED_4096x2048(2).jpg",
         "width": 2048,
         "height": 1024,
@@ -80,7 +144,8 @@
         "style": "warme Keramikwerkstatt, blau-weißes Porzellan, Töpfer und Maler, großer Brennofen",
         "source": "user-uploaded chat attachment",
         "availableInGitHub": false,
-        "referenceZipName": "FactoryGuessr_Gemini_4_Referenzbilder.zip"
+        "referenceZipName": "FactoryGuessr_Gemini_4_Referenzbilder.zip",
+        "relationToNewFilename": "not_verified_do_not_copy_hash_or_resolution"
       }
     },
     {
@@ -92,13 +157,30 @@
       "difficulty": "M",
       "id": "P04",
       "category": "production",
-      "owner": "colleague",
-      "status": "image_to_generate",
+      "owner": "user",
+      "status": "visual_accepted_not_game_approved",
       "previousPlanningStatus": "candidate_existing_requires_qa",
-      "image_status": "needed",
-      "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_status": "visual_accepted_pending_qa",
+      "image_generation_owner": "none_unless_further_review",
+      "image_qa_status": "pending_independent_360_historical_rights_check",
+      "reference": {
+        "file": "barbados-zucker.jpg",
+        "source": "filename_from_user_review_not_uploaded",
+        "availableInGitHub": false,
+        "verifiedBytes": false,
+        "width": null,
+        "height": null,
+        "sha256": null
+      },
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "passt",
+        "filename": "barbados-zucker.jpg",
+        "source": "user-provided image review 09.11.2026",
+        "scope": "visual_acceptability_only",
+        "actualFileBytesConfirmedInRepository": false,
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "oldMasterNumber": 7,
@@ -110,12 +192,30 @@
       "id": "P05",
       "category": "production",
       "owner": "user",
-      "status": "user_accepted_visual_reference_pending_technical_qa",
+      "status": "visual_accepted_not_game_approved",
       "previousPlanningStatus": "candidate_existing_requires_qa",
-      "image_status": "reference_selected",
-      "image_generation_owner": "none_currently",
-      "image_qa_status": "not_finally_verified",
+      "image_status": "visual_accepted_pending_qa",
+      "image_generation_owner": "none_unless_further_review",
+      "image_qa_status": "pending_independent_360_historical_rights_check",
       "reference": {
+        "file": "gb-1840-textile-mill.jpg",
+        "source": "filename_from_user_review_not_uploaded",
+        "availableInGitHub": false,
+        "verifiedBytes": false,
+        "width": null,
+        "height": null,
+        "sha256": null
+      },
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "passt",
+        "filename": "gb-1840-textile-mill.jpg",
+        "source": "user-provided image review 09.11.2026",
+        "scope": "visual_acceptability_only",
+        "actualFileBytesConfirmedInRepository": false,
+        "technical360QA": "not_documented_by_this_review"
+      },
+      "priorReferenceMetadata": {
         "file": "gb-1840-textile-mill-v2-upscaled-4096x2048(1).jpg",
         "width": 2048,
         "height": 1024,
@@ -123,7 +223,8 @@
         "style": "viktorianische Backsteinhalle, Antriebswellen, Baumwollspindeln, Staub im Fensterlicht",
         "source": "user-uploaded chat attachment",
         "availableInGitHub": false,
-        "referenceZipName": "FactoryGuessr_Gemini_4_Referenzbilder.zip"
+        "referenceZipName": "FactoryGuessr_Gemini_4_Referenzbilder.zip",
+        "relationToNewFilename": "not_verified_do_not_copy_hash_or_resolution"
       }
     },
     {
@@ -136,12 +237,20 @@
       "id": "P06",
       "category": "production",
       "owner": "colleague",
-      "status": "image_to_generate",
+      "status": "open_not_reviewed_in_current_batch",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
+      "image_status": "open_no_current_user_review",
       "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_qa_status": "not_documented",
+      "reference": null,
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "nicht_gelistet",
+        "filename": null,
+        "source": "no outcome given in user-provided 09.11.2026 review",
+        "scope": "status_only_no_visual_inspection_performed",
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "oldMasterNumber": 15,
@@ -153,12 +262,20 @@
       "id": "P07",
       "category": "production",
       "owner": "colleague",
-      "status": "image_to_generate",
+      "status": "open_not_reviewed_in_current_batch",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
+      "image_status": "open_no_current_user_review",
       "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_qa_status": "not_documented",
+      "reference": null,
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "nicht_gelistet",
+        "filename": null,
+        "source": "no outcome given in user-provided 09.11.2026 review",
+        "scope": "status_only_no_visual_inspection_performed",
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "oldMasterNumber": 20,
@@ -170,12 +287,20 @@
       "id": "P08",
       "category": "production",
       "owner": "colleague",
-      "status": "image_to_generate",
+      "status": "open_not_reviewed_in_current_batch",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
+      "image_status": "open_no_current_user_review",
       "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_qa_status": "not_documented",
+      "reference": null,
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "nicht_gelistet",
+        "filename": null,
+        "source": "no outcome given in user-provided 09.11.2026 review",
+        "scope": "status_only_no_visual_inspection_performed",
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "oldMasterNumber": 17,
@@ -186,13 +311,30 @@
       "difficulty": "E",
       "id": "P09",
       "category": "production",
-      "owner": "colleague",
-      "status": "image_to_generate",
+      "owner": "user",
+      "status": "visual_accepted_not_game_approved",
       "previousPlanningStatus": "candidate_existing_requires_qa",
-      "image_status": "needed",
-      "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_status": "visual_accepted_pending_qa",
+      "image_generation_owner": "none_unless_further_review",
+      "image_qa_status": "pending_independent_360_historical_rights_check",
+      "reference": {
+        "file": "gt-1910-banana-packing.jpg",
+        "source": "filename_from_user_review_not_uploaded",
+        "availableInGitHub": false,
+        "verifiedBytes": false,
+        "width": null,
+        "height": null,
+        "sha256": null
+      },
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "passt",
+        "filename": "gt-1910-banana-packing.jpg",
+        "source": "user-provided image review 09.11.2026",
+        "scope": "visual_acceptability_only",
+        "actualFileBytesConfirmedInRepository": false,
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "oldMasterNumber": 16,
@@ -204,12 +346,30 @@
       "id": "P10",
       "category": "production",
       "owner": "user",
-      "status": "user_accepted_visual_reference_pending_technical_qa",
+      "status": "visual_accepted_not_game_approved",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "reference_selected",
-      "image_generation_owner": "none_currently",
-      "image_qa_status": "not_finally_verified",
+      "image_status": "visual_accepted_pending_qa",
+      "image_generation_owner": "none_unless_further_review",
+      "image_qa_status": "pending_independent_360_historical_rights_check",
       "reference": {
+        "file": "automobilfabrik.png",
+        "source": "filename_from_user_review_not_uploaded",
+        "availableInGitHub": false,
+        "verifiedBytes": false,
+        "width": null,
+        "height": null,
+        "sha256": null
+      },
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "passt",
+        "filename": "automobilfabrik.png",
+        "source": "user-provided image review 09.11.2026",
+        "scope": "visual_acceptability_only",
+        "actualFileBytesConfirmedInRepository": false,
+        "technical360QA": "not_documented_by_this_review"
+      },
+      "priorReferenceMetadata": {
         "file": "Historische Automobilfabrik im Panorama(1).png",
         "width": 1774,
         "height": 887,
@@ -217,7 +377,8 @@
         "style": "weite Industriehalle mit großen Fenstern, viele Arbeiter und Motor-/Fahrgestellmontage, unaufgeräumt aber nachvollziehbar",
         "source": "user-uploaded chat attachment",
         "availableInGitHub": false,
-        "referenceZipName": "FactoryGuessr_Gemini_4_Referenzbilder.zip"
+        "referenceZipName": "FactoryGuessr_Gemini_4_Referenzbilder.zip",
+        "relationToNewFilename": "not_verified_do_not_copy_hash_or_resolution"
       }
     },
     {
@@ -230,12 +391,20 @@
       "id": "P11",
       "category": "production",
       "owner": "colleague",
-      "status": "image_to_generate",
+      "status": "open_not_reviewed_in_current_batch",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
+      "image_status": "open_no_current_user_review",
       "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_qa_status": "not_documented",
+      "reference": null,
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "nicht_gelistet",
+        "filename": null,
+        "source": "no outcome given in user-provided 09.11.2026 review",
+        "scope": "status_only_no_visual_inspection_performed",
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "oldMasterNumber": 42,
@@ -247,12 +416,20 @@
       "id": "P12",
       "category": "production",
       "owner": "colleague",
-      "status": "image_to_generate",
+      "status": "open_not_reviewed_in_current_batch",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
+      "image_status": "open_no_current_user_review",
       "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_qa_status": "not_documented",
+      "reference": null,
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "nicht_gelistet",
+        "filename": null,
+        "source": "no outcome given in user-provided 09.11.2026 review",
+        "scope": "status_only_no_visual_inspection_performed",
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "oldMasterNumber": 51,
@@ -263,13 +440,30 @@
       "difficulty": "E",
       "id": "P13",
       "category": "production",
-      "owner": "colleague",
-      "status": "image_to_generate",
+      "owner": "user",
+      "status": "visual_accepted_not_game_approved",
       "previousPlanningStatus": "candidate_existing_requires_qa",
-      "image_status": "needed",
-      "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_status": "visual_accepted_pending_qa",
+      "image_generation_owner": "none_unless_further_review",
+      "image_qa_status": "pending_independent_360_historical_rights_check",
+      "reference": {
+        "file": "cn-2015-electronics-assembly.jpg",
+        "source": "filename_from_user_review_not_uploaded",
+        "availableInGitHub": false,
+        "verifiedBytes": false,
+        "width": null,
+        "height": null,
+        "sha256": null
+      },
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "passt",
+        "filename": "cn-2015-electronics-assembly.jpg",
+        "source": "user-provided image review 09.11.2026",
+        "scope": "visual_acceptability_only",
+        "actualFileBytesConfirmedInRepository": false,
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "oldMasterNumber": 52,
@@ -281,12 +475,20 @@
       "id": "P14",
       "category": "production",
       "owner": "colleague",
-      "status": "image_to_generate",
+      "status": "open_not_reviewed_in_current_batch",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
+      "image_status": "open_no_current_user_review",
       "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_qa_status": "not_documented",
+      "reference": null,
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "nicht_gelistet",
+        "filename": null,
+        "source": "no outcome given in user-provided 09.11.2026 review",
+        "scope": "status_only_no_visual_inspection_performed",
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "oldMasterNumber": 53,
@@ -298,12 +500,20 @@
       "id": "P15",
       "category": "production",
       "owner": "colleague",
-      "status": "image_to_generate",
+      "status": "open_not_reviewed_in_current_batch",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
+      "image_status": "open_no_current_user_review",
       "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_qa_status": "not_documented",
+      "reference": null,
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "nicht_gelistet",
+        "filename": null,
+        "source": "no outcome given in user-provided 09.11.2026 review",
+        "scope": "status_only_no_visual_inspection_performed",
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "oldMasterNumber": 55,
@@ -315,12 +525,20 @@
       "id": "P16",
       "category": "production",
       "owner": "colleague",
-      "status": "image_to_generate",
+      "status": "open_not_reviewed_in_current_batch",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
+      "image_status": "open_no_current_user_review",
       "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_qa_status": "not_documented",
+      "reference": null,
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "nicht_gelistet",
+        "filename": null,
+        "source": "no outcome given in user-provided 09.11.2026 review",
+        "scope": "status_only_no_visual_inspection_performed",
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "id": "T01",
@@ -331,13 +549,30 @@
       "learning": "Handelsgesellschaft, Handelsmonopole und Kolonialnetz",
       "source": "https://www.rijksmuseum.nl/en/stories/dutch-east-india-company",
       "category": "trade_power",
-      "owner": "colleague",
-      "status": "image_to_generate",
+      "owner": "user",
+      "status": "visual_accepted_not_game_approved",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
-      "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_status": "visual_accepted_pending_qa",
+      "image_generation_owner": "none_unless_further_review",
+      "image_qa_status": "pending_independent_360_historical_rights_check",
+      "reference": {
+        "file": "amsterdam-voc-werft.png",
+        "source": "filename_from_user_review_not_uploaded",
+        "availableInGitHub": false,
+        "verifiedBytes": false,
+        "width": null,
+        "height": null,
+        "sha256": null
+      },
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "passt",
+        "filename": "amsterdam-voc-werft.png",
+        "source": "user-provided image review 09.11.2026",
+        "scope": "visual_acceptability_only",
+        "actualFileBytesConfirmedInRepository": false,
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "id": "T02",
@@ -349,12 +584,20 @@
       "source": "https://whc.unesco.org/en/list/34/",
       "category": "trade_power",
       "owner": "colleague",
-      "status": "image_to_generate",
+      "status": "open_not_reviewed_in_current_batch",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
+      "image_status": "open_no_current_user_review",
       "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_qa_status": "not_documented",
+      "reference": null,
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "nicht_gelistet",
+        "filename": null,
+        "source": "no outcome given in user-provided 09.11.2026 review",
+        "scope": "status_only_no_visual_inspection_performed",
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "id": "T03",
@@ -365,13 +608,30 @@
       "learning": "Handelskompanie als territoriale Macht und Rohstoffexport",
       "source": "https://www.britishmuseum.org/collection/galleries/south-asia",
       "category": "trade_power",
-      "owner": "colleague",
-      "status": "image_to_generate",
+      "owner": "user",
+      "status": "visual_accepted_not_game_approved",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
-      "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_status": "visual_accepted_pending_qa",
+      "image_generation_owner": "none_unless_further_review",
+      "image_qa_status": "pending_independent_360_historical_rights_check",
+      "reference": {
+        "file": "kalkutta-handel.png",
+        "source": "filename_from_user_review_not_uploaded",
+        "availableInGitHub": false,
+        "verifiedBytes": false,
+        "width": null,
+        "height": null,
+        "sha256": null
+      },
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "passt",
+        "filename": "kalkutta-handel.png",
+        "source": "user-provided image review 09.11.2026",
+        "scope": "visual_acceptability_only",
+        "actualFileBytesConfirmedInRepository": false,
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "id": "T04",
@@ -382,13 +642,40 @@
       "learning": "Handelsregeln, Zugang zum Chinahandel und Privilegien",
       "source": "https://www.britishmuseum.org/collection/galleries/chinese-ceramics",
       "category": "trade_power",
-      "owner": "colleague",
-      "status": "image_to_generate",
+      "owner": "user",
+      "status": "visual_accepted_not_game_approved",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
-      "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_status": "visual_accepted_pending_qa",
+      "image_generation_owner": "none_unless_further_review",
+      "image_qa_status": "pending_independent_360_historical_rights_check",
+      "reference": {
+        "file": "kanton-handel.png",
+        "source": "filename_from_user_review_not_uploaded",
+        "availableInGitHub": false,
+        "verifiedBytes": false,
+        "width": null,
+        "height": null,
+        "sha256": null
+      },
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "passt",
+        "filename": "kanton-handel.png",
+        "source": "user-provided image review 09.11.2026",
+        "scope": "visual_acceptability_only",
+        "actualFileBytesConfirmedInRepository": false,
+        "technical360QA": "not_documented_by_this_review"
+      },
+      "alternativeImageReviews": [
+        {
+          "id": "T04",
+          "filename": "review-perlfluss-alternative.png",
+          "subject": "Kanton – Alternative (Handelshafen am Perlfluss)",
+          "verdict": "passt",
+          "role": "alternate_for_existing_scene",
+          "note": "Zweite akzeptierte Bildvariante für T04, kein zusätzliches Level. Finale Variantenauswahl noch nicht dokumentiert."
+        }
+      ]
     },
     {
       "id": "T05",
@@ -400,12 +687,21 @@
       "source": "https://www.ect.nl/en/about-us/60-years-milestones",
       "category": "trade_power",
       "owner": "colleague",
-      "status": "image_to_generate",
+      "status": "review_rejected_new_image_required",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
+      "image_status": "redo_requested",
       "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_qa_status": "not_started_for_replacement",
+      "reference": null,
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "neu_machen",
+        "filename": "rotterdam-container.webp",
+        "source": "user-provided image review 09.11.2026",
+        "scope": "visual_acceptability_only",
+        "actualFileBytesConfirmedInRepository": false,
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "id": "T06",
@@ -417,12 +713,20 @@
       "source": "https://www.mpa.gov.sg/port-marine-ops/operations/port-infrastructure/terminals",
       "category": "trade_power",
       "owner": "colleague",
-      "status": "image_to_generate",
+      "status": "open_not_reviewed_in_current_batch",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
+      "image_status": "open_no_current_user_review",
       "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_qa_status": "not_documented",
+      "reference": null,
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "nicht_gelistet",
+        "filename": null,
+        "source": "no outcome given in user-provided 09.11.2026 review",
+        "scope": "status_only_no_visual_inspection_performed",
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "id": "E01",
@@ -435,12 +739,21 @@
       "caution": "Kein fiktiver Original-Zeugenausschnitt; einzelne Personen nur generisch",
       "category": "turning_point",
       "owner": "colleague",
-      "status": "image_to_generate",
+      "status": "review_rejected_new_image_required",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
+      "image_status": "redo_requested",
       "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_qa_status": "not_started_for_replacement",
+      "reference": null,
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "neu_machen",
+        "filename": "boston-tea-party.jpg",
+        "source": "user-provided image review 09.11.2026",
+        "scope": "visual_acceptability_only",
+        "actualFileBytesConfirmedInRepository": false,
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "id": "E02",
@@ -453,12 +766,20 @@
       "caution": "Kein erfundener genauer Schlachtaugenblick; Ereignis kann besser symbolisch als Schauplatz der Phase gezeigt werden",
       "category": "turning_point",
       "owner": "colleague",
-      "status": "image_to_generate",
+      "status": "open_not_reviewed_in_current_batch",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
+      "image_status": "open_no_current_user_review",
       "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_qa_status": "not_documented",
+      "reference": null,
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "nicht_gelistet",
+        "filename": null,
+        "source": "no outcome given in user-provided 09.11.2026 review",
+        "scope": "status_only_no_visual_inspection_performed",
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "id": "E03",
@@ -471,12 +792,21 @@
       "caution": "Keine Containerschiffe oder modernen Canal-Bauwerke",
       "category": "turning_point",
       "owner": "colleague",
-      "status": "image_to_generate",
+      "status": "review_rejected_new_image_required",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
+      "image_status": "redo_requested",
       "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_qa_status": "not_started_for_replacement",
+      "reference": null,
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "neu_machen",
+        "filename": "suezkanal.png",
+        "source": "user-provided image review 09.11.2026",
+        "scope": "visual_acceptability_only",
+        "actualFileBytesConfirmedInRepository": false,
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "id": "E04",
@@ -489,12 +819,21 @@
       "caution": "Kein gefälschtes zeitgenössisches Zeitungsfaksimile",
       "category": "turning_point",
       "owner": "colleague",
-      "status": "image_to_generate",
+      "status": "review_rejected_new_image_required",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
+      "image_status": "redo_requested",
       "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_qa_status": "not_started_for_replacement",
+      "reference": null,
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "neu_machen",
+        "filename": "new-york-boerse.png",
+        "source": "user-provided image review 09.11.2026",
+        "scope": "visual_acceptability_only",
+        "actualFileBytesConfirmedInRepository": false,
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "id": "E05",
@@ -507,12 +846,21 @@
       "caution": "United Fruit nicht als alleinige Ursache behaupten; keine erfundene genaue Geheimoperation",
       "category": "turning_point",
       "owner": "colleague",
-      "status": "image_to_generate",
+      "status": "review_rejected_new_image_required",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
+      "image_status": "redo_requested",
       "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_qa_status": "not_started_for_replacement",
+      "reference": null,
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "neu_machen",
+        "filename": "guatemala-1954.png",
+        "source": "user-provided image review 09.11.2026",
+        "scope": "visual_acceptability_only",
+        "actualFileBytesConfirmedInRepository": false,
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "id": "E06",
@@ -525,12 +873,20 @@
       "caution": "Keine erfundenen historischen Streikplakate oder Aussagen",
       "category": "turning_point",
       "owner": "colleague",
-      "status": "image_to_generate",
+      "status": "open_not_reviewed_in_current_batch",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
+      "image_status": "open_no_current_user_review",
       "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_qa_status": "not_documented",
+      "reference": null,
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "nicht_gelistet",
+        "filename": null,
+        "source": "no outcome given in user-provided 09.11.2026 review",
+        "scope": "status_only_no_visual_inspection_performed",
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "id": "E07",
@@ -543,12 +899,21 @@
       "caution": "Keine Verletzten/Toten zeigen, keine identifizierbaren Opfer erfinden, kein Fotodokument behaupten",
       "category": "turning_point",
       "owner": "colleague",
-      "status": "image_to_generate",
+      "status": "review_rejected_new_image_required",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
+      "image_status": "redo_requested",
       "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_qa_status": "not_started_for_replacement",
+      "reference": null,
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "neu_machen",
+        "filename": "review-rana-plaza.webp",
+        "source": "user-provided image review 09.11.2026",
+        "scope": "visual_acceptability_only",
+        "actualFileBytesConfirmedInRepository": false,
+        "technical360QA": "not_documented_by_this_review"
+      }
     },
     {
       "id": "E08",
@@ -561,22 +926,82 @@
       "caution": "Keine falschen Erklärungen für Unfallursache oder frei erfundene Markenlogos",
       "category": "turning_point",
       "owner": "colleague",
-      "status": "image_to_generate",
+      "status": "open_not_reviewed_in_current_batch",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "needed",
+      "image_status": "open_no_current_user_review",
       "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started",
-      "reference": null
+      "image_qa_status": "not_documented",
+      "reference": null,
+      "visualReview": {
+        "reviewDate": "2026-11-09",
+        "verdict": "nicht_gelistet",
+        "filename": null,
+        "source": "no outcome given in user-provided 09.11.2026 review",
+        "scope": "status_only_no_visual_inspection_performed",
+        "technical360QA": "not_documented_by_this_review"
+      }
     }
   ],
   "imageProduction": {
     "total": 30,
-    "acceptedVisualReferences": 4,
-    "stillToGenerate": 26,
+    "acceptedVisualReferences": 11,
+    "redoRequested": 6,
+    "openWithoutReview": 13,
+    "remainingActionItems": 19,
     "formalGameApprovals": 0,
+    "visualSelectionOwner": "user",
     "remainingOwner": "colleague_using_Gemini",
-    "visualSelectionOwner": "project_lead",
-    "referencesArchive": "FactoryGuessr_Gemini_4_Referenzbilder.zip (chat download; not uploaded to GitHub)",
-    "referenceArchiveSha256": "8b9028a83aa6f54c24e30eeffe2ddeb97ad13810432388bb8ede92d5d0a455db"
-  }
+    "reviewDate": "2026-11-09",
+    "remark": "11 of 30 scene images accepted visually, 6 rejected for regeneration, 13 without a result in the current review; separate review-only extras are not additional levels."
+  },
+  "reviewExtras": [
+    {
+      "id": "T04",
+      "filename": "review-perlfluss-alternative.png",
+      "subject": "Kanton – Alternative (Handelshafen am Perlfluss)",
+      "verdict": "passt",
+      "role": "alternate_for_existing_scene",
+      "note": "Zweite akzeptierte Bildvariante für T04, kein zusätzliches Level. Finale Variantenauswahl noch nicht dokumentiert."
+    },
+    {
+      "id": "P02",
+      "filename": "review-venedig.webp",
+      "subject": "Venedig / Murano – Kollegen-Fassung",
+      "verdict": "neu_machen",
+      "role": "rejected_alternate",
+      "note": "Die Hauptversion P02/murano-glas.jpg passt bereits; diese Alternativfassung nicht verwenden."
+    },
+    {
+      "id": null,
+      "filename": "review-marktplatz-1400.webp",
+      "subject": "Marktplatz um 1400",
+      "verdict": "neu_machen",
+      "role": "outside_active_30",
+      "note": "Kein aktiver 30er-Szeneneintrag; nicht ohne neue Projektentscheidung als Level neu erzeugen."
+    },
+    {
+      "id": null,
+      "filename": "review-machu-picchu.webp",
+      "subject": "Machu Picchu",
+      "verdict": "neu_machen",
+      "role": "outside_active_30",
+      "note": "Kein aktiver 30er-Szeneneintrag; nicht ohne neue Projektentscheidung als Level neu erzeugen."
+    },
+    {
+      "id": null,
+      "filename": "review-regenwald-2015.webp",
+      "subject": "Regenwald 2015",
+      "verdict": "neu_machen",
+      "role": "outside_active_30",
+      "note": "Kein aktiver 30er-Szeneneintrag; nicht ohne neue Projektentscheidung als Level neu erzeugen."
+    },
+    {
+      "id": null,
+      "filename": "review-usa-railway.webp",
+      "subject": "Eisenbahnbau USA",
+      "verdict": "neu_machen",
+      "role": "outside_active_30",
+      "note": "Kein aktiver 30er-Szeneneintrag; nicht ohne neue Projektentscheidung als Level neu erzeugen."
+    }
+  ]
 }
