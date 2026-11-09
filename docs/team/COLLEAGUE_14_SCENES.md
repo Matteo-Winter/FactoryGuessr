@@ -1,12 +1,8 @@
 # Deine 14 Szenen – Handels-/Machtzentren und Wendepunkte
 
-**Neue Bildzuständigkeit ab 09.11.2026:** Die folgenden **14 T/E-Bilder** müssen weiterhin erstellt werden. **Zusätzlich** produziert der Kollege mit Gemini auch die **12 fehlenden P-Bilder**; insgesamt also **26 neue Bilder**. Dies ist nur der **T/E-Motivkatalog**, nicht mehr der vollständige Arbeitsauftrag. Siehe [aktuelle 26er-Bildliste](../IMAGE_PRODUCTION_STATUS_30.md) und [Gemini-Übergabe](GEMINI_IMAGE_HANDOFF_26.md).
+**Aktueller Stand nach Bildprüfung 09.11.2026:** Dieser Katalog beschreibt weiterhin die 14 T/E-Motive. **T01/T03/T04 wurden visuell akzeptiert** (3), **T05/E01/E03/E04/E05/E07 müssen neu erstellt werden** (6), **T02/T06/E02/E06/E08 sind im Review nicht bewertet** (5). Zusätzlich stehen acht P-Produktionsbilder ohne Review offen. **Insgesamt 19 aktive Aufgaben beim Kollegen.**
 
-**Neue Pflichtdateien für deinen Einstieg:**
-1. **[Aktuelle Liste aller 26 fehlenden Bilder](../IMAGE_PRODUCTION_STATUS_30.md)**
-2. **[Verbindlicher Gemini-Bildproduktionsauftrag](GEMINI_IMAGE_HANDOFF_26.md)**
-3. [Maschinenlesbare Bildstatusliste](ACTIVE_SCENES_30.json) und [historischer Gesamtplan](../SCENE_MASTERPLAN_30.md).
-4. [Ausführliche zusätzliche 3D-/Ereignis-Anleitung](COLLEAGUE_MASTER_PROMPT_14.md) (technischer Anhang, **Zuständigkeitsabschnitt dort überholt**).
+**Verbindlich:** [Bildstatus 30](../IMAGE_PRODUCTION_STATUS_30.md) · [Gemini-Auftrag aktuell](GEMINI_IMAGE_HANDOFF_CURRENT.md) · [Maschinenliste](ACTIVE_SCENES_30.json). Die ausführliche [alte 14er-Anweisung](COLLEAGUE_MASTER_PROMPT_14.md) gilt nur als technische/historische Detailhilfe, nicht mehr als vollständige Zuständigkeitsliste.
 
 ## A. Handels- und Machtzentren (6)
 
