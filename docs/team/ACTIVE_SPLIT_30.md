@@ -1,18 +1,20 @@
-# Aktive Teamaufteilung – 30 Szenen (Stand 09.11.2026)
+# Aktuelle Bildproduktion – 4 Referenzen und 26 offene Bilder
 
-**NEU: 16 Produktionsstätten (Nutzer) + 6 Handel-/Machtzentren (Kollege) + 8 historische Wendepunkte (Kollege) = 30.** Die frühere **30 ältere / 30 neuere** Aufteilung ist nicht mehr gültig.
+**Stand: 09.11.2026, nach neuer Bildauswahl des Nutzers.**
 
-| Zuständigkeit | Aktive IDs | Umfang | Liste |
-|---|---|---:|---|
-| Projektleitung / Nutzer | `P01–P16` | **16** | [USER_16_PRODUCTION.md](USER_16_PRODUCTION.md) |
-| Kollege | `T01–T06` + `E01–E08` | **14** | [COLLEAGUE_14_SCENES.md](COLLEAGUE_14_SCENES.md) |
+Der **inhaltliche 30er-Plan** bleibt bestehen (16 Produktion P, 6 Handel T, 8 Wendepunkte E). Die **Bildgenerierung** ist ab jetzt **nicht** mehr auf 16 P beim Nutzer und 14 T/E beim Kollegen geteilt.
 
-**Aktiver Gesamtplan:** [SCENE_MASTERPLAN_30.md](../SCENE_MASTERPLAN_30.md) · **Kollegen-Masterprompt:** [COLLEAGUE_MASTER_PROMPT_14.md](COLLEAGUE_MASTER_PROMPT_14.md) · **Manifest:** [ACTIVE_SCENES_30.json](ACTIVE_SCENES_30.json).
+| Rolle | Visuelle Bildproduktion | Menge |
+|---|---|---:|
+| Nutzer/Projektleitung | Vier bisherige Bildreferenzen akzeptiert und für alle 30 endgültige visuelle/historische/technische Abnahme | 4 Referenzen |
+| Kollege mit Gemini | Alle noch fehlenden Bilder **12 P + 6 T + 8 E** | **26 neue Bilder** |
 
-## Einfache parallele Zusammenarbeit
+**Verbindliche [Bildstatusliste](../IMAGE_PRODUCTION_STATUS_30.md)**, **[Gemini-Prompt](GEMINI_IMAGE_HANDOFF_26.md)**, [strukturierte 30er-Liste](ACTIVE_SCENES_30.json). Ältere Unterlagen, die 16/14 nach Bildproduktion aufteilen, sind durch diesen Status ersetzt.
 
-- Produktionsverantwortung ist nach **P/T/E-ID**, **nicht** nach Jahrgang verteilt.
-- Jede Szene bekommt erst eine Quellen-Faktenkarte, dann eine geometrisch korrekte 3D-Umgebung, danach eine realistische 360°-Darstellung und QA.
-- Stand: sieben bestehende Produktions-Bildkandidaten, **0/30 offizielle Freigaben**. Kein vorhandener 2:1-KI-Entwurf allein zählt als technisch fertige Kugel.
-- **Projektleitung übernimmt fachliche Endabnahme und Merge**. Kollegenarbeiten auf `colleague/<ID>-...`-Branches, eigener PR mit QA-Bericht, keine eigenmächtigen Merges/Deployments. Szenen-JSON bleibt bis zum Review stabil.
-- Urheber-/Lizenzstatus für historische Archivfotos und 3D-Assets prüfen. Keine tatsächlichen historischen Personen/Ereignisse als erfundene fotografische Aufnahmen ausgeben.
+**Vier visuell ausgewählt:** P02 Murano 1680, P03 Jingdezhen 1700, P05 GB-Textilfabrik 1840, P10 USA-Autofabrik 1913. **Nicht erneut generieren, solange der Nutzer es nicht verlangt.** Diese Referenzen liegen bisher als Nutzeruploads im Chat; ein separates ZIP steht als Übergabe bereit, **nicht** auf GitHub.
+
+**26 neu zu erzeugen:** P01/P04/P06/P07/P08/P09/P11/P12/P13/P14/P15/P16 + T01–T06 + E01–E08.
+
+**Nicht gleichsetzen:** Nutzerakzeptanz 4/30 bedeutet nicht technische Spiel-Freigabe; `public/data/scenes.json` bleibt bei `approved_panorama_count=0`. Historische Korrektheit, 360°-Naht, Pole, perspektivische Geometrie und reale Browserdrehung müssen vor Produktfreigabe bestätigt werden.
+
+GitHub: Änderungen über eigenen Branch/PR, kein selbstständiger Merge/Deployment; 30er-Szenenauswahl bleibt unverändert.
