@@ -71,6 +71,17 @@ python3 scripts/generate_skybox.py gb-1840-textile-mill
 
 Das exportiert den Prompt und die Bildvorgaben (**kein API-Aufruf, keine Kosten**). Zur anschließenden manuellen Generierung und Qualitätsprüfung siehe `docs/PANORAMA_PIPELINE.md`. Niemals Zugangsdaten ins Repo oder ins Frontend schreiben.
 
+## Arbeitsteilung: 2 Personen, 60 Szenen
+
+Die geplanten 60 Motive sind **chronologisch in genau 30 ältere und 30 neuere Szenen** geteilt. Die Master-Nummern bleiben stabil. Die Grenze ist 1925 (Paris 1925 = ältere Liste, Kaffee Brasilien 1925 = neuere Liste).
+
+- **[Beide Teams, Aufteilungsregel und Arbeitsregeln](docs/team/SCENE_SPLIT_30_30.md)**
+- **[Ältere 30 – Projektleitung](docs/team/OLDER_30_LEAD.md)**
+- **[Neuere 30 – Kollege](docs/team/NEWER_30_COLLEAGUE.md)**
+- **[Ausführlicher 3D-first-360°-Masterprompt für alle Bilder](docs/team/PRODUCTION_PLAYBOOK_360.md)**
+
+Vor **jeder** Bildgenerierung historische Quellen-Faktenkarte, danach echte zusammenhängende 3D-Geometrie, native Kugelprojektion und die vollständige 360°-QA. Kein 2:1-Bild allein als „3D“ und kein Pixel-Nahtwert allein als Freigabe. **Alle bisherigen Bilder bleiben bis zur individuellen Abnahme Kandidaten.**
+
 ## 360°-Qualitätskontrolle und nächste Bildpipeline
 
 - [Recherche: native 360°-Generatoren, Preise und 1-Szenen-Testplan](docs/360_GENERATION_OPTIONS_2026-11-08.md)
