@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "project": "Made in Time",
-  "target_scenes": 60,
+  "target_scenes": 30,
   "approved_panorama_count": 0,
-  "note": "3 KI-generierte 2:1-Testbilder im Repository; 0/60 historisch und geometrisch freigegebene Panoramen",
+  "note": "3 KI-generierte 2:1-Testbilder im Repository; 0/30 historisch und geometrisch freigegebene Panoramen",
   "scenes": [
     {
       "id": "gb-1840-textile-mill",
