@@ -1,5 +1,8 @@
 # Made in Time – Masterplan für 60 Produktionsszenen (Entwurf V1)
 
+> **ARCHIV – NICHT MEHR AKTUELL (09.11.2026).** Dieses Dokument beschreibt den früheren **60er- bzw. 30/30-Plan** und ist **keine Arbeitsanweisung** für neue Bilder. Aktueller Umfang: **30 Szenen, 16 Produktionsstätten (Nutzer) + 6 Handelsorte und 8 Wendepunkte (Kollege)**. Siehe [aktiver Masterplan](SCENE_MASTERPLAN_30.md) und [aktueller Kollegen-Prompt](team/COLLEAGUE_MASTER_PROMPT_14.md). Alte Nummern bleiben nur als Referenz erhalten.
+
+
 **Stand: 09.11.2026 · 60 von 60 Motiven geplant · 3 bereits angelegte Pilot-IDs erhalten · 0/60 historisch und panorama-geometrisch freigegeben.**
 
 ## Zweck und Spielprinzip
