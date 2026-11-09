@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.7/build/pannellum.css">
   <style>
     :root{color-scheme:dark;background:#0a0a0a;color:#fafafa}
-    *{box-sizing:border-box}body{margin:0;font-family:"Hanken Grotesk",Inter,ui-sans-serif,system-ui,sans-serif}
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;font-family:"Hanken Grotesk",Inter,ui-sans-serif,system-ui,sans-serif}
     h1{margin:0}button{font:inherit;border:0;cursor:pointer}
     /* Start screen */
     #start{--bg:#0a0a0a;--text:#fafafa;--muted:#a3a3a3;--line:#262626;--line-strong:#fafafa;--surface:#141414;
@@ -158,14 +158,34 @@
       transition:background-color 120ms cubic-bezier(.2,0,0,1),transform 120ms cubic-bezier(.2,0,0,1)}
     .zoom button:hover{background:var(--surface)}
     .zoom button:active{transform:scale(.96)}
+    /* Guess button: grey until year and country are chosen, then lights up yellow once */
+    .guess{flex:none;width:136px;height:120px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
+    .guess-status{display:flex;align-items:center;justify-content:center;gap:6px;height:28px;border-radius:10px;background:var(--card);border:1px solid var(--line);
+      font-size:13px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+    .guess-status i{width:6px;height:6px;border-radius:50%;background:#404040;transition:background-color 160ms cubic-bezier(.2,0,0,1)}
+    .guess-status i.on{background:#ffd43b}
+    .guess-status.done{color:var(--text)}
+    #guessBtn{width:100%;height:56px;border-radius:12px;background:#ffd43b;color:#0a0a0a;font-size:17px;font-weight:700;
+      transition:background-color 200ms cubic-bezier(.2,0,0,1),color 200ms cubic-bezier(.2,0,0,1),transform 120ms cubic-bezier(.2,0,0,1)}
+    #guessBtn:hover{background:#ffdc5c}
+    #guessBtn:active{transform:scale(.985)}
+    #guessBtn:focus-visible{outline:2px solid var(--text);outline-offset:3px}
+    #guessBtn:disabled{background:#262626;color:#737373;cursor:not-allowed;transform:none}
+    #guessBtn.lit{animation:lit 420ms cubic-bezier(.2,0,0,1)}
+    @keyframes lit{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
     @media(max-width:639px){
-      .dock{flex-direction:column;align-items:stretch;gap:8px}
-      .map-slot{align-self:flex-end;width:132px;height:80px}
+      .dock{flex-wrap:wrap;gap:8px}
+      .dock .timeline{flex:1 1 100%}
+      .guess{flex:1;width:auto;height:80px;flex-direction:row;align-items:stretch;gap:8px}
+      .guess-status{height:auto;width:56px;flex-direction:column;gap:4px}
+      #guessBtn{height:auto}
+      .guess{order:1}
+      .map-slot{order:2;width:132px;height:80px}
       .map{width:132px;height:80px}
       .map:not(.open) .map-label{opacity:0}
       .timeline{height:auto;padding:12px 16px 10px}
     }
-    @media(prefers-reduced-motion:reduce){.map,#game *{transition:none!important}}
+    @media(prefers-reduced-motion:reduce){.map,#game *{transition:none!important}#guessBtn.lit{animation:none}}
   </style>
 </head>
 <body>
@@ -223,6 +243,10 @@
       <div class="map-stage" id="mapStage"><div class="map-layers" id="mapLayers"></div></div>
       <div class="zoom"><button type="button" id="zoomIn" aria-label="Hineinzoomen">+</button><button type="button" id="zoomOut" aria-label="Herauszoomen">−</button></div>
     </div></div>
+    <div class="guess">
+      <div class="guess-status" id="guessStatus" aria-live="polite"><i id="dotWhen"></i><i id="dotWhere"></i><span id="guessCount">0/2</span></div>
+      <button type="button" id="guessBtn" disabled>Raten</button>
+    </div>
   </div>
 </div>
 <script>
@@ -290,8 +314,13 @@ const yearOut=$('yearOut');
 function showYear(preview){if(preview!=null){yearOut.textContent=preview;yearOut.className='preview';return;}
   if(guessYear==null){yearOut.textContent='Jahr antippen';yearOut.className='empty';}else{yearOut.textContent=guessYear;yearOut.className='';}}
 function setYear(y){guessYear=Math.min(Y1,Math.max(Y0,y));marker.style.left=pct(guessYear)+'%';marker.hidden=false;showYear();
-  ruler.setAttribute('aria-valuenow',guessYear);ruler.setAttribute('aria-valuetext',String(guessYear));}
+  ruler.setAttribute('aria-valuenow',guessYear);ruler.setAttribute('aria-valuetext',String(guessYear));updateGuess();}
 let dragging=false;
+// Guess progress: 0/2, 1/2, 2/2 (year + country). The button lights up when both are set.
+function updateGuess(){const w=guessYear!=null,c=guessCountry!=null,n=w+c,btn=$('guessBtn'),was=!btn.disabled;
+  $('dotWhen').classList.toggle('on',w);$('dotWhere').classList.toggle('on',c);$('guessCount').textContent=n+'/2';
+  $('guessStatus').classList.toggle('done',n===2);$('guessStatus').setAttribute('aria-label',n+' von 2 gewählt'+(w?'':', Jahr fehlt')+(c?'':', Land fehlt'));
+  btn.disabled=n<2;if(n===2&&!was){btn.classList.remove('lit');void btn.offsetWidth;btn.classList.add('lit');}}
 ruler.addEventListener('pointerdown',e=>{dragging=true;ghost.hidden=true;ruler.setPointerCapture(e.pointerId);setYear(yearAt(e.clientX));});
 ruler.addEventListener('pointermove',e=>{const y=yearAt(e.clientX);if(dragging){setYear(y);return;}
   if(e.pointerType!=='mouse')return;ghost.style.left=pct(y)+'%';ghost.hidden=false;showYear(y);});
@@ -343,7 +372,9 @@ fetch('assets/map/countries.svg').then(r=>r.text()).then(t=>{
   svgT.appendChild(pinG);layers.appendChild(svgT);sizes();commit();});
 function selectCountry(path,p){if(selPath)selPath.classList.remove('sel');selPath=path;path.classList.add('sel');
   guessCountry=path.dataset.name;guessLL={lon:p.x-180,lat:90-p.y};
-  const lab=$('mapLabel');lab.textContent='Wo?';const b=document.createElement('b');b.textContent=guessCountry;lab.appendChild(b);commit();}
+  const lab=$('mapLabel');lab.textContent='Wo?';const b=document.createElement('b');b.textContent=guessCountry;lab.appendChild(b);commit();updateGuess();}
+// The result screen comes next; for now the guess is only kept for it.
+$('guessBtn').addEventListener('click',()=>{window.lastGuess={year:guessYear,country:guessCountry,lon:guessLL?.lon,lat:guessLL?.lat};});
 // open / close
 let closeT;
 function openMap(){clearTimeout(closeT);map.classList.add('open');}
