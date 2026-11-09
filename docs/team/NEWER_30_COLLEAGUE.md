@@ -1,5 +1,8 @@
 # Made in Time — neuere Szenen für den Kollegen (30 Motive)
 
+> **ARCHIV – NICHT MEHR AKTUELL (09.11.2026).** Dieses Dokument beschreibt den früheren **60er- bzw. 30/30-Plan** und ist **keine Arbeitsanweisung** für neue Bilder. Aktueller Umfang: **30 Szenen, 16 Produktionsstätten (Nutzer) + 6 Handelsorte und 8 Wendepunkte (Kollege)**. Siehe [aktiver Masterplan](../SCENE_MASTERPLAN_30.md) und [aktueller Kollegen-Prompt](COLLEAGUE_MASTER_PROMPT_14.md). Alte Nummern bleiben nur als Referenz erhalten.
+
+
 **Zuständigkeit: Kollege, eigenständige Bildproduktion.** Stand: 09.11.2026. **Zeitraum: 1925 bis 2023**, die chronologisch letzten 30 Einträge aus [SCENE_MASTERPLAN_60.md](../SCENE_MASTERPLAN_60.md). Die Nummern in der ersten Spalte sind **verbindliche Master-IDs zur Übergabe**; nicht neu durchnummerieren. **0/60 offiziell freigegeben**.
 
 ### Einstieg
