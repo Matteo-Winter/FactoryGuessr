@@ -31,7 +31,7 @@
     /* Start screen */
     #start{--bg:#0a0a0a;--text:#fafafa;--muted:#a3a3a3;--line:#262626;--line-strong:#fafafa;--surface:#141414;
       font-family:"Hanken Grotesk",Inter,ui-sans-serif,system-ui,sans-serif;background:var(--bg);color:var(--text);
-      min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;padding:24px 24px max(24px,env(safe-area-inset-bottom));
+      min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;padding:72px 24px max(24px,env(safe-area-inset-bottom));
       position:relative;overflow:hidden;isolation:isolate}
     #start[hidden],#game[hidden]{display:none}
     .start-inner{width:100%;max-width:400px;margin:auto;display:flex;flex-direction:column;position:relative;z-index:1}
@@ -46,6 +46,8 @@
       border:1px solid var(--line);border-radius:12px;margin:0;color:var(--text);background:var(--bg);font-size:17px;font-weight:500;cursor:pointer;
       transition:border-color 150ms cubic-bezier(.2,0,0,1),background-color 150ms cubic-bezier(.2,0,0,1)}
     .level:hover{background:var(--surface)}
+    .level .name{flex:1}
+    .level .count{margin-right:16px;color:var(--muted);font-size:15px;font-variant-numeric:tabular-nums}
     .level input{position:absolute;opacity:0;pointer-events:none}
     .level .dot{width:18px;height:18px;border-radius:50%;border:1.5px solid #525252;transition:border 150ms cubic-bezier(.2,0,0,1)}
     .level:has(input:checked){border-color:var(--line-strong)}
@@ -87,6 +89,7 @@
     @media(max-width:639px){#settings{margin:auto 0 0;max-width:none;border-radius:16px 16px 0 0;border-width:1px 0 0;padding-bottom:max(24px,env(safe-area-inset-bottom))}}
     .start-foot{position:relative;z-index:1;margin:32px auto 0;max-width:960px;text-align:center;font-size:14px;line-height:1.45;color:var(--muted);text-wrap:balance}
     @media(min-width:640px){.brand h1{font-size:56px}}
+    @media(max-height:640px){.level{min-height:52px}.brand{margin-bottom:28px}#startBtn{margin-top:24px}.start-foot{margin-top:20px}}
     @media(prefers-reduced-motion:reduce){#start *,#settings,#settings *{transition:none!important}#settings[open]{animation:none}}
     @media(max-width:920px){main{grid-template-columns:1fr}aside{border-left:0;border-top:1px solid #344047}#stage,#panorama{min-height:400px}}
   </style>
@@ -100,13 +103,14 @@
   <div class="start-inner">
     <div class="brand"><h1 id="startTitle"><img class="logo" src="assets/logo-wo-und-wann.png" width="1200" height="228" alt="Wo &amp; Wann?"></h1></div>
     <form id="startForm">
-      <!-- Placeholder: difficulty is stored but does not change gameplay yet. -->
+      <!-- Mode (theme block) is stored and exposed as body[data-mode]; scenes are not filtered yet. Counts follow docs/SCENE_MASTERPLAN_30.md. -->
       <fieldset>
-        <legend>Schwierigkeit</legend>
+        <legend>Spielmodus</legend>
         <div class="levels">
-          <label class="level"><input type="radio" name="level" value="easy">Leicht<span class="dot" aria-hidden="true"></span></label>
-          <label class="level"><input type="radio" name="level" value="medium" checked>Mittel<span class="dot" aria-hidden="true"></span></label>
-          <label class="level"><input type="radio" name="level" value="hard">Schwer<span class="dot" aria-hidden="true"></span></label>
+          <label class="level"><input type="radio" name="mode" value="all" checked><span class="name">Alle Themen</span><span class="count">30</span><span class="dot" aria-hidden="true"></span></label>
+          <label class="level"><input type="radio" name="mode" value="production"><span class="name">Produktion</span><span class="count">16</span><span class="dot" aria-hidden="true"></span></label>
+          <label class="level"><input type="radio" name="mode" value="trade"><span class="name">Handel &amp; Macht</span><span class="count">6</span><span class="dot" aria-hidden="true"></span></label>
+          <label class="level"><input type="radio" name="mode" value="events"><span class="name">Wendepunkte</span><span class="count">8</span><span class="dot" aria-hidden="true"></span></label>
         </div>
       </fieldset>
       <button id="startBtn" type="submit">Spiel starten</button>
@@ -197,10 +201,10 @@ if(!/^image\/(jpeg|png|webp)$/.test(f.type)){$('imageStatus').textContent='Bitte
 const im=new Image();const u=URL.createObjectURL(f);im.onload=()=>{if(im.width!==im.height*2){$('imageStatus').textContent='Ungültiges 2:1-Bild ('+im.width+'×'+im.height+'). Es wird kein Panorama angezeigt.';URL.revokeObjectURL(u);return;}
 if(uploadedUrl)URL.revokeObjectURL(uploadedUrl);uploadedUrl=u;showImage(u,'Lokales Testpanorama: '+f.name+' ('+im.width+'×'+im.height+').');};
 im.onerror=()=>{URL.revokeObjectURL(u);$('imageStatus').textContent='Bild konnte nicht gelesen werden.';};im.src=u;});
-try{const saved=localStorage.getItem('mit-level');const r=document.querySelector('#startForm input[value="'+saved+'"]');if(r)r.checked=true;}catch(e){}
-$('startForm').addEventListener('submit',e=>{e.preventDefault();const level=new FormData(e.target).get('level');
-try{localStorage.setItem('mit-level',level);}catch(err){}
-document.body.dataset.level=level;$('start').hidden=true;$('game').hidden=false;if(scenes.length&&!viewer)openScene();});
+try{const saved=localStorage.getItem('mit-mode');const r=document.querySelector('#startForm input[value="'+saved+'"]');if(r)r.checked=true;}catch(e){}
+$('startForm').addEventListener('submit',e=>{e.preventDefault();const mode=new FormData(e.target).get('mode');
+try{localStorage.setItem('mit-mode',mode);}catch(err){}
+document.body.dataset.mode=mode;$('start').hidden=true;$('game').hidden=false;if(scenes.length&&!viewer)openScene();});
 $('seam').addEventListener('click',()=>{if(viewer)viewer.setYaw(180);});
 $('guess').addEventListener('click',()=>{const s=current();if(!s)return;
 const p=periods.find(([a,b])=>s.year>=a&&s.year<=b);const entered=$('period').value;
