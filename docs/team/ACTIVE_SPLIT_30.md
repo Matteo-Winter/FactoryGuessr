@@ -1,20 +1,20 @@
-# Aktuelle Bildproduktion – 4 Referenzen und 26 offene Bilder
+# Aktuelle Bildproduktion – 11 akzeptiert, 6 neu, 13 offen
 
-**Stand: 09.11.2026, nach neuer Bildauswahl des Nutzers.**
+**Stand: Bildprüfung des Nutzers vom 09.11.2026.** Der historische Umfang bleibt **30 Level = 16 Produktionsorte, 6 Handelsorte, 8 Wendepunkte**.
 
-Der **inhaltliche 30er-Plan** bleibt bestehen (16 Produktion P, 6 Handel T, 8 Wendepunkte E). Die **Bildgenerierung** ist ab jetzt **nicht** mehr auf 16 P beim Nutzer und 14 T/E beim Kollegen geteilt.
+| Bildstatus | Anzahl | Aufgabe |
+|---|---:|---|
+| **Passt** (visuelle Auswahl) | **11** | Originaldatei sichern; separater 360°-/Historien-/Browser-QA noch offen |
+| **Neu machen** | **6** | Diese sechs Bildversionen neu erzeugen; Szenen/IDs unverändert |
+| **Kein Urteil im aktuellen Review** | **13** | Vorhandenes Bild zur Prüfung geben oder neues mit Gemini erzeugen |
+| **Formal im Spiel freigegeben** | **0** | Keine stillschweigende `ready`-Markierung |
 
-| Rolle | Visuelle Bildproduktion | Menge |
-|---|---|---:|
-| Nutzer/Projektleitung | Vier bisherige Bildreferenzen akzeptiert und für alle 30 endgültige visuelle/historische/technische Abnahme | 4 Referenzen |
-| Kollege mit Gemini | Alle noch fehlenden Bilder **12 P + 6 T + 8 E** | **26 neue Bilder** |
+**Der Kollege mit Gemini bearbeitet die **19 offenen aktiven Punkte**: sechs Remakes plus 13 unbeurteilte Szenen.** Projektleitung/Nutzer wählt und beurteilt Ergebnisse für alle 30. Kein neuer 16/14-Aufgabensplit für die Bildgenerierung.
 
-**Verbindliche [Bildstatusliste](../IMAGE_PRODUCTION_STATUS_30.md)**, **[Gemini-Prompt](GEMINI_IMAGE_HANDOFF_26.md)**, [strukturierte 30er-Liste](ACTIVE_SCENES_30.json). Ältere Unterlagen, die 16/14 nach Bildproduktion aufteilen, sind durch diesen Status ersetzt.
+**[Aktuelle 30er-Bildliste mit exakten Dateinamen](../IMAGE_PRODUCTION_STATUS_30.md)** · **[Gemini-Auftrag](GEMINI_IMAGE_HANDOFF_CURRENT.md)** · **[Szenenstatus als JSON](ACTIVE_SCENES_30.json)** · **[GitHub Issue #18](https://github.com/Matteo-Winter/FactoryGuessr/issues/18)**.
 
-**Vier visuell ausgewählt:** P02 Murano 1680, P03 Jingdezhen 1700, P05 GB-Textilfabrik 1840, P10 USA-Autofabrik 1913. **Nicht erneut generieren, solange der Nutzer es nicht verlangt.** Diese Referenzen liegen bisher als Nutzeruploads im Chat; ein separates ZIP steht als Übergabe bereit, **nicht** auf GitHub.
-
-**26 neu zu erzeugen:** P01/P04/P06/P07/P08/P09/P11/P12/P13/P14/P15/P16 + T01–T06 + E01–E08.
-
-**Nicht gleichsetzen:** Nutzerakzeptanz 4/30 bedeutet nicht technische Spiel-Freigabe; `public/data/scenes.json` bleibt bei `approved_panorama_count=0`. Historische Korrektheit, 360°-Naht, Pole, perspektivische Geometrie und reale Browserdrehung müssen vor Produktfreigabe bestätigt werden.
-
-GitHub: Änderungen über eigenen Branch/PR, kein selbstständiger Merge/Deployment; 30er-Szenenauswahl bleibt unverändert.
+- Die drei bereits vorhandenen technischen Pilot-IDs `gb-1840-textile-mill`, `gt-1910-banana-packing`, `cn-2015-electronics-assembly` gehören zu P05/P09/P13 und werden nicht doppelt gezählt.
+- Kanton `review-perlfluss-alternative.png` ist die zweite akzeptierte Variante **desselben Levels T04**, kein zusätzliches Level. Die abgelehnte Murano-Kollegenfassung ändert nicht die positive P02-Hauptversion.
+- Sonstige bewertete Motive außerhalb des aktiven 30er-Plans **nicht** als neue Szenen anlegen.
+- **"Passt" = Nutzerurteil zur Bildwirkung**, nicht formaler Geometrie-/Quellen-/Lizenz-PASS. Die hier genannten Dateinamen sind nicht automatisch als Originalbilder in GitHub verfügbar.
+- Feature-Branch/PR für Integration; kein eigenständiger Merge/Deployment; `public/data/scenes.json` bleibt `approved_panorama_count=0` bis Abnahme.
