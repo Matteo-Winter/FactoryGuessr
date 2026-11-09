@@ -74,6 +74,15 @@ Lokale Orte sind Testpanoramen, die noch nicht freigegeben sind. Sie liegen in `
   - `block`: `production`, `trade` oder `events`
   - `overview_de`, `learning_de`, `visual_clues`, `historical_status`
 
-**Bildpool einer Runde:** lokale Orte plus alle Szenen aus `scenes.json` mit Panorama, gefiltert nach den gewählten Themenblöcken.
+## Spielbare Orte (`data/orte.json`)
+
+Was online gespielt wird, steht in `public/data/orte.json`; die Bilder liegen als Web-JPG (max. 4096×2048, Qualität 86) in `public/assets/orte/`. Beides erzeugt `python3 scripts/build_orte.py` aus dem lokalen Ordner (Reihenfolge und Auswahl aus `_local/index.json`). Neuer Ort: Bild + Lösung in `_local/` ablegen, in `index.json` eintragen, Skript laufen lassen, committen.
+
+- `group`: Varianten desselben Orts/Ereignisses (z. B. `E03` und `E03b`) – pro Runde höchstens eine.
+- Status aller Orte: KI-Rekonstruktion, `historical_status: composite_reconstruction`; nicht historisch freigegeben, `scenes.json` und `approved_panorama_count` bleiben unverändert.
+
+**Bildpool einer Runde:** Orte aus `orte.json` plus alle Szenen aus `scenes.json` mit Panorama, gefiltert nach den gewählten Themenblöcken. Nur auf `localhost` kommen zusätzlich Bilder aus `_local/` dazu, die noch nicht in `orte.json` stehen.
+
+**Keine Wiederholungen:** `localStorage` `ww-played` merkt sich, wann jeder Ort (Gruppe) und jedes Bild zuletzt gezeigt wurde. Eine Runde nimmt zuerst nie gezeigte Orte, dann die am längsten nicht gezeigten; innerhalb eines Orts die am längsten nicht gezeigte Variante. Erst wenn alle Orte der gewählten Themen einmal dran waren, kommen Orte wieder – die zuletzt gespielten als letzte.
 
 **Einzelner Test:** `?pano=assets/…` testet genau ein Panorama; erlaubt sind nur relative Pfade unter `assets/`.

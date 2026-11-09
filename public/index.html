@@ -459,31 +459,44 @@ let scenes=[],viewer=null;
 const $=id=>document.getElementById(id);
 // Widest view that still looks natural: about 100° vertical, at most 130° horizontal. Zoom is locked to it.
 function fov(){const a=innerWidth/innerHeight;return Math.min(130,2*Math.atan(Math.tan(50*Math.PI/180)*a)*180/Math.PI);}
-// Panorama source, in this order:
-// 1. ?pano=assets/... (relative paths under assets/ only)
-// 2. a local, git-excluded test image (assets/panoramas/_local/test.png etc.) if present on this machine
-// 3. the first scene in scenes.json
-const LOCAL_DIR='assets/panoramas/_local/',LOCAL_TEST=[LOCAL_DIR+'automobilfabrik.png'];
-// A test panorama may have a solution file next to it (same name, .json); scenes come with their own fields.
-// ---------- Round ----------
-// Pool = local test panorama(s) (with their .json solution) + every scene in scenes.json that has a panorama.
-// A round takes n random images from the pool (n from the start screen, capped at what exists).
-let scene=null,round=[],roundIdx=0,roundResults=[];
+// ---------- Orte ----------
+// Playable Orte come from data/orte.json (images in assets/orte/, solution fields inline) plus every
+// scenes.json pilot that has a panorama. Orte with the same "group" are variants of one place/event:
+// a round contains at most one of them.
+// Dev only: images in the git-excluded assets/panoramas/_local/ (listed in its index.json, solution in a
+// .json next to each image) are added if they are not in orte.json yet. ?pano=assets/... shows one image.
+const LOCAL_DIR='assets/panoramas/_local/',DEV=/^(localhost|127\.0\.0\.1)$/.test(location.hostname),IMG=/\.(jpe?g|png|webp)$/i;
+let scene=null,round=[],roundIdx=0,roundResults=[],orte=null;
 async function localScene(url){let sol={};try{const r=await fetch(url.replace(/\.\w+$/,'.json'));if(r.ok)sol=await r.json();}catch(e){}return {...sol,panorama_path:url};}
-async function buildPool(blocks){const q=new URLSearchParams(location.search).get('pano'),pool=[];
-  if(q&&/^assets\/[\w\/.-]+\.(jpe?g|png|webp)$/i.test(q))return [await localScene(q)];
-  // local, git-excluded Orte: assets/panoramas/_local/index.json lists the image files (fallback: LOCAL_TEST)
-  let local=LOCAL_TEST;try{const r=await fetch(LOCAL_DIR+'index.json');if(r.ok){const l=await r.json();if(Array.isArray(l))local=l.filter(f=>/^[\w.-]+\.(jpe?g|png|webp)$/i.test(f)).map(f=>LOCAL_DIR+f);}}catch(e){}
-  for(const u of local){try{if((await fetch(u,{method:'HEAD'})).ok)pool.push(await localScene(u));}catch(e){}}
+async function loadOrte(){if(orte)return orte;orte=[];try{const r=await fetch('data/orte.json');if(r.ok)orte=((await r.json()).orte||[]).filter(o=>o.panorama_path);}catch(e){}return orte;}
+async function buildPool(blocks){const q=new URLSearchParams(location.search).get('pano'),pool=[...await loadOrte()];
+  if(q&&/^assets\/[\w\/.-]+$/.test(q)&&IMG.test(q))return [pool.find(o=>o.panorama_path===q)||await localScene(q)];
+  if(DEV)try{const r=await fetch(LOCAL_DIR+'index.json');if(r.ok){const l=await r.json();
+    if(Array.isArray(l))for(const f of l)if(/^[\w.-]+$/.test(f)&&IMG.test(f)&&!pool.some(o=>o.source_file===f))pool.push(await localScene(LOCAL_DIR+f));}}catch(e){}
   for(const s of scenes)if(s.panorama_path)pool.push(s);
   // theme filter; scenes without a block are production sites (all current pilots are)
   const f=pool.filter(s=>blocks.includes(s.block||'production'));return f.length?f:pool;}
 function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+// No repeats until everything was seen: localStorage "ww-played" remembers when each Ort (group) and each
+// image was last shown (a running counter). A round takes the Orte never shown first, then the ones shown
+// longest ago; within an Ort the variant shown longest ago. So all Orte of the chosen themes come once
+// before any comes back, and after a full cycle the most recent ones come last again.
+const PLAYED_KEY='ww-played',gkey=s=>s.group||s.id||s.panorama_path;
+function played(){try{return JSON.parse(localStorage.getItem(PLAYED_KEY))||{};}catch(e){return {};}}
+function markPlayed(s){const p=played();p._n=(p._n||0)+1;p['g:'+gkey(s)]=p._n;p['i:'+s.panorama_path]=p._n;try{localStorage.setItem(PLAYED_KEY,JSON.stringify(p));}catch(e){}}
+function pickRound(pool,n){const p=played(),groups=new Map();
+  for(const s of pool){const k=gkey(s);if(!groups.has(k))groups.set(k,[]);groups.get(k).push(s);}
+  const age=k=>p[k]||0; // 0 = never shown
+  const cand=shuffle([...groups]).map(([k,v])=>({last:age('g:'+k),s:shuffle(v).sort((a,b)=>age('i:'+a.panorama_path)-age('i:'+b.panorama_path))[0]}));
+  cand.sort((a,b)=>a.last-b.last); // stable: never-shown Orte stay in random order
+  return shuffle(cand.slice(0,Math.max(1,n)).map(c=>c.s));}
 function loadImage(i){roundIdx=i;scene=round[i];$('roundPill').textContent='Bild '+(i+1)+' / '+round.length;
-  if(!scene||!window.pannellum)return;if(viewer){viewer.destroy();viewer=null;}const h=fov();
+  if(!scene||!window.pannellum)return;markPlayed(scene);
+  if(round[i+1]){const pre=new Image();pre.src=round[i+1].panorama_path;} // next image loads in the background
+  if(viewer){viewer.destroy();viewer=null;}const h=fov();
   viewer=pannellum.viewer('panorama',{type:'equirectangular',panorama:scene.panorama_path,autoLoad:true,showControls:false,compass:false,
     mouseZoom:false,keyboardZoom:false,hfov:h,minHfov:h,maxHfov:h,pitch:0,yaw:0});}
-async function startGame(blocks,n){const pool=await buildPool(blocks);round=shuffle(pool).slice(0,Math.max(1,Math.min(n,pool.length)));roundResults=[];loadImage(0);}
+async function startGame(blocks,n){const pool=await buildPool(blocks);round=pickRound(pool,n);roundResults=[];loadImage(0);}
 addEventListener('resize',()=>{if(!viewer)return;const h=fov();viewer.setHfovBounds([h,h]);viewer.setHfov(h,false);});
 try{const r=await fetch('data/scenes.json');if(r.ok)scenes=(await r.json()).scenes||[];}catch(e){}
 // Timeline
@@ -679,8 +692,8 @@ function sizeOf(url){return imgSize[url]||(imgSize[url]=new Promise(res=>{const 
 async function buildReviewList(){const pool=await buildPool(['production','trade','events']);
   const BL={production:'Produktion',trade:'Handel & Macht',events:'Wendepunkte'};
   const list=pool.map(s=>({path:s.panorama_path,title:s.title_de||[s.site_type||s.industry,s.year].filter(Boolean).join(', ')||s.panorama_path.split('/').pop(),
-    id:(s.id||'').replace(/-local(-test)?$/,''),block:BL[s.block||'production'],note:s.panorama_path.includes('/_local/')?'':'Pilotszene aus scenes.json'}));
-  try{const r=await fetch(LOCAL_DIR+'review.json');if(r.ok)for(const x of await r.json())if(/^[\w.-]+\.(jpe?g|png|webp)$/i.test(x.file||''))
+    id:(s.id||'').replace(/-local(-test)?$/,''),block:BL[s.block||'production'],note:scenes.includes(s)?'Pilotszene aus scenes.json':s.panorama_path.includes('/_local/')?'nur lokal, noch nicht in orte.json':''}));
+  if(DEV)try{const r=await fetch(LOCAL_DIR+'review.json');if(r.ok)for(const x of await r.json())if(/^[\w.-]+\.(jpe?g|png|webp)$/i.test(x.file||''))
     list.push({path:LOCAL_DIR+x.file,title:x.title||x.file,id:'',block:'nicht spielbar',note:x.note||''});}catch(e){}
   return list;}
 function revShow(i){revIdx=(i+revList.length)%revList.length;const it=revList[revIdx],st=revStore()[it.path]||{};
