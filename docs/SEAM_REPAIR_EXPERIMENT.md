@@ -82,3 +82,23 @@ SHA-256 `412ee73f…5aa11e`, **1774×887 (unter 4K)**. Nahtreparatur mit `--band
   - Der Mühlenkörper ist ein runder Pavillon mit geschwungenem Kegeldach, die Flügel sitzen auf der Dachspitze. Ein historischer Paltrok hat einen hohen, rechteckigen Holzkörper mit Flügeln an der Stirnseite und Seitenanbauten. Das muss gegen Abbildungen geprüft werden.
   - Die Flügel sind verbogen und liegen nicht in einer starren Ebene.
   - Die Verbindung von der Flügelwelle oben zur Kurbelwelle unten ist nicht sichtbar.
+
+## Dritter Kandidat: `nl-1660-paltrok-v3-upscaled-4096x2048.jpg`
+
+SHA-256 `d75fbe8f…26df4`, 4096×2048, laut Dateiname hochskaliert. Nahtreparatur mit `--band 160`.
+
+| Messung | Vorher | Nachher |
+|---|---|---|
+| `check_panorama.py`: Naht/normal | 2,233 (`SEAM_COLOR_DISCONTINUITY`, `POLE_ROW_VARIATION`) | 0,189 (`POLE_ROW_VARIATION`) |
+| `export_panorama_views.py`: Nahtsprung/normal | 6,173 | 0,465 |
+| Polzeilen-Kennwert oben/unten | 12,52 / 9,29 | 12,55 / 9,31 |
+
+**Naht: nach Reparatur visuell PASS.** Bei 180° liegen nur Himmel, Wiese und Kanal auf beiden Seiten, ohne Objekt quer zur Naht. Die Linie ist danach auch in dreifacher Vergrößerung in Himmel und Wasser nicht mehr zu sehen, es gibt weder Schleier noch Streifen. Damit ist das der in Kandidat 2 beschriebene Fall, in dem das Verfahren taugt.
+
+**Zenit: FAIL.** Beim Blick senkrecht nach oben laufen die Wolken sternförmig zusammen (Warnung `POLE_ROW_VARIATION`), und der obere Flügel läuft bis in den Pol. Die Nahtreparatur ändert daran nichts, weil der Fehler außerhalb des Bands liegt. Reparieren ließe er sich nur durch Retusche der Polkappe oder durch eine Neugenerierung mit mehr freiem Himmel über der Mühle.
+
+**Geometrie der Flügel: fraglich.** In den perspektivischen Ansichten nach oben (pitch 35–40°) erscheinen die Flügelruten als Bögen. Starre Ruten müssten dort gerade sein. Das spricht dafür, dass der obere Bildteil nicht exakt equirectangular gezeichnet ist.
+
+**Bauform: deutlich näher am Paltrok.**
+- ✅ Hoher, rechteckiger Holzkörper mit vier Flügeln an der Stirnseite, darunter der offene Sägeboden mit Seitenanbauten (ruimen-artig), Rollenkranz, Kurbelwelle mit Zahnrad und Sägerahmen. Im Umfeld Zaan-typische Holzhäuser, Polder und Kanal.
+- ⚠️ Zu prüfen: Die Pfosten der Seitendächer stehen außerhalb des Rollenkranzes auf dem festen Steg. Bei einem Paltrok dreht sich der ganze Bau mit, die Anbauten müssten also mitdrehen können. Der Sägerahmen zeigt nur ein einzelnes Blatt, historisch üblich sind Gatter mit mehreren Blättern.
