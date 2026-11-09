@@ -173,6 +173,51 @@
     #guessBtn:disabled{background:#262626;color:#737373;cursor:not-allowed;transform:none}
     #guessBtn.lit{animation:lit 420ms cubic-bezier(.2,0,0,1)}
     @keyframes lit{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
+    /* Result */
+    #game.resolved .dock,#game.resolved .guess{display:none}
+    .result{position:absolute;z-index:4;left:50%;bottom:max(24px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(1040px,calc(100% - 32px));
+      max-height:calc(100% - 96px);overflow:auto;overscroll-behavior:contain;display:grid;grid-template-columns:1.15fr 1fr;gap:24px;padding:20px;
+      background:rgba(10,10,10,.94);border:1px solid var(--line);border-radius:20px;animation:resIn 280ms cubic-bezier(.2,0,0,1)}
+    .result[hidden]{display:none}
+    @keyframes resIn{from{opacity:0;transform:translate(-50%,16px)}}
+    .res-map{position:relative;aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:#0f0f0f}
+    .res-map svg{position:absolute;inset:0;width:100%;height:100%}
+    .res-map .countries path{fill:#3a3a3a;stroke:#141414;stroke-width:.6px;vector-effect:non-scaling-stroke}
+    .res-map .countries path.sel{fill:#ffd43b}
+    .res-map .countries path.guess{fill:#737373}
+    .res-map .labels{fill:#fafafa;font-weight:600;text-anchor:middle;dominant-baseline:middle;paint-order:stroke;stroke:rgba(10,10,10,.85);stroke-linejoin:round}
+    .res-map .pin{fill:#fafafa;stroke:#0a0a0a;stroke-width:1.25px;vector-effect:non-scaling-stroke}
+    .res-line{stroke:#fafafa;stroke-width:2px;stroke-dasharray:6 5;vector-effect:non-scaling-stroke;fill:none}
+    .res-true{fill:#0a0a0a;stroke:#ffd43b;stroke-width:3px;vector-effect:non-scaling-stroke}
+    .res-timeline{position:relative;height:56px;margin-top:12px}
+    .res-timeline .marker{height:40px;top:0}
+    .res-timeline .marker.mine{background:#fafafa}.res-timeline .marker.mine::before{background:#fafafa}
+    .res-span{position:absolute;top:28px;height:4px;margin-top:-2px;background:rgba(255,212,59,.35);border-radius:2px}
+    .res-legend{display:flex;gap:16px;margin-top:4px;font-size:13px;color:var(--muted)}
+    .res-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+    .lg-mine{background:#fafafa}.lg-true{background:#ffd43b}
+    .res-total{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+    .res-total span{flex-basis:100%;font-size:13px;font-weight:500;color:var(--muted)}
+    .res-total strong{font-size:44px;line-height:1;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+    .res-total small{font-size:15px;color:var(--muted)}
+    .res-row{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+    .res-row-head{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;font-weight:600}
+    .res-row-head b{font-variant-numeric:tabular-nums}
+    .res-bar{height:4px;margin:8px 0 10px;border-radius:2px;background:#262626;overflow:hidden}
+    .res-bar i{display:block;height:100%;width:0;background:#ffd43b;transition:width 700ms cubic-bezier(.2,0,0,1)}
+    .res-row dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0;font-size:14px}
+    .res-row dt{color:var(--muted)}.res-row dd{margin:0;font-variant-numeric:tabular-nums}
+    .res-explain{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:15px;line-height:1.5}
+    .res-explain h3{margin:0 0 8px;font-size:17px;font-weight:700}
+    .res-explain p{margin:0 0 10px}.res-explain .muted{color:#c4c4c4}
+    .res-explain h4{margin:12px 0 6px;font-size:13px;font-weight:500;color:var(--muted)}
+    .res-explain ul{margin:0;padding-left:18px;color:#c4c4c4;font-size:14px}
+    .res-explain .note{margin-top:12px;font-size:12px;color:#8a8a8a}
+    #resNext{width:100%;height:56px;margin-top:16px;border-radius:12px;background:var(--text);color:var(--bg);font-size:17px;font-weight:600;
+      transition:opacity 120ms,transform 120ms cubic-bezier(.2,0,0,1)}
+    #resNext:hover{opacity:.9}#resNext:active{transform:scale(.985)}
+    #resNext:focus-visible{outline:2px solid var(--text);outline-offset:3px}
+    @media(max-width:819px){.result{grid-template-columns:1fr;gap:16px;padding:16px;max-height:calc(100% - 88px)}}
     @media(max-width:639px){
       .dock{width:calc(100% - 32px);flex-direction:column;align-items:stretch;gap:8px}
       .guess{left:16px;right:auto;width:calc(100% - 172px);height:80px;flex-direction:row;align-items:stretch;gap:8px}
@@ -183,7 +228,7 @@
       .map:not(.open) .map-label{opacity:0}
       .timeline{height:auto;padding:12px 16px 10px}
     }
-    @media(prefers-reduced-motion:reduce){.map,#game *{transition:none!important}#guessBtn.lit{animation:none}}
+    @media(prefers-reduced-motion:reduce){.map,#game *{transition:none!important}#guessBtn.lit,.result{animation:none}}
   </style>
 </head>
 <body>
@@ -246,6 +291,34 @@
     <div class="guess-status" id="guessStatus" aria-live="polite"><i id="dotWhen"></i><i id="dotWhere"></i><span id="guessCount">0/2</span></div>
     <button type="button" id="guessBtn" disabled>Raten</button>
   </div>
+  <section class="result" id="result" hidden aria-labelledby="resHead">
+    <div class="res-visual">
+      <div class="res-map" id="resMap"></div>
+      <div class="res-timeline"><div class="ruler-track" id="resTrack"></div></div>
+      <div class="res-legend"><span><i class="lg-mine"></i>Dein Tipp</span><span><i class="lg-true"></i>Richtig</span></div>
+    </div>
+    <div class="res-text">
+      <div class="res-total"><span id="resHead">Punkte</span><strong id="resTotal">0</strong><small>von 10.000</small></div>
+      <div class="res-row">
+        <div class="res-row-head"><span>Wo?</span><b id="resWherePts">0</b></div>
+        <div class="res-bar"><i id="resWherePtsBar"></i></div>
+        <dl><dt>Richtig</dt><dd id="resWhereRight"></dd><dt>Dein Tipp</dt><dd id="resWhereMine"></dd><dt>Abweichung</dt><dd id="resWhereDiff"></dd></dl>
+      </div>
+      <div class="res-row">
+        <div class="res-row-head"><span>Wann?</span><b id="resWhenPts">0</b></div>
+        <div class="res-bar"><i id="resWhenPtsBar"></i></div>
+        <dl><dt>Richtig</dt><dd id="resWhenRight"></dd><dt>Dein Tipp</dt><dd id="resWhenMine"></dd><dt>Abweichung</dt><dd id="resWhenDiff"></dd></dl>
+      </div>
+      <div class="res-explain">
+        <h3 id="resTitle"></h3>
+        <p id="resOverview"></p>
+        <p id="resLearning" class="muted"></p>
+        <div id="resCluesWrap"><h4>Hinweise im Bild</h4><ul id="resClues"></ul></div>
+        <p id="resNote" class="note"></p>
+      </div>
+      <button type="button" id="resNext">Zurück zum Start</button>
+    </div>
+  </section>
 </div>
 <script>
 // Start-screen background: historical images (public domain / CC0, see docs/START_SCREEN_IMAGES.md)
@@ -289,12 +362,15 @@ function fov(){const a=innerWidth/innerHeight;return Math.min(130,2*Math.atan(Ma
 // 2. a local, git-excluded test image (assets/panoramas/_local/test.png etc.) if present on this machine
 // 3. the first scene in scenes.json
 const LOCAL_TEST=['assets/panoramas/_local/automobilfabrik.png'];
-async function panoUrl(){const q=new URLSearchParams(location.search).get('pano');
-  if(q&&/^assets\/[\w\/.-]+\.(jpe?g|png|webp)$/i.test(q))return q;
-  for(const u of LOCAL_TEST){try{if((await fetch(u,{method:'HEAD'})).ok)return u;}catch(e){}}
-  return (scenes.find(s=>s.panorama_path)||{}).panorama_path;}
+// A test panorama may have a solution file next to it (same name, .json); scenes come with their own fields.
+let scene=null;
+async function pickScene(){const q=new URLSearchParams(location.search).get('pano');let url=null;
+  if(q&&/^assets\/[\w\/.-]+\.(jpe?g|png|webp)$/i.test(q))url=q;
+  else for(const u of LOCAL_TEST){try{if((await fetch(u,{method:'HEAD'})).ok){url=u;break;}}catch(e){}}
+  if(url){let sol={};try{const r=await fetch(url.replace(/\.\w+$/,'.json'));if(r.ok)sol=await r.json();}catch(e){}return {...sol,panorama_path:url};}
+  return scenes.find(s=>s.panorama_path)||null;}
 async function startGame(){
-  if(viewer)return;const url=await panoUrl();if(!url||!window.pannellum||viewer)return;const h=fov();
+  if(viewer)return;scene=await pickScene();const url=scene&&scene.panorama_path;if(!url||!window.pannellum||viewer)return;const h=fov();
   viewer=pannellum.viewer('panorama',{type:'equirectangular',panorama:url,autoLoad:true,showControls:false,compass:false,
     mouseZoom:false,keyboardZoom:false,hfov:h,minHfov:h,maxHfov:h,pitch:0,yaw:0});
 }
@@ -342,7 +418,8 @@ const upx=v=>Math.max(v.w/IW,v.h/IH);                                   // svg u
 const off=v=>{const u=upx(v);return [(IW-v.w/u)/2,(IH-v.h/u)/2];};       // letterbox offset in px
 function clampVb(){vb.w=Math.min(FULL.w,Math.max(FULL.w/MAXZ,vb.w));vb.h=vb.w*FULL.h/FULL.w;
   vb.x=Math.min(FULL.x+FULL.w-vb.w,Math.max(FULL.x,vb.x));vb.y=Math.min(FULL.y+FULL.h-vb.h,Math.max(FULL.y,vb.y));}
-function toSvg(cx,cy){const r=stage.getBoundingClientRect(),u=upx(vb),[ox,oy]=off(vb);return {x:vb.x+(cx-r.left-ox)*u,y:vb.y+(cy-r.top-oy)*u};}
+// works while the map is still scaling open: divide by the stage's current on-screen scale
+function toSvg(cx,cy){const r=stage.getBoundingClientRect(),sc=r.width/IW||1,u=upx(vb),[ox,oy]=off(vb);return {x:vb.x+((cx-r.left)/sc-ox)*u,y:vb.y+((cy-r.top)/sc-oy)*u};}
 function preview(){clampVb();const uC=upx(vbC),k=vbC.w/vb.w,[ox,oy]=off(vbC);
   layers.style.transform='translate('+(ox*(1-k)+k*(vbC.x-vb.x)/uC)+'px,'+(oy*(1-k)+k*(vbC.y-vb.y)/uC)+'px) scale('+k+')';
   clearTimeout(commitT);commitT=setTimeout(commit,140);}
@@ -360,7 +437,8 @@ function commit(){if(!svgC||!IW)return;clampVb();Object.assign(vbC,vb);const v=v
 function zoomAt(cx,cy,f){const p=toSvg(cx,cy),nw=Math.min(FULL.w,Math.max(FULL.w/MAXZ,vb.w/f)),k=nw/vb.w;
   vb.x=p.x-(p.x-vb.x)*k;vb.y=p.y-(p.y-vb.y)*k;vb.w=nw;vb.h=nw*FULL.h/FULL.w;preview();}
 const NS='http://www.w3.org/2000/svg';
-fetch('assets/map/countries.svg').then(r=>r.text()).then(t=>{
+let mapText='';
+fetch('assets/map/countries.svg').then(r=>r.text()).then(t=>{mapText=t;
   layers.innerHTML=t;svgC=layers.querySelector('svg');svgC.setAttribute('preserveAspectRatio','xMidYMid meet');
   // labels + pin live in a second SVG on top, so they can fade in/out without repainting the countries
   svgT=document.createElementNS(NS,'svg');svgT.setAttribute('class','map-top');svgT.setAttribute('preserveAspectRatio','xMidYMid meet');
@@ -371,8 +449,71 @@ fetch('assets/map/countries.svg').then(r=>r.text()).then(t=>{
 function selectCountry(path,p){if(selPath)selPath.classList.remove('sel');selPath=path;path.classList.add('sel');
   guessCountry=path.dataset.name;guessLL={lon:p.x-180,lat:90-p.y};
   const lab=$('mapLabel');lab.textContent='Wo?';const b=document.createElement('b');b.textContent=guessCountry;lab.appendChild(b);commit();updateGuess();}
-// The result screen comes next; for now the guess is only kept for it.
-$('guessBtn').addEventListener('click',()=>{window.lastGuess={year:guessYear,country:guessCountry,lon:guessLL?.lon,lat:guessLL?.lat};});
+// ---------- Result ----------
+// Scoring follows GeoGuessr's world-map curve: 5000 · e^(−d / 1492.7 km) for the place
+// (full 5000 when the country is right), and the same idea for time: 5000 · e^(−Δyears / 40).
+const ALIAS={'vereinigte staaten':'usa','vereinigte staaten von amerika':'usa','united states':'usa','vereinigtes königreich':'großbritannien',
+  'united kingdom':'großbritannien','volksrepublik china':'china','republik china':'taiwan','demokratische republik kongo':'dr kongo'};
+const norm=n=>{n=String(n||'').trim().toLowerCase();return ALIAS[n]||n;};
+const placeScore=(d,ok)=>ok?5000:Math.round(5000*Math.exp(-d/1492.7));
+const timeScore=dy=>Math.round(5000*Math.exp(-Math.abs(dy)/40));
+function km(a,b){const R=6371,r=Math.PI/180,dl=(b.lat-a.lat)*r,dn=(b.lon-a.lon)*r;
+  const h=Math.sin(dl/2)**2+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h));}
+const fmt=n=>n.toLocaleString('de-DE');
+function solutionPoint(){if(Number.isFinite(scene?.lat)&&Number.isFinite(scene?.lon))return {lat:scene.lat,lon:scene.lon};
+  // fallback: the country's label point on the map
+  const t=[...(labels?.children||[])].find(t=>norm(t.textContent)===norm(scene?.country_de));
+  return t?{lon:+t.getAttribute('x')-180,lat:90-+t.getAttribute('y')}:null;}
+function countUp(el,to){if(matchMedia('(prefers-reduced-motion: reduce)').matches){el.textContent=fmt(to);return;}
+  const t0=performance.now();const step=t=>{const k=Math.min(1,(t-t0)/700),e=1-Math.pow(1-k,3);el.textContent=fmt(Math.round(to*e));if(k<1)requestAnimationFrame(step);};requestAnimationFrame(step);}
+function drawResultMap(sol){const box=$('resMap');box.innerHTML=mapText;const sv=box.querySelector('svg');if(!sv)return;
+  sv.setAttribute('preserveAspectRatio','xMidYMid meet');
+  const right=norm(scene.country_de),mine=norm(guessCountry);
+  for(const p of sv.querySelectorAll('.countries path')){const n=norm(p.dataset.name);if(n===right)p.classList.add('sel');else if(n===mine)p.classList.add('guess');}
+  const g={x:guessLL.lon+180,y:90-guessLL.lat},S=sol?{x:sol.lon+180,y:90-sol.lat}:g;
+  const r=box.getBoundingClientRect(),asp=r.height/r.width||.56;
+  let w=Math.max(Math.abs(g.x-S.x)*1.8,Math.abs(g.y-S.y)*1.8/asp,40),h=w*asp;
+  const vb={x:(g.x+S.x)/2-w/2,y:(g.y+S.y)/2-h/2,w,h};sv.setAttribute('viewBox',vb.x+' '+vb.y+' '+vb.w+' '+vb.h);
+  const u=Math.max(vb.w/r.width,vb.h/r.height),NS='http://www.w3.org/2000/svg',el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);sv.appendChild(e);return e;};
+  const lab=sv.querySelector('.labels');lab.style.fontSize=(12*u)+'px';lab.style.strokeWidth=(12*u*.28)+'px';
+  for(const t of [...lab.children]){const n=norm(t.textContent);if(n!==right&&n!==mine)t.remove();}
+  if(sol){el('line',{x1:g.x,y1:g.y,x2:S.x,y2:S.y,class:'res-line'});
+    el('circle',{cx:S.x,cy:S.y,r:7*u,class:'res-true'});}
+  el('path',{class:'pin',d:'M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12zM12 12.6a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2z','fill-rule':'evenodd',
+    transform:'translate('+g.x+' '+g.y+') scale('+(26/24*u)+') translate(-12 -22)'});
+  sv.appendChild(lab);}
+function drawResultTimeline(y,Y){const tr=$('resTrack');tr.replaceChildren();const P=v=>pct(v)+'%';
+  for(let v=Y0;v<=Y1;v+=50){const t=document.createElement('div');t.className='tick'+(v%100===0?' major':' mid');t.style.left=P(v);tr.appendChild(t);
+    if(v%100===0){const l=document.createElement('span');l.className='tick-label';l.textContent=v;l.style.left=P(v);tr.appendChild(l);}}
+  if(Y!=null){const sp=document.createElement('div');sp.className='res-span';sp.style.left=P(Math.min(y,Y));sp.style.width=(Math.abs(pct(y)-pct(Y)))+'%';tr.appendChild(sp);
+    const m=document.createElement('div');m.className='marker';m.style.left=P(Y);tr.appendChild(m);}
+  const g=document.createElement('div');g.className='marker mine';g.style.left=P(y);tr.appendChild(g);}
+$('guessBtn').addEventListener('click',()=>{if(guessYear==null||!guessCountry)return;
+  const sol=solutionPoint(),hasYear=Number.isFinite(scene?.year),okC=!!scene?.country_de&&norm(guessCountry)===norm(scene.country_de);
+  const d=sol?Math.round(km(guessLL,sol)):null,dy=hasYear?guessYear-scene.year:null;
+  const ps=sol||okC?placeScore(d??0,okC):0,ts=hasYear?timeScore(dy):0;
+  window.lastGuess={year:guessYear,country:guessCountry,lon:guessLL.lon,lat:guessLL.lat,distanceKm:d,yearDiff:dy,points:{place:ps,time:ts}};
+  $('game').classList.add('resolved');$('result').hidden=false;$('result').scrollTop=0;
+  // where
+  $('resWhereRight').textContent=scene?.country_de?(scene.country_de+(scene.place_de?' · '+scene.place_de:'')):'keine Lösung hinterlegt';
+  $('resWhereMine').textContent=guessCountry+(okC?' ✓':'');
+  $('resWhereDiff').textContent=okC?'Richtiges Land'+(d!=null&&Number.isFinite(scene?.lat)?' · '+fmt(d)+' km vom Ort':''):(d!=null?fmt(d)+' km entfernt':'–');
+  // when
+  $('resWhenRight').textContent=hasYear?scene.year:'–';$('resWhenMine').textContent=guessYear+(dy===0?' ✓':'');
+  $('resWhenDiff').textContent=dy==null?'–':dy===0?'Genau richtig':Math.abs(dy)+(Math.abs(dy)===1?' Jahr ':' Jahre ')+(dy<0?'zu früh':'zu spät');
+  for(const [id,v] of [['resWherePts',ps],['resWhenPts',ts]]){countUp($(id),v);$(id+'Bar').style.width=(v/50)+'%';}
+  countUp($('resTotal'),ps+ts);
+  // explanation
+  $('resTitle').textContent=scene?.title_de||scene?.site_type||scene?.industry||'Auflösung';
+  $('resOverview').textContent=scene?.overview_de||'';$('resLearning').textContent=scene?.learning_de||'';
+  const cl=$('resClues');cl.replaceChildren();for(const c of scene?.visual_clues||[]){const li=document.createElement('li');li.textContent=c;cl.appendChild(li);}
+  $('resCluesWrap').hidden=!cl.children.length;
+  $('resNote').textContent=scene?.historical_status==='composite_reconstruction'||!scene?.historical_status?'KI-Rekonstruktion eines historisch belegten Schauplatzes – kein Originalfoto.':'';
+  requestAnimationFrame(()=>{drawResultMap(sol);drawResultTimeline(guessYear,hasYear?scene.year:null);});
+  $('resNext').focus({preventScroll:true});});
+function resetGuess(){guessYear=null;marker.hidden=true;ruler.removeAttribute('aria-valuenow');ruler.setAttribute('aria-valuetext','kein Jahr gewählt');showYear();
+  if(selPath)selPath.classList.remove('sel');selPath=null;guessCountry=null;guessLL=null;if(pinG)pinG.style.display='none';$('mapLabel').textContent='Wo?';updateGuess();}
+$('resNext').addEventListener('click',()=>{resetGuess();$('result').hidden=true;$('game').classList.remove('resolved');$('game').hidden=true;$('start').hidden=false;});
 // open / close
 let closeT;
 function openMap(){clearTimeout(closeT);map.classList.add('open');}
