@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-09-v5-reviewed-23-entries",
+  "version": "2026-11-09-v6-boston-accepted-suez-candidate-fail",
   "project": "Made in Time – Guess where. Guess when.",
   "activeTarget": 30,
   "approvedCount": 0,
@@ -738,21 +738,34 @@
       "source": "https://www.nps.gov/articles/000/boston-tea-party-in-real-time.htm",
       "caution": "Kein fiktiver Original-Zeugenausschnitt; einzelne Personen nur generisch",
       "category": "turning_point",
-      "owner": "colleague",
-      "status": "review_rejected_new_image_required",
+      "owner": "user",
+      "status": "visual_accepted_not_game_approved",
       "previousPlanningStatus": "planned_requires_research",
-      "image_status": "redo_requested",
-      "image_generation_owner": "colleague_gemini",
-      "image_qa_status": "not_started_for_replacement",
-      "reference": null,
+      "image_status": "visual_accepted_pending_qa",
+      "image_generation_owner": "none_unless_further_review",
+      "image_qa_status": "pending_independent_360_historical_rights_check",
+      "reference": {
+        "file": "nahtloses_panorama_der_boston_tea_party.png",
+        "source": "conversation image output acknowledged by user",
+        "availableInGitHub": false,
+        "verifiedBytes": false,
+        "width": 1774,
+        "height": 887,
+        "sha256": null
+      },
       "visualReview": {
         "reviewDate": "2026-11-09",
-        "verdict": "neu_machen",
-        "filename": "boston-tea-party.jpg",
-        "source": "user-provided image review 09.11.2026",
+        "verdict": "passt",
+        "filename": "nahtloses_panorama_der_boston_tea_party.png",
+        "source": "user response 'okay passt, nächstes bild' after latest E01 generation",
         "scope": "visual_acceptability_only",
         "actualFileBytesConfirmedInRepository": false,
         "technical360QA": "not_documented_by_this_review"
+      },
+      "previousRejectedVersion": {
+        "verdict": "neu_machen",
+        "filename": "boston-tea-party.jpg",
+        "date": "2026-11-09"
       }
     },
     {
@@ -806,6 +819,17 @@
         "scope": "visual_acceptability_only",
         "actualFileBytesConfirmedInRepository": false,
         "technical360QA": "not_documented_by_this_review"
+      },
+      "newAttempt": {
+        "date": "2026-11-09",
+        "visualPhotoCandidate": "E03_Suez_1869_PHOTO_V1_ORIGINAL_1774x887.png",
+        "geometryReference": "E03_Suez_1869_3D_FRONTROT_50_4096x2048.png",
+        "bundle": "Made_in_Time_E03_Suez_1869_REWORK_QA.zip",
+        "bundleSha256": "88509c5a1f7ea5e4ef5145b69f0383819c4b649e9d440584def357de2351617d",
+        "quality": "FAIL_photo_seam_yaw180",
+        "photoEdgeRatio": 6.6288,
+        "historicalResearch": "docs/scene-research/E03_Suez_1869_REWORK_QA.md",
+        "fileBytesInGitHub": false
       }
     },
     {
@@ -944,15 +968,15 @@
   ],
   "imageProduction": {
     "total": 30,
-    "acceptedVisualReferences": 11,
-    "redoRequested": 6,
+    "acceptedVisualReferences": 12,
+    "redoRequested": 5,
     "openWithoutReview": 13,
-    "remainingActionItems": 19,
+    "remainingActionItems": 18,
     "formalGameApprovals": 0,
     "visualSelectionOwner": "user",
     "remainingOwner": "colleague_using_Gemini",
     "reviewDate": "2026-11-09",
-    "remark": "11 of 30 scene images accepted visually, 6 rejected for regeneration, 13 without a result in the current review; separate review-only extras are not additional levels."
+    "remark": "E01 visually accepted by subsequent user response; E03 Suez attempt still fails rear seam. No change to public game."
   },
   "reviewExtras": [
     {
