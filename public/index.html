@@ -232,6 +232,20 @@
     @media(min-width:640px) and (max-height:640px){.result{padding:16px;gap:20px;max-height:calc(100% - 84px)}
       .res-total strong{font-size:32px}.res-row{margin-top:10px;padding-top:10px}.res-bar{margin:5px 0 6px}.res-row dl{gap:1px 12px}
       .res-scores .res-row:last-of-type{margin-bottom:10px}#resNext{height:48px}.res-timeline{height:50px;margin-top:6px}}
+    .summary{position:absolute;z-index:4;left:50%;top:50%;transform:translate(-50%,-50%);width:min(440px,calc(100% - 32px));max-height:calc(100% - 96px);overflow:auto;
+      padding:24px;background:rgba(10,10,10,.94);border:1px solid var(--line);border-radius:20px;animation:sumIn 280ms cubic-bezier(.2,0,0,1)}
+    .summary[hidden]{display:none}
+    @keyframes sumIn{from{opacity:0;transform:translate(-50%,calc(-50% + 16px))}}
+    .summary>span{font-size:13px;font-weight:500;color:var(--muted)}
+    .sum-total{display:flex;align-items:baseline;gap:10px;margin-top:6px}
+    .sum-total strong{font-size:48px;line-height:1;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:#ffd43b}
+    .sum-total small{font-size:15px;color:var(--muted)}
+    .summary ol{list-style:none;margin:18px 0 0;padding:0;border-top:1px solid var(--line)}
+    .summary li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+    .summary li span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;white-space-collapse:preserve}
+    .summary li b{font-variant-numeric:tabular-nums}
+    #sumDone{width:100%;height:56px;margin-top:20px;border-radius:12px;background:var(--text);color:var(--bg);font-size:17px;font-weight:600;transition:opacity 120ms,transform 120ms cubic-bezier(.2,0,0,1)}
+    #sumDone:hover{opacity:.9}#sumDone:active{transform:scale(.985)}#sumDone:focus-visible{outline:2px solid var(--text);outline-offset:3px}
     /* medium widths: map + scores side by side, explanation below across both */
     @media(max-width:899px){.result{grid-template-columns:1fr 1fr;gap:20px}.res-explain{grid-column:1/-1;max-height:9.2em}.res-map{aspect-ratio:16/10}}
     /* phones: one column; explanation clamped with "Weiterlesen", expanded text may scroll */
@@ -254,7 +268,7 @@
       .map:not(.open) .map-label{opacity:0}
       .timeline{height:auto;padding:12px 16px 10px}
     }
-    @media(prefers-reduced-motion:reduce){.map,#game *{transition:none!important}#guessBtn.lit,.result{animation:none}}
+    @media(prefers-reduced-motion:reduce){.map,#game *{transition:none!important}#guessBtn.lit,.result,.summary{animation:none}}
   </style>
 </head>
 <body>
@@ -335,7 +349,7 @@
         <div class="res-bar"><i id="resWhenPtsBar"></i></div>
         <dl><dt>Richtig</dt><dd id="resWhenRight"></dd><dt>Dein Tipp</dt><dd id="resWhenMine"></dd><dt>Abweichung</dt><dd id="resWhenDiff"></dd></dl>
       </div>
-      <button type="button" id="resNext">Zurück zum Start</button>
+      <button type="button" id="resNext">Weiter</button>
     </div>
     <div class="res-explain" id="resExplain">
       <h3 id="resTitle"></h3>
@@ -345,6 +359,12 @@
       <p id="resNote" class="note"></p>
       <button type="button" id="resMore" class="more" hidden><span>Weiterlesen</span></button>
     </div>
+  </section>
+  <section class="summary" id="summary" hidden aria-labelledby="sumHead">
+    <span id="sumHead">Runde beendet</span>
+    <div class="sum-total"><strong id="sumTotal">0</strong><small id="sumMax"></small></div>
+    <ol id="sumList"></ol>
+    <button type="button" id="sumDone">Zurück zum Start</button>
   </section>
 </div>
 <script>
@@ -390,17 +410,23 @@ function fov(){const a=innerWidth/innerHeight;return Math.min(130,2*Math.atan(Ma
 // 3. the first scene in scenes.json
 const LOCAL_TEST=['assets/panoramas/_local/automobilfabrik.png'];
 // A test panorama may have a solution file next to it (same name, .json); scenes come with their own fields.
-let scene=null;
-async function pickScene(){const q=new URLSearchParams(location.search).get('pano');let url=null;
-  if(q&&/^assets\/[\w\/.-]+\.(jpe?g|png|webp)$/i.test(q))url=q;
-  else for(const u of LOCAL_TEST){try{if((await fetch(u,{method:'HEAD'})).ok){url=u;break;}}catch(e){}}
-  if(url){let sol={};try{const r=await fetch(url.replace(/\.\w+$/,'.json'));if(r.ok)sol=await r.json();}catch(e){}return {...sol,panorama_path:url};}
-  return scenes.find(s=>s.panorama_path)||null;}
-async function startGame(){
-  if(viewer)return;scene=await pickScene();const url=scene&&scene.panorama_path;if(!url||!window.pannellum||viewer)return;const h=fov();
-  viewer=pannellum.viewer('panorama',{type:'equirectangular',panorama:url,autoLoad:true,showControls:false,compass:false,
-    mouseZoom:false,keyboardZoom:false,hfov:h,minHfov:h,maxHfov:h,pitch:0,yaw:0});
-}
+// ---------- Round ----------
+// Pool = local test panorama(s) (with their .json solution) + every scene in scenes.json that has a panorama.
+// A round takes n random images from the pool (n from the start screen, capped at what exists).
+let scene=null,round=[],roundIdx=0,roundResults=[];
+async function localScene(url){let sol={};try{const r=await fetch(url.replace(/\.\w+$/,'.json'));if(r.ok)sol=await r.json();}catch(e){}return {...sol,panorama_path:url};}
+async function buildPool(blocks){const q=new URLSearchParams(location.search).get('pano'),pool=[];
+  if(q&&/^assets\/[\w\/.-]+\.(jpe?g|png|webp)$/i.test(q))return [await localScene(q)];
+  for(const u of LOCAL_TEST){try{if((await fetch(u,{method:'HEAD'})).ok)pool.push(await localScene(u));}catch(e){}}
+  for(const s of scenes)if(s.panorama_path)pool.push(s);
+  // theme filter; scenes without a block are production sites (all current pilots are)
+  const f=pool.filter(s=>blocks.includes(s.block||'production'));return f.length?f:pool;}
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function loadImage(i){roundIdx=i;scene=round[i];$('roundPill').textContent='Bild '+(i+1)+' / '+round.length;
+  if(!scene||!window.pannellum)return;if(viewer){viewer.destroy();viewer=null;}const h=fov();
+  viewer=pannellum.viewer('panorama',{type:'equirectangular',panorama:scene.panorama_path,autoLoad:true,showControls:false,compass:false,
+    mouseZoom:false,keyboardZoom:false,hfov:h,minHfov:h,maxHfov:h,pitch:0,yaw:0});}
+async function startGame(blocks,n){const pool=await buildPool(blocks);round=shuffle(pool).slice(0,Math.max(1,Math.min(n,pool.length)));roundResults=[];loadImage(0);}
 addEventListener('resize',()=>{if(!viewer)return;const h=fov();viewer.setHfovBounds([h,h]);viewer.setHfov(h,false);});
 try{const r=await fetch('data/scenes.json');if(r.ok)scenes=(await r.json()).scenes||[];}catch(e){}
 // Timeline
@@ -520,6 +546,8 @@ $('guessBtn').addEventListener('click',()=>{if(guessYear==null||!guessCountry)re
   const d=sol?Math.round(km(guessLL,sol)):null,dy=hasYear?guessYear-scene.year:null;
   const ps=sol||okC?placeScore(d??0,okC):0,ts=hasYear?timeScore(dy):0;
   window.lastGuess={year:guessYear,country:guessCountry,lon:guessLL.lon,lat:guessLL.lat,distanceKm:d,yearDiff:dy,points:{place:ps,time:ts}};
+  roundResults[roundIdx]={title:scene?.title_de||[scene?.site_type,scene?.year].filter(Boolean).join(', ')||'Bild '+(roundIdx+1),points:ps+ts};
+  $('resNext').textContent=roundIdx<round.length-1?'Weiter':'Ergebnis der Runde';
   $('game').classList.add('resolved');$('result').hidden=false;$('result').scrollTop=0;
   // where
   $('resWhereRight').textContent=scene?.country_de?(scene.country_de+(scene.place_de?' · '+scene.place_de:'')):'keine Lösung hinterlegt';
@@ -542,7 +570,18 @@ $('guessBtn').addEventListener('click',()=>{if(guessYear==null||!guessCountry)re
 function resetGuess(){guessYear=null;marker.hidden=true;ruler.removeAttribute('aria-valuenow');ruler.setAttribute('aria-valuetext','kein Jahr gewählt');showYear();
   if(selPath)selPath.classList.remove('sel');selPath=null;guessCountry=null;guessLL=null;if(pinG)pinG.style.display='none';$('mapLabel').textContent='Wo?';updateGuess();}
 $('resMore').addEventListener('click',()=>{$('resExplain').classList.add('open');$('result').classList.add('expanded');$('resMore').hidden=true;});
-$('resNext').addEventListener('click',()=>{resetGuess();$('result').hidden=true;$('game').classList.remove('resolved');$('game').hidden=true;$('start').hidden=false;});
+$('resNext').addEventListener('click',()=>{resetGuess();$('result').hidden=true;$('game').classList.remove('resolved');
+  if(roundIdx<round.length-1){loadImage(roundIdx+1);return;}
+  showSummary();});
+function showSummary(){const total=roundResults.reduce((a,r)=>a+(r?.points||0),0),max=round.length*10000;
+  try{localStorage.setItem('mit-last-round',JSON.stringify({points:total,max}));}catch(e){}
+  updateSticker();$('game').classList.add('resolved');
+  $('sumTotal').textContent=fmt(total);$('sumMax').textContent='von '+fmt(max);
+  const ul=$('sumList');ul.replaceChildren();
+  roundResults.forEach((r,i)=>{const li=document.createElement('li'),a=document.createElement('span'),b=document.createElement('b');
+    a.textContent=(i+1)+'  '+r.title;b.textContent=fmt(r.points);li.append(a,b);ul.appendChild(li);});
+  $('summary').hidden=false;$('sumDone').focus({preventScroll:true});}
+$('sumDone').addEventListener('click',()=>{$('summary').hidden=true;$('game').classList.remove('resolved');$('game').hidden=true;$('start').hidden=false;});
 // open / close
 let closeT;
 function openMap(){clearTimeout(closeT);map.classList.add('open');}
@@ -571,16 +610,17 @@ function endPointer(e){if(!pointers.has(e.pointerId))return;pointers.delete(e.po
     if(path)selectCountry(path,toSvg(e.clientX,e.clientY));}}
 stage.addEventListener('pointerup',endPointer);stage.addEventListener('pointercancel',endPointer);
 addEventListener('resize',()=>{sizes();commit();});
-$('backBtn').addEventListener('click',()=>{$('game').hidden=true;$('start').hidden=false;});
+$('backBtn').addEventListener('click',()=>{resetGuess();$('result').hidden=true;$('summary').hidden=true;$('game').classList.remove('resolved');$('game').hidden=true;$('start').hidden=false;});
 const blockInputs=[...document.querySelectorAll('#startForm input[name=block]')];
 function syncStart(){const n=blockInputs.filter(i=>i.checked).length;$('startBtn').disabled=!n;$('startBtn').textContent=n?'Spiel starten':'Mindestens ein Thema wählen';}
 try{const saved=JSON.parse(localStorage.getItem('mit-blocks'));if(Array.isArray(saved)&&saved.length)blockInputs.forEach(i=>i.checked=saved.includes(i.value));}catch(e){}
 blockInputs.forEach(i=>i.addEventListener('change',syncStart));syncStart();
-// Last-round sticker: the game will later store mit-last-round = {"correct":n,"total":m}. ?demo=score shows a sample.
-(()=>{let last=null;try{last=JSON.parse(localStorage.getItem('mit-last-round'));}catch(e){}
-  if(/[?&]demo=score\b/.test(location.search))last={correct:7,total:9};
-  if(!(last&&Number.isFinite(last.correct)&&last.total>0))return;
-  const el=$('score');el.classList.remove('empty');el.querySelector('small').textContent='Letzte Runde';$('scoreValue').textContent=last.correct+'/'+last.total;})();
+// Last-round sticker: points of the last finished round (mit-last-round = {"points":n,"max":m}). ?demo=score shows a sample.
+function updateSticker(){let last=null;try{last=JSON.parse(localStorage.getItem('mit-last-round'));}catch(e){}
+  if(/[?&]demo=score\b/.test(location.search))last={points:23450,max:30000};
+  if(!(last&&Number.isFinite(last.points)))return;
+  const el=$('score');el.classList.remove('empty');el.querySelector('small').textContent='Letzte Runde';$('scoreValue').textContent=fmt(last.points);}
+updateSticker();
 const rounds=$('rounds');
 function syncRounds(){const v=+rounds.value;rounds.style.setProperty('--p',((v-1)/8*100)+'%');
   $('roundsOut').textContent=v+' · '+(v<=3?'Leicht':v<=6?'Mittel':'Schwer');}
@@ -589,7 +629,8 @@ rounds.addEventListener('input',syncRounds);syncRounds();
 $('startForm').addEventListener('submit',e=>{e.preventDefault();const blocks=new FormData(e.target).getAll('block');if(!blocks.length)return;
 try{localStorage.setItem('mit-blocks',JSON.stringify(blocks));}catch(err){}
 document.body.dataset.blocks=blocks.join(' ');document.body.dataset.rounds=rounds.value;
-try{localStorage.setItem('mit-rounds',rounds.value);}catch(err){}$('roundPill').textContent='Bild 1 / '+rounds.value;$('start').hidden=true;$('game').hidden=false;sizes();commit();startGame();});
+try{localStorage.setItem('mit-rounds',rounds.value);}catch(err){}resetGuess();$('result').hidden=true;$('summary').hidden=true;$('game').classList.remove('resolved');
+$('start').hidden=true;$('game').hidden=false;sizes();commit();startGame(blocks,+rounds.value);});
 })();
 </script>
 </body>
