@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-09-v3-30",
+  "version": "2026-11-09-v4-image-selection",
   "project": "Made in Time – Guess where. Guess when.",
   "activeTarget": 30,
   "approvedCount": 0,
@@ -9,8 +9,8 @@
     "turningPoints": 8
   },
   "assignment": {
-    "user": "P01–P16",
-    "colleague": "T01–T06 and E01–E08"
+    "lead": "Visual selection and final QA for all 30; 4 reference images accepted for now",
+    "colleague": "Create/recreate all 26 scenes without an accepted visual reference: P, T and E"
   },
   "statusNotes": "All entries are plans or existing unapproved candidates. Retain source files and original legacy numbers.",
   "scenes": [
@@ -23,8 +23,13 @@
       "difficulty": "M",
       "id": "P01",
       "category": "production",
-      "owner": "user",
-      "status": "candidate_existing_requires_qa"
+      "owner": "colleague",
+      "status": "image_to_generate",
+      "previousPlanningStatus": "candidate_existing_requires_qa",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "oldMasterNumber": 2,
@@ -36,7 +41,21 @@
       "id": "P02",
       "category": "production",
       "owner": "user",
-      "status": "candidate_existing_requires_qa"
+      "status": "user_accepted_visual_reference_pending_technical_qa",
+      "previousPlanningStatus": "candidate_existing_requires_qa",
+      "image_status": "reference_selected",
+      "image_generation_owner": "none_currently",
+      "image_qa_status": "not_finally_verified",
+      "reference": {
+        "file": "Murano_1680_V2_One_Canal_UPSCALED_4096x2048(2).jpg",
+        "width": 2048,
+        "height": 1024,
+        "sha256": "fc0a2d3ffa7c82deca48a1e3e12b88ec2fadb2ce7bc5fd77daf242a451ebe695",
+        "style": "warm flackerndes Ofenlicht, venezianische Ziegelbögen und Kanal, Glasbläser an der Arbeit",
+        "source": "user-uploaded chat attachment",
+        "availableInGitHub": false,
+        "referenceZipName": "FactoryGuessr_Gemini_4_Referenzbilder.zip"
+      }
     },
     {
       "oldMasterNumber": 3,
@@ -48,7 +67,21 @@
       "id": "P03",
       "category": "production",
       "owner": "user",
-      "status": "candidate_existing_requires_qa"
+      "status": "user_accepted_visual_reference_pending_technical_qa",
+      "previousPlanningStatus": "candidate_existing_requires_qa",
+      "image_status": "reference_selected",
+      "image_generation_owner": "none_currently",
+      "image_qa_status": "not_finally_verified",
+      "reference": {
+        "file": "Jingdezhen_1700_seamfix_UPSCALED_4096x2048(2).jpg",
+        "width": 2048,
+        "height": 1024,
+        "sha256": "319f23317621b9d7cd67e9d0172d7247c441f68192c92e28ddba378c4c51333f",
+        "style": "warme Keramikwerkstatt, blau-weißes Porzellan, Töpfer und Maler, großer Brennofen",
+        "source": "user-uploaded chat attachment",
+        "availableInGitHub": false,
+        "referenceZipName": "FactoryGuessr_Gemini_4_Referenzbilder.zip"
+      }
     },
     {
       "oldMasterNumber": 4,
@@ -59,8 +92,13 @@
       "difficulty": "M",
       "id": "P04",
       "category": "production",
-      "owner": "user",
-      "status": "candidate_existing_requires_qa"
+      "owner": "colleague",
+      "status": "image_to_generate",
+      "previousPlanningStatus": "candidate_existing_requires_qa",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "oldMasterNumber": 7,
@@ -72,7 +110,21 @@
       "id": "P05",
       "category": "production",
       "owner": "user",
-      "status": "candidate_existing_requires_qa"
+      "status": "user_accepted_visual_reference_pending_technical_qa",
+      "previousPlanningStatus": "candidate_existing_requires_qa",
+      "image_status": "reference_selected",
+      "image_generation_owner": "none_currently",
+      "image_qa_status": "not_finally_verified",
+      "reference": {
+        "file": "gb-1840-textile-mill-v2-upscaled-4096x2048(1).jpg",
+        "width": 2048,
+        "height": 1024,
+        "sha256": "da6052683de27a4b38ff81dcb85dc7073f8cdcad919c49b9dc91d95ae86d5fb4",
+        "style": "viktorianische Backsteinhalle, Antriebswellen, Baumwollspindeln, Staub im Fensterlicht",
+        "source": "user-uploaded chat attachment",
+        "availableInGitHub": false,
+        "referenceZipName": "FactoryGuessr_Gemini_4_Referenzbilder.zip"
+      }
     },
     {
       "oldMasterNumber": 18,
@@ -83,8 +135,13 @@
       "difficulty": "M",
       "id": "P06",
       "category": "production",
-      "owner": "user",
-      "status": "planned_requires_research"
+      "owner": "colleague",
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "oldMasterNumber": 15,
@@ -95,8 +152,13 @@
       "difficulty": "E",
       "id": "P07",
       "category": "production",
-      "owner": "user",
-      "status": "planned_requires_research"
+      "owner": "colleague",
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "oldMasterNumber": 20,
@@ -107,8 +169,13 @@
       "difficulty": "M",
       "id": "P08",
       "category": "production",
-      "owner": "user",
-      "status": "planned_requires_research"
+      "owner": "colleague",
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "oldMasterNumber": 17,
@@ -119,8 +186,13 @@
       "difficulty": "E",
       "id": "P09",
       "category": "production",
-      "owner": "user",
-      "status": "candidate_existing_requires_qa"
+      "owner": "colleague",
+      "status": "image_to_generate",
+      "previousPlanningStatus": "candidate_existing_requires_qa",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "oldMasterNumber": 16,
@@ -132,7 +204,21 @@
       "id": "P10",
       "category": "production",
       "owner": "user",
-      "status": "planned_requires_research"
+      "status": "user_accepted_visual_reference_pending_technical_qa",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "reference_selected",
+      "image_generation_owner": "none_currently",
+      "image_qa_status": "not_finally_verified",
+      "reference": {
+        "file": "Historische Automobilfabrik im Panorama(1).png",
+        "width": 1774,
+        "height": 887,
+        "sha256": "1bd6263952c41d7a4d832a67b2733d0809a86e15e406e4df47cba42dee10ba5c",
+        "style": "weite Industriehalle mit großen Fenstern, viele Arbeiter und Motor-/Fahrgestellmontage, unaufgeräumt aber nachvollziehbar",
+        "source": "user-uploaded chat attachment",
+        "availableInGitHub": false,
+        "referenceZipName": "FactoryGuessr_Gemini_4_Referenzbilder.zip"
+      }
     },
     {
       "oldMasterNumber": 44,
@@ -143,8 +229,13 @@
       "difficulty": "E",
       "id": "P11",
       "category": "production",
-      "owner": "user",
-      "status": "planned_requires_research"
+      "owner": "colleague",
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "oldMasterNumber": 42,
@@ -155,8 +246,13 @@
       "difficulty": "E",
       "id": "P12",
       "category": "production",
-      "owner": "user",
-      "status": "planned_requires_research"
+      "owner": "colleague",
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "oldMasterNumber": 51,
@@ -167,8 +263,13 @@
       "difficulty": "E",
       "id": "P13",
       "category": "production",
-      "owner": "user",
-      "status": "candidate_existing_requires_qa"
+      "owner": "colleague",
+      "status": "image_to_generate",
+      "previousPlanningStatus": "candidate_existing_requires_qa",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "oldMasterNumber": 52,
@@ -179,8 +280,13 @@
       "difficulty": "E",
       "id": "P14",
       "category": "production",
-      "owner": "user",
-      "status": "planned_requires_research"
+      "owner": "colleague",
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "oldMasterNumber": 53,
@@ -191,8 +297,13 @@
       "difficulty": "M",
       "id": "P15",
       "category": "production",
-      "owner": "user",
-      "status": "planned_requires_research"
+      "owner": "colleague",
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "oldMasterNumber": 55,
@@ -203,8 +314,13 @@
       "difficulty": "M",
       "id": "P16",
       "category": "production",
-      "owner": "user",
-      "status": "planned_requires_research"
+      "owner": "colleague",
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "id": "T01",
@@ -216,7 +332,12 @@
       "source": "https://www.rijksmuseum.nl/en/stories/dutch-east-india-company",
       "category": "trade_power",
       "owner": "colleague",
-      "status": "planned_requires_research"
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "id": "T02",
@@ -228,7 +349,12 @@
       "source": "https://whc.unesco.org/en/list/34/",
       "category": "trade_power",
       "owner": "colleague",
-      "status": "planned_requires_research"
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "id": "T03",
@@ -240,7 +366,12 @@
       "source": "https://www.britishmuseum.org/collection/galleries/south-asia",
       "category": "trade_power",
       "owner": "colleague",
-      "status": "planned_requires_research"
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "id": "T04",
@@ -252,7 +383,12 @@
       "source": "https://www.britishmuseum.org/collection/galleries/chinese-ceramics",
       "category": "trade_power",
       "owner": "colleague",
-      "status": "planned_requires_research"
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "id": "T05",
@@ -264,7 +400,12 @@
       "source": "https://www.ect.nl/en/about-us/60-years-milestones",
       "category": "trade_power",
       "owner": "colleague",
-      "status": "planned_requires_research"
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "id": "T06",
@@ -276,7 +417,12 @@
       "source": "https://www.mpa.gov.sg/port-marine-ops/operations/port-infrastructure/terminals",
       "category": "trade_power",
       "owner": "colleague",
-      "status": "planned_requires_research"
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "id": "E01",
@@ -289,7 +435,12 @@
       "caution": "Kein fiktiver Original-Zeugenausschnitt; einzelne Personen nur generisch",
       "category": "turning_point",
       "owner": "colleague",
-      "status": "planned_requires_research"
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "id": "E02",
@@ -302,7 +453,12 @@
       "caution": "Kein erfundener genauer Schlachtaugenblick; Ereignis kann besser symbolisch als Schauplatz der Phase gezeigt werden",
       "category": "turning_point",
       "owner": "colleague",
-      "status": "planned_requires_research"
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "id": "E03",
@@ -315,7 +471,12 @@
       "caution": "Keine Containerschiffe oder modernen Canal-Bauwerke",
       "category": "turning_point",
       "owner": "colleague",
-      "status": "planned_requires_research"
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "id": "E04",
@@ -328,7 +489,12 @@
       "caution": "Kein gefälschtes zeitgenössisches Zeitungsfaksimile",
       "category": "turning_point",
       "owner": "colleague",
-      "status": "planned_requires_research"
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "id": "E05",
@@ -341,7 +507,12 @@
       "caution": "United Fruit nicht als alleinige Ursache behaupten; keine erfundene genaue Geheimoperation",
       "category": "turning_point",
       "owner": "colleague",
-      "status": "planned_requires_research"
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "id": "E06",
@@ -354,7 +525,12 @@
       "caution": "Keine erfundenen historischen Streikplakate oder Aussagen",
       "category": "turning_point",
       "owner": "colleague",
-      "status": "planned_requires_research"
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "id": "E07",
@@ -367,7 +543,12 @@
       "caution": "Keine Verletzten/Toten zeigen, keine identifizierbaren Opfer erfinden, kein Fotodokument behaupten",
       "category": "turning_point",
       "owner": "colleague",
-      "status": "planned_requires_research"
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     },
     {
       "id": "E08",
@@ -380,7 +561,22 @@
       "caution": "Keine falschen Erklärungen für Unfallursache oder frei erfundene Markenlogos",
       "category": "turning_point",
       "owner": "colleague",
-      "status": "planned_requires_research"
+      "status": "image_to_generate",
+      "previousPlanningStatus": "planned_requires_research",
+      "image_status": "needed",
+      "image_generation_owner": "colleague_gemini",
+      "image_qa_status": "not_started",
+      "reference": null
     }
-  ]
+  ],
+  "imageProduction": {
+    "total": 30,
+    "acceptedVisualReferences": 4,
+    "stillToGenerate": 26,
+    "formalGameApprovals": 0,
+    "remainingOwner": "colleague_using_Gemini",
+    "visualSelectionOwner": "project_lead",
+    "referencesArchive": "FactoryGuessr_Gemini_4_Referenzbilder.zip (chat download; not uploaded to GitHub)",
+    "referenceArchiveSha256": "8b9028a83aa6f54c24e30eeffe2ddeb97ad13810432388bb8ede92d5d0a455db"
+  }
 }
