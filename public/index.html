@@ -37,10 +37,20 @@
     .start-inner{width:100%;max-width:400px;margin:auto;display:flex;flex-direction:column;position:relative;z-index:1}
     .brand{margin:0 0 48px;text-align:center}
     .brand h1{font-size:44px;line-height:1;letter-spacing:-.035em;font-weight:700}
-    .brand .logo{display:block;width:min(560px,calc(100vw - 32px));max-width:none;height:auto;margin:0 auto;position:relative;left:50%;transform:translateX(-50%)}
-    .brand p{margin:20px auto 0;color:var(--muted);font-size:15px;line-height:1.45}
+    .logo-wrap{position:relative;width:min(560px,calc(100vw - 32px));left:50%;transform:translateX(-50%)}
+    .brand .logo{display:block;width:100%;height:auto}
+    /* Last-round score: a small sticker overlapping the logo */
+    .score{position:absolute;right:2%;bottom:-30px;display:flex;flex-direction:column;align-items:center;padding:8px 14px 9px;border-radius:12px;
+      background:#ffd43b;color:#0a0a0a;transform:rotate(-6deg);box-shadow:0 2px 0 rgba(0,0,0,.35);text-align:center;line-height:1;
+      animation:pop 280ms cubic-bezier(.2,0,0,1) both 120ms}
+    .score[hidden]{display:none}
+    .score small{font-size:11px;font-weight:600;letter-spacing:.02em;text-transform:uppercase}
+    .score strong{margin-top:3px;font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+    .score.empty strong{font-size:15px}
+    @media(max-width:639px){.score{right:0;bottom:-40px;padding:6px 11px 7px}.score small{font-size:10px}.score strong{font-size:18px}.score.empty strong{font-size:13px}}
+    @keyframes pop{from{opacity:0;transform:rotate(-6deg) scale(.85)}}
     #start fieldset{border:0;margin:0;padding:0}
-    #start legend{padding:0;margin:0 auto 12px;font-size:13px;font-weight:500;color:var(--muted)}
+    #start legend{padding:0;margin:0 0 10px;font-size:13px;font-weight:500;color:var(--muted)}
     .themes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
     .theme{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:104px;padding:14px 6px;margin:0;
       border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--muted);font-size:15px;font-weight:500;line-height:1.25;text-align:center;cursor:pointer;
@@ -101,7 +111,7 @@
     .start-foot{position:relative;z-index:1;margin:32px auto 0;max-width:960px;text-align:center;font-size:14px;line-height:1.45;color:var(--muted);text-wrap:balance}
     @media(min-width:640px){.brand h1{font-size:56px}}
     @media(max-height:640px){.theme{min-height:92px}.rounds{margin-top:20px}.brand{margin-bottom:28px}#startBtn{margin-top:24px}.start-foot{margin-top:20px}}
-    @media(prefers-reduced-motion:reduce){#start *,#settings,#settings *{transition:none!important}#settings[open]{animation:none}}
+    @media(prefers-reduced-motion:reduce){.score{animation:none}#start *,#settings,#settings *{transition:none!important}#settings[open]{animation:none}}
     @media(max-width:920px){main{grid-template-columns:1fr}aside{border-left:0;border-top:1px solid #344047}#stage,#panorama{min-height:400px}}
   </style>
 </head>
@@ -112,7 +122,8 @@
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
   </button>
   <div class="start-inner">
-    <div class="brand"><h1 id="startTitle"><img class="logo" src="assets/logo-wo-und-wann.png" width="1200" height="228" alt="Wo &amp; Wann?"></h1></div>
+    <div class="brand"><div class="logo-wrap"><h1 id="startTitle"><img class="logo" src="assets/logo-wo-und-wann.png" width="1200" height="228" alt="Wo &amp; Wann?"></h1>
+      <p class="score" id="score" role="status" hidden><small>Letzte Runde</small><strong id="scoreValue"></strong></p></div></div>
     <form id="startForm">
       <!-- Theme blocks (docs/SCENE_MASTERPLAN_30.md) and images per round are stored and exposed as body[data-blocks] / body[data-rounds]; gameplay does not use them yet. -->
       <fieldset>
@@ -220,6 +231,13 @@ const blockInputs=[...document.querySelectorAll('#startForm input[name=block]')]
 function syncStart(){const n=blockInputs.filter(i=>i.checked).length;$('startBtn').disabled=!n;$('startBtn').textContent=n?'Spiel starten':'Mindestens ein Thema wählen';}
 try{const saved=JSON.parse(localStorage.getItem('mit-blocks'));if(Array.isArray(saved)&&saved.length)blockInputs.forEach(i=>i.checked=saved.includes(i.value));}catch(e){}
 blockInputs.forEach(i=>i.addEventListener('change',syncStart));syncStart();
+// Last round score, written by the game later as mit-last-round = {"correct":n,"total":m}. ?demo=score shows a sample.
+(()=>{let last=null;try{last=JSON.parse(localStorage.getItem('mit-last-round'));}catch(e){}
+  if(/[?&]demo=score\b/.test(location.search))last={correct:7,total:9};
+  const el=$('score');
+  if(last&&Number.isFinite(last.correct)&&Number.isFinite(last.total)&&last.total>0){$('scoreValue').textContent=last.correct+'/'+last.total;}
+  else{el.classList.add('empty');el.querySelector('small').textContent='Highscore';$('scoreValue').textContent='Noch keine Runde';}
+  el.hidden=false;})();
 const rounds=$('rounds');
 function syncRounds(){const v=+rounds.value;rounds.style.setProperty('--p',((v-1)/8*100)+'%');
   $('roundsOut').textContent=v+' · '+(v<=3?'Leicht':v<=6?'Mittel':'Schwer');}
