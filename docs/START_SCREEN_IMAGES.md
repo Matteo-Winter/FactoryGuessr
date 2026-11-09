@@ -50,6 +50,6 @@ Die Karte `public/assets/map/world.svg` ist aus den Landflächen von **Natural E
 
 ## Lokales Testpanorama
 
-`?pano=assets/…` lädt im Spielbildschirm ein anderes Panorama von derselben Website. Erlaubt sind nur relative Pfade unter `assets/`. So lassen sich Kandidaten testen, ohne `scenes.json` zu ändern.
+Reihenfolge der Panoramaquelle im Spielbildschirm: (1) `?pano=assets/…` (nur relative Pfade unter `assets/`), (2) lokales Testbild `assets/panoramas/_local/automobilfabrik.png`, falls vorhanden (per HEAD geprüft), (3) erste Szene aus `scenes.json`. So lassen sich Kandidaten testen, ohne `scenes.json` zu ändern; ohne lokale Datei (z. B. nach einem Deployment) greift automatisch die Pilotszene.
 
 Lokale Testbilder gehören in `public/assets/panoramas/_local/`. Dieser Ordner ist nur lokal über `.git/info/exclude` vom Commit ausgeschlossen und wird **nicht** veröffentlicht.

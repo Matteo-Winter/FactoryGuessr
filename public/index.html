@@ -238,12 +238,17 @@ let scenes=[],viewer=null;
 const $=id=>document.getElementById(id);
 // Widest view that still looks natural: about 100° vertical, at most 130° horizontal. Zoom is locked to it.
 function fov(){const a=innerWidth/innerHeight;return Math.min(130,2*Math.atan(Math.tan(50*Math.PI/180)*a)*180/Math.PI);}
-// Local test: ?pano=assets/... loads another panorama from this site (relative paths under assets/ only).
-function panoUrl(){const q=new URLSearchParams(location.search).get('pano');
+// Panorama source, in this order:
+// 1. ?pano=assets/... (relative paths under assets/ only)
+// 2. a local, git-excluded test image (assets/panoramas/_local/test.png etc.) if present on this machine
+// 3. the first scene in scenes.json
+const LOCAL_TEST=['assets/panoramas/_local/automobilfabrik.png'];
+async function panoUrl(){const q=new URLSearchParams(location.search).get('pano');
   if(q&&/^assets\/[\w\/.-]+\.(jpe?g|png|webp)$/i.test(q))return q;
+  for(const u of LOCAL_TEST){try{if((await fetch(u,{method:'HEAD'})).ok)return u;}catch(e){}}
   return (scenes.find(s=>s.panorama_path)||{}).panorama_path;}
-function startGame(){
-  const url=panoUrl();if(!url||!window.pannellum||viewer)return;const h=fov();
+async function startGame(){
+  if(viewer)return;const url=await panoUrl();if(!url||!window.pannellum||viewer)return;const h=fov();
   viewer=pannellum.viewer('panorama',{type:'equirectangular',panorama:url,autoLoad:true,showControls:false,compass:false,
     mouseZoom:false,keyboardZoom:false,hfov:h,minHfov:h,maxHfov:h,pitch:0,yaw:0});
 }
