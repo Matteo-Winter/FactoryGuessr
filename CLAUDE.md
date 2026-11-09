@@ -13,7 +13,7 @@ Projekt: `Matteo-Winter/FactoryGuessr` (privat), Spieltitel **Made in Time – G
 
 ## Produkt- und Technikentscheidungen
 
-- Aktives Ziel: **30 verschiedene 360°-Schauplätze** = 16 Produktionsstätten (Projektleitung), 6 Handels-/Machtzentren und 8 historische Wendepunkte (Kollege), ca. 1660–2023. Alte 60er- und 30/30-Pläne sind Archiv. Schwerpunkt ZuWi: *Von Handelskompanien zu Multinational Corporations*.
+- Aktives Ziel: **30 verschiedene 360°-Schauplätze** = 16 Produktionsstätten, 6 Handels-/Machtzentren, 8 historische Wendepunkte, ca. 1660–2023. **Bildproduktion: 4 Referenzen vom Nutzer visuell akzeptiert, 26 fehlen und werden vom Kollegen mit Gemini erstellt.** Projektleitung prüft alle 30. Alte 60er- und 30/30-Pläne sind Archiv. Schwerpunkt ZuWi: *Von Handelskompanien zu Multinational Corporations*.
 - V1: **360°-Panorama** mit fixer Kameraposition (Maus ziehen, Zoom, Vollbild); kein frei begehbares, geometrisch rekonstruiertes 3D.
 - Für Street-View-artiges Weitergehen sind später *mehrere* konsistente Kamera-Standpunkte und Hotspots nötig. Nicht vortäuschen, dass ein einzelnes 2D-Bild dies bereits bietet.
 - Derzeit drei vorbereitete Szenen in `public/data/scenes.json`:
@@ -25,17 +25,17 @@ Projekt: `Matteo-Winter/FactoryGuessr` (privat), Spieltitel **Made in Time – G
 - Vercel: statisches Hosting über `public/` (`vercel.json`), ohne notwendiges Backend; **kein Deployment ohne expliziten Auftrag**.
 - Keine Secrets committen; keine kostenpflichtigen API-Aufrufe ohne Freigabe.
 
-## AKTUELLER Motivplan und Produktionsfreigabe (09.11.2026)
+## AKTUELLE Szene- und Bildplanung (09.11.2026)
 
-- **[Aktiver Gesamtplan mit genau 30 Leveln](docs/SCENE_MASTERPLAN_30.md)**: 16 P + 6 T + 8 E. Die 60er-Liste und ältere 30/30-Teilung gelten **nicht** mehr als Produktionsaufträge.
-- **[Arbeitsteilung 16/14](docs/team/ACTIVE_SPLIT_30.md)** · [Nutzer – 16 Produktionen](docs/team/USER_16_PRODUCTION.md) · [Kollege – 14 Handel-/Ereignisszenen](docs/team/COLLEAGUE_14_SCENES.md).
-- **[Pflicht-Masterprompt für Kollegen](docs/team/COLLEAGUE_MASTER_PROMPT_14.md)**: historische Quellen, 3D-first, native sphärische 4K-Projektion, Bildrealismus, QA, event-sensible Rekonstruktion, Lieferschema.
-- Nur die **zugewiesenen IDs** bearbeiten. T/E-Szenen nie mit dem alten „neuere 30 Produktionsstätten“-Auftrag verwechseln; P-Bilder bleiben bei Projektleitung.
-- Pro Motiv institutionelle/archivarische Quellen, Ort und alte/historische Staatsform, produktive/historische Kernhandlung, mindestens zwei plausible Orte-/Zeitmerkmale, Anachronismen; dann echte 3D-Szene, Bilder, perspektivische QA und Browser-Review. **Kein 2:1-Foto als echten 360°-Raum ausgeben.**
-- Für Ereignisse mit Opfern oder Konflikten keine scheinbar authentischen, erfundenen Augenzeugenbilder, Gewalt- oder Opferbilder; respektvolle **klar als KI-Rekonstruktion** gekennzeichnete historische Schauplätze.
-- Die **drei existierenden Pilotszenen** `gb-1840-textile-mill`, `gt-1910-banana-packing`, `cn-2015-electronics-assembly` im Repo sind unverändert weiterzuverwenden, aber **nicht freigegeben**. Weitere vier P-Motive haben Bildkandidaten aus dem Chat (NL/Murano/Jingdezhen/Barbados); technische und historische Abnahme offen.
-- `approved_panorama_count=0`; `target_scenes=30`. Weder `scene_status=ready` noch Deployment oder Merge ohne Review.
-- Kollegen-Branchnamen `colleague/T01-...` bzw. `colleague/E01-...`, Claude-Code-Branchnamen `claude/...`. Keine parallele direkte Änderung an `public/data/scenes.json` ohne Koordination.
+- Historischer Inhalt weiterhin [**30 Szenen**](docs/SCENE_MASTERPLAN_30.md), aber Bildauswahl wurde **explizit durch Nutzer neu priorisiert**.
+- **[VERBINDLICHE Bildliste: 4 akzeptiert, 26 zu erstellen](docs/IMAGE_PRODUCTION_STATUS_30.md)** und [JSON-Quelle](docs/team/ACTIVE_SCENES_30.json).
+- **Visuell akzeptierte Referenzbilder:** `P02` Murano 1680, `P03` Jingdezhen 1700, `P05` GB Textilfabrik 1840, `P10` Detroit Autobau 1913. Achtung: Die vier Bilddateien wurden im Chat hochgeladen und sind **nicht automatisch über GitHub verfügbar**. Ihre echten Pixelgrößen stehen im Manifest. Sie sind noch **nicht** technisch/historisch `ready`.
+- **Alle 26 anderen Bilder von Kollege/Gemini:** 12 P + 6 T + 8 E. **[Aufgabenbriefing](docs/team/GEMINI_IMAGE_HANDOFF_26.md)** und [Teamübergabe](docs/team/ACTIVE_SPLIT_30.md).
+- Die alte Vorgabe **P01–P16 nur beim Nutzer** und `COLLEAGUE_MASTER_PROMPT_14.md` als vollständiger Arbeitsauftrag ist überholt. Der 14er-Prompt dient nur als ausführlicher *Anhang zu T/E-Historik und QA*, nicht als personelle Zuständigkeitsliste.
+- Pro Szene institutionelle/archivarische Quellen, Jahr, Produkt oder historische Handlung, regional passende visuelle Hinweise und Anachronismen; 3D-/sphärische Bildgeometrie und echter Pannellum-QA-Check. **2:1 allein beweist keine gültige Kugel.**
+- Bei Events mit Opfern/kolonialem Zwang **klar als KI-Rekonstruktion** kennzeichnen, keine falschen Augenzeugenfotos oder erfundenen Verletztenbilder.
+- `target_scenes=30`, `approved_panorama_count=0`. Bestehende drei Piloteinträge in `public/data/scenes.json` sind keine vollständige Bildinventarliste und werden durch die 30er-Planung **nicht** stillschweigend überschrieben.
+- Kein automatisches `ready`, Merge, Deployment oder kostenpflichtige API ohne ausdrückliche Freigabe.
 
 ## Lokaler Start
 
