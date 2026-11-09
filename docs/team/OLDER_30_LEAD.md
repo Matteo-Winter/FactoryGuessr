@@ -1,5 +1,8 @@
 # Made in Time — historische Szenen (30 Motive)
 
+> **ARCHIV – NICHT MEHR AKTUELL (09.11.2026).** Dieses Dokument beschreibt den früheren **60er- bzw. 30/30-Plan** und ist **keine Arbeitsanweisung** für neue Bilder. Aktueller Umfang: **30 Szenen, 16 Produktionsstätten (Nutzer) + 6 Handelsorte und 8 Wendepunkte (Kollege)**. Siehe [aktiver Masterplan](../SCENE_MASTERPLAN_30.md) und [aktueller Kollegen-Prompt](COLLEAGUE_MASTER_PROMPT_14.md). Alte Nummern bleiben nur als Referenz erhalten.
+
+
 **Zuständigkeit: Projektleitung / Hauptteam.** Stand: 09.11.2026. **Zeitraum: 1660 bis 1925**, die chronologisch ersten 30 Einträge aus [SCENE_MASTERPLAN_60.md](../SCENE_MASTERPLAN_60.md). **0/60 offiziell freigegeben**. Die Master-Nummern wurden **nicht** geändert; die Liste ist nach tatsächlichem Zieljahr sortiert und kann daher von der ursprünglichen Tabellenreihenfolge abweichen.
 
 **Anderes Paket:** [Kollege – 30 neuere Szenen](NEWER_30_COLLEAGUE.md). **Gemeinsame bindende Anleitung:** [Produktionsprompt](PRODUCTION_PLAYBOOK_360.md).
