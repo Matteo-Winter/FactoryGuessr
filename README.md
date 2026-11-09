@@ -2,18 +2,18 @@
 
 **Guess where. Guess when.**
 
-Ein historisches GeoGuessr-artiges Lernspiel für die ZuWi-Vertiefung **„Von Handelskompanien zu Multinational Corporations“**: In einer drehbaren Produktionsszene erraten Spielende das Land und die Epoche. Danach folgt eine kurze Einordnung zu Arbeitsbedingungen, Industrie, Kolonialismus, Unternehmensmacht oder globalen Lieferketten.
+Ein historisches GeoGuessr-artiges Lernspiel für die ZuWi-Vertiefung **„Von Handelskompanien zu Multinational Corporations“**: In einer drehbaren historischen Produktions-, Handels- oder Ereignisszene erraten Spielende das Land und die Epoche. Danach folgt eine kurze Einordnung zu Arbeitsbedingungen, Industrie, Kolonialismus, Unternehmensmacht oder globalen Lieferketten.
 
 ## Festgelegter Umfang
 
-- Ziel: **mindestens 60 unterschiedliche spielbare Szenen**, ca. **1600–2026**, aus mehreren Regionen und Industriezweigen.
-- **[Masterplan mit 60 konkreten Szenen, Ländern, Jahren, Produkten und Bildhinweisen](docs/SCENE_MASTERPLAN_60.md)** — Entwurf der Motivliste, keine automatische Bild- oder Geschichtsfreigabe. Vor jedem einzelnen Rendering wird eine geprüfte historische Faktenkarte angelegt.
+- **Aktives Ziel: genau 30 spielbare Szenen**: 16 Produktionsorte, 6 Handels-/Machtzentren und 8 historische Wendepunkte (1670–2023; bestehende Szene P01 beginnt 1660).
+- **[Aktiver Masterplan mit allen 30 Szene-IDs, Ländern, Jahren, Inhalten und ZuWi-Bezügen](docs/SCENE_MASTERPLAN_30.md)**. Der [frühere 60er-Fabrikenplan](docs/SCENE_MASTERPLAN_60.md) ist ausschließlich Archiv; keine neuen Bilder für ausgemusterte Vorschläge erzeugen.
 - V1 verwendet **360°-Panoramen (equirectangular, 2:1)** mit fester Kameraposition, **keine frei begehbaren 3D-Modelle**.
 - Historische Betriebe dürfen **plausible, KI-generierte Kompositszenen** sein. Diese werden als *Rekonstruktion* gekennzeichnet – nicht als echte historische Fotografien.
 - Informationen wie Land, Zeitraum und Lernkontext werden getrennt vom KI-Bild geprüft.
 - Keine automatischen Behauptungen über konkrete Unternehmen, die nicht belegt sind.
 
-**Projektstatus:** 3 erste Szenenkonzepte mit je einem KI-generierten 2:1-Testbild im Repository, **0/60 historisch und geometrisch freigegebene Panoramen**. Bilder werden erst nach Sichtprüfung als `ready` markiert.
+**Projektstatus:** 3 erste Szenenkonzepte mit je einem KI-generierten 2:1-Testbild im Repository, **0/30 historisch und geometrisch freigegebene Panoramen**. Bilder werden erst nach Sichtprüfung als `ready` markiert.
 
 ## Repository
 
@@ -46,7 +46,7 @@ Historischer Hinweis: Die Bilder wurden ursprünglich als ZIP aus dem ChatGPT-Ch
 
 Schritt-für-Schritt-Anleitung und technische Grenzen: [docs/LOCAL_360_TEST.md](docs/LOCAL_360_TEST.md).
 
-**Ein 360°-Bild ist nicht dasselbe wie ein frei begehbares 3D-Modell.** Die KI-Bilder sind noch nicht auf vollständige 360°-Nahtlosigkeit geprüft und bleiben deshalb Testmaterial (0/60 freigegeben).
+**Ein 360°-Bild ist nicht dasselbe wie ein frei begehbares 3D-Modell.** Die KI-Bilder sind noch nicht auf vollständige 360°-Nahtlosigkeit geprüft und bleiben deshalb Testmaterial (0/30 freigegeben).
 
 ## Auf Vercel bereitstellen (noch nicht deployed)
 
@@ -71,22 +71,23 @@ python3 scripts/generate_skybox.py gb-1840-textile-mill
 
 Das exportiert den Prompt und die Bildvorgaben (**kein API-Aufruf, keine Kosten**). Zur anschließenden manuellen Generierung und Qualitätsprüfung siehe `docs/PANORAMA_PIPELINE.md`. Niemals Zugangsdaten ins Repo oder ins Frontend schreiben.
 
-## Arbeitsteilung: 2 Personen, 60 Szenen
+## Aktuelle Arbeitsteilung: 16 Produktionsorte + 14 weitere Schauplätze
 
-Die geplanten 60 Motive sind **chronologisch in genau 30 ältere und 30 neuere Szenen** geteilt. Die Master-Nummern bleiben stabil. Die Grenze ist 1925 (Paris 1925 = ältere Liste, Kaffee Brasilien 1925 = neuere Liste).
+Der ältere **30/30-Jahrgangssplit ist außer Kraft**. Aktive IDs und Übergaben:
 
-- **[Beide Teams, Aufteilungsregel und Arbeitsregeln](docs/team/SCENE_SPLIT_30_30.md)**
-- **[Ältere 30 – Projektleitung](docs/team/OLDER_30_LEAD.md)**
-- **[Neuere 30 – Kollege](docs/team/NEWER_30_COLLEAGUE.md)**
-- **[Ausführlicher 3D-first-360°-Masterprompt für alle Bilder](docs/team/PRODUCTION_PLAYBOOK_360.md)**
+- **[Aufgabenverteilung 16/14](docs/team/ACTIVE_SPLIT_30.md)**
+- **[Für Projektleitung: 16 Produktionsstätten P01–P16](docs/team/USER_16_PRODUCTION.md)**
+- **[Für Kollegen: 6 Handelsorte T01–T06 und 8 Wendepunkte E01–E08](docs/team/COLLEAGUE_14_SCENES.md)**
+- **[Sehr ausführlicher 3D-first-Masterprompt speziell für den Kollegen](docs/team/COLLEAGUE_MASTER_PROMPT_14.md)**
+- **[Maschinenlesbare 30er-Liste](docs/team/ACTIVE_SCENES_30.json)**
 
-Vor **jeder** Bildgenerierung historische Quellen-Faktenkarte, danach echte zusammenhängende 3D-Geometrie, native Kugelprojektion und die vollständige 360°-QA. Kein 2:1-Bild allein als „3D“ und kein Pixel-Nahtwert allein als Freigabe. **Alle bisherigen Bilder bleiben bis zur individuellen Abnahme Kandidaten.**
+Vor **jeder** Generierung historische Faktenkarte, konsistente 3D-Geometrie, native sphärische Kugelprojektion und vollständige 360°-QA. Handels-/Ereignisszenen werden als Rekonstruktion gekennzeichnet; keine erfundenen historischen Augenzeugenfotos. Bisherige Bilder bleiben Kandidaten bis zur QA.
 
 ## 360°-Qualitätskontrolle und nächste Bildpipeline
 
 - [Recherche: native 360°-Generatoren, Preise und 1-Szenen-Testplan](docs/360_GENERATION_OPTIONS_2026-11-08.md)
 - [Aktuelle Arbeitsaufgabe für Claude Code: Issue #3](https://github.com/Matteo-Winter/FactoryGuessr/issues/3)
-- Die Bilder sind weiterhin **nicht** historisch/optisch freigegeben (0/60), obwohl der Viewer technisch funktioniert.
+- Die Bilder sind weiterhin **nicht** historisch/optisch freigegeben (0/30), obwohl der Viewer technisch funktioniert.
 
 Optionale lokale Diagnostik (Pillow und NumPy, **keine** API-Aufrufe):
 
@@ -101,7 +102,7 @@ Die Ergebnisse zeigen Bildgröße, Farbbruch an der 360°-Naht und Hinweise auf 
 
 ## Arbeitsprinzip
 
-**Zuerst den 60er-Masterplan als gemeinsame Motivliste verwenden, dann jeweils eine historische Faktenkarte (Produkt, Region, Jahr, passende Maschinen, 2 Orts- und 2 Zeitmerkmale, überprüfbare Quellen) erstellen, dann erst das Bild generieren und QA ausführen.** Die bestehende britische Textilmühle ist als visueller Stilversuch vom Nutzer ausreichend bewertet; das allein ersetzt keine historische oder equirectangulare Freigabe. Bilder sollen sich weltweit und über Epochen unterscheiden und vor der Auflösung keine Ortsnamen/Flaggen als Spoiler zeigen.
+**Zuerst den aktiven 30er-Masterplan als gemeinsame Motivliste verwenden, dann jeweils eine historische Faktenkarte (Produkt, Region, Jahr, passende Maschinen, 2 Orts- und 2 Zeitmerkmale, überprüfbare Quellen) erstellen, dann erst das Bild generieren und QA ausführen.** Die bestehende britische Textilmühle ist als visueller Stilversuch vom Nutzer ausreichend bewertet; das allein ersetzt keine historische oder equirectangulare Freigabe. Bilder sollen sich weltweit und über Epochen unterscheiden und vor der Auflösung keine Ortsnamen/Flaggen als Spoiler zeigen.
 
 Quellen zur Technik:
 - [Blockade Labs: Skybox AI](https://www.blockadelabs.com/)
