@@ -63,8 +63,17 @@ Die Karte `public/assets/map/countries.svg` ist aus **Natural Earth 1:50m Admin-
 - Verschieben per Ziehen.
 - Ein Klick setzt den Pin als Länge/Breite.
 
-## Lokales Testpanorama
+## Lokale Orte (Testpanoramen)
 
-Reihenfolge der Panoramaquelle im Spielbildschirm: (1) `?pano=assets/…` (nur relative Pfade unter `assets/`), (2) lokales Testbild `assets/panoramas/_local/automobilfabrik.png`, falls vorhanden (per HEAD geprüft), (3) erste Szene aus `scenes.json`. So lassen sich Kandidaten testen, ohne `scenes.json` zu ändern; ohne lokale Datei (z. B. nach einem Deployment) greift automatisch die Pilotszene.
+Lokale Orte sind Testpanoramen, die noch nicht freigegeben sind. Sie liegen in `public/assets/panoramas/_local/`. Dieser Ordner ist nur lokal über `.git/info/exclude` ausgeschlossen und wird **nicht** committet oder veröffentlicht.
 
-Lokale Testbilder gehören in `public/assets/panoramas/_local/`. Dieser Ordner ist nur lokal über `.git/info/exclude` vom Commit ausgeschlossen und wird **nicht** veröffentlicht.
+**Aufbau des Ordners**
+- `index.json` listet die Bilddateien, z. B. `["automobilfabrik.png","amsterdam-voc-werft.png"]`.
+- Zu jedem Bild gehört eine gleichnamige `.json` mit der Lösung:
+  - `title_de`, `place_de`, `country_de`, `year`, `lat`, `lon`
+  - `block`: `production`, `trade` oder `events`
+  - `overview_de`, `learning_de`, `visual_clues`, `historical_status`
+
+**Bildpool einer Runde:** lokale Orte plus alle Szenen aus `scenes.json` mit Panorama, gefiltert nach den gewählten Themenblöcken.
+
+**Einzelner Test:** `?pano=assets/…` testet genau ein Panorama; erlaubt sind nur relative Pfade unter `assets/`.

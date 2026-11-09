@@ -408,7 +408,7 @@ function fov(){const a=innerWidth/innerHeight;return Math.min(130,2*Math.atan(Ma
 // 1. ?pano=assets/... (relative paths under assets/ only)
 // 2. a local, git-excluded test image (assets/panoramas/_local/test.png etc.) if present on this machine
 // 3. the first scene in scenes.json
-const LOCAL_TEST=['assets/panoramas/_local/automobilfabrik.png'];
+const LOCAL_DIR='assets/panoramas/_local/',LOCAL_TEST=[LOCAL_DIR+'automobilfabrik.png'];
 // A test panorama may have a solution file next to it (same name, .json); scenes come with their own fields.
 // ---------- Round ----------
 // Pool = local test panorama(s) (with their .json solution) + every scene in scenes.json that has a panorama.
@@ -417,7 +417,9 @@ let scene=null,round=[],roundIdx=0,roundResults=[];
 async function localScene(url){let sol={};try{const r=await fetch(url.replace(/\.\w+$/,'.json'));if(r.ok)sol=await r.json();}catch(e){}return {...sol,panorama_path:url};}
 async function buildPool(blocks){const q=new URLSearchParams(location.search).get('pano'),pool=[];
   if(q&&/^assets\/[\w\/.-]+\.(jpe?g|png|webp)$/i.test(q))return [await localScene(q)];
-  for(const u of LOCAL_TEST){try{if((await fetch(u,{method:'HEAD'})).ok)pool.push(await localScene(u));}catch(e){}}
+  // local, git-excluded Orte: assets/panoramas/_local/index.json lists the image files (fallback: LOCAL_TEST)
+  let local=LOCAL_TEST;try{const r=await fetch(LOCAL_DIR+'index.json');if(r.ok){const l=await r.json();if(Array.isArray(l))local=l.filter(f=>/^[\w.-]+\.(jpe?g|png|webp)$/i.test(f)).map(f=>LOCAL_DIR+f);}}catch(e){}
+  for(const u of local){try{if((await fetch(u,{method:'HEAD'})).ok)pool.push(await localScene(u));}catch(e){}}
   for(const s of scenes)if(s.panorama_path)pool.push(s);
   // theme filter; scenes without a block are production sites (all current pilots are)
   const f=pool.filter(s=>blocks.includes(s.block||'production'));return f.length?f:pool;}
