@@ -102,3 +102,18 @@ SHA-256 `d75fbe8f…26df4`, 4096×2048, laut Dateiname hochskaliert. Nahtreparat
 **Bauform: deutlich näher am Paltrok.**
 - ✅ Hoher, rechteckiger Holzkörper mit vier Flügeln an der Stirnseite, darunter der offene Sägeboden mit Seitenanbauten (ruimen-artig), Rollenkranz, Kurbelwelle mit Zahnrad und Sägerahmen. Im Umfeld Zaan-typische Holzhäuser, Polder und Kanal.
 - ⚠️ Zu prüfen: Die Pfosten der Seitendächer stehen außerhalb des Rollenkranzes auf dem festen Steg. Bei einem Paltrok dreht sich der ganze Bau mit, die Anbauten müssten also mitdrehen können. Der Sägerahmen zeigt nur ein einzelnes Blatt, historisch üblich sind Gatter mit mehreren Blättern.
+
+## Vierter Kandidat: `nl-1660-paltrok-v4.png`
+
+SHA-256 `2020ef8c…dffdc98c3`, **1774×887 (unter 4K)**. Nahtreparatur mit `--band 70`.
+
+| Messung | Vorher | Nachher |
+|---|---|---|
+| `check_panorama.py`: Naht/normal | 1,529 (`BELOW_4K`, `SEAM_COLOR_DISCONTINUITY`, `POLE_ROW_VARIATION`) | 0,431 (`BELOW_4K`, `POLE_ROW_VARIATION`) |
+| `export_panorama_views.py`: Nahtsprung/normal | 4,546 | 0,882 |
+| Polzeilen-Kennwert oben/unten | 11,74 / 12,61 | 11,72 / 12,59 |
+
+- **Naht: nach Reparatur visuell PASS.** Bei 180° liegen nur Himmel, Wiese und Kanal, die Linie ist danach nicht mehr zu sehen.
+- **Bauform: ✅ deutlich verbessert.** Sägegatter mit mehreren Blättern, die Seitendächer stehen auf der Plattform über dem Rollenkranz, die Mühle liegt komplett unter freiem Himmel.
+- **Zenit: kleiner, aber noch vorhanden.** Der sternförmige Wolkenwirbel ist kleiner und liegt im freien Himmel, der Flügel reicht nicht mehr in den Pol.
+- **Flügel: FAIL.** Die Ruten sind im Panorama als gerades, achsparalleles Kreuz gezeichnet. Für eine gerade Rute oberhalb des Horizonts ist das in einer equirectangularen Projektion falsch, sie müsste dort gekrümmt erscheinen. Im Viewer biegen sich die waagerechten Flügel deshalb deutlich nach oben („Bananenform“), sobald man zur Mühle hochschaut. Weil das das Hauptmotiv bei yaw 0° ist, fällt der Fehler sofort auf und lässt sich mit lokaler Retusche nicht beheben.
