@@ -1,5 +1,12 @@
 # Claude Code – Zusammenarbeit an Made in Time
 
+## AKTUELLE Bildprüfung / Quellenstand (09.11.2026)
+- **[Offizieller Bildstatus 13 visuell akzeptiert / 4 neu / 13 offen](docs/IMAGE_PRODUCTION_STATUS_30.md)**. Maßgeblich statt älterer 4/26-, 11/6-, 12/5- und 16/14-Datei-Aufteilungen.
+- **E04 Wall Street 1929:** Nutzer hat das neu generierte Bild mit „perfekt“ visuell akzeptiert; keine formale Geometrie-/Historien-/Lizenzfreigabe folgern.
+- **E05 Guatemala 1954:** neuer 3D-first-Fotokandidat mit 360°-Nahtglättung vorhanden, aber visuelle Abnahme und historische Palastgenauigkeit offen. [Ausführliche QA](docs/scene-research/E05_Guatemala_1954_3D_photo_QA.md). Kein neuer `ready`-Status. ZIP im Chat, nicht im Repository.
+- **[Gemini-Auftrag für die 17 offenen Bilder](docs/team/GEMINI_IMAGE_HANDOFF_CURRENT.md)** · [GitHub Issue #18](https://github.com/Matteo-Winter/FactoryGuessr/issues/18). Keine weiteren 4/26- oder 12/5-Produktionsaufträge ausführen.
+
+
 Projekt: `Matteo-Winter/FactoryGuessr` (privat), Spieltitel **Made in Time – Guess where. Guess when.**
 
 ## Arbeitsweise
