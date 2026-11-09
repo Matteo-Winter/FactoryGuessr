@@ -10,15 +10,14 @@
 
 **Spiel:** Ein fester 360°-Standpunkt, freies Umsehen wie Street View. Erst heutiges Land und historische Epoche schätzen, optional eine dritte Frage nach dem Ereignis / der Machtstruktur. Die komplexen Fakten folgen **nach** der Auflösung, nicht als notwendige Voraussetzung fürs einfache Raten.
 
-## AKTUELLE Bildprüfung vom 09.11.2026 (ersetzt frühere 4/26-Bildaufteilung)
+## AKTUELLER Bildstand nach E01 Boston und E03 Suez (09.11.2026)
 
-**[Verbindliche Bildstatusliste mit Dateinamen](IMAGE_PRODUCTION_STATUS_30.md)** · **[Gemini-Auftrag für 6 Remakes + 13 offene](team/GEMINI_IMAGE_HANDOFF_CURRENT.md)** · **[maschinenlesbares Manifest](team/ACTIVE_SCENES_30.json)**.
+**[Verbindliche Bildstatusliste 12/5/13](IMAGE_PRODUCTION_STATUS_30.md)** · [Gemini-Auftrag 5 Remakes + 13 offene](team/GEMINI_IMAGE_HANDOFF_CURRENT.md) · [JSON](team/ACTIVE_SCENES_30.json).
 
-- **11 Bildversionen visuell vom Nutzer akzeptiert:** P01, P02, P03, P04, P05, P09, P10, P13, T01, T03, T04.
-- **6 ausdrücklich neu zu erstellen:** E01, E03, E04, E05, E07, T05.
-- **13 weitere aktive Szenen ohne Urteil im aktuellen Review:** P06, P07, P08, P11, P12, P14, P15, P16, T02, T06, E02, E06, E08.
-- **19 offene Bildarbeiten beim Kollegen mit Gemini.** Die historische Auswahl von 30 Motiven bleibt gleich. Zusätzliche Review-Files (Kanton-Alternative, abgelehnte Murano-Alternative, Marktplatz/Machu Picchu/Regenwald/Eisenbahnbau) werden **nicht** zu eigenständigen Leveln.
-- **Kein Bild automatisch `ready`:** Nutzerwert „Passt“ betrifft nur visuelle Auswahl; vollständige 360°-, Historien-, Quellen- und Browser-Tests bleiben gesondert nachzuweisen.
+- **12 akzeptierte visuelle Bildfassungen:** `P01,P02,P03,P04,P05,P09,P10,P13,T01,T03,T04,E01`; E01 Boston wurde nach dem neuen Bild vom Nutzer als „passt“ bestätigt.
+- **5 zu ersetzen:** `T05,E03,E04,E05,E07`. E03 Suez wurde in echter 3D-Raumvorlage sowie fotorealistisch neu erzeugt, aber **die Foto-Naht besteht den 360°-Test nicht**. [Detaillierter E03-Report](scene-research/E03_Suez_1869_REWORK_QA.md).
+- **13 ohne aktuelles Urteil:** `P06,P07,P08,P11,P12,P14,P15,P16,T02,T06,E02,E06,E08`. Genau **18 offene Bildarbeiten** beim Kollegen mit Gemini.
+- Unverändert: 30 verschiedene historische Schauplätze, Szenen-IDs, **0/30 formale Spiel-Level-Freigaben**. Weitere Alternativen außerhalb der 30 werden nicht automatisch zu Leveln.
 
 ## A. 16 Produktionsstätten – 8 visuell akzeptiert, 8 noch offen
 
@@ -96,8 +95,6 @@
 - **E07:** [Historischer Einstieg](https://www.ilo.org/resource/chronology-recent-events-bangladesh-ready-made-garment-rmg-sector) — konkrete Bildkomposition und Details gegen Quellen prüfen. **Warnung:** Keine Verletzten/Toten zeigen, keine identifizierbaren Opfer erfinden, kein Fotodokument behaupten
 - **E08:** [Historischer Einstieg](https://www.suezcanal.gov.eg/English/MediaCenter/News/Pages/nav_29-03-2021.aspx) — konkrete Bildkomposition und Details gegen Quellen prüfen. **Warnung:** Keine falschen Erklärungen für Unfallursache oder frei erfundene Markenlogos
 
-## Nächster Schritt – nach Bildprüfung
+## Nächster Schritt
 
-- Kollege arbeitet laut [aktueller Gemini-Liste](team/GEMINI_IMAGE_HANDOFF_CURRENT.md): **sechs abgelehnte Bilder neu erzeugen; 13 nicht beurteilte Szenen zur Prüfung bringen**. Die elf akzeptierten Hauptversionen nicht ohne Auftrag neu produzieren.
-- Bilder im Nutzer-Review sind nach Dateinamen dokumentiert, **ihre tatsächlichen Binärdateien sind nicht automatisch im GitHub-Repo**.
-- Entwickler/Projektleitung: Nutzerakzeptanz, technische sphärische QA, historischer Quellenabgleich, Lizenzprüfung und formale Spielfreigabe getrennt behandeln. `approved_panorama_count=0` bleibt unverändert.
+Kollege übernimmt **fünf** Remakes (T05/E03/E04/E05/E07) und **13** noch offene Bewertungen. Die Projektleitung prüft Stil und echte 360°-Geometrie getrennt. Kein ungefragter `ready`-Status, Merge oder Deployment.
