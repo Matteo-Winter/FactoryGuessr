@@ -1,5 +1,12 @@
 # Made in Time – AKTIVER MASTERPLAN: 30 Szenen (ZuWi)
 
+## Aktueller Bildstand nach E04 und E05 (09.11.2026)
+
+- **13 visuell „Passt“, 4 „Neu machen“, 13 ohne aktuelles Urteil**. Gesamtumfang unverändert 30; Freigabe im Spiel unverändert 0/30.
+- **E04 Wall Street:** neue Bildfassung vom Nutzer akzeptiert; **E05 Guatemala:** neue 3D-first-Fotofassung erzeugt, Nutzerreview und historischer Fassadenabgleich offen. Siehe [E05 Qualitätsbericht](scene-research/E05_Guatemala_1954_3D_photo_QA.md).
+- [Aktueller Bildstatus](IMAGE_PRODUCTION_STATUS_30.md) · [Gemini-Prompt für 17 offene](team/GEMINI_IMAGE_HANDOFF_CURRENT.md). Ältere 12/5- und 4/26-Zwischenstände sind ersetzt.
+
+
 **Aktuell beschlossen am 09.11.2026.** **16 Produktionsstätten + 6 Handels-/Machtzentren + 8 historische Wendepunkte = 30 Szenen insgesamt. Die Bildproduktion wird nach offener Bildliste verteilt.**
 
 **Dieser Plan ersetzt den alten Entwurf mit 60 Fabriken, die alte 30/30-Personenteilung und die kurz diskutierte 55er-Aufteilung.** Historische Dateien werden aus Gründen der Nachvollziehbarkeit nicht gelöscht, sind aber **nicht mehr aktive Produktionsaufträge**. **0/30 offizielle Abnahmen**; bestehende KI-Panoramen bleiben Kandidaten, bis ihre geometrische und historische QA wirklich bestanden ist.
