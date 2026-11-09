@@ -13,7 +13,7 @@ Ein historisches GeoGuessr-artiges Lernspiel für die ZuWi-Vertiefung **„Von H
 - Informationen wie Land, Zeitraum und Lernkontext werden getrennt vom KI-Bild geprüft.
 - Keine automatischen Behauptungen über konkrete Unternehmen, die nicht belegt sind.
 
-**Projektstatus:** 3 erste Szenenkonzepte mit je einem KI-generierten 2:1-Testbild im Repository, **0/30 historisch und geometrisch freigegebene Panoramen**. Bilder werden erst nach Sichtprüfung als `ready` markiert.
+**Aktueller Bildstatus:** Von 30 Szenen hat der Nutzer **4 visuelle Referenzbilder gewählt** (P02 Murano, P03 Jingdezhen, P05 Manchester, P10 Detroit), **26 Bilder werden vom Kollegen mit Gemini neu erstellt** (12 P + 6 T + 8 E). Die vier Dateien befinden sich bislang im Chat, **nicht automatisch im Repository**. **0/30 technisch und historisch endgültig freigegebene Panoramen**. [Aktuelle Liste](docs/IMAGE_PRODUCTION_STATUS_30.md).
 
 ## Repository
 
@@ -71,17 +71,16 @@ python3 scripts/generate_skybox.py gb-1840-textile-mill
 
 Das exportiert den Prompt und die Bildvorgaben (**kein API-Aufruf, keine Kosten**). Zur anschließenden manuellen Generierung und Qualitätsprüfung siehe `docs/PANORAMA_PIPELINE.md`. Niemals Zugangsdaten ins Repo oder ins Frontend schreiben.
 
-## Aktuelle Arbeitsteilung: 16 Produktionsorte + 14 weitere Schauplätze
+## Aktuelle Bildproduktion: 4 ausgewählt, 26 fehlen
 
-Der ältere **30/30-Jahrgangssplit ist außer Kraft**. Aktive IDs und Übergaben:
+**[Bildliste: Alle 30 Motive mit individuellem Produktionsstatus](docs/IMAGE_PRODUCTION_STATUS_30.md)** · [JSON-Version](docs/team/ACTIVE_SCENES_30.json).
 
-- **[Aufgabenverteilung 16/14](docs/team/ACTIVE_SPLIT_30.md)**
-- **[Für Projektleitung: 16 Produktionsstätten P01–P16](docs/team/USER_16_PRODUCTION.md)**
-- **[Für Kollegen: 6 Handelsorte T01–T06 und 8 Wendepunkte E01–E08](docs/team/COLLEAGUE_14_SCENES.md)**
-- **[Sehr ausführlicher 3D-first-Masterprompt speziell für den Kollegen](docs/team/COLLEAGUE_MASTER_PROMPT_14.md)**
-- **[Maschinenlesbare 30er-Liste](docs/team/ACTIVE_SCENES_30.json)**
+- **4 vom Nutzer akzeptierte Referenzen (nicht nochmals generieren):** P02, P03, P05, P10.
+- **26 Bilder neu zu erstellen (Kollege + Gemini):** 12 übrige P-Szenen + sämtliche 6 T- und 8 E-Szenen.
+- **[Gemini-Übergabe mit Vibe, Qualitätskriterien und Vorgehen](docs/team/GEMINI_IMAGE_HANDOFF_26.md)**.
+- [Teamzuständigkeit](docs/team/ACTIVE_SPLIT_30.md) · [Historische 30 Motive](docs/SCENE_MASTERPLAN_30.md).
 
-Vor **jeder** Generierung historische Faktenkarte, konsistente 3D-Geometrie, native sphärische Kugelprojektion und vollständige 360°-QA. Handels-/Ereignisszenen werden als Rekonstruktion gekennzeichnet; keine erfundenen historischen Augenzeugenfotos. Bisherige Bilder bleiben Kandidaten bis zur QA.
+Alle 30 Schauplätze bleiben im Projekt. Von den früher produzierten Bildexperimenten zählen **nur die vier explizit vom Nutzer ausgewählten** als vorhandene visuelle Referenzen. Die Fotos selbst werden bei Bedarf über das separate Referenz-ZIP aus dem Chat geteilt, nicht durch eine fingierte GitHub-Bildadresse. Bildauswahl ist **keine** formale 360°-QA und ändert `approved_panorama_count=0` nicht.
 
 ## 360°-Qualitätskontrolle und nächste Bildpipeline
 
