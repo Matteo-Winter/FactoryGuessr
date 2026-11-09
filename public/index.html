@@ -46,8 +46,10 @@
       border:1px solid var(--line);border-radius:12px;margin:0;color:var(--text);background:var(--bg);font-size:17px;font-weight:500;cursor:pointer;
       transition:border-color 150ms cubic-bezier(.2,0,0,1),background-color 150ms cubic-bezier(.2,0,0,1)}
     .level:hover{background:var(--surface)}
-    .level .name{flex:1}
-    .level .count{margin-right:16px;color:var(--muted);font-size:15px;font-variant-numeric:tabular-nums}
+    .level .check{width:22px;height:22px;border-radius:6px;border:1.5px solid #525252;display:grid;place-items:center;color:transparent;
+      transition:background-color 150ms cubic-bezier(.2,0,0,1),border-color 150ms cubic-bezier(.2,0,0,1),color 150ms}
+    .level:has(input:checked) .check{background:var(--text);border-color:var(--text);color:var(--bg)}
+    #startBtn:disabled{background:#262626;color:#737373;opacity:1;cursor:not-allowed;transform:none}
     .level input{position:absolute;opacity:0;pointer-events:none}
     .level .dot{width:18px;height:18px;border-radius:50%;border:1.5px solid #525252;transition:border 150ms cubic-bezier(.2,0,0,1)}
     .level:has(input:checked){border-color:var(--line-strong)}
@@ -103,14 +105,13 @@
   <div class="start-inner">
     <div class="brand"><h1 id="startTitle"><img class="logo" src="assets/logo-wo-und-wann.png" width="1200" height="228" alt="Wo &amp; Wann?"></h1></div>
     <form id="startForm">
-      <!-- Mode (theme block) is stored and exposed as body[data-mode]; scenes are not filtered yet. Counts follow docs/SCENE_MASTERPLAN_30.md. -->
+      <!-- Theme blocks (docs/SCENE_MASTERPLAN_30.md) are stored and exposed as body[data-blocks]; scenes are not filtered yet. -->
       <fieldset>
-        <legend>Spielmodus</legend>
+        <legend>Themen</legend>
         <div class="levels">
-          <label class="level"><input type="radio" name="mode" value="all" checked><span class="name">Alle Themen</span><span class="count">30</span><span class="dot" aria-hidden="true"></span></label>
-          <label class="level"><input type="radio" name="mode" value="production"><span class="name">Produktion</span><span class="count">16</span><span class="dot" aria-hidden="true"></span></label>
-          <label class="level"><input type="radio" name="mode" value="trade"><span class="name">Handel &amp; Macht</span><span class="count">6</span><span class="dot" aria-hidden="true"></span></label>
-          <label class="level"><input type="radio" name="mode" value="events"><span class="name">Wendepunkte</span><span class="count">8</span><span class="dot" aria-hidden="true"></span></label>
+          <label class="level"><input type="checkbox" name="block" value="production" checked>Produktion<span class="check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></label>
+          <label class="level"><input type="checkbox" name="block" value="trade" checked>Handel &amp; Macht<span class="check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></label>
+          <label class="level"><input type="checkbox" name="block" value="events" checked>Wendepunkte<span class="check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></label>
         </div>
       </fieldset>
       <button id="startBtn" type="submit">Spiel starten</button>
@@ -201,10 +202,13 @@ if(!/^image\/(jpeg|png|webp)$/.test(f.type)){$('imageStatus').textContent='Bitte
 const im=new Image();const u=URL.createObjectURL(f);im.onload=()=>{if(im.width!==im.height*2){$('imageStatus').textContent='Ungültiges 2:1-Bild ('+im.width+'×'+im.height+'). Es wird kein Panorama angezeigt.';URL.revokeObjectURL(u);return;}
 if(uploadedUrl)URL.revokeObjectURL(uploadedUrl);uploadedUrl=u;showImage(u,'Lokales Testpanorama: '+f.name+' ('+im.width+'×'+im.height+').');};
 im.onerror=()=>{URL.revokeObjectURL(u);$('imageStatus').textContent='Bild konnte nicht gelesen werden.';};im.src=u;});
-try{const saved=localStorage.getItem('mit-mode');const r=document.querySelector('#startForm input[value="'+saved+'"]');if(r)r.checked=true;}catch(e){}
-$('startForm').addEventListener('submit',e=>{e.preventDefault();const mode=new FormData(e.target).get('mode');
-try{localStorage.setItem('mit-mode',mode);}catch(err){}
-document.body.dataset.mode=mode;$('start').hidden=true;$('game').hidden=false;if(scenes.length&&!viewer)openScene();});
+const blockInputs=[...document.querySelectorAll('#startForm input[name=block]')];
+function syncStart(){const n=blockInputs.filter(i=>i.checked).length;$('startBtn').disabled=!n;$('startBtn').textContent=n?'Spiel starten':'Mindestens ein Thema wählen';}
+try{const saved=JSON.parse(localStorage.getItem('mit-blocks'));if(Array.isArray(saved)&&saved.length)blockInputs.forEach(i=>i.checked=saved.includes(i.value));}catch(e){}
+blockInputs.forEach(i=>i.addEventListener('change',syncStart));syncStart();
+$('startForm').addEventListener('submit',e=>{e.preventDefault();const blocks=new FormData(e.target).getAll('block');if(!blocks.length)return;
+try{localStorage.setItem('mit-blocks',JSON.stringify(blocks));}catch(err){}
+document.body.dataset.blocks=blocks.join(' ');$('start').hidden=true;$('game').hidden=false;if(scenes.length&&!viewer)openScene();});
 $('seam').addEventListener('click',()=>{if(viewer)viewer.setYaw(180);});
 $('guess').addEventListener('click',()=>{const s=current();if(!s)return;
 const p=periods.find(([a,b])=>s.year>=a&&s.year<=b);const entered=$('period').value;
