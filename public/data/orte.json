@@ -230,74 +230,7 @@
    "source_file": "kalkutta-handel.png"
   },
   {
-   "id": "E05",
-   "block": "events",
-   "title_de": "Sturz der Regierung Árbenz, Guatemala 1954",
-   "place_de": "Plaza de la Constitución, Guatemala-Stadt",
-   "country_de": "Guatemala",
-   "year": 1954,
-   "lat": 14.6427,
-   "lon": -90.5133,
-   "overview_de": "Vor dem Nationalpalast in Guatemala-Stadt stehen Soldaten und eine angespannte Menschenmenge. Ein Flugzeug wirft Flugblätter ab. Im Juni 1954 drangen von der CIA unterstützte Rebellen nach Guatemala ein, Flugzeuge warfen Propaganda und Bomben ab; Präsident Jacobo Árbenz trat am 27. Juni zurück.",
-   "learning_de": "Árbenz hatte 1952 eine Landreform begonnen, die auch ungenutzte Flächen der US-amerikanischen United Fruit Company enteignete, des größten Landbesitzers des Landes. Die US-Regierung sah darin eine kommunistische Gefahr im Kalten Krieg. Der Putsch zeigt, wie eng Interessen eines multinationalen Konzerns und Außenpolitik verknüpft sein konnten.",
-   "visual_clues": [
-    "Nationalpalast und Flagge Guatemalas",
-    "Soldaten, Jeeps und Militär-Lkw",
-    "Flugzeug wirft Flugblätter ab",
-    "Bananenkisten am Rand",
-    "Autos und Kleidung der 1950er"
-   ],
-   "historical_status": "composite_reconstruction",
-   "group": "E05",
-   "panorama_path": "assets/orte/guatemala-1954.jpg",
-   "source_file": "guatemala-1954.png"
-  },
-  {
-   "id": "E04",
-   "block": "events",
-   "title_de": "Börsenkrach an der Wall Street, Oktober 1929",
-   "place_de": "New York Stock Exchange, Wall Street",
-   "country_de": "USA",
-   "year": 1929,
-   "lat": 40.7069,
-   "lon": -74.0113,
-   "overview_de": "Vor der New Yorker Börse drängen sich Menschen, lesen Zeitungen und warten auf Nachrichten. Am „Schwarzen Donnerstag“, dem 24. Oktober 1929, und in den folgenden Tagen brachen die Aktienkurse dramatisch ein.",
-   "learning_de": "In den 1920er-Jahren hatten viele Menschen Aktien auf Kredit gekauft, die Kurse stiegen weit über den wirklichen Wert der Firmen. Der Absturz löste die Weltwirtschaftskrise aus: Banken brachen zusammen, und weil US-Kredite aus Europa abgezogen wurden, traf die Krise auch Deutschland mit Massenarbeitslosigkeit.",
-   "visual_clues": [
-    "Börsengebäude mit Säulenfassade",
-    "große Menschenmenge im Anzug mit Hut",
-    "Hochhäuser der 1920er",
-    "Zeitungen in den Händen"
-   ],
-   "historical_status": "composite_reconstruction",
-   "group": "E04",
-   "panorama_path": "assets/orte/new-york-boerse.jpg",
-   "source_file": "new-york-boerse.png"
-  },
-  {
    "id": "E03",
-   "block": "events",
-   "title_de": "Eröffnung des Suezkanals, 17. November 1869",
-   "place_de": "Port Said, Suezkanal",
-   "country_de": "Ägypten",
-   "year": 1869,
-   "lat": 31.2653,
-   "lon": 32.3019,
-   "overview_de": "Zuschauer stehen am Ufer, als eine Prozession von Dampf- und Segelschiffen in den neuen Kanal einfährt. Der Suezkanal verbindet das Mittelmeer mit dem Roten Meer und wurde am 17. November 1869 in Port Said feierlich eröffnet.",
-   "learning_de": "Gebaut hatte ihn in zehn Jahren eine französisch geführte Gesellschaft unter Ferdinand de Lesseps, mit einer Konzession des ägyptischen Herrschers – anfangs mit Zwangsarbeit Zehntausender ägyptischer Bauern. Schiffe mussten nun nicht mehr um Afrika herumfahren. Großbritannien kaufte 1875 Ägyptens Anteile und kontrollierte bald den Weg nach Indien; erst 1956 verstaatlichte Ägypten den Kanal.",
-   "visual_clues": [
-    "Dampfschiffe in einer Prozession",
-    "Wüstenufer und Fahnen",
-    "Zuschauer in Kleidung der 1860er",
-    "festlich geschmückte Tribüne"
-   ],
-   "historical_status": "composite_reconstruction",
-   "group": "E03",
-   "panorama_path": "assets/orte/suezkanal.jpg",
-   "source_file": "suezkanal.png"
-  },
-  {
-   "id": "E03b",
    "block": "events",
    "title_de": "Erste Schiffsprozession durch den Suezkanal, November 1869",
    "place_de": "Suezkanal bei Ismailia",
@@ -319,7 +252,7 @@
    "source_file": "suezkanal-ismailia.png"
   },
   {
-   "id": "E04b",
+   "id": "E04",
    "block": "events",
    "title_de": "Börsenkrach an der Wall Street, Oktober 1929",
    "place_de": "Broad Street vor der New York Stock Exchange",
@@ -341,7 +274,7 @@
    "source_file": "wall-street-1929.png"
   },
   {
-   "id": "E05b",
+   "id": "E05",
    "block": "events",
    "title_de": "Sturz der Regierung Árbenz, Guatemala 1954",
    "place_de": "Plaza de la Constitución vor dem Nationalpalast, Guatemala-Stadt",
