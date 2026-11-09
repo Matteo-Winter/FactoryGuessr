@@ -1,5 +1,8 @@
 # Gemini-Bildproduktion – Auftrag für die 26 fehlenden historischen 360°-Szenen
 
+> **ÜBERHOLT seit der Nutzer-Bildprüfung vom 09.11.2026.** Diese frühere Liste mit **26 neu zu generierenden Bildern ist nicht mehr aktuell**. Es sind **11 Bilder visuell akzeptiert, 6 Versionen neu zu machen und 13 Szenen ohne aktuelles Urteil offen**. **Jetzt gilt [Gemini-Auftrag – 19 offene Arbeiten](GEMINI_IMAGE_HANDOFF_CURRENT.md)**, zusammen mit [dem Bildstatus](../IMAGE_PRODUCTION_STATUS_30.md). Die alten Anweisungen darunter sind nur Archiv und dürfen nicht als aktuelle Bild-To-do-Liste verwendet werden.
+
+
 **[GitHub-Issue #18 für die gemeinsame Fortschrittsliste](https://github.com/Matteo-Winter/FactoryGuessr/issues/18)**.
 
 **Aktiv ab 09.11.2026.** Dies ist die **verbindliche Übergabe** für den Kollegen. Sie ersetzt die frühere Anweisung, nur 14 Handels-/Ereignisbilder zu produzieren.
