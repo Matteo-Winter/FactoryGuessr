@@ -13,7 +13,7 @@ Projekt: `Matteo-Winter/FactoryGuessr` (privat), Spieltitel **Made in Time – G
 
 ## Produkt- und Technikentscheidungen
 
-- Aktives Ziel: **30 verschiedene 360°-Schauplätze** = 16 Produktionsstätten, 6 Handels-/Machtzentren, 8 historische Wendepunkte, ca. 1660–2023. **Bildproduktion: 4 Referenzen vom Nutzer visuell akzeptiert, 26 fehlen und werden vom Kollegen mit Gemini erstellt.** Projektleitung prüft alle 30. Alte 60er- und 30/30-Pläne sind Archiv. Schwerpunkt ZuWi: *Von Handelskompanien zu Multinational Corporations*.
+- Aktives Ziel: **30 verschiedene 360°-Schauplätze** = 16 Produktionsstätten, 6 Handels-/Machtzentren, 8 historische Wendepunkte, ca. 1660–2023. **Bildstatus nach Review 09.11.2026: 11 visuell akzeptiert, 6 neu zu machen, 13 offen. Kollege bearbeitet 19 Bild-To-dos; Projektleitung prüft alle 30.** Alte 60er- und 30/30-Pläne sind Archiv. Schwerpunkt ZuWi: *Von Handelskompanien zu Multinational Corporations*.
 - V1: **360°-Panorama** mit fixer Kameraposition (Maus ziehen, Zoom, Vollbild); kein frei begehbares, geometrisch rekonstruiertes 3D.
 - Für Street-View-artiges Weitergehen sind später *mehrere* konsistente Kamera-Standpunkte und Hotspots nötig. Nicht vortäuschen, dass ein einzelnes 2D-Bild dies bereits bietet.
 - Derzeit drei vorbereitete Szenen in `public/data/scenes.json`:
@@ -25,17 +25,17 @@ Projekt: `Matteo-Winter/FactoryGuessr` (privat), Spieltitel **Made in Time – G
 - Vercel: statisches Hosting über `public/` (`vercel.json`), ohne notwendiges Backend; **kein Deployment ohne expliziten Auftrag**.
 - Keine Secrets committen; keine kostenpflichtigen API-Aufrufe ohne Freigabe.
 
-## AKTUELLE Szene- und Bildplanung (09.11.2026)
+## AKTUELLE Szene- und Bildplanung (Nutzerprüfung 09.11.2026)
 
-- Historischer Inhalt weiterhin [**30 Szenen**](docs/SCENE_MASTERPLAN_30.md), aber Bildauswahl wurde **explizit durch Nutzer neu priorisiert**.
-- **[VERBINDLICHE Bildliste: 4 akzeptiert, 26 zu erstellen](docs/IMAGE_PRODUCTION_STATUS_30.md)** und [JSON-Quelle](docs/team/ACTIVE_SCENES_30.json).
-- **Visuell akzeptierte Referenzbilder:** `P02` Murano 1680, `P03` Jingdezhen 1700, `P05` GB Textilfabrik 1840, `P10` Detroit Autobau 1913. Achtung: Die vier Bilddateien wurden im Chat hochgeladen und sind **nicht automatisch über GitHub verfügbar**. Ihre echten Pixelgrößen stehen im Manifest. Sie sind noch **nicht** technisch/historisch `ready`.
-- **Alle 26 anderen Bilder von Kollege/Gemini:** 12 P + 6 T + 8 E. **[Aufgabenbriefing](docs/team/GEMINI_IMAGE_HANDOFF_26.md)** und [Teamübergabe](docs/team/ACTIVE_SPLIT_30.md).
-- Die alte Vorgabe **P01–P16 nur beim Nutzer** und `COLLEAGUE_MASTER_PROMPT_14.md` als vollständiger Arbeitsauftrag ist überholt. Der 14er-Prompt dient nur als ausführlicher *Anhang zu T/E-Historik und QA*, nicht als personelle Zuständigkeitsliste.
-- Pro Szene institutionelle/archivarische Quellen, Jahr, Produkt oder historische Handlung, regional passende visuelle Hinweise und Anachronismen; 3D-/sphärische Bildgeometrie und echter Pannellum-QA-Check. **2:1 allein beweist keine gültige Kugel.**
-- Bei Events mit Opfern/kolonialem Zwang **klar als KI-Rekonstruktion** kennzeichnen, keine falschen Augenzeugenfotos oder erfundenen Verletztenbilder.
-- `target_scenes=30`, `approved_panorama_count=0`. Bestehende drei Piloteinträge in `public/data/scenes.json` sind keine vollständige Bildinventarliste und werden durch die 30er-Planung **nicht** stillschweigend überschrieben.
-- Kein automatisches `ready`, Merge, Deployment oder kostenpflichtige API ohne ausdrückliche Freigabe.
+- Historischer Umfang **30**: [Aktiver Masterplan](docs/SCENE_MASTERPLAN_30.md) mit 16 Produktionsstätten, 6 Handels-/Machtorten und 8 Wendepunkten.
+- **[Verbindliche aktuelle Bildprüfung mit Dateinamen](docs/IMAGE_PRODUCTION_STATUS_30.md)** · [JSON-Quelle](docs/team/ACTIVE_SCENES_30.json) · [Aktueller Gemini-Prompt](docs/team/GEMINI_IMAGE_HANDOFF_CURRENT.md) · [Issue #18](https://github.com/Matteo-Winter/FactoryGuessr/issues/18).
+- **11 Nutzerurteile „Passt“:** P01, P02, P03, P04, P05, P09, P10, P13, T01, T03, T04. **6 abgelehnte Dateien:** T05, E01, E03, E04, E05, E07. **13 aktive Szenen ohne Urteil im Review:** P06, P07, P08, P11, P12, P14, P15, P16, T02, T06, E02, E06, E08.
+- **Arbeit des Kollegen mit Gemini:** genau **6 Remakes + 13 offene**; der alte Auftrag „26 Bilder komplett neu“ sowie die frühere 16/14-Bildzuweisung sind **überholt**. `COLLEAGUE_MASTER_PROMPT_14.md` dient nur noch als historisch-technischer Spezialanhang.
+- Drei alte Pilot-IDs `gb-1840-textile-mill`, `gt-1910-banana-packing`, `cn-2015-electronics-assembly` entsprechen den aktiven P05, P09, P13, **nicht** drei zusätzlichen Leveln.
+- Kanton/Perlfluss `review-perlfluss-alternative.png` ist eine zweite vom Nutzer als „Passt“ beurteilte **Variante von T04**, kein Level 31. Das abgelehnte Murano-Alternativbild ändert nichts an P02 „Passt“. Sonstige reviewed Extras außerhalb des 30er-Plans nicht neu als Level erstellen.
+- **Nur Bildname und Reviewurteil sind bekannt.** Aktuelle Bildbytes sind durch GitHub-Notizen nicht übertragen; keine Dateihashes, Dateigrößen oder Bild-Uploads fingieren.
+- **„Passt“ ist nur die visuelle Nutzerentscheidung**, kein vollständiger Kugelprojektion-/Historien-/Lizenz- oder Browser-PASS. `target_scenes=30`, `approved_panorama_count=0`. In `public/data/scenes.json` bestehende Piloten nicht stillschweigend überschreiben.
+- Historische Recherche und Equirectangular-/Naht-/Zenit-/Nadir-/Perspektivprüfung pro Bild; sensible Ereignisse als KI-Rekonstruktion. Kein automatisches `ready`, Merge/Deployment oder kostenpflichtiger Aufruf.
 
 ## Lokaler Start
 
