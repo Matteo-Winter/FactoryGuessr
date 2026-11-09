@@ -1,5 +1,7 @@
 # Gemini-Bildproduktion – Auftrag für die 26 fehlenden historischen 360°-Szenen
 
+**[GitHub-Issue #18 für die gemeinsame Fortschrittsliste](https://github.com/Matteo-Winter/FactoryGuessr/issues/18)**.
+
 **Aktiv ab 09.11.2026.** Dies ist die **verbindliche Übergabe** für den Kollegen. Sie ersetzt die frühere Anweisung, nur 14 Handels-/Ereignisbilder zu produzieren.
 
 ## Projekt und Dateien – bitte in dieser Reihenfolge lesen
