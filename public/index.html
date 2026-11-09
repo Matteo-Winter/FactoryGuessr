@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Wo &amp; Wann? — Guess where. Guess when.</title>
+  <title>Wo &amp; Wann?</title>
   <link rel="icon" href="data:,">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,7 +38,7 @@
     .brand{margin:0 0 40px;text-align:center}
     .brand h1{font-size:44px;line-height:1;letter-spacing:-.035em;font-weight:700}
     .brand .logo{display:block;width:min(560px,calc(100vw - 32px));max-width:none;height:auto;margin:0 auto;position:relative;left:50%;transform:translateX(-50%)}
-    .brand p{margin:16px 0 0;color:var(--muted);font-size:17px}
+    .brand p{margin:20px auto 0;color:var(--muted);font-size:15px;line-height:1.45}
     #start fieldset{border:0;margin:0;padding:0}
     #start legend{padding:0;margin:0 auto 12px;font-size:13px;font-weight:500;color:var(--muted)}
     .levels{display:flex;flex-direction:column;gap:8px}
@@ -98,7 +98,7 @@
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
   </button>
   <div class="start-inner">
-    <div class="brand"><h1 id="startTitle"><img class="logo" src="assets/logo-wo-und-wann.png" width="1200" height="228" alt="Wo &amp; Wann?"></h1><p>Guess where. Guess when.</p></div>
+    <div class="brand"><h1 id="startTitle"><img class="logo" src="assets/logo-wo-und-wann.png" width="1200" height="228" alt="Wo &amp; Wann?"></h1><p>Ein ZuWi Creative Assignment<br>von Matteo Winter &amp; Niklas Meller<br>unter Aufsicht von Wolfgang Gruber</p></div>
     <form id="startForm">
       <!-- Placeholder: difficulty is stored but does not change gameplay yet. -->
       <fieldset>
@@ -121,7 +121,7 @@
   <form method="dialog"><button id="settingsDone">Fertig</button></form>
 </dialog>
 <div id="game" hidden>
-<header><div><h1>WO &amp; WANN?</h1><p>Guess where. Guess when.</p></div><span class="pill">360° PILOT · 0/60 FREIGEGEBEN</span></header>
+<header><div><h1>WO &amp; WANN?</h1><p>Ein ZuWi Creative Assignment von Matteo Winter &amp; Niklas Meller unter Aufsicht von Wolfgang Gruber</p></div><span class="pill">360° PILOT · 0/60 FREIGEGEBEN</span></header>
 <main>
   <section id="stage"><div id="panorama"></div><button id="seam" type="button" disabled title="Zum Panorama-Übergang bei 0/360° drehen">Naht prüfen · 180°</button><div id="empty"><div><h2>Noch kein Panorama verfügbar</h2><p class="small">Die ersten drei historischen Szenen sind vorbereitet. Lade ein lokales 360°-Testpanorama (equirectangular, 2:1) hoch, um dich schon jetzt umzusehen.</p></div></div></section>
   <aside>
