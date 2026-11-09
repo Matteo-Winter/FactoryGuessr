@@ -1,11 +1,12 @@
 # Deine 14 Szenen – Handels-/Machtzentren und Wendepunkte
 
-**AKTUELLE ZUSTÄNDIGKEIT ab 09.11.2026:** **6 Handels-/Machtzentren T01–T06 + 8 historische Wendepunkte E01–E08 = 14 Bilder**. **Keine** Produktionsstätten erstellen. Die alte 30-neueren-Liste und der alte 60er-Masterplan sind nur Archiv.
+**Neue Bildzuständigkeit ab 09.11.2026:** Die folgenden **14 T/E-Bilder** müssen weiterhin erstellt werden. **Zusätzlich** produziert der Kollege mit Gemini auch die **12 fehlenden P-Bilder**; insgesamt also **26 neue Bilder**. Dies ist nur der **T/E-Motivkatalog**, nicht mehr der vollständige Arbeitsauftrag. Siehe [aktuelle 26er-Bildliste](../IMAGE_PRODUCTION_STATUS_30.md) und [Gemini-Übergabe](GEMINI_IMAGE_HANDOFF_26.md).
 
-**Drei Pflichtdateien für deinen Einstieg:**
-1. [Neue Gesamtauswahl mit allen 30 Orten und ihren Gründen](../SCENE_MASTERPLAN_30.md)
-2. **[Ausführlicher Copy-paste-Masterprompt mit Recherche-, 3D- und 360°-QA-Arbeitsablauf](COLLEAGUE_MASTER_PROMPT_14.md)**
-3. [Maschinenlesbares Szenenmanifest, eindeutige IDs und Quellenstarts](ACTIVE_SCENES_30.json)
+**Neue Pflichtdateien für deinen Einstieg:**
+1. **[Aktuelle Liste aller 26 fehlenden Bilder](../IMAGE_PRODUCTION_STATUS_30.md)**
+2. **[Verbindlicher Gemini-Bildproduktionsauftrag](GEMINI_IMAGE_HANDOFF_26.md)**
+3. [Maschinenlesbare Bildstatusliste](ACTIVE_SCENES_30.json) und [historischer Gesamtplan](../SCENE_MASTERPLAN_30.md).
+4. [Ausführliche zusätzliche 3D-/Ereignis-Anleitung](COLLEAGUE_MASTER_PROMPT_14.md) (technischer Anhang, **Zuständigkeitsabschnitt dort überholt**).
 
 ## A. Handels- und Machtzentren (6)
 
