@@ -29,7 +29,7 @@
     #seam:disabled{opacity:.35;cursor:not-allowed}
     #stage{overflow:hidden}
     /* Start screen */
-    #start{--bg:#0a0a0a;--text:#fafafa;--muted:#8a8a8a;--line:#262626;--line-strong:#fafafa;--surface:#141414;
+    #start{--bg:#0a0a0a;--text:#fafafa;--muted:#a3a3a3;--line:#262626;--line-strong:#fafafa;--surface:#141414;
       font-family:"Hanken Grotesk",Inter,ui-sans-serif,system-ui,sans-serif;background:var(--bg);color:var(--text);
       min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;padding:24px 24px max(24px,env(safe-area-inset-bottom));
       position:relative;overflow:hidden;isolation:isolate}
@@ -57,11 +57,12 @@
     #startBtn:focus-visible{outline:2px solid var(--text);outline-offset:3px}
     /* Background: placeholder tiles on the inside of a slowly turning cylinder */
     .bg{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-    .bg::after{content:"";position:absolute;inset:0;background:rgba(10,10,10,.62)}
+    .bg::after{content:"";position:absolute;inset:0;/* scrim: darker behind the menu for legibility */
+      background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(10,10,10,.9) 40%,rgba(10,10,10,.6) 100%)}
     .ring{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;animation:spin 200s linear infinite}
     .bg.still .ring{animation-play-state:paused}
     @keyframes spin{to{transform:rotateY(-360deg)}}
-    .tile{position:absolute;border-radius:6px;backface-visibility:hidden;background:var(--tile)}
+    .tile{position:absolute;border-radius:6px;backface-visibility:hidden;background:#2b2b2b center/cover no-repeat}
     /* Settings */
     .icon-btn{position:absolute;z-index:2;top:max(16px,env(safe-area-inset-top));right:16px;width:44px;height:44px;padding:0;display:grid;place-items:center;
       background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:12px;transition:background-color 120ms cubic-bezier(.2,0,0,1),transform 120ms cubic-bezier(.2,0,0,1)}
@@ -83,7 +84,7 @@
     #settingsDone{margin-top:24px;height:56px;border-radius:12px;background:var(--text);color:var(--bg);font:600 17px/1 "Hanken Grotesk",Inter,sans-serif}
     #settingsDone:hover{background:var(--text);opacity:.9}
     @media(max-width:639px){#settings{margin:auto 0 0;max-width:none;border-radius:16px 16px 0 0;border-width:1px 0 0;padding-bottom:max(24px,env(safe-area-inset-bottom))}}
-    .start-foot{margin:24px 0 0;text-align:center;font-size:13px;color:#5c5c5c}
+    .start-foot{margin:24px 0 0;text-align:center;font-size:13px;color:#737373}
     @media(min-width:640px){.brand h1{font-size:56px}}
     @media(prefers-reduced-motion:reduce){#start *,#settings,#settings *{transition:none!important}#settings[open]{animation:none}}
     @media(max-width:920px){main{grid-template-columns:1fr}aside{border-left:0;border-top:1px solid #344047}#stage,#panorama{min-height:400px}}
@@ -134,11 +135,12 @@
 </main>
 </div>
 <script>
-// Start-screen background: placeholder tiles on the inside of a cylinder.
+// Start-screen background: historical images (public domain / CC0, see docs/START_SCREEN_IMAGES.md)
+// on the inside of a cylinder.
 // Tiles at the sides are close to the camera, the middle ones far behind.
 (()=>{
 const bg=document.getElementById('bg'),ring=document.getElementById('ring');
-const shades=['#2b2b2b','#333','#3b3b3b','#2f2f2f','#444','#363636'];
+const imgs=["e01-boston-tea-party", "e03-suez-1869", "e04-nyse-crowd-1929", "e06-gdansk-gate-1980", "p01-zaandam-mills-1871", "p02-glassworks-encyclopedie", "p03-porcelain-vase-1650", "p04-boiling-house-1823", "p05-powerloom-1835", "p06-tomioka-1872", "p07-krupp-essen-1901", "p10-ford-line-1913", "p12-dammam-7-1938", "p16-atacama-ponds-2018", "t01-voc-oostenburg-1805", "t02-cape-coast-1806", "t03-calcutta-1835", "t04-canton-factories-1806"];
 function build(){
   const w=innerWidth,h=innerHeight,N=14,R=Math.max(w*.55,480);
   const cw=2*R*Math.tan(Math.PI/N)*.9,ch=cw*.72,gap=ch*1.1,step=360/N;
@@ -148,7 +150,7 @@ function build(){
   for(let r=0;r<rows;r++)for(let i=0;i<N;i++){
     const t=document.createElement('div');t.className='tile';
     const y=(r-(rows-1)/2)*gap;
-    t.style.cssText='width:'+cw+'px;height:'+ch+'px;left:'+(-cw/2)+'px;top:'+(y-ch/2)+'px;--tile:'+shades[(i*5+r*3)%shades.length]+
+    t.style.cssText='width:'+cw+'px;height:'+ch+'px;left:'+(-cw/2)+'px;top:'+(y-ch/2)+'px;background-image:url(assets/start/'+imgs[(i+r*5)%imgs.length]+'.jpg)'+
       ';transform:rotateY('+(i*step+(r%2)*step/2)+'deg) translateZ('+(-R)+'px)';
     ring.appendChild(t);}
 }
