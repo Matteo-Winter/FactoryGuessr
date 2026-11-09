@@ -61,3 +61,24 @@ Das Bild zeigt also keine zusammenhängende Paltrokmühle. Die Nahtreparatur än
 - `public/` und `scenes.json` sind unverändert, weiter 0/60 `ready`.
 - Kandidat und Reparaturergebnisse liegen nur lokal in `qa-candidates/` und `qa-output/` (von git ignoriert).
 - Tests: `tests/test_experimental_seam_repair.py` mit 5 Tests (Farbsprung entfernt, nur das Band verändert, nahtloses Bild bleibt praktisch gleich, Fehlereingaben, CLI). Gesamte Suite: 21/21 OK.
+
+## Zweiter Kandidat: `nl-1660-paltrok-v2.png` (Neugenerierung, 09.11.2026)
+
+SHA-256 `412ee73f…5aa11e`, **1774×887 (unter 4K)**. Nahtreparatur mit `--band 70`, weil die Bandbreite zur Bildbreite passen muss.
+
+| Messung | Vorher | Nachher |
+|---|---|---|
+| `check_panorama.py`: Naht/normal | 4,493 (`BELOW_4K`, `SEAM_COLOR_DISCONTINUITY`) | 0,666 (`BELOW_4K`) |
+| `export_panorama_views.py`: Nahtsprung/normal | 9,276 | 1,161 |
+| Kontrollwert über 7 px | 1,65 | 0,97 |
+
+**Naht: FAIL, und die Reparatur ist hier ungeeignet.** Links der Naht liegen Himmel, Wiese und Kanal, rechts beginnen abrupt ein Haus mit Ziegeldach und ein Bretterstapel. Hier stoßen zwei Bildinhalte gegeneinander, das ist kein Farbversatz. Die Korrektur verschmiert diesen Unterschied als **orangen Schleier in den Himmel** und als blassen Streifen über die Bretter. Das Bild wird dadurch sichtbar schlechter, obwohl **alle drei Kennwerte besser aussehen**. Auch der Kontrollwert fällt auf 0,97 und lässt sich also täuschen.
+
+**Folgerung:** Das Verfahren taugt nur, wenn an der Naht inhaltlich dasselbe auf beiden Seiten liegt und nur Farbe oder Helligkeit abweichen (wie beim ersten Kandidaten). Liegt ein Objekt quer zur Naht, ist nur eine Neugenerierung oder ein Inpainting sinnvoll. Über das Ergebnis entscheidet immer der Blick auf Nahtansicht und Nahaufnahme, keine der Metriken.
+
+**Bauform: deutlich näher am Paltrok, aber noch nicht freigegeben.**
+- **Plausibel:** sichtbarer Rollenkranz mit Holzrollen unter der Plattform (das Gebäude dreht sich als Ganzes), offener Sägeboden, senkrechter Sägerahmen, große Zahnrad- und Wellenmechanik, Stamm auf dem Sägeschlitten, Kanal mit Stammfloß, Polder mit Windmühlen am Horizont.
+- **Fraglich:**
+  - Der Mühlenkörper ist ein runder Pavillon mit geschwungenem Kegeldach, die Flügel sitzen auf der Dachspitze. Ein historischer Paltrok hat einen hohen, rechteckigen Holzkörper mit Flügeln an der Stirnseite und Seitenanbauten. Das muss gegen Abbildungen geprüft werden.
+  - Die Flügel sind verbogen und liegen nicht in einer starren Ebene.
+  - Die Verbindung von der Flügelwelle oben zur Kurbelwelle unten ist nicht sichtbar.
