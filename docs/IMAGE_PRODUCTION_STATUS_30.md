@@ -2,6 +2,8 @@
 
 **Aktueller verbindlicher Stand: 09.11.2026, nach der visuellen Auswahl durch den Nutzer.** Es gibt **4 ausgewählte Bildreferenzen und 26 fehlende/neu zu erstellende Bildmotive**. **Die 30 Szenen selbst, ihre IDs, Orte, Jahre und Produkte bleiben unverändert.**
 
+**[GitHub-Issue #18: 26 Bilder mit Checkliste](https://github.com/Matteo-Winter/FactoryGuessr/issues/18)** · [Gemini-Produktionsprompt](team/GEMINI_IMAGE_HANDOFF_26.md).
+
 **Für den Kollegen:** Nutze zuerst diese Liste und [GEMINI_IMAGE_HANDOFF_26.md](team/GEMINI_IMAGE_HANDOFF_26.md) mit dem Produktionsstandard. Produziere ausschließlich die Zeilen **„Bild NEU erstellen“** (12 P + 6 T + 8 E). Die vier akzeptierten Motive nicht neu generieren.
 
 ## Produktionsstätten – 12 von 16 noch zu erstellen
