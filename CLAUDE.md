@@ -13,7 +13,7 @@ Projekt: `Matteo-Winter/FactoryGuessr` (privat), Spieltitel **Made in Time – G
 
 ## Produkt- und Technikentscheidungen
 
-- Ziel: **mindestens 60 unterschiedliche Produktionsstätten**, ca. 1600–2026, mindestens verschiedene Epochen, Länder und Industrien. Schwerpunkt ZuWi: *Von Handelskompanien zu Multinational Corporations*.
+- Aktives Ziel: **30 verschiedene 360°-Schauplätze** = 16 Produktionsstätten (Projektleitung), 6 Handels-/Machtzentren und 8 historische Wendepunkte (Kollege), ca. 1660–2023. Alte 60er- und 30/30-Pläne sind Archiv. Schwerpunkt ZuWi: *Von Handelskompanien zu Multinational Corporations*.
 - V1: **360°-Panorama** mit fixer Kameraposition (Maus ziehen, Zoom, Vollbild); kein frei begehbares, geometrisch rekonstruiertes 3D.
 - Für Street-View-artiges Weitergehen sind später *mehrere* konsistente Kamera-Standpunkte und Hotspots nötig. Nicht vortäuschen, dass ein einzelnes 2D-Bild dies bereits bietet.
 - Derzeit drei vorbereitete Szenen in `public/data/scenes.json`:
@@ -25,20 +25,17 @@ Projekt: `Matteo-Winter/FactoryGuessr` (privat), Spieltitel **Made in Time – G
 - Vercel: statisches Hosting über `public/` (`vercel.json`), ohne notwendiges Backend; **kein Deployment ohne expliziten Auftrag**.
 - Keine Secrets committen; keine kostenpflichtigen API-Aufrufe ohne Freigabe.
 
-## Maßgeblicher Motivplan und Produktionsfreigabe (09.11.2026)
+## AKTUELLER Motivplan und Produktionsfreigabe (09.11.2026)
 
-- **[docs/SCENE_MASTERPLAN_60.md](docs/SCENE_MASTERPLAN_60.md)** ist der abgestimmte **Entwurf** mit 60 geplanten Produktionsszenen über sechs Epochen. Die Auswahl soll **leicht verständliche Produkte** und faire Orts-/Zeitsignale liefern, keine 60 austauschbaren Fabrikhallen.
-- **Nicht alle 60 Szenen auf einmal generieren.** Pro Motiv zuerst regional und historisch verifizieren (mindestens eine institutionelle/archivarische Quelle, idealerweise zwei unabhängige Quellen), per Faktenkarte festhalten, sichtbares Hauptprodukt, Ort, Jahr, passende Maschinen, Kleidung/Transport/Energiequelle und Anachronismen prüfen. Erst dann Rendering und 360°-QA.
-- Bei den älteren Szenen ist das Rateland der **heutige Staat**, damals abweichende Herrschaftsformen werden nach dem Raten aufgeklärt. Keine zeitfremden Flaggen, Schildaufschriften, geographische Stereotype oder erfundene Firmenbezüge einsetzen.
-- Die bereits vorhandenen 3 Pilot-IDs in `public/data/scenes.json` bleiben erhalten: `gb-1840-textile-mill`, `gt-1910-banana-packing`, `cn-2015-electronics-assembly`. Die Nutzerbewertung „Bild gut genug“ betrifft **nur den visuellen Stil** des jüngsten Textilmühlenkandidaten; noch keine automatische technische/historische Freigabe. `approved_panorama_count` bleibt 0, bis QA und explizite Freigabe erfüllt sind.
-- Die Liste darf gemeinsam angepasst werden, aber **keine `ready`-Statusänderungen, keine neuen produktiven Bildpfade und kein Deployment** ohne eigenen Prüfauftrag.
-
-## Parallele Szenenproduktion (30/30)
-
-- **[Team-Split](docs/team/SCENE_SPLIT_30_30.md)**, **[ältere Szenen – Projektleitung](docs/team/OLDER_30_LEAD.md)** und **[neuere Szenen – Kollege](docs/team/NEWER_30_COLLEAGUE.md)** sind verbindliche Entwürfe für die Arbeitsteilung. Bei Jahrgleichheit 1925 gehören Paris/Französische Mode (Master-Nr. 32) zum älteren Team und São-Paulo-Kaffee (Nr. 34) zum neueren Team.
-- **[3D-/360°-Produktionsprompt und Quality Gates](docs/team/PRODUCTION_PLAYBOOK_360.md)** ist für beide Teams verpflichtend. Nicht einfach freie 2:1-Bilder als geometrisch korrekt ausgeben. Gerade Maschinen/Balken/Flügel müssen in der **Pannellum-Perspektive** plausibel sein.
-- Die Szene-Sperren beziehen sich auf die **Master-Nummern** (nicht die Zeilennummer nach Sortierung). Claude Code und ChatGPT können reviewen; nur zuständiger Besitzer ändert die Produktionskandidaten. Abstimmung für gemeinsame `public/data/scenes.json`-Änderungen notwendig.
-- Für Kollegen-Repositories pro Szene `colleague/scene-NN-...`-Feature-Branch und PR; für Claude-Code-Aufgaben weiterhin `claude/...`. Keine automatische `ready`-Freigabe und kein Deployment.
+- **[Aktiver Gesamtplan mit genau 30 Leveln](docs/SCENE_MASTERPLAN_30.md)**: 16 P + 6 T + 8 E. Die 60er-Liste und ältere 30/30-Teilung gelten **nicht** mehr als Produktionsaufträge.
+- **[Arbeitsteilung 16/14](docs/team/ACTIVE_SPLIT_30.md)** · [Nutzer – 16 Produktionen](docs/team/USER_16_PRODUCTION.md) · [Kollege – 14 Handel-/Ereignisszenen](docs/team/COLLEAGUE_14_SCENES.md).
+- **[Pflicht-Masterprompt für Kollegen](docs/team/COLLEAGUE_MASTER_PROMPT_14.md)**: historische Quellen, 3D-first, native sphärische 4K-Projektion, Bildrealismus, QA, event-sensible Rekonstruktion, Lieferschema.
+- Nur die **zugewiesenen IDs** bearbeiten. T/E-Szenen nie mit dem alten „neuere 30 Produktionsstätten“-Auftrag verwechseln; P-Bilder bleiben bei Projektleitung.
+- Pro Motiv institutionelle/archivarische Quellen, Ort und alte/historische Staatsform, produktive/historische Kernhandlung, mindestens zwei plausible Orte-/Zeitmerkmale, Anachronismen; dann echte 3D-Szene, Bilder, perspektivische QA und Browser-Review. **Kein 2:1-Foto als echten 360°-Raum ausgeben.**
+- Für Ereignisse mit Opfern oder Konflikten keine scheinbar authentischen, erfundenen Augenzeugenbilder, Gewalt- oder Opferbilder; respektvolle **klar als KI-Rekonstruktion** gekennzeichnete historische Schauplätze.
+- Die **drei existierenden Pilotszenen** `gb-1840-textile-mill`, `gt-1910-banana-packing`, `cn-2015-electronics-assembly` im Repo sind unverändert weiterzuverwenden, aber **nicht freigegeben**. Weitere vier P-Motive haben Bildkandidaten aus dem Chat (NL/Murano/Jingdezhen/Barbados); technische und historische Abnahme offen.
+- `approved_panorama_count=0`; `target_scenes=30`. Weder `scene_status=ready` noch Deployment oder Merge ohne Review.
+- Kollegen-Branchnamen `colleague/T01-...` bzw. `colleague/E01-...`, Claude-Code-Branchnamen `claude/...`. Keine parallele direkte Änderung an `public/data/scenes.json` ohne Koordination.
 
 ## Lokaler Start
 
