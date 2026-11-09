@@ -1,5 +1,8 @@
 # MASTER-PROMPT / PRODUCTION PLAYBOOK — Made in Time: echte 3D-zu-360°-Szenen
 
+> **ARCHIV – NICHT MEHR AKTUELL (09.11.2026).** Dieses Dokument beschreibt den früheren **60er- bzw. 30/30-Plan** und ist **keine Arbeitsanweisung** für neue Bilder. Aktueller Umfang: **30 Szenen, 16 Produktionsstätten (Nutzer) + 6 Handelsorte und 8 Wendepunkte (Kollege)**. Siehe [aktiver Masterplan](../SCENE_MASTERPLAN_30.md) und [aktueller Kollegen-Prompt](COLLEAGUE_MASTER_PROMPT_14.md). Alte Nummern bleiben nur als Referenz erhalten.
+
+
 **Version:** 1.0 · 09.11.2026 · **Zielgruppe:** Kollege für die **neueren 30 Motive** (1925–2023), aber für alle 60 wiederverwendbar.
 
 > **Diesen gesamten Text als Arbeitsauftrag an eine KI mit Recherche-, Datei- und Code-/3D-Werkzeugen geben.** Danach am Ende **genau eine** Szene aus [NEWER_30_COLLEAGUE.md](NEWER_30_COLLEAGUE.md) nennen. Ohne GitHub-Zugang die Liste und dieses Dokument als Dateien/Text beilegen. Das Ergebnis muss **eine wirklich erzeugte Datei mit nachvollziehbarer QA** sein, nicht nur ein Prompt oder ein schöner, gewöhnlicher Breitbildentwurf.
