@@ -1,5 +1,10 @@
 # Aktuelle Bildproduktion – 11 akzeptiert, 6 neu, 13 offen
 
+## Bildproduktion Stand 09.11.2026: 13/4/13
+
+**13 visuell akzeptierte Bildfassungen, 4 Remakes, 13 weitere ohne aktuelles Prüfurteil = 17 offene Bildarbeiten**. E04 wurde nach neuem Bild akzeptiert, E05 liegt als neuer, noch zu beurteilender Fotokandidat vor. [Verbindliche Bildliste](../IMAGE_PRODUCTION_STATUS_30.md) · [Gemini-Auftrag](GEMINI_IMAGE_HANDOFF_CURRENT.md) · [E05 QA](../scene-research/E05_Guatemala_1954_3D_photo_QA.md). Die 30 historischen Motive bleiben gleich und kein Bild ist automatisch `ready`.
+
+
 **Stand: Bildprüfung des Nutzers vom 09.11.2026.** Der historische Umfang bleibt **30 Level = 16 Produktionsorte, 6 Handelsorte, 8 Wendepunkte**.
 
 | Bildstatus | Anzahl | Aufgabe |
