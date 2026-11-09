@@ -1,89 +1,78 @@
-# Gemini-Übergabe – aktueller Bildauftrag nach Prüfung vom 9. November 2026
+# GEMINI – aktueller Bildauftrag nach E01-Akzeptanz und E03-Test
 
-**VERBINDLICH AB SOFORT: Das Projekt besteht weiter aus 30 verschiedenen historischen 360°-Leveln.** Die neue Nutzerprüfung ergibt **11 visuell akzeptierte Bilder, 6 klar abgelehnte Bilder und 13 offene/unbeurteilte aktive Szenen**. **Dein Auftrag als Kollege: 6 Bilder überarbeiten / neu generieren und 13 offene Szenen erstellen bzw. zur Prüfung bringen.** Nicht die frühere, nun überholte Aufgabe „26 neu“ ausführen.
+**Stand 09.11.2026.** Aktive 30er-Liste: **12 vom Nutzer visuell akzeptierte Bilder, 5 klar abgelehnte Versionen, 13 ohne aktuelles Urteil.** Dein Auftrag: **5 Remakes + 13 offene Motive = 18 aktive Bildarbeiten.** Frühere 26er-, 19er- oder 14er-Aufträge sind für die Bildproduktion **überholt**.
 
-**Lese-Reihenfolge:**
-1. [Bildstatus, Dateinamen und zusätzliche Bildvarianten](../IMAGE_PRODUCTION_STATUS_30.md) – maßgebliche Quelle.
-2. [Datenliste mit individuellen Review-Entscheidungen](ACTIVE_SCENES_30.json) – `visualReview.verdict`.
-3. [Vollständiger historischer Szenenplan mit Inhalt/Lernziel](../SCENE_MASTERPLAN_30.md).
-4. [Ausführliche spezielle 3D- und Ereignis-Anleitung](COLLEAGUE_MASTER_PROMPT_14.md) – die dort **alte** 14-Bilder-Zuständigkeit ist überholt; nur technische und historische Qualitätsregeln weiterverwenden.
-5. [GitHub Issue #18](https://github.com/Matteo-Winter/FactoryGuessr/issues/18) – aktuelle Aufgabencheckliste.
+## Lies diese Dateien zuerst
 
-## A. 6 schlechte Versionen – diese Bilder jetzt neu machen
+1. **[Aktueller Bildstatus mit exakten Namen und 30 Szene-IDs](../IMAGE_PRODUCTION_STATUS_30.md)**.
+2. **[Machine-readable status / historische Vorgaben](ACTIVE_SCENES_30.json)**: `visualReview.verdict` ist die Nutzerentscheidung; keine eigenmächtige Neuzuordnung.
+3. **[Historischer Masterplan 30 mit Produkthandlung und Lernbezug](../SCENE_MASTERPLAN_30.md)**.
+4. **[Ausführlicher technischer 3D-360-Workflow und besondere Regeln für Ereignisse](COLLEAGUE_MASTER_PROMPT_14.md)** – NUR als Fach-/QA-Anhang, seine alte 14-Bilder-Zuständigkeit ist außer Kraft.
+5. **[Suez 1869 – aktueller gescheiterter Bildversuch](../scene-research/E03_Suez_1869_REWORK_QA.md)** – zeigt den hartnäckigen Naht-/Raumfehler, den neue Bilder vermeiden müssen.
 
-| ID | Jahr | Ort | Inhalt | Abgelehnte Datei |
+## 5 ausdrücklich erneut zu erzeugende Bilder
+
+| ID | Jahr | Ort | Szene | Letzte vom Nutzer abgelehnte Version |
 |---|---:|---|---|---|
-| **T05** | 1975 | Niederlande, Rotterdam/Eemhaven | Containerhafen | `rotterdam-container.webp` |
-| **E01** | 1773 | USA, Boston/Griffin's Wharf | Boston Tea Party | `boston-tea-party.jpg` |
-| **E03** | 1869 | Ägypten, Suezkanal | Eröffnung des Suezkanals | `suezkanal.png` |
-| **E04** | 1929 | USA, New York/Wall Street | Börsencrash | `new-york-boerse.png` |
-| **E05** | 1954 | Guatemala, Guatemala-Stadt | Sturz von Jacobo Árbenz | `guatemala-1954.png` |
-| **E07** | 2013 | Bangladesch, Savar/Rana Plaza | Einsturz Rana Plaza | `review-rana-plaza.webp` |
+| T05 | 1975 | Niederlande, Rotterdam/Eemhaven | Containerhafen | rotterdam-container.webp |
+| E03 | 1869 | Ägypten, Suezkanal | Eröffnung des Suezkanals | suezkanal.png |
+| E04 | 1929 | USA, New York/Wall Street | Börsencrash | new-york-boerse.png |
+| E05 | 1954 | Guatemala, Guatemala-Stadt | Sturz von Jacobo Árbenz | guatemala-1954.png |
+| E07 | 2013 | Bangladesch, Savar/Rana Plaza | Einsturz Rana Plaza | review-rana-plaza.webp |
 
-**Was „Neu machen“ heißt:** historische Szene/ID **beibehalten**, nur die fehlerhafte Bildversion ersetzen. Bitte keine Auswechslung der Event-Themen ohne Rücksprache. Fehler im neuen Bild selbst beheben, nicht erst nach Übergabe dokumentieren und abbrechen.
+**Besonders E03:** Die neue 3D-first-Ausarbeitung der Suezkanal-Eröffnung ist historisch passend und hat eine gültige räumliche 3D-Referenz. Das fotorealistische 2:1-Bild ist aber **nicht** als sphärischer Rundumblick brauchbar: an 180° bricht der Ufer-/Wasser-/Pavillon-Anschluss ab. 300/400/480px-Kantenspiegelungen führten zu unnatürlichen Verlängerungen und wurden verworfen. **Nicht** die 1774×887-Quelle hochskalieren und allein mit Pixelglättung als 4K/360°-PASS melden. Das Original-/3D-QA-Paket ist im Chat, aber nicht automatisch in GitHub.
 
-## B. 13 weitere offene Szenen – zur Prüfung bringen
+## 13 offene Szenen – möglicherweise existierende Bilder erst vorlegen
 
-| ID | Jahr | Ort | Inhalt | Letzter bekannter Datei-Status |
+| ID | Jahr | Ort | Thema | Dateiname |
 |---|---:|---|---|---|
-| **P06** | 1880 | Japan, Tomioka, Gunma | Rohseide | Kein Dateiname im aktuellen Review |
-| **P07** | 1890 | Deutschland, Ruhrgebiet | Stahl | Kein Dateiname im aktuellen Review |
-| **P08** | 1900 | DR Kongo (heutiges Staatsgebiet), Äquatorregion / Kongobecken | Naturkautschuk | Kein Dateiname im aktuellen Review |
-| **P11** | 1970 | Ghana, Takoradi / Tema | Kakaomasse und Kakaobutter | Kein Dateiname im aktuellen Review |
-| **P12** | 1975 | Saudi-Arabien, Ostprovinz / Dhahran | Erdöl | Kein Dateiname im aktuellen Review |
-| **P14** | 2018 | Bangladesch, Dhaka | T-Shirts und Kleidung | Kein Dateiname im aktuellen Review |
-| **P15** | 2023 | Taiwan, Hsinchu | Halbleiterchips | Kein Dateiname im aktuellen Review |
-| **P16** | 2023 | Chile, Salar de Atacama | Lithiumsalz-Vorprodukte | Kein Dateiname im aktuellen Review |
-| **T02** | 1750 | Heutiges Ghana, Cape Coast Castle | Atlantische Handelsfestung | Kein Dateiname im aktuellen Review |
-| **T06** | 2015 | Singapur, Pasir Panjang | Globaler Containerumschlag | Kein Dateiname im aktuellen Review |
-| **E02** | 1791 | Heutiges Haiti, Saint-Domingue | Beginn der Haitianischen Revolution | Kein Dateiname im aktuellen Review |
-| **E06** | 1980 | Polen, Gdańsk/Danzig | Solidarność-Werftstreiks | Kein Dateiname im aktuellen Review |
-| **E08** | 2021 | Ägypten, Suezkanal | Ever-Given-Blockade | Kein Dateiname im aktuellen Review |
+| P06 | 1880 | Japan, Tomioka, Gunma | Rohseide | noch kein Dateiname |
+| P07 | 1890 | Deutschland, Ruhrgebiet | Stahl | noch kein Dateiname |
+| P08 | 1900 | DR Kongo (heutiges Staatsgebiet), Äquatorregion / Kongobecken | Naturkautschuk | noch kein Dateiname |
+| P11 | 1970 | Ghana, Takoradi / Tema | Kakaomasse und Kakaobutter | noch kein Dateiname |
+| P12 | 1975 | Saudi-Arabien, Ostprovinz / Dhahran | Erdöl | noch kein Dateiname |
+| P14 | 2018 | Bangladesch, Dhaka | T-Shirts und Kleidung | noch kein Dateiname |
+| P15 | 2023 | Taiwan, Hsinchu | Halbleiterchips | noch kein Dateiname |
+| P16 | 2023 | Chile, Salar de Atacama | Lithiumsalz-Vorprodukte | noch kein Dateiname |
+| T02 | 1750 | Heutiges Ghana, Cape Coast Castle | Atlantische Handelsfestung | noch kein Dateiname |
+| T06 | 2015 | Singapur, Pasir Panjang | Globaler Containerumschlag | noch kein Dateiname |
+| E02 | 1791 | Heutiges Haiti, Saint-Domingue | Beginn der Haitianischen Revolution | noch kein Dateiname |
+| E06 | 1980 | Polen, Gdańsk/Danzig | Solidarność-Werftstreiks | noch kein Dateiname |
+| E08 | 2021 | Ägypten, Suezkanal | Ever-Given-Blockade | noch kein Dateiname |
 
-Hier liegt **kein Urteil in der neuen Liste** vor. Wenn du bereits ein Bild hast, zur Prüfung vorlegen; andernfalls mit Gemini erstellen. **Nicht** als explizit abgelehnt ausgeben.
+Das fehlende Urteil in der aktuellen Nutzerprüfung ist **keine Ablehnung**. Bereits erzeugte Bilder bitte zunächst prüfen/vorlegen; nur falls nötig neu machen.
 
-## C. 11 akzeptierte Referenzbilder – nicht wieder neu erzeugen
+## 12 Bilder, die visuell akzeptiert wurden – nicht unaufgefordert neu erstellen
 
-| ID | Originaldatei laut Nutzerprüfung |
-|---|---|
-| P01 | `zaandam-saegemuehle.jpg` |
-| P02 | `murano-glas.jpg` |
-| P03 | `jingdezhen-porzellan.jpg` |
-| P04 | `barbados-zucker.jpg` |
-| P05 | `gb-1840-textile-mill.jpg` |
-| P09 | `gt-1910-banana-packing.jpg` |
-| P10 | `automobilfabrik.png` |
-| P13 | `cn-2015-electronics-assembly.jpg` |
-| T01 | `amsterdam-voc-werft.png` |
-| T03 | `kalkutta-handel.png` |
-| T04 | `kanton-handel.png` |
+- **P01** – Niederlande, Zaandam/Zaanstreek (1660): `zaandam-saegemuehle.jpg`
+- **P02** – Italien, Murano bei Venedig (1680): `murano-glas.jpg`
+- **P03** – China, Jingdezhen (1700): `jingdezhen-porzellan.jpg`
+- **P04** – Barbados, St. James / Zuckerrohrgürtel (1700): `barbados-zucker.jpg`
+- **P05** – Großbritannien, Manchester / Lancashire (Pilot) (1840): `gb-1840-textile-mill.jpg`
+- **P09** – Guatemala, Karibikküste / Puerto-Barrios-Region (Pilot) (1910): `gt-1910-banana-packing.jpg`
+- **P10** – USA, Highland Park / Detroit (1913): `automobilfabrik.png`
+- **P13** – China, Shenzhen / Perlflussdelta (Pilot) (2015): `cn-2015-electronics-assembly.jpg`
+- **T01** – Niederlande, Amsterdam/Oostenburg (1670): `amsterdam-voc-werft.png`
+- **T03** – Heutiges Indien, Kalkutta/Kolkata, Hooghly (1780): `kalkutta-handel.png`
+- **T04** – China, Guangzhou/Kanton (1820): `kanton-handel.png`
+- **E01** – USA, Boston/Griffin's Wharf (1773): `nahtloses_panorama_der_boston_tea_party.png`
 
-Die Bilder wurden per **Dateinamen und Review-Ergebnis** übermittelt. Die tatsächlichen Dateien liegen nicht automatisch in GitHub und sind nicht dadurch technisch verifiziert. Für einen konsistenten Stil bitte diese **Originaldateien** (nicht alte, möglicherweise abweichende Testbilder) vom Nutzer beziehen, wenn verfügbar.
+**E01 Boston wurde nach dem vorherigen Remake vom Nutzer mit „okay passt, nächstes bild“ visuell akzeptiert.** Die Datei ist nur eine Chat-Bildausgabe; sie benötigt weiterhin technische/historische QA, die Akzeptanz bescheinigt keine lückenlos korrekte 360°-Geometrie.
 
-## D. Look & Feel – so sollen die neuen 360°-Szenen aussehen
+## Vibe – visuell anspruchsvoll, räumlich nachvollziehbar
 
-**Vibe:** „Ich stehe gerade wirklich dort“ – glaubwürdige, dichte **historische Dokumentarfilm-Realistik**, lebendiges, zeittypisches Arbeiten/Handeln/Entdecken statt glatter Showroom- oder Computerspielästhetik. Menschen haben **sinnvolle Handlungen**: an echten Maschinen, Werkbänken, Schiffen, Waren, bei einer Demonstration oder in einer konkret belegbaren historischen Situation. Details sollen aufmerksames Erkunden belohnen: Rohstoffe, fertige Produkte, Werkzeuggebrauch, richtige Kleidung, Materialalterung, Maschinenlogik, regionale Architekturen und Transportwege.
+- **„Ich stehe selbst dort“:** realistische, detailreiche historische Dokumentarfilmszene mit Leben und konkreter Handlung; Zuschauer sollen an Ort/Epoche denken, nicht an eine moderne 3D-Spielkulisse.
+- **Keine leeren Kulissen:** Arbeiterinnen/Arbeiter verrichten historische Produktionsschritte; Hafenarbeiter bewegen echte Waren; Ereignisse zeigen glaubwürdige Umstände, nicht nur „Menschen vor Gebäude“. Auch die Rückseite soll einen sinnvollen Ort zeigen.
+- **Echte historische Unterscheidbarkeit:** Land, Ort, Kleidungsstile, Architektur, Vegetation, Waren, Werkzeuge, Technik und Verkehrsmittel gegen Museum/Archiv/Forschung prüfen; keine Flaggen/Schriftlabels/Jahreszahlen als Spoiler.
+- **Realistische, aber nicht uniforme Atmosphäre:** Natürliches Licht, glaubwürdige Schatten, Alterung, Staub/Glut/Feuchtigkeit nur wenn sachlich angebracht. Kein einheitlicher brauner Vintagefilter; moderner Reinraum darf klinisch wirken.
+- **An kritischen historischen Ereignissen respektvoll:** echte Quellen, keine frei erfundenen „Archivfotos“, keine Sensationsdarstellungen von Opfern; wirtschaftliche Macht/Zwang/Arbeitsbedingungen nach der Runde erklären.
 
-**Stilkonstanz ohne Einheitsfilter:** Die akzeptierten Beispiele kombinieren authentisches Material, schöne natürliche Lichtführung, dichtes aber lesbares Geschehen und visuell sofort erkennbare Produkte. Ein venezianischer Glasofen darf warm glühen, eine 1840er Textilhalle Staub in Fensterstrahlen haben; ein 1970er Hafen, ein Halbleiterreinraum 2023 oder ein politischer Wendepunkt brauchen **ihre eigene sachlich passende** Farb- und Lichtwelt. **Nicht alle Orte sepiafarben färben.**
+## VERBINDLICHER 3D-/360°-Ablauf – keine Abkürzungen
 
-**ZuWi:** Wir zeigen nicht nur Gebäude, sondern *wer produziert, wer kontrolliert Handel und Logistik, welche Arbeitsbedingungen herrschen und was sich historisch geändert hat*. Die Szene muss Land und Epoche erratbar machen, ohne triviale Flaggen, Jahreszahlen, Firmenschilder, Cities im Bild oder künstliche Text-Hinweise.
+1. Historisch quellenbasierte Faktenkarte mit Bildobjekten und 5 Anachronismen. Bei E/T auch Institutionen und die genaue Ereigniszeit.
+2. Räumlich konsistentes 3D-Blockout (Blender/VTK/gleichwertig), fixer Augenstandpunkt, echt equirectangulares vollständiges 360°×180°-Rendering. Vorne Hauptgeschehen, seitlich Kontext, **hinten echter plausibler Raum**, keine doppelte Spiegelwelt.
+3. Fotorealistische PBR-Materialien **auf der echten Geometrie** oder nachweislich geometriegebundene Style-Übertragung. Eine frei generierte 2:1-Fassung, deren Schiffe/Masten/Heizrohre abweichen, **nicht als 3D-Referenz-locked behaupten**.
+4. Vor jeder Abgabe in **mindestens zwölf Perspektivansichten** yaw 0/90/180/270, ±180° bei pitch ±55°, Zenit/Nadir, diagonale Objekt-/Maschinenblickwinkel, Zoom prüfen; die Bilder wirklich im Pannellum-Viewer drehen. Form- und Nahtsprünge reparieren **ohne** Spiegelduplikate oder verbogene Körper. Keine Kennzahl alleine ist PASS.
+5. Natives 4096×2048 anstreben, Upscale getrennt kennzeichnen; Originaldatei, 3D-Quelle, Quellen/Lizenzen, QA-Kontaktblatt, Bericht und Viewer-/ZIP-Übergabe bereitstellen. Nutzer entscheidet; **kein** automatisches `ready` oder eigenmächtiges GitHub-Merge/Deployment.
 
-### Historische Sorgfalt
-Vor jedem neuen Bild mindestens ein institutionell/museal/archivisch belastbarer Quellenbeleg und wenn möglich unabhängige Zweitquelle; notieren: Land damals/heute, Jahr, örtliche Gebäude, typische Produkte/Handlungen, historische Technik/Fahrzeuge/Kleidung, zwei geografische Hinweise und zwei Zeit-Indizien sowie 5 anachronistische Elemente, die nicht gezeigt werden dürfen. Bei Katastrophen und Gewalt/Eingriffen keine erfundenen konkreten Opfer oder vermeintlichen Originalfotos erzeugen. Als **KI-Rekonstruktion** kennzeichnen.
-
-### Räumlicher / technischer Standard
-1. **Eine Kamera an einem plausiblen Augenpunkt**, über volle **360° horizontal / 180° vertikal**. Ziel ist eine echte sphärisch-equirectangulare Ansicht, **nicht** eine normale breite 2:1-Fotografie.
-2. **3D-Blockout / strukturtreue Vorlage zuerst**, in Blender oder gleichwertigem Verfahren, oder ein anderer nachgewiesen geometrisch konsistenter 360°-Erzeugungsweg. KI-Realismus darf Kamera-/Bauteilposition und Proportionen nicht beliebig verändern.
-3. Motiv logisch über Rundumblick verteilen: vorne Kernhandlung; seitlich ergänzende Schritte/Umgebung; hinten eine sinnvolle, wirklich passende Rückseite. Naht darf **keine** Personen, Gebäude, Kräne oder Maschinen halbieren. Decken-/Himmels-**Zenit**, Boden-**Nadir**, rechte/linke Meridian-Kante und interne Übergänge kontrollieren.
-4. **Per perspektivischem View testen**: yaw 0, ±90, 180, ±180 bei pitch ±55, senkrecht oben/unten und Zoom. Gerade Dachträger, Kräne, Segelmasten und Maschinen müssen *im Viewer* korrekt aussehen. Ein mathematischer Nahtquotient allein ist **kein** PASS; gespiegelte Hallen oder Fahrzeuge sind ebenfalls Fehler.
-5. Möglichst **native 4096×2048 Pixel**, tatsächliche Pixelmaße angeben; Upscaling getrennt kennzeichnen. Realistischen Render zusammen mit Quelle, Quellenliste, Perspektiven-Kontaktsheet, QA-Report und nachvollziehbaren Nutzungsrechten liefern.
-6. **Kein selbstständiges `ready`, GitHub-Merge oder Deployment.** Nutzer sieht und entscheidet zuerst die tatsächlichen Bilddateien. Auch ein optisch akzeptiertes Bild braucht die separate technische/historische Freigabe.
-
-### Priorität
-**Zuerst die sechs abgelehnten Bilder** (damit die vorhandenen konkreten Review-Fehler behoben werden), anschließend die 13 offenen. Ideal: Erster verbesserter Kandidat **E01 Boston Tea Party**, mit vollständiger Recherche und echter 360°-QA, bevor mehrere Varianten unkontrolliert gesammelt werden. Bereits akzeptierte Bilder nicht noch einmal neu bauen.
-
-## E. Abgabe
-
-Für **jede ID**: `research.md`, historische Quellen und Prompt, tatsächliche Bilddatei, gegebenenfalls 3D-Quelle, `qa/contact_sheet.jpg` (Front/Links/Rechts/Naht/Zenit/Nadir), `qa/report.md` mit FAIL/PASS/NICHT GETESTET, echte Maße und Vergleich zur abgelehnten Fassung. GitHub-Feature-Branch + PR oder eigenständiges ZIP, falls nötig. Die ursprüngliche Szene-ID beibehalten, damit sich das Bild ins Spiel einpflegen lässt.
-
-**Nicht neu als zusätzliche Level erstellen:** `review-perlfluss-alternative.png` ist ein **alternatives T04** und darf nicht als T07 erscheinen; `review-venedig.webp` ist eine abgelehnte P02-Alternative trotz akzeptiertem P02; Marktplatz 1400, Machu Picchu, Regenwald 2015, Eisenbahnbau USA gehören **nicht** zur aktiven 30er-Liste.
+**Jetzt bearbeiten:** zuerst die **fünf ausdrücklich abgelehnten Bilder** (historischer Ort und ID bleiben!), dann die **13 offenen**. Bei bereits vorhandenen E03- oder anderen QA-Kandidaten Ergebnisse und Fehlerursachen wiederverwenden, aber nicht als fertig ausgeben. Keine weiteren neuen Level außerhalb der 30er-Liste.
