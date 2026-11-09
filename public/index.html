@@ -175,12 +175,13 @@
     @keyframes lit{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
     /* Result */
     #game.resolved .dock,#game.resolved .guess{display:none}
-    .result{position:absolute;z-index:4;left:50%;bottom:max(24px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(1040px,calc(100% - 32px));
-      max-height:calc(100% - 96px);overflow:auto;overscroll-behavior:contain;display:grid;grid-template-columns:1.15fr 1fr;gap:24px;padding:20px;
-      background:rgba(10,10,10,.94);border:1px solid var(--line);border-radius:20px;animation:resIn 280ms cubic-bezier(.2,0,0,1)}
+    .result{position:absolute;z-index:4;left:50%;bottom:max(24px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(1280px,calc(100% - 48px));
+      max-height:calc(100% - 96px);overflow:hidden;display:grid;grid-template-columns:1.15fr .85fr 1fr;gap:28px;padding:20px;
+      font-size:clamp(13px,1.75vh,15px);background:rgba(10,10,10,.94);border:1px solid var(--line);border-radius:20px;animation:resIn 280ms cubic-bezier(.2,0,0,1)}
     .result[hidden]{display:none}
     @keyframes resIn{from{opacity:0;transform:translate(-50%,16px)}}
-    .res-map{position:relative;aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:#0f0f0f}
+    .res-visual,.res-scores,.res-explain{min-width:0;min-height:0}
+    .res-map{position:relative;aspect-ratio:4/3;max-height:calc(100vh - 260px);width:100%;border-radius:12px;overflow:hidden;background:#0f0f0f}
     .res-map svg{position:absolute;inset:0;width:100%;height:100%}
     .res-map .countries path{fill:#3a3a3a;stroke:#141414;stroke-width:.6px;vector-effect:non-scaling-stroke}
     .res-map .countries path.sel{fill:#ffd43b}
@@ -189,35 +190,55 @@
     .res-map .pin{fill:#fafafa;stroke:#0a0a0a;stroke-width:1.25px;vector-effect:non-scaling-stroke}
     .res-line{stroke:#fafafa;stroke-width:2px;stroke-dasharray:6 5;vector-effect:non-scaling-stroke;fill:none}
     .res-true{fill:#0a0a0a;stroke:#ffd43b;stroke-width:3px;vector-effect:non-scaling-stroke}
-    .res-timeline{position:relative;height:56px;margin-top:12px}
+    .res-timeline{position:relative;height:56px;margin-top:10px}
     .res-timeline .marker{height:40px;top:0}
     .res-timeline .marker.mine{background:#fafafa}.res-timeline .marker.mine::before{background:#fafafa}
     .res-span{position:absolute;top:28px;height:4px;margin-top:-2px;background:rgba(255,212,59,.35);border-radius:2px}
-    .res-legend{display:flex;gap:16px;margin-top:4px;font-size:13px;color:var(--muted)}
+    .res-legend{display:flex;gap:16px;font-size:13px;color:var(--muted)}
     .res-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
     .lg-mine{background:#fafafa}.lg-true{background:#ffd43b}
+    .res-scores{display:flex;flex-direction:column}
     .res-total{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
     .res-total span{flex-basis:100%;font-size:13px;font-weight:500;color:var(--muted)}
     .res-total strong{font-size:44px;line-height:1;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
     .res-total small{font-size:15px;color:var(--muted)}
-    .res-row{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+    .res-row{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
     .res-row-head{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;font-weight:600}
     .res-row-head b{font-variant-numeric:tabular-nums}
     .res-bar{height:4px;margin:8px 0 10px;border-radius:2px;background:#262626;overflow:hidden}
     .res-bar i{display:block;height:100%;width:0;background:#ffd43b;transition:width 700ms cubic-bezier(.2,0,0,1)}
-    .res-row dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0;font-size:14px}
+    .res-row dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin:0}
+    .res-scores .res-row:last-of-type{margin-bottom:16px}
     .res-row dt{color:var(--muted)}.res-row dd{margin:0;font-variant-numeric:tabular-nums}
-    .res-explain{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:15px;line-height:1.5}
-    .res-explain h3{margin:0 0 8px;font-size:17px;font-weight:700}
-    .res-explain p{margin:0 0 10px}.res-explain .muted{color:#c4c4c4}
-    .res-explain h4{margin:12px 0 6px;font-size:13px;font-weight:500;color:var(--muted)}
-    .res-explain ul{margin:0;padding-left:18px;color:#c4c4c4;font-size:14px}
-    .res-explain .note{margin-top:12px;font-size:12px;color:#8a8a8a}
-    #resNext{width:100%;height:56px;margin-top:16px;border-radius:12px;background:var(--text);color:var(--bg);font-size:17px;font-weight:600;
+    #resNext{width:100%;height:56px;margin-top:auto;border-radius:12px;background:var(--text);color:var(--bg);font-size:17px;font-weight:600;
       transition:opacity 120ms,transform 120ms cubic-bezier(.2,0,0,1)}
     #resNext:hover{opacity:.9}#resNext:active{transform:scale(.985)}
     #resNext:focus-visible{outline:2px solid var(--text);outline-offset:3px}
-    @media(max-width:819px){.result{grid-template-columns:1fr;gap:16px;padding:16px;max-height:calc(100% - 88px)}}
+    .res-explain{position:relative;line-height:1.5;overflow:hidden}
+    .res-explain.open{overflow:visible}
+    .result.expanded{overflow:auto}
+    .res-explain h3{margin:0 0 8px;font-size:1.13em;font-weight:700}
+    .res-explain p{margin:0 0 10px}.res-explain .muted{color:#c4c4c4}
+    .res-explain .clues{color:#c4c4c4}.res-explain .clues span:first-child{color:var(--muted)}
+    .res-explain .clues[hidden]{display:none}
+    .res-explain .note{margin:0;font-size:12px;color:#8a8a8a}
+    /* shown only when the explanation is cut off: sits on a fade at the bottom of the column */
+    .more{position:absolute;left:0;right:0;bottom:0;height:56px;padding:24px 0 0;text-align:left;color:var(--text);font-size:14px;font-weight:600;
+      background:linear-gradient(to bottom,rgba(10,10,10,0),rgba(10,10,10,.97) 45%)}
+    .more span{text-decoration:underline;text-underline-offset:3px}
+    .more[hidden]{display:none}
+    /* medium widths: map + scores side by side, explanation below across both */
+    @media(max-width:899px){.result{grid-template-columns:1fr 1fr;gap:20px}.res-explain{grid-column:1/-1;max-height:9.2em}.res-map{aspect-ratio:16/10}}
+    /* phones: one column; explanation clamped with "Weiterlesen", expanded text may scroll */
+    @media(max-width:639px){
+      .result{grid-template-columns:1fr;gap:10px;padding:14px;width:calc(100% - 32px);max-height:calc(100% - 84px);bottom:16px}
+      .res-map{aspect-ratio:2.8/1}.res-timeline{height:54px;margin-top:2px}.res-legend{display:none}
+      .res-total strong{font-size:30px}.res-row{margin-top:8px;padding-top:8px}.res-bar{margin:5px 0 5px}
+      .res-scores{display:contents}.res-visual{order:1}.res-total,.res-row{order:2}.res-explain{order:3}#resNext{order:4;margin-top:0;height:48px}
+      .res-scores .res-row:last-of-type{margin-bottom:0}.res-row dl{gap:2px 12px}
+      .res-explain{max-height:5.6em}.res-explain h3{margin-bottom:4px}
+      .res-explain.open{max-height:none}
+    }
     @media(max-width:639px){
       .dock{width:calc(100% - 32px);flex-direction:column;align-items:stretch;gap:8px}
       .guess{left:16px;right:auto;width:calc(100% - 172px);height:80px;flex-direction:row;align-items:stretch;gap:8px}
@@ -297,7 +318,7 @@
       <div class="res-timeline"><div class="ruler-track" id="resTrack"></div></div>
       <div class="res-legend"><span><i class="lg-mine"></i>Dein Tipp</span><span><i class="lg-true"></i>Richtig</span></div>
     </div>
-    <div class="res-text">
+    <div class="res-scores">
       <div class="res-total"><span id="resHead">Punkte</span><strong id="resTotal">0</strong><small>von 10.000</small></div>
       <div class="res-row">
         <div class="res-row-head"><span>Wo?</span><b id="resWherePts">0</b></div>
@@ -309,14 +330,15 @@
         <div class="res-bar"><i id="resWhenPtsBar"></i></div>
         <dl><dt>Richtig</dt><dd id="resWhenRight"></dd><dt>Dein Tipp</dt><dd id="resWhenMine"></dd><dt>Abweichung</dt><dd id="resWhenDiff"></dd></dl>
       </div>
-      <div class="res-explain">
-        <h3 id="resTitle"></h3>
-        <p id="resOverview"></p>
-        <p id="resLearning" class="muted"></p>
-        <div id="resCluesWrap"><h4>Hinweise im Bild</h4><ul id="resClues"></ul></div>
-        <p id="resNote" class="note"></p>
-      </div>
       <button type="button" id="resNext">Zurück zum Start</button>
+    </div>
+    <div class="res-explain" id="resExplain">
+      <h3 id="resTitle"></h3>
+      <p id="resOverview"></p>
+      <p id="resLearning" class="muted"></p>
+      <p id="resCluesWrap" class="clues"><span>Hinweise im Bild:</span> <span id="resClues"></span></p>
+      <p id="resNote" class="note"></p>
+      <button type="button" id="resMore" class="more" hidden><span>Weiterlesen</span></button>
     </div>
   </section>
 </div>
@@ -506,13 +528,15 @@ $('guessBtn').addEventListener('click',()=>{if(guessYear==null||!guessCountry)re
   // explanation
   $('resTitle').textContent=scene?.title_de||scene?.site_type||scene?.industry||'Auflösung';
   $('resOverview').textContent=scene?.overview_de||'';$('resLearning').textContent=scene?.learning_de||'';
-  const cl=$('resClues');cl.replaceChildren();for(const c of scene?.visual_clues||[]){const li=document.createElement('li');li.textContent=c;cl.appendChild(li);}
-  $('resCluesWrap').hidden=!cl.children.length;
+  const clues=scene?.visual_clues||[];$('resClues').textContent=clues.join(' · ');$('resCluesWrap').hidden=!clues.length;
+  // phones: explanation is clamped so the result fits on one screen; "Weiterlesen" expands it
+  const ex=$('resExplain');ex.classList.remove('open');$('result').classList.remove('expanded');requestAnimationFrame(()=>{$('resMore').hidden=ex.scrollHeight<=ex.clientHeight+2;});
   $('resNote').textContent=scene?.historical_status==='composite_reconstruction'||!scene?.historical_status?'KI-Rekonstruktion eines historisch belegten Schauplatzes – kein Originalfoto.':'';
   requestAnimationFrame(()=>{drawResultMap(sol);drawResultTimeline(guessYear,hasYear?scene.year:null);});
   $('resNext').focus({preventScroll:true});});
 function resetGuess(){guessYear=null;marker.hidden=true;ruler.removeAttribute('aria-valuenow');ruler.setAttribute('aria-valuetext','kein Jahr gewählt');showYear();
   if(selPath)selPath.classList.remove('sel');selPath=null;guessCountry=null;guessLL=null;if(pinG)pinG.style.display='none';$('mapLabel').textContent='Wo?';updateGuess();}
+$('resMore').addEventListener('click',()=>{$('resExplain').classList.add('open');$('result').classList.add('expanded');$('resMore').hidden=true;});
 $('resNext').addEventListener('click',()=>{resetGuess();$('result').hidden=true;$('game').classList.remove('resolved');$('game').hidden=true;$('start').hidden=false;});
 // open / close
 let closeT;
