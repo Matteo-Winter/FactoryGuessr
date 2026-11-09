@@ -1,6 +1,6 @@
 # VOLLSTÄNDIGER MASTER-PROMPT — 14 Handels-/Machtzentren und historische Wendepunkte in 3D und 360°
 
-> **AKTUELLER HINWEIS (09.11.2026):** Dieses Dokument ist nur noch eine **technische und historische Spezialanleitung für die 14 T/E-Szenen**. Der Kollege erstellt jetzt mit Gemini **alle 26 noch fehlenden Bilder** (12 P, 6 T, 8 E). **VERBINDLICH** sind [die 26er-Bildliste](../IMAGE_PRODUCTION_STATUS_30.md) und [der neue Gemini-Auftrag](GEMINI_IMAGE_HANDOFF_26.md). Alle nachfolgenden Aussagen wie „nur 14“, „keine P-Szenen“ oder „beginne ausschließlich mit T01“ sind in ihrer Zuständigkeitsfunktion **überholt**. Das 3D-/360°-Qualitätsverfahren und die Regeln für historische Ereignisse gelten weiterhin.
+> **AKTUELLER HINWEIS (Bildprüfung 09.11.2026):** Dieses Dokument ist ausschließlich eine **technische und historische Spezialanleitung** für T/E-Szenen. Der neue Nutzerstatus lautet **11 akzeptierte Bilder, 6 neu zu erstellende Versionen und 13 weitere offene Szenen**. Für den Kollegen sind **[aktuelle 19 Bildarbeiten](GEMINI_IMAGE_HANDOFF_CURRENT.md)** und **[der Bildstatus aller 30](../IMAGE_PRODUCTION_STATUS_30.md)** maßgeblich. Nachfolgende ältere personelle „nur 14 T/E“- oder 26er-Aufgaben zählen nicht mehr als Arbeitsliste.
 
 
 **Version:** 2.0 · 09.11.2026 · **Zuständigkeit: Kollege, ausschließlich T01–T06 und E01–E08 (14 Szenen)**. Der ursprüngliche 60er- und 30/30-Plan ist ARCHIV. Nur der aktive 30er-Plan gilt.
