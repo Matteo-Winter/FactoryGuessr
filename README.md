@@ -13,7 +13,7 @@ Ein historisches GeoGuessr-artiges Lernspiel für die ZuWi-Vertiefung **„Von H
 - Informationen wie Land, Zeitraum und Lernkontext werden getrennt vom KI-Bild geprüft.
 - Keine automatischen Behauptungen über konkrete Unternehmen, die nicht belegt sind.
 
-**Aktueller Bildstatus nach Nutzerprüfung vom 09.11.2026:** **11 Bildversionen „Passt“**, **6 „Neu machen“**, **13 weitere ohne aktuelles Urteil**. Kollege mit Gemini bearbeitet **19 offene Punkte** (6 Remakes + 13 noch nicht beurteilte Szenen). Formale technische/historische Spielfreigabe **0/30**. [Verbindliche Bildliste mit Dateinamen](docs/IMAGE_PRODUCTION_STATUS_30.md).
+**Aktueller Bildstatus (09.11.2026):** **12 Bildfassungen visuell akzeptiert**, **5 Bilder neu zu machen**, **13 ohne aktuelles Urteil**. Kollege mit Gemini bearbeitet **18 offene Arbeiten**. E01 Boston wurde nach dem Remake akzeptiert; E03 Suez ist nach neuem 3D-/Foto-Versuch **wegen der 360°-Naht weiterhin FAIL**. **0/30 formale Spielfreigaben**. [Bildstatus und Namen](docs/IMAGE_PRODUCTION_STATUS_30.md).
 
 ## Repository
 
@@ -71,16 +71,15 @@ python3 scripts/generate_skybox.py gb-1840-textile-mill
 
 Das exportiert den Prompt und die Bildvorgaben (**kein API-Aufruf, keine Kosten**). Zur anschließenden manuellen Generierung und Qualitätsprüfung siehe `docs/PANORAMA_PIPELINE.md`. Niemals Zugangsdaten ins Repo oder ins Frontend schreiben.
 
-## Aktuelle Bildprüfung: 11 passen, 6 neu, 13 offen
+## Bildproduktion: 12 akzeptiert, 5 neu, 13 offen
 
-**[Verbindlicher Bildstatus aller 30 Szenen einschließlich Dateinamen](docs/IMAGE_PRODUCTION_STATUS_30.md)** · [JSON mit Nutzerurteilen](docs/team/ACTIVE_SCENES_30.json).
+**[Verbindlicher Status aller 30 Szenen](docs/IMAGE_PRODUCTION_STATUS_30.md)** · [JSON/Einzelentscheidungen](docs/team/ACTIVE_SCENES_30.json) · **[Gemini-Auftrag für 18 offene Arbeiten](docs/team/GEMINI_IMAGE_HANDOFF_CURRENT.md)** · [Issue #18](https://github.com/Matteo-Winter/FactoryGuessr/issues/18).
 
-- **11 vom Nutzer visuell akzeptiert:** P01/P02/P03/P04/P05/P09/P10/P13 und T01/T03/T04 (noch **kein** automatischer Geometrie-/Historien-PASS).
-- **6 Bildfassungen neu zu erzeugen:** T05 und E01/E03/E04/E05/E07.
-- **13 ohne aktuelles Review:** P06/P07/P08/P11/P12/P14/P15/P16, T02/T06 und E02/E06/E08.
-- **[Aktueller Gemini-Auftrag für die 19 noch offenen Arbeiten](docs/team/GEMINI_IMAGE_HANDOFF_CURRENT.md)** · [GitHub Issue #18](https://github.com/Matteo-Winter/FactoryGuessr/issues/18) · [aktuelle Zusammenarbeit](docs/team/ACTIVE_SPLIT_30.md).
+- **12 visuell akzeptiert:** P01/P02/P03/P04/P05/P09/P10/P13, T01/T03/T04, **E01 Boston**.
+- **5 neu:** T05 und E03/E04/E05/E07. **E03 Suez:** neuer Fotokandidat samt echter 3D-Referenz vorhanden, doch die 180°-Naht ist noch nicht sauber; [QA-Bericht](docs/scene-research/E03_Suez_1869_REWORK_QA.md).
+- **13 aktuell nicht beurteilt:** P06/P07/P08/P11/P12/P14/P15/P16, T02/T06, E02/E06/E08.
 
-Die vier im vorigen Review vorhandenen Referenzbilder wurden durch die neue **11er-Positivliste ersetzt**. Alle Bilddateinamen stammen aus der Nutzerprüfung; die tatsächlichen Bildbytes sind nicht automatisch in GitHub vorhanden. Nicht als `ready` markieren, bevor echte 360°-QA, Historie und Browserprüfung bestanden sind. Das Projekt hat weiterhin genau 30 aktive Level.
+Die Bilddateien aus dem Chat sind nicht automatisch auf GitHub hochgeladen; das Urteil „Passt“ ist **nur eine visuelle Auswahl**, keine 360°- oder Historienfreigabe. Keine stillschweigende `ready`-Änderung in `public/data/scenes.json`.
 
 ## 360°-Qualitätskontrolle und nächste Bildpipeline
 
