@@ -6,16 +6,16 @@
 
 ## Status und Ziele
 
-- **60 Level sind das Ziel, nicht der bisherige Ist-Stand.**
+- **Aktives Ziel: 30 Level**, davon 16 Produktionsstätten, 6 Handels-/Machtzentren und 8 historische Ereignisse.
 - **3 Pilot-Szenenkonzepte** stehen in `public/data/scenes.json`: Großbritannien 1840, Guatemala 1910, China 2015.
 - **0 verifizierte, fertige Panoramen**. Drei KI-generierte 2:1-Testbilder liegen im Repository, jedoch keines ist historisch oder panorama-geometrisch freigegeben.
-- **Alle 60 konkreten Szenen** sind als **Entwurf** in [SCENE_MASTERPLAN_60.md](SCENE_MASTERPLAN_60.md) geplant (6/8/14/10/12/10); vor dem Rendering jeder Szene ist historische Quellenprüfung erforderlich.
+- **Alle 30 aktiven Szenen** sind als **Entwurf** in [SCENE_MASTERPLAN_30.md](SCENE_MASTERPLAN_30.md) geplant; die alte [60er-Liste](SCENE_MASTERPLAN_60.md) ist Archiv. Zuständigkeit siehe [Team-Split](team/ACTIVE_SPLIT_30.md).
 
 ## Produktion je Szene
 
-1. **Historisches Briefing** erstellen: Land (heute / damaliger Staat), ca. Jahr, klar erkennbares Hauptprodukt, regionale Architektur/Landschaft, reale Maschinen und Arbeitsweise der Zeit; mindestens eine institutionelle/archivarische Bild- oder Sachquelle plus möglichst einen weiteren Beleg **vor der Generierung**. Zwei faire Orts- und zwei Epoche-Hinweise festlegen und Anachronismen explizit ausschließen. [60er-Masterplan](SCENE_MASTERPLAN_60.md).
+1. **Historisches Briefing** erstellen: Land (heute / damaliger Staat), ca. Jahr, klar erkennbares Produkt oder historische Hauptaktivität, regionale Architektur/Landschaft, reale Maschinen bzw. Handel-/Ereignisausstattung der Zeit; mindestens eine institutionelle/archivarische Bild- oder Sachquelle plus möglichst einen weiteren Beleg **vor der Generierung**. Zwei faire Orts- und zwei Epoche-Hinweise festlegen und Anachronismen explizit ausschließen. [aktiver 30er-Masterplan](SCENE_MASTERPLAN_30.md).
 2. **Prompts/Referenzen erstellen** und als `concept` speichern. Keine impliziten Behauptungen über bestimmte Unternehmen.
-3. **360°-Panorama erzeugen**, z. B. mit Skybox AI oder anderem Anbieter, der *tatsächliche* equirectangulare Panoramen exportiert. Alternativ können lizenzierte reale Panoramen verwendet werden.
+3. **Vorlage als echte 3D-Geometrie erstellen** (z. B. Blender/VTK), festen Augenpunkt und korrekt projizierte Architektur/Maschinen/Gebäude prüfen. **Native sphärische 360°×180°-Karte** in 4096×2048 rendern; realistische PBR-/Bildaufwertung nur, wenn die Kugelgeometrie erhalten bleibt. Externe Panorama-KIs sind höchstens experimentelle Alternativen mit Geometrie-QA.
 4. **Export lokal validieren**: tatsächliche Dateidimension 2:1, ausreichende Auflösung, korrekte Projektion, nahtloser 0°/360°-Übergang, keine sichtbar deformierten Personen/Maschinen, keine modernen Gegenstände in historischen Leveln.
 5. **Im Browser umsehen**: Viewer öffnen, oben/unten sowie die Naht prüfen. Land und Zeitraum dürfen nicht auf Flaggen/Schildern direkt zu lesen sein.
 6. **Historische Plausibilität und Rechte prüfen**: Datierung, regionale Aussagekraft, KI-/Fotorechte und Nutzung für den Uni-Kurs dokumentieren. Bilderkennbar KI-generiert -> als Rekonstruktion kennzeichnen.
@@ -28,7 +28,7 @@
 - Jedes Bild ist historisch plausibel und in der Szene mit `composite_reconstruction` gekennzeichnet.
 - Kein KI-Bild behauptet, einen konkret identifizierten historischen Betrieb wahrheitsgetreu darzustellen.
 - Spieler kann Land und Epoche abgeben und eine belegbare Lern-Erklärung sehen.
-- Erst danach die restlichen 57 Szenen in Batches erzeugen und qualitätsprüfen.
+- Danach die noch nicht fertiggestellten aktiven P/T/E-Szenen nacheinander oder in kleinen Batches erzeugen und **jede** Szene unabhängig qualitätsprüfen.
 
 ## Ordner und Hosting
 
@@ -46,15 +46,12 @@ Im Repository werden nur Inhalte aus `public/` auf der Website veröffentlicht. 
 
 Drittanbieter-Generierung kann kostenpflichtig sein. Die konkreten API-Endpunkte, Eingabeformate, Preise, Credits und Nutzungsrechte müssen jeweils **vor dem ersten kostenpflichtigen Aufruf** gegen die aktuelle Anbieterdokumentation verifiziert werden. Niemals API-Keys in HTML, Screenshots oder Git-Commits speichern. Für kommerzielle spätere Nutzung die Bedingungen gesondert prüfen.
 
-## Geplante Epochenmischung (60 Ziel-Level)
+## Aktiver Themenmix (30 Ziel-Level)
 
-| Zeitraum | Szenen | Hinweise |
-| --- | ---: | --- |
-| 1600–1749 | 6 | Manufakturen, Zucker- und Rohstoffverarbeitung, koloniale Produktionsstätten |
-| 1750–1849 | 8 | Mechanisierung, frühe Fabriken |
-| 1850–1913 | 14 | Industrialisierung, Eisenbahn, koloniale Rohstoffe |
-| 1914–1945 | 10 | Massenproduktion, Kriegswirtschaft |
-| 1946–1989 | 12 | Dekolonisierung, Fertigungsverlagerung |
-| 1990–2026 | 10 | Globale Wertschöpfungsketten, Automatisierung |
+| Typ | Anzahl | Verantwortlich | Grundlage |
+|---|---:|---|---|
+| Produktionsstätten | 16 | Projektleitung | [P01–P16](team/USER_16_PRODUCTION.md) |
+| Handel und Machtzentren | 6 | Kollege | [T01–T06](team/COLLEAGUE_14_SCENES.md) |
+| Historische Wendepunkte | 8 | Kollege | [E01–E08](team/COLLEAGUE_14_SCENES.md) |
 
-Diese Verteilung ist eine **Projektplanung** mit 60 konkreten Motivvorschlägen in [SCENE_MASTERPLAN_60.md](SCENE_MASTERPLAN_60.md), keine bereits freigegebene Bilddatenbank. Die Herkunft eines KI-Komposits ist die *historisch modellierte Szene*, nicht der reale Aufnahmeort.
+Beide Personen verwenden denselben [3D-first-Prompt und die QA-Gates](team/COLLEAGUE_MASTER_PROMPT_14.md), das Ereignis-/Kolonialgeschichts-Modul gilt für T/E besonders. Die historischen Ursprungsdaten bleiben Arbeitsannahmen bis zur individuellen Quellenvalidierung.
