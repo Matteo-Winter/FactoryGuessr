@@ -105,7 +105,7 @@
     #backBtn{left:16px;right:auto;background:var(--card)}
     .round-pill{position:absolute;z-index:2;top:max(16px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);height:44px;padding:0 16px;display:flex;align-items:center;
       border-radius:12px;background:var(--card);border:1px solid var(--line);font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
-    .dock{position:absolute;z-index:2;left:50%;bottom:max(24px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(960px,calc(100% - 32px));
+    .dock{position:absolute;z-index:2;left:50%;bottom:max(24px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(960px,calc(100% - 344px));
       display:flex;align-items:flex-end;gap:12px;pointer-events:none}
     .dock>*{pointer-events:auto}
     .card{background:var(--card);border:1px solid var(--line);border-radius:16px}
@@ -159,7 +159,7 @@
     .zoom button:hover{background:var(--surface)}
     .zoom button:active{transform:scale(.96)}
     /* Guess button: grey until year and country are chosen, then lights up yellow once */
-    .guess{flex:none;width:136px;height:120px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
+    .guess{position:absolute;z-index:1;right:24px;bottom:max(24px,env(safe-area-inset-bottom));width:136px;height:120px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
     .guess-status{display:flex;align-items:center;justify-content:center;gap:6px;height:28px;border-radius:10px;background:var(--card);border:1px solid var(--line);
       font-size:13px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
     .guess-status i{width:6px;height:6px;border-radius:50%;background:#404040;transition:background-color 160ms cubic-bezier(.2,0,0,1)}
@@ -174,13 +174,11 @@
     #guessBtn.lit{animation:lit 420ms cubic-bezier(.2,0,0,1)}
     @keyframes lit{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
     @media(max-width:639px){
-      .dock{flex-wrap:wrap;gap:8px}
-      .dock .timeline{flex:1 1 100%}
-      .guess{flex:1;width:auto;height:80px;flex-direction:row;align-items:stretch;gap:8px}
+      .dock{width:calc(100% - 32px);flex-direction:column;align-items:stretch;gap:8px}
+      .guess{left:16px;right:auto;width:calc(100% - 172px);height:80px;flex-direction:row;align-items:stretch;gap:8px}
       .guess-status{height:auto;width:56px;flex-direction:column;gap:4px}
       #guessBtn{height:auto}
-      .guess{order:1}
-      .map-slot{order:2;width:132px;height:80px}
+      .map-slot{align-self:flex-end;width:132px;height:80px}
       .map{width:132px;height:80px}
       .map:not(.open) .map-label{opacity:0}
       .timeline{height:auto;padding:12px 16px 10px}
@@ -243,10 +241,10 @@
       <div class="map-stage" id="mapStage"><div class="map-layers" id="mapLayers"></div></div>
       <div class="zoom"><button type="button" id="zoomIn" aria-label="Hineinzoomen">+</button><button type="button" id="zoomOut" aria-label="Herauszoomen">−</button></div>
     </div></div>
-    <div class="guess">
-      <div class="guess-status" id="guessStatus" aria-live="polite"><i id="dotWhen"></i><i id="dotWhere"></i><span id="guessCount">0/2</span></div>
-      <button type="button" id="guessBtn" disabled>Raten</button>
-    </div>
+  </div>
+  <div class="guess">
+    <div class="guess-status" id="guessStatus" aria-live="polite"><i id="dotWhen"></i><i id="dotWhere"></i><span id="guessCount">0/2</span></div>
+    <button type="button" id="guessBtn" disabled>Raten</button>
   </div>
 </div>
 <script>
