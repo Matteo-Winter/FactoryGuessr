@@ -132,21 +132,33 @@
     .marker[hidden],.ghost[hidden]{display:none}
     @media(hover:none){.ghost{display:none}}
     .map-slot{position:relative;flex:none;width:200px;height:120px}
-    .map{position:absolute;right:0;bottom:0;width:200px;height:120px;overflow:hidden;cursor:crosshair;
+    .map{position:absolute;right:0;bottom:0;width:200px;height:120px;overflow:hidden;cursor:pointer;background:var(--card);
       transition:width 240ms cubic-bezier(.2,0,0,1),height 240ms cubic-bezier(.2,0,0,1)}
-    .map img,.pin-box{position:absolute;left:12px;right:12px;top:32px;bottom:12px}
-    .map img{width:calc(100% - 24px);height:calc(100% - 44px);pointer-events:none;user-select:none}
-    .map-label{position:absolute;left:12px;top:10px;font-size:13px;font-weight:500;color:var(--muted);pointer-events:none}
-    .map:hover,.map.open{z-index:3;background:var(--bg);width:min(560px,calc(100vw - 32px));height:min(300px,calc((100vw - 32px)*.54))}
-    .pin{position:absolute;width:28px;height:28px;margin:-28px 0 0 -14px;color:#ffd43b;pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.5))}
-    .pin:not(.show){display:none}
+    .map.open{z-index:3;background:#0f0f0f;cursor:crosshair;width:min(880px,calc(100vw - 32px));height:min(500px,calc(100vh - 150px),calc((100vw - 32px)*.62))}
+    .map.panning{cursor:grabbing}
+    .map-label{position:absolute;z-index:1;left:12px;top:10px;font-size:13px;font-weight:500;color:var(--muted);pointer-events:none}
+    .map-view{position:absolute;left:8px;right:8px;top:30px;bottom:8px;touch-action:none}
+    .map-view svg{display:block;width:100%;height:100%}
+    .map-view .countries path{fill:#4a4a4a;stroke:#141414;stroke-width:.6px;vector-effect:non-scaling-stroke;stroke-linejoin:round;transition:fill 120ms}
+    .map.open .map-view .countries path:hover{fill:#5e5e5e}
+    .map-view .labels{display:none;fill:#e5e5e5;font-family:inherit;font-weight:500;text-anchor:middle;dominant-baseline:middle;
+      paint-order:stroke;stroke:rgba(10,10,10,.85);stroke-linejoin:round;pointer-events:none}
+    .map.open .map-view .labels{display:block}
+    .map-view .labels text.off{display:none}
+    .map-view .pin{fill:#ffd43b;stroke:#0a0a0a;stroke-width:1.25px;vector-effect:non-scaling-stroke}
+    .zoom{position:absolute;z-index:1;right:12px;bottom:12px;display:none;flex-direction:column;gap:6px}
+    .map.open .zoom{display:flex}
+    .zoom button{width:40px;height:40px;border-radius:10px;background:var(--bg);color:var(--text);border:1px solid var(--line);font-size:20px;line-height:1;
+      transition:background-color 120ms cubic-bezier(.2,0,0,1),transform 120ms cubic-bezier(.2,0,0,1)}
+    .zoom button:hover{background:var(--surface)}
+    .zoom button:active{transform:scale(.96)}
     @media(max-width:639px){
       .dock{flex-direction:column;align-items:stretch;gap:8px}
       .map-slot{align-self:flex-end;width:132px;height:80px}
       .map{width:132px;height:80px}
       .map:not(.open) .map-label{display:none}
-      .map:not(.open) img,.map:not(.open) .pin-box{top:8px;left:8px;right:8px;bottom:8px}
-      .map:not(.open) img{width:calc(100% - 16px);height:calc(100% - 16px)}
+      .map:not(.open) .map-view{top:6px;left:6px;right:6px;bottom:6px}
+      .map.open{height:min(420px,calc(100vh - 220px))}
       .timeline{height:auto;padding:12px 16px 10px}
     }
     @media(prefers-reduced-motion:reduce){.map,#game *{transition:none!important}}
@@ -204,8 +216,8 @@
     </div>
     <div class="map-slot"><div class="card map" id="map" role="button" tabindex="0" aria-label="Weltkarte: Ort markieren">
       <span class="map-label">Wo?</span>
-      <img src="assets/map/world.svg" alt="">
-      <div class="pin-box"><svg class="pin" id="pin" viewBox="0 0 24 24" fill="currentColor" stroke="#0a0a0a" stroke-width="1.25"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6" fill="#0a0a0a" stroke="none"/></svg></div>
+      <div class="map-view" id="mapView"></div>
+      <div class="zoom"><button type="button" id="zoomIn" aria-label="Hineinzoomen">+</button><button type="button" id="zoomOut" aria-label="Herauszoomen">−</button></div>
     </div></div>
   </div>
 </div>
@@ -283,15 +295,60 @@ ruler.addEventListener('pointerup',()=>{dragging=false;});
 ruler.addEventListener('pointerleave',()=>{ghost.hidden=true;showYear();});
 ruler.addEventListener('keydown',e=>{const d={ArrowRight:1,ArrowUp:1,ArrowLeft:-1,ArrowDown:-1}[e.key];if(!d)return;e.preventDefault();
   setYear((guessYear??1810)+d*(e.shiftKey?10:1));});
-// Map: hover (or tap on touch) enlarges it, click places the pin. Stored as lon/lat for the guess later.
-const map=$('map'),pin=$('pin'),box=document.querySelector('.pin-box');let guessLL=null;
-function placePin(){if(!guessLL)return;pin.style.left=((guessLL.lon+180)/360*100)+'%';pin.style.top=((84-guessLL.lat)/142*100)+'%';pin.classList.add('show');}
-map.addEventListener('click',e=>{
-  if(matchMedia('(hover: none)').matches&&!map.classList.contains('open')){map.classList.add('open');return;}
-  const r=box.getBoundingClientRect();const x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
-  if(x<0||x>1||y<0||y>1)return;guessLL={lon:x*360-180,lat:84-y*142};placePin();});
-document.addEventListener('pointerdown',e=>{if(!map.contains(e.target))map.classList.remove('open');});
-map.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();map.classList.toggle('open');}});
+// Map: countries with German names (Natural Earth, public domain). Opens on hover (tap on touch),
+// zoom with wheel / pinch / +−, drag to pan, click to place the pin (stored as lon/lat).
+const map=$('map'),mapView=$('mapView');let guessLL=null,svg=null,labels=null,pinG=null;
+const FULL={x:0,y:6,w:360,h:142},vb={...FULL},MAXZ=12;
+const isOpen=()=>map.classList.contains('open');
+function unitsPerPx(){const r=mapView.getBoundingClientRect();return Math.max(vb.w/r.width,vb.h/r.height);}
+function clampVb(){vb.w=Math.min(FULL.w,Math.max(FULL.w/MAXZ,vb.w));vb.h=vb.w*FULL.h/FULL.w;
+  vb.x=Math.min(FULL.x+FULL.w-vb.w,Math.max(FULL.x,vb.x));vb.y=Math.min(FULL.y+FULL.h-vb.h,Math.max(FULL.y,vb.y));}
+function render(){if(!svg||!mapView.getBoundingClientRect().width)return;clampVb();svg.setAttribute('viewBox',vb.x+' '+vb.y+' '+vb.w+' '+vb.h);
+  const u=unitsPerPx(),z=FULL.w/vb.w,fs=12*u;labels.style.fontSize=fs+'px';labels.style.strokeWidth=(fs*.28)+'px';
+  // Which names fit: rank threshold grows with pixels per degree, then overlapping names are dropped (most important first).
+  const ppd=1/u,thr=Math.max(1.8,2.2+1.7*Math.log2(ppd/2.4)),boxes=[],ts=[...labels.children].sort((a,b)=>a.dataset.min-b.dataset.min);
+  for(const t of ts){let show=+t.dataset.min<=thr;
+    if(show){const x=+t.getAttribute('x'),y=+t.getAttribute('y'),hw=t.textContent.length*fs*.29+fs*.3,hh=fs*.65;
+      if(x-hw<vb.x||x+hw>vb.x+vb.w||y-hh<vb.y||y+hh>vb.y+vb.h)show=false;
+      else if(boxes.some(b=>Math.abs(b[0]-x)<b[2]+hw&&Math.abs(b[1]-y)<b[3]+hh))show=false;else boxes.push([x,y,hw,hh]);}
+    t.classList.toggle('off',!show);}
+  if(guessLL){const x=guessLL.lon+180,y=90-guessLL.lat,k=28/24*u;pinG.setAttribute('transform','translate('+x+' '+y+') scale('+k+') translate(-12 -22)');pinG.style.display='';}}
+function toSvg(cx,cy){const m=svg.getScreenCTM().inverse();return new DOMPoint(cx,cy).matrixTransform(m);}
+function zoomAt(cx,cy,f){const p=toSvg(cx,cy),nw=Math.min(FULL.w,Math.max(FULL.w/MAXZ,vb.w/f)),k=nw/vb.w;
+  vb.x=p.x-(p.x-vb.x)*k;vb.y=p.y-(p.y-vb.y)*k;vb.w=nw;render();}
+fetch('assets/map/countries.svg').then(r=>r.text()).then(t=>{mapView.innerHTML=t;svg=mapView.querySelector('svg');
+  svg.setAttribute('preserveAspectRatio','xMidYMid meet');labels=svg.querySelector('.labels');
+  pinG=document.createElementNS('http://www.w3.org/2000/svg','path');pinG.setAttribute('class','pin');pinG.style.display='none';
+  pinG.setAttribute('d','M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12zM12 12.6a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2z');pinG.setAttribute('fill-rule','evenodd');
+  svg.appendChild(pinG);render();});
+// open / close
+let closeT;
+function openMap(){clearTimeout(closeT);if(!isOpen()){map.classList.add('open');setTimeout(render,260);}}
+function closeMap(){map.classList.remove('open');setTimeout(render,260);}
+map.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')openMap();});
+map.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse'&&!pointers.size)closeT=setTimeout(closeMap,350);});
+document.addEventListener('pointerdown',e=>{if(!map.contains(e.target)&&isOpen())closeMap();});
+map.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();isOpen()?closeMap():openMap();}
+  else if(isOpen()&&(e.key==='+'||e.key==='-')){const r=mapView.getBoundingClientRect();zoomAt(r.left+r.width/2,r.top+r.height/2,e.key==='+'?1.6:1/1.6);}});
+for(const [id,f] of [['zoomIn',1.6],['zoomOut',1/1.6]])$(id).addEventListener('click',e=>{e.stopPropagation();const r=mapView.getBoundingClientRect();zoomAt(r.left+r.width/2,r.top+r.height/2,f);});
+// wheel zoom
+mapView.addEventListener('wheel',e=>{if(!isOpen()||!svg)return;e.preventDefault();zoomAt(e.clientX,e.clientY,Math.pow(1.0018,-e.deltaY));},{passive:false});
+// pan, pinch, click
+const pointers=new Map();let moved=false,pinchD=0;
+mapView.addEventListener('pointerdown',e=>{if(!svg)return;if(!isOpen()){openMap();return;}
+  mapView.setPointerCapture(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});moved=false;
+  if(pointers.size===2){const [a,b]=[...pointers.values()];pinchD=Math.hypot(a.x-b.x,a.y-b.y);}});
+mapView.addEventListener('pointermove',e=>{const prev=pointers.get(e.pointerId);if(!prev)return;
+  const cur={x:e.clientX,y:e.clientY};
+  if(pointers.size===1){const dx=cur.x-prev.x,dy=cur.y-prev.y;if(!moved&&Math.hypot(dx,dy)<4)return;
+    moved=true;map.classList.add('panning');const u=unitsPerPx();vb.x-=dx*u;vb.y-=dy*u;pointers.set(e.pointerId,cur);render();return;}
+  pointers.set(e.pointerId,cur);const [a,b]=[...pointers.values()],d=Math.hypot(a.x-b.x,a.y-b.y);moved=true;
+  if(pinchD){zoomAt((a.x+b.x)/2,(a.y+b.y)/2,d/pinchD);}pinchD=d;});
+function endPointer(e){if(!pointers.has(e.pointerId))return;pointers.delete(e.pointerId);pinchD=0;map.classList.remove('panning');
+  if(e.type==='pointerup'&&!moved&&!pointers.size){const p=toSvg(e.clientX,e.clientY);
+    if(p.x>=0&&p.x<=360&&p.y>=FULL.y&&p.y<=FULL.y+FULL.h){guessLL={lon:p.x-180,lat:90-p.y};render();}}}
+mapView.addEventListener('pointerup',endPointer);mapView.addEventListener('pointercancel',endPointer);
+addEventListener('resize',render);
 $('backBtn').addEventListener('click',()=>{$('game').hidden=true;$('start').hidden=false;});
 const blockInputs=[...document.querySelectorAll('#startForm input[name=block]')];
 function syncStart(){const n=blockInputs.filter(i=>i.checked).length;$('startBtn').disabled=!n;$('startBtn').textContent=n?'Spiel starten':'Mindestens ein Thema wählen';}
@@ -310,7 +367,7 @@ rounds.addEventListener('input',syncRounds);syncRounds();
 $('startForm').addEventListener('submit',e=>{e.preventDefault();const blocks=new FormData(e.target).getAll('block');if(!blocks.length)return;
 try{localStorage.setItem('mit-blocks',JSON.stringify(blocks));}catch(err){}
 document.body.dataset.blocks=blocks.join(' ');document.body.dataset.rounds=rounds.value;
-try{localStorage.setItem('mit-rounds',rounds.value);}catch(err){}$('roundPill').textContent='Bild 1 / '+rounds.value;$('start').hidden=true;$('game').hidden=false;startGame();});
+try{localStorage.setItem('mit-rounds',rounds.value);}catch(err){}$('roundPill').textContent='Bild 1 / '+rounds.value;$('start').hidden=true;$('game').hidden=false;render();startGame();});
 })();
 </script>
 </body>

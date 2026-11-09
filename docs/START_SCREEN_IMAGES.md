@@ -42,11 +42,26 @@ Bewusst nicht verwendet wurden Bilder, die Gewalt, Opfer oder Versklavte in den 
 
 ## Weltkarte im Spielbildschirm
 
-Die Karte `public/assets/map/world.svg` ist aus den Landflächen von **Natural Earth 1:110m** erzeugt (`ne_110m_land.geojson` aus `nvkelso/natural-earth-vector`). Natural Earth ist **Public Domain**.
+Die Karte `public/assets/map/countries.svg` ist aus **Natural Earth 1:50m Admin-0 Countries** erzeugt. Quelle ist `ne_50m_admin_0_countries.geojson` aus `nvkelso/natural-earth-vector`; Natural Earth ist **Public Domain**.
 
-- **Projektion:** plattkartenartig, Länge −180…180 und Breite 84° N bis 58° S, ohne Antarktis.
-- **Darstellung:** Landfläche einfarbig `#5c5c5c`.
-- **Pin:** Die Spielseite rechnet die Pin-Position direkt in Länge und Breite um und nutzt dafür dieselben Grenzen.
+**Daten**
+- 238 Länder und Gebiete, ohne Antarktis und einige unbewohnte Außengebiete.
+- Vereinfacht mit Ramer-Douglas-Peucker (0,05°), Koordinaten auf 0,01° gerundet.
+- Kleine Inselstaaten wie Barbados und Singapur bleiben erhalten.
+- Dateigröße 412 KB, gzip 152 KB.
+
+**Projektion:** plattkartenartig mit `x = Länge + 180` und `y = 90 − Breite`. Sichtbar ist Breite 84° N bis 58° S.
+
+**Namen**
+- Grundlage ist `NAME_DE` aus Natural Earth, Position aus `LABEL_X/Y`. `MIN_LABEL` steuert, ab welcher Zoomstufe ein Name erscheint; überlappende Namen werden ausgeblendet.
+- Angepasst, damit die Namen zum Spiel passen: „Volksrepublik China“ wird zu **China**, „Republik China“ zu **Taiwan**, „Demokratische Republik Kongo“ zu **DR Kongo**, „Vereinigte Staaten“ zu **USA**, „Vereinigtes Königreich“ zu **Großbritannien**.
+- Die Grenzen zeigen den heutigen Stand. Das passt zur Spielregel „Rateland = heutiger Staat“.
+
+**Bedienung**
+- Hover öffnet die Karte, auf Touchgeräten ein Tippen.
+- Zoom per Mausrad, Pinch, +/− oder Tastatur, maximal 12-fach.
+- Verschieben per Ziehen.
+- Ein Klick setzt den Pin als Länge/Breite.
 
 ## Lokales Testpanorama
 
