@@ -39,3 +39,17 @@ Bewusst nicht verwendet wurden Bilder, die Gewalt, Opfer oder Versklavte in den 
 | `t02-cape-coast-1806.jpg` | T02 | [Cape Coast Castle, a British Settlement on the Gold Coast Africa.jpeg](https://commons.wikimedia.org/wiki/File:Cape_Coast_Castle,_a_British_Settlement_on_the_Gold_Coast_Africa.jpeg) | George Webster / John Hill | 1806 | Public domain |
 | `t03-calcutta-1835.jpg` | T03 | ["Calcutta from Garden House Reach," by William Daniell, from The Oriental Annual or Scenes.jpg](https://commons.wikimedia.org/wiki/File:%22Calcutta_from_Garden_House_Reach,%22_by_William_Daniell,_from_The_Oriental_Annual_or_Scenes.jpg) | William Daniell | 1835 | Public domain |
 | `t04-canton-factories-1806.jpg` | T04 | [William Daniell - The European Factories, Canton - Google Art Project.jpg](https://commons.wikimedia.org/wiki/File:William_Daniell_-_The_European_Factories,_Canton_-_Google_Art_Project.jpg) | William Daniell | 1806 | Public domain |
+
+## Weltkarte im Spielbildschirm
+
+Die Karte `public/assets/map/world.svg` ist aus den Landflächen von **Natural Earth 1:110m** erzeugt (`ne_110m_land.geojson` aus `nvkelso/natural-earth-vector`). Natural Earth ist **Public Domain**.
+
+- **Projektion:** plattkartenartig, Länge −180…180 und Breite 84° N bis 58° S, ohne Antarktis.
+- **Darstellung:** Landfläche einfarbig `#5c5c5c`.
+- **Pin:** Die Spielseite rechnet die Pin-Position direkt in Länge und Breite um und nutzt dafür dieselben Grenzen.
+
+## Lokales Testpanorama
+
+`?pano=assets/…` lädt im Spielbildschirm ein anderes Panorama von derselben Website. Erlaubt sind nur relative Pfade unter `assets/`. So lassen sich Kandidaten testen, ohne `scenes.json` zu ändern.
+
+Lokale Testbilder gehören in `public/assets/panoramas/_local/`. Dieser Ordner ist nur lokal über `.git/info/exclude` vom Commit ausgeschlossen und wird **nicht** veröffentlicht.

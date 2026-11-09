@@ -10,24 +10,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.7/build/pannellum.css">
   <style>
-    :root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;color-scheme:dark;background:#11171c;color:#f4f1e9}
-    *{box-sizing:border-box}body{margin:0}header{padding:22px clamp(16px,4vw,60px);display:flex;justify-content:space-between;gap:20px;align-items:center;border-bottom:1px solid #2d363c}
-    h1{font-weight:800;letter-spacing:-.05em;margin:0;font-size:clamp(27px,3vw,40px)}header p,.muted{color:#aab3b9;margin:4px 0 0;font-size:14px}
-    main{display:grid;grid-template-columns:minmax(0,1fr) 350px;min-height:calc(100vh - 91px)}
-    #stage{min-height:550px;position:relative;background:radial-gradient(circle at 45% 35%,#293640,#10171b)}
-    #panorama{width:100%;height:100%;min-height:550px}
-    #empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;pointer-events:none}
-    #empty>div{max-width:460px;background:#101820dc;border:1px solid #43515b;border-radius:18px;padding:24px}
-    aside{padding:26px;background:#192127;border-left:1px solid #344047;display:flex;flex-direction:column;gap:17px}
-    label{font-size:13px;font-weight:700;display:block;margin-bottom:8px;color:#d6dcdf}
-    select,input,button{width:100%;background:#252f36;color:#f4f1e9;border:1px solid #4b5b66;border-radius:9px;padding:12px;font:inherit}
-    button{background:#e1b06c;color:#152027;font-weight:750;border:0;cursor:pointer}
-    button:hover{background:#f3c184}h2{font-size:19px;margin:0}#result{background:#27343c;border:1px solid #465b67;padding:15px;border-radius:10px;line-height:1.5;display:none}
-    #result.show{display:block}.pill{display:inline-block;font-size:12px;color:#ffdea3;border:1px solid #906e3e;padding:4px 9px;border-radius:20px}
-    .small{font-size:13px;color:#bbc4c9;line-height:1.5}.file-input{font-size:12px}
-    #seam{position:absolute;z-index:4;right:18px;bottom:18px;width:auto;background:#182329ec;color:#f0d6a4;border:1px solid #6d7980;font-size:13px;padding:10px 13px}
-    #seam:disabled{opacity:.35;cursor:not-allowed}
-    #stage{overflow:hidden}
+    :root{color-scheme:dark;background:#0a0a0a;color:#fafafa}
+    *{box-sizing:border-box}body{margin:0;font-family:"Hanken Grotesk",Inter,ui-sans-serif,system-ui,sans-serif}
+    h1{margin:0}button{font:inherit;border:0;cursor:pointer}
     /* Start screen */
     #start{--bg:#0a0a0a;--text:#fafafa;--muted:#a3a3a3;--line:#262626;--line-strong:#fafafa;--surface:#141414;
       font-family:"Hanken Grotesk",Inter,ui-sans-serif,system-ui,sans-serif;background:var(--bg);color:var(--text);
@@ -112,7 +97,52 @@
     @media(min-width:640px){.brand h1{font-size:56px}}
     @media(max-height:640px){#start{padding-top:64px}.theme{min-height:80px;padding:10px 6px;gap:6px}.brand{margin-bottom:20px}.rounds{margin-top:14px}.start-wrap{margin-top:22px}.start-foot{margin-top:14px}}
     @media(prefers-reduced-motion:reduce){.score{animation:none}#start *,#settings,#settings *{transition:none!important}#settings[open]{animation:none}}
-    @media(max-width:920px){main{grid-template-columns:1fr}aside{border-left:0;border-top:1px solid #344047}#stage,#panorama{min-height:400px}}
+    /* Game screen: full-screen panorama, dock with timeline + map */
+    #game{--bg:#0a0a0a;--text:#fafafa;--muted:#a3a3a3;--line:#262626;--surface:#141414;--card:rgba(10,10,10,.88);
+      position:fixed;inset:0;background:var(--bg);color:var(--text);overflow:hidden}
+    #panorama{position:absolute;inset:0}
+    #panorama .pnlm-load-box{background:var(--card);border-radius:12px;font-family:inherit}
+    #backBtn{left:16px;right:auto;background:var(--card)}
+    .round-pill{position:absolute;z-index:2;top:max(16px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);height:44px;padding:0 16px;display:flex;align-items:center;
+      border-radius:12px;background:var(--card);border:1px solid var(--line);font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
+    .dock{position:absolute;z-index:2;left:50%;bottom:max(24px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(960px,calc(100% - 32px));
+      display:flex;align-items:flex-end;gap:12px;pointer-events:none}
+    .dock>*{pointer-events:auto}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px}
+    .timeline{flex:1;min-width:0;height:120px;padding:14px 20px 12px}
+    .timeline-head{display:flex;justify-content:space-between;align-items:baseline}
+    .timeline-head label{margin:0;font-size:13px;font-weight:500;color:var(--muted)}
+    .timeline-head output{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+    #year{-webkit-appearance:none;appearance:none;display:block;width:100%;height:36px;margin:2px 0 0;padding:0;border:0;background:transparent;cursor:pointer;--p:50%}
+    #year::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(to right,var(--text) var(--p),#404040 var(--p))}
+    #year::-moz-range-track{height:4px;border-radius:2px;background:#404040}
+    #year::-moz-range-progress{height:4px;border-radius:2px;background:var(--text)}
+    #year::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;margin-top:-10px;border-radius:50%;background:var(--text);border:0;transition:transform 120ms cubic-bezier(.2,0,0,1)}
+    #year::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--text);border:0}
+    #year:active::-webkit-slider-thumb{transform:scale(1.1)}
+    #year:focus-visible{outline:2px solid var(--text);outline-offset:4px;border-radius:4px}
+    .years{position:relative;height:16px;margin:0 12px;font-size:12px;color:#737373;font-variant-numeric:tabular-nums}
+    .years span{position:absolute;transform:translateX(-50%)}
+    .years span::before{content:"";position:absolute;left:50%;top:-8px;width:1px;height:5px;background:#404040}
+    .map-slot{position:relative;flex:none;width:200px;height:120px}
+    .map{position:absolute;right:0;bottom:0;width:200px;height:120px;overflow:hidden;cursor:crosshair;
+      transition:width 240ms cubic-bezier(.2,0,0,1),height 240ms cubic-bezier(.2,0,0,1)}
+    .map img,.pin-box{position:absolute;left:12px;right:12px;top:32px;bottom:12px}
+    .map img{width:calc(100% - 24px);height:calc(100% - 44px);pointer-events:none;user-select:none}
+    .map-label{position:absolute;left:12px;top:10px;font-size:13px;font-weight:500;color:var(--muted);pointer-events:none}
+    .map:hover,.map.open{z-index:3;background:var(--bg);width:min(560px,calc(100vw - 32px));height:min(300px,calc((100vw - 32px)*.54))}
+    .pin{position:absolute;width:28px;height:28px;margin:-28px 0 0 -14px;color:#ffd43b;pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.5))}
+    .pin:not(.show){display:none}
+    @media(max-width:639px){
+      .dock{flex-direction:column;align-items:stretch;gap:8px}
+      .map-slot{align-self:flex-end;width:132px;height:80px}
+      .map{width:132px;height:80px}
+      .map:not(.open) .map-label{display:none}
+      .map:not(.open) img,.map:not(.open) .pin-box{top:8px;left:8px;right:8px;bottom:8px}
+      .map:not(.open) img{width:calc(100% - 16px);height:calc(100% - 16px)}
+      .timeline{height:auto;padding:12px 16px 10px}
+    }
+    @media(prefers-reduced-motion:reduce){.map,#game *{transition:none!important}}
   </style>
 </head>
 <body>
@@ -153,19 +183,23 @@
   <form method="dialog"><button id="settingsDone">Fertig</button></form>
 </dialog>
 <div id="game" hidden>
-<header><div><h1>WO &amp; WANN?</h1><p>Ein ZuWi Creative Assignment von Matteo Winter &amp; Niklas Meller unter Aufsicht von Wolfgang Gruber</p></div><span class="pill">360° PILOT · 0/60 FREIGEGEBEN</span></header>
-<main>
-  <section id="stage"><div id="panorama"></div><button id="seam" type="button" disabled title="Zum Panorama-Übergang bei 0/360° drehen">Naht prüfen · 180°</button><div id="empty"><div><h2>Noch kein Panorama verfügbar</h2><p class="small">Die ersten drei historischen Szenen sind vorbereitet. Lade ein lokales 360°-Testpanorama (equirectangular, 2:1) hoch, um dich schon jetzt umzusehen.</p></div></div></section>
-  <aside>
-    <div><label for="scene">Pilot-Szene</label><select id="scene"></select></div>
-    <div><label for="upload">Eigenes 360°-Testbild laden</label><input class="file-input" id="upload" type="file" accept="image/jpeg,image/png,image/webp"><p class="small" id="imageStatus">Keine Bilddatei geladen.</p></div>
-    <div><label for="country">Welches Land?</label><select id="country"><option value="">Land wählen</option><option>Großbritannien</option><option>Guatemala</option><option>China</option><option>Indien</option><option>Brasilien</option><option>Deutschland</option><option>Japan</option></select></div>
-    <div><label for="period">Welche Epoche?</label><select id="period"><option value="">Epoche wählen</option><option value="1600">1600–1749</option><option value="1750">1750–1849</option><option value="1850">1850–1913</option><option value="1914">1914–1945</option><option value="1946">1946–1989</option><option value="1990">1990–2026</option></select></div>
-    <button id="guess">Antwort überprüfen</button>
-    <div id="result" role="status" aria-live="polite"></div>
-    <div class="small">Dies ist ein Test-Viewer, noch keine fertige Partie. Die Pilot-Szenen sind fiktive, historisch inspirierte Kompositszenen. Ein hochgeladenes Testbild ist nicht automatisch die gewählte Szene.</div>
-  </aside>
-</main>
+  <div id="panorama" aria-label="360°-Ansicht: ziehen zum Umsehen"></div>
+  <button class="icon-btn" id="backBtn" type="button" aria-label="Zurück zum Start">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+  </button>
+  <div class="round-pill" id="roundPill">Bild 1 / 5</div>
+  <div class="dock">
+    <div class="card timeline">
+      <div class="timeline-head"><label for="year">Wann?</label><output id="yearOut" for="year">1810</output></div>
+      <input id="year" type="range" min="1600" max="2025" step="1" value="1810">
+      <div class="years" aria-hidden="true"></div>
+    </div>
+    <div class="map-slot"><div class="card map" id="map" role="button" tabindex="0" aria-label="Weltkarte: Ort markieren">
+      <span class="map-label">Wo?</span>
+      <img src="assets/map/world.svg" alt="">
+      <div class="pin-box"><svg class="pin" id="pin" viewBox="0 0 24 24" fill="currentColor" stroke="#0a0a0a" stroke-width="1.25"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6" fill="#0a0a0a" stroke="none"/></svg></div>
+    </div></div>
+  </div>
 </div>
 <script>
 // Start-screen background: historical images (public domain / CC0, see docs/START_SCREEN_IMAGES.md)
@@ -200,35 +234,36 @@ build();
 <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.7/build/pannellum.js"></script>
 <script>
 (async ()=>{
-let scenes=[],viewer=null,uploadedUrl=null,hasImage=false;
+let scenes=[],viewer=null;
 const $=id=>document.getElementById(id);
-const periods=[[1600,1749],[1750,1849],[1850,1913],[1914,1945],[1946,1989],[1990,2026]];
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function current(){return scenes.find(s=>s.id===$('scene').value);}
-// Status is only reported after Pannellum's own load/error events, so a missing file or missing WebGL is never shown as "loaded".
-function showImage(url,loadedMsg){if(!window.pannellum){$('imageStatus').textContent='Pannellum konnte nicht geladen werden (Internetverbindung prüfen).';return false;}
-if(viewer){viewer.destroy();viewer=null;}
-hasImage=false;$('seam').disabled=true;$('imageStatus').textContent='Panorama wird geladen …';
-$('empty').style.display='none'; const v=viewer=pannellum.viewer('panorama',{type:'equirectangular',panorama:url,autoLoad:true,showControls:true,compass:false,mouseZoom:true});
-v.on('load',()=>{if(v!==viewer)return;hasImage=true;$('seam').disabled=false;$('imageStatus').textContent=loadedMsg;});
-v.on('error',()=>{if(v!==viewer)return;hasImage=false;$('seam').disabled=true;$('imageStatus').textContent='Panorama konnte nicht angezeigt werden (Datei fehlt oder Browser ohne WebGL).';});
-return true;}
-function openScene(){
-$('result').classList.remove('show');$('country').value='';$('period').value='';
-if(uploadedUrl){URL.revokeObjectURL(uploadedUrl);uploadedUrl=null;}
-$('upload').value='';hasImage=false;$('seam').disabled=true;const s=current();if(!s)return;
-if(!s.panorama_path){if(viewer){viewer.destroy();viewer=null;}$('empty').style.display='flex';$('imageStatus').textContent='Für diese Szene ist noch kein Panorama vorhanden.';return;}
-showImage(s.panorama_path,'Testpanorama geladen – Rundumblick möglich; Naht und Geometrie noch ungeprüft.');
+// Widest view that still looks natural: about 100° vertical, at most 130° horizontal. Zoom is locked to it.
+function fov(){const a=innerWidth/innerHeight;return Math.min(130,2*Math.atan(Math.tan(50*Math.PI/180)*a)*180/Math.PI);}
+// Local test: ?pano=assets/... loads another panorama from this site (relative paths under assets/ only).
+function panoUrl(){const q=new URLSearchParams(location.search).get('pano');
+  if(q&&/^assets\/[\w\/.-]+\.(jpe?g|png|webp)$/i.test(q))return q;
+  return (scenes.find(s=>s.panorama_path)||{}).panorama_path;}
+function startGame(){
+  const url=panoUrl();if(!url||!window.pannellum||viewer)return;const h=fov();
+  viewer=pannellum.viewer('panorama',{type:'equirectangular',panorama:url,autoLoad:true,showControls:false,compass:false,
+    mouseZoom:false,keyboardZoom:false,hfov:h,minHfov:h,maxHfov:h,pitch:0,yaw:0});
 }
-try {const r=await fetch('data/scenes.json');if(!r.ok)throw Error('JSON fehlt');const data=await r.json();scenes=data.scenes||[];
-scenes.forEach((s,i)=>{const o=document.createElement('option');o.value=s.id;o.textContent='Szene '+String(i+1).padStart(2,'0')+' · '+(s.industry||'Produktionsort');$('scene').appendChild(o);});
-$('scene').addEventListener('change',openScene);}
-catch(e){$('imageStatus').textContent='Szenenliste nicht verfügbar. Bitte lokalen HTTP-Server starten.';}
-$('upload').addEventListener('change',e=>{const f=e.target.files?.[0];if(!f)return;
-if(!/^image\/(jpeg|png|webp)$/.test(f.type)){$('imageStatus').textContent='Bitte JPG, PNG oder WebP wählen.';return;}
-const im=new Image();const u=URL.createObjectURL(f);im.onload=()=>{if(im.width!==im.height*2){$('imageStatus').textContent='Ungültiges 2:1-Bild ('+im.width+'×'+im.height+'). Es wird kein Panorama angezeigt.';URL.revokeObjectURL(u);return;}
-if(uploadedUrl)URL.revokeObjectURL(uploadedUrl);uploadedUrl=u;showImage(u,'Lokales Testpanorama: '+f.name+' ('+im.width+'×'+im.height+').');};
-im.onerror=()=>{URL.revokeObjectURL(u);$('imageStatus').textContent='Bild konnte nicht gelesen werden.';};im.src=u;});
+addEventListener('resize',()=>{if(!viewer)return;const h=fov();viewer.setHfovBounds([h,h]);viewer.setHfov(h,false);});
+try{const r=await fetch('data/scenes.json');if(r.ok)scenes=(await r.json()).scenes||[];}catch(e){}
+// Timeline
+const year=$('year'),years=document.querySelector('.years');
+for(const y of [1600,1700,1800,1900,2000]){const t=document.createElement('span');t.textContent=y;t.style.left=((y-1600)/425*100)+'%';years.appendChild(t);}
+function syncYear(){year.style.setProperty('--p',((year.value-1600)/425*100)+'%');$('yearOut').textContent=year.value;}
+year.addEventListener('input',syncYear);syncYear();
+// Map: hover (or tap on touch) enlarges it, click places the pin. Stored as lon/lat for the guess later.
+const map=$('map'),pin=$('pin'),box=document.querySelector('.pin-box');let guessLL=null;
+function placePin(){if(!guessLL)return;pin.style.left=((guessLL.lon+180)/360*100)+'%';pin.style.top=((84-guessLL.lat)/142*100)+'%';pin.classList.add('show');}
+map.addEventListener('click',e=>{
+  if(matchMedia('(hover: none)').matches&&!map.classList.contains('open')){map.classList.add('open');return;}
+  const r=box.getBoundingClientRect();const x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+  if(x<0||x>1||y<0||y>1)return;guessLL={lon:x*360-180,lat:84-y*142};placePin();});
+document.addEventListener('pointerdown',e=>{if(!map.contains(e.target))map.classList.remove('open');});
+map.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();map.classList.toggle('open');}});
+$('backBtn').addEventListener('click',()=>{$('game').hidden=true;$('start').hidden=false;});
 const blockInputs=[...document.querySelectorAll('#startForm input[name=block]')];
 function syncStart(){const n=blockInputs.filter(i=>i.checked).length;$('startBtn').disabled=!n;$('startBtn').textContent=n?'Spiel starten':'Mindestens ein Thema wählen';}
 try{const saved=JSON.parse(localStorage.getItem('mit-blocks'));if(Array.isArray(saved)&&saved.length)blockInputs.forEach(i=>i.checked=saved.includes(i.value));}catch(e){}
@@ -246,15 +281,7 @@ rounds.addEventListener('input',syncRounds);syncRounds();
 $('startForm').addEventListener('submit',e=>{e.preventDefault();const blocks=new FormData(e.target).getAll('block');if(!blocks.length)return;
 try{localStorage.setItem('mit-blocks',JSON.stringify(blocks));}catch(err){}
 document.body.dataset.blocks=blocks.join(' ');document.body.dataset.rounds=rounds.value;
-try{localStorage.setItem('mit-rounds',rounds.value);}catch(err){}$('start').hidden=true;$('game').hidden=false;if(scenes.length&&!viewer)openScene();});
-$('seam').addEventListener('click',()=>{if(viewer)viewer.setYaw(180);});
-$('guess').addEventListener('click',()=>{const s=current();if(!s)return;
-const p=periods.find(([a,b])=>s.year>=a&&s.year<=b);const entered=$('period').value;
-const countryOk=$('country').value===s.country_de,yearOk=p&&entered===String(p[0]);
-const msg=!hasImage?'Hinweis: Es wurde noch kein freigegebenes Szenenpanorama geladen. Das Ergebnis ist nur eine Testauswertung. ':'';
-$('result').innerHTML='<strong>'+escapeHtml(msg)+(countryOk&&yearOk?'Beide Antworten richtig!':countryOk?'Land richtig, Epoche falsch.':yearOk?'Epoche richtig, Land falsch.':'Noch nicht richtig.')+'</strong><p><strong>Auflösung:</strong> '+escapeHtml(s.country_de)+', ca. '+s.year+'.</p><p>'+escapeHtml(s.learning_de)+'</p><p class="small">KI-Komposit / historisch inspirierte Beispielszene, kein Originalfoto eines belegten Betriebs.</p>';
-$('result').classList.add('show');
-});
+try{localStorage.setItem('mit-rounds',rounds.value);}catch(err){}$('roundPill').textContent='Bild 1 / '+rounds.value;$('start').hidden=true;$('game').hidden=false;startGame();});
 })();
 </script>
 </body>
