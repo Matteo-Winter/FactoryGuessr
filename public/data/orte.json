@@ -385,6 +385,28 @@
    "group": "X01",
    "panorama_path": "assets/orte/katanga-kupfer.jpg",
    "source_file": "katanga-kupfer.png"
+  },
+  {
+   "id": "X02",
+   "block": "events",
+   "title_de": "Weltausstellung im Kristallpalast, London 1851",
+   "place_de": "Kristallpalast im Hyde Park, London",
+   "country_de": "Großbritannien",
+   "year": 1851,
+   "lat": 51.503,
+   "lon": -0.169,
+   "overview_de": "Unter einem riesigen Dach aus Eisen und Glas flanieren Besucher in Zylinder und Reifrock an einem Springbrunnen vorbei, daneben stehen Dampfmaschinen, Skulpturen und Teppiche aus aller Welt. Mitten in der Halle wächst ein alter Baum – der Bau umschloss die Ulmen des Hyde Parks. Die „Great Exhibition“ von 1851 war die erste Weltausstellung.",
+   "learning_de": "Der Kristallpalast wurde aus vorgefertigten Eisen- und Glasteilen in nur rund fünf Monaten errichtet. Über sechs Millionen Menschen sahen Maschinen, Rohstoffe und Waren aus Industrie und Kolonien. Großbritannien präsentierte sich als „Werkstatt der Welt“ und Zentrum des Welthandels; die Schau warb für Freihandel und industriellen Fortschritt.",
+   "visual_clues": [
+    "riesige Halle aus Eisen und Glas",
+    "Dampfmaschine und Exponate aus aller Welt",
+    "Zylinder, Reifröcke und Hauben der 1850er",
+    "Baum mitten in der Halle"
+   ],
+   "historical_status": "composite_reconstruction",
+   "group": "X02",
+   "panorama_path": "assets/orte/kristallpalast-1851.jpg",
+   "source_file": "kristallpalast-1851.png"
   }
  ]
 }
