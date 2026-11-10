@@ -1,11 +1,8 @@
 # Deine 14 Szenen – Handels-/Machtzentren und Wendepunkte
 
-**AKTUELLE ZUSTÄNDIGKEIT ab 09.11.2026:** **6 Handels-/Machtzentren T01–T06 + 8 historische Wendepunkte E01–E08 = 14 Bilder**. **Keine** Produktionsstätten erstellen. Die alte 30-neueren-Liste und der alte 60er-Masterplan sind nur Archiv.
+**Aktueller Stand nach Bildprüfung 09.11.2026:** Dieser Katalog beschreibt weiterhin die 14 T/E-Motive. **T01/T03/T04 wurden visuell akzeptiert** (3), **T05/E01/E03/E04/E05/E07 müssen neu erstellt werden** (6), **T02/T06/E02/E06/E08 sind im Review nicht bewertet** (5). Zusätzlich stehen acht P-Produktionsbilder ohne Review offen. **Insgesamt 19 aktive Aufgaben beim Kollegen.**
 
-**Drei Pflichtdateien für deinen Einstieg:**
-1. [Neue Gesamtauswahl mit allen 30 Orten und ihren Gründen](../SCENE_MASTERPLAN_30.md)
-2. **[Ausführlicher Copy-paste-Masterprompt mit Recherche-, 3D- und 360°-QA-Arbeitsablauf](COLLEAGUE_MASTER_PROMPT_14.md)**
-3. [Maschinenlesbares Szenenmanifest, eindeutige IDs und Quellenstarts](ACTIVE_SCENES_30.json)
+**Verbindlich:** [Bildstatus 30](../IMAGE_PRODUCTION_STATUS_30.md) · [Gemini-Auftrag aktuell](GEMINI_IMAGE_HANDOFF_CURRENT.md) · [Maschinenliste](ACTIVE_SCENES_30.json). Die ausführliche [alte 14er-Anweisung](COLLEAGUE_MASTER_PROMPT_14.md) gilt nur als technische/historische Detailhilfe, nicht mehr als vollständige Zuständigkeitsliste.
 
 ## A. Handels- und Machtzentren (6)
 

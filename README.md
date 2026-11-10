@@ -1,5 +1,12 @@
 # Made in Time — FactoryGuessr
 
+## Aktueller Bildstatus (nach E04 Wall Street und E05 Guatemala)
+- **13 visuell akzeptiert**, **4 ausdrücklich neu**, **13 ohne aktuelles Review**. Keine finale Spiel-/360°-Freigabe (0/30).
+- E04 Wall Street 1929 nach Nutzerfeedback visuell akzeptiert; E05 Guatemala 1954 neuer, noch ungeprüfter 3D-first-Fotokandidat. [E05 QA](docs/scene-research/E05_Guatemala_1954_3D_photo_QA.md).
+- **[Verbindliche Bildliste](docs/IMAGE_PRODUCTION_STATUS_30.md)** · [Gemini-Briefing (17 offen)](docs/team/GEMINI_IMAGE_HANDOFF_CURRENT.md) · [Issue #18](https://github.com/Matteo-Winter/FactoryGuessr/issues/18).
+- Die neue Fotofassung ist kein native 4K-Foto und nicht streng 3D-geometriegebunden; die exakten Bilddateien liegen im Chat-ZIP, nicht automatisch im Repository.
+
+
 **Guess where. Guess when.**
 
 Ein historisches GeoGuessr-artiges Lernspiel für die ZuWi-Vertiefung **„Von Handelskompanien zu Multinational Corporations“**: In einer drehbaren historischen Produktions-, Handels- oder Ereignisszene erraten Spielende das Land und die Epoche. Danach folgt eine kurze Einordnung zu Arbeitsbedingungen, Industrie, Kolonialismus, Unternehmensmacht oder globalen Lieferketten.
@@ -13,7 +20,7 @@ Ein historisches GeoGuessr-artiges Lernspiel für die ZuWi-Vertiefung **„Von H
 - Informationen wie Land, Zeitraum und Lernkontext werden getrennt vom KI-Bild geprüft.
 - Keine automatischen Behauptungen über konkrete Unternehmen, die nicht belegt sind.
 
-**Projektstatus:** 3 erste Szenenkonzepte mit je einem KI-generierten 2:1-Testbild im Repository, **0/30 historisch und geometrisch freigegebene Panoramen**. Bilder werden erst nach Sichtprüfung als `ready` markiert.
+**Aktueller Bildstatus (09.11.2026):** **12 Bildfassungen visuell akzeptiert**, **5 Bilder neu zu machen**, **13 ohne aktuelles Urteil**. Kollege mit Gemini bearbeitet **18 offene Arbeiten**. E01 Boston wurde nach dem Remake akzeptiert; E03 Suez ist nach neuem 3D-/Foto-Versuch **wegen der 360°-Naht weiterhin FAIL**. **0/30 formale Spielfreigaben**. [Bildstatus und Namen](docs/IMAGE_PRODUCTION_STATUS_30.md).
 
 ## Repository
 
@@ -71,17 +78,15 @@ python3 scripts/generate_skybox.py gb-1840-textile-mill
 
 Das exportiert den Prompt und die Bildvorgaben (**kein API-Aufruf, keine Kosten**). Zur anschließenden manuellen Generierung und Qualitätsprüfung siehe `docs/PANORAMA_PIPELINE.md`. Niemals Zugangsdaten ins Repo oder ins Frontend schreiben.
 
-## Aktuelle Arbeitsteilung: 16 Produktionsorte + 14 weitere Schauplätze
+## Bildproduktion: 12 akzeptiert, 5 neu, 13 offen
 
-Der ältere **30/30-Jahrgangssplit ist außer Kraft**. Aktive IDs und Übergaben:
+**[Verbindlicher Status aller 30 Szenen](docs/IMAGE_PRODUCTION_STATUS_30.md)** · [JSON/Einzelentscheidungen](docs/team/ACTIVE_SCENES_30.json) · **[Gemini-Auftrag für 18 offene Arbeiten](docs/team/GEMINI_IMAGE_HANDOFF_CURRENT.md)** · [Issue #18](https://github.com/Matteo-Winter/FactoryGuessr/issues/18).
 
-- **[Aufgabenverteilung 16/14](docs/team/ACTIVE_SPLIT_30.md)**
-- **[Für Projektleitung: 16 Produktionsstätten P01–P16](docs/team/USER_16_PRODUCTION.md)**
-- **[Für Kollegen: 6 Handelsorte T01–T06 und 8 Wendepunkte E01–E08](docs/team/COLLEAGUE_14_SCENES.md)**
-- **[Sehr ausführlicher 3D-first-Masterprompt speziell für den Kollegen](docs/team/COLLEAGUE_MASTER_PROMPT_14.md)**
-- **[Maschinenlesbare 30er-Liste](docs/team/ACTIVE_SCENES_30.json)**
+- **12 visuell akzeptiert:** P01/P02/P03/P04/P05/P09/P10/P13, T01/T03/T04, **E01 Boston**.
+- **5 neu:** T05 und E03/E04/E05/E07. **E03 Suez:** neuer Fotokandidat samt echter 3D-Referenz vorhanden, doch die 180°-Naht ist noch nicht sauber; [QA-Bericht](docs/scene-research/E03_Suez_1869_REWORK_QA.md).
+- **13 aktuell nicht beurteilt:** P06/P07/P08/P11/P12/P14/P15/P16, T02/T06, E02/E06/E08.
 
-Vor **jeder** Generierung historische Faktenkarte, konsistente 3D-Geometrie, native sphärische Kugelprojektion und vollständige 360°-QA. Handels-/Ereignisszenen werden als Rekonstruktion gekennzeichnet; keine erfundenen historischen Augenzeugenfotos. Bisherige Bilder bleiben Kandidaten bis zur QA.
+Die Bilddateien aus dem Chat sind nicht automatisch auf GitHub hochgeladen; das Urteil „Passt“ ist **nur eine visuelle Auswahl**, keine 360°- oder Historienfreigabe. Keine stillschweigende `ready`-Änderung in `public/data/scenes.json`.
 
 ## 360°-Qualitätskontrolle und nächste Bildpipeline
 

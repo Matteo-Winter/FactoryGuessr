@@ -1,5 +1,12 @@
 # Claude Code – Zusammenarbeit an Made in Time
 
+## AKTUELLE Bildprüfung / Quellenstand (09.11.2026)
+- **[Offizieller Bildstatus 13 visuell akzeptiert / 4 neu / 13 offen](docs/IMAGE_PRODUCTION_STATUS_30.md)**. Maßgeblich statt älterer 4/26-, 11/6-, 12/5- und 16/14-Datei-Aufteilungen.
+- **E04 Wall Street 1929:** Nutzer hat das neu generierte Bild mit „perfekt“ visuell akzeptiert; keine formale Geometrie-/Historien-/Lizenzfreigabe folgern.
+- **E05 Guatemala 1954:** neuer 3D-first-Fotokandidat mit 360°-Nahtglättung vorhanden, aber visuelle Abnahme und historische Palastgenauigkeit offen. [Ausführliche QA](docs/scene-research/E05_Guatemala_1954_3D_photo_QA.md). Kein neuer `ready`-Status. ZIP im Chat, nicht im Repository.
+- **[Gemini-Auftrag für die 17 offenen Bilder](docs/team/GEMINI_IMAGE_HANDOFF_CURRENT.md)** · [GitHub Issue #18](https://github.com/Matteo-Winter/FactoryGuessr/issues/18). Keine weiteren 4/26- oder 12/5-Produktionsaufträge ausführen.
+
+
 Projekt: `Matteo-Winter/FactoryGuessr` (privat), Spieltitel **Made in Time – Guess where. Guess when.**
 
 ## Arbeitsweise
@@ -13,7 +20,7 @@ Projekt: `Matteo-Winter/FactoryGuessr` (privat), Spieltitel **Made in Time – G
 
 ## Produkt- und Technikentscheidungen
 
-- Aktives Ziel: **30 verschiedene 360°-Schauplätze** = 16 Produktionsstätten (Projektleitung), 6 Handels-/Machtzentren und 8 historische Wendepunkte (Kollege), ca. 1660–2023. Alte 60er- und 30/30-Pläne sind Archiv. Schwerpunkt ZuWi: *Von Handelskompanien zu Multinational Corporations*.
+- Aktives Ziel: **30 verschiedene 360°-Schauplätze** = 16 Produktionsstätten, 6 Handels-/Machtzentren, 8 historische Wendepunkte, ca. 1660–2023. **Bildstatus nach Review + Boston-Nachtrag 09.11.2026: 12 visuell akzeptiert, 5 neu zu machen, 13 offen. Kollege bearbeitet 18 Bild-To-dos; Projektleitung prüft alle 30.** Alte 60er- und 30/30-Pläne sind Archiv. Schwerpunkt ZuWi: *Von Handelskompanien zu Multinational Corporations*.
 - V1: **360°-Panorama** mit fixer Kameraposition (Maus ziehen, Zoom, Vollbild); kein frei begehbares, geometrisch rekonstruiertes 3D.
 - Für Street-View-artiges Weitergehen sind später *mehrere* konsistente Kamera-Standpunkte und Hotspots nötig. Nicht vortäuschen, dass ein einzelnes 2D-Bild dies bereits bietet.
 - Derzeit drei vorbereitete Szenen in `public/data/scenes.json`:
@@ -25,17 +32,15 @@ Projekt: `Matteo-Winter/FactoryGuessr` (privat), Spieltitel **Made in Time – G
 - Vercel: statisches Hosting über `public/` (`vercel.json`), ohne notwendiges Backend; **kein Deployment ohne expliziten Auftrag**.
 - Keine Secrets committen; keine kostenpflichtigen API-Aufrufe ohne Freigabe.
 
-## AKTUELLER Motivplan und Produktionsfreigabe (09.11.2026)
+## AKTUELLER Bildstatus (Nutzerprüfung + E01-Nachtrag, 09.11.2026)
 
-- **[Aktiver Gesamtplan mit genau 30 Leveln](docs/SCENE_MASTERPLAN_30.md)**: 16 P + 6 T + 8 E. Die 60er-Liste und ältere 30/30-Teilung gelten **nicht** mehr als Produktionsaufträge.
-- **[Arbeitsteilung 16/14](docs/team/ACTIVE_SPLIT_30.md)** · [Nutzer – 16 Produktionen](docs/team/USER_16_PRODUCTION.md) · [Kollege – 14 Handel-/Ereignisszenen](docs/team/COLLEAGUE_14_SCENES.md).
-- **[Pflicht-Masterprompt für Kollegen](docs/team/COLLEAGUE_MASTER_PROMPT_14.md)**: historische Quellen, 3D-first, native sphärische 4K-Projektion, Bildrealismus, QA, event-sensible Rekonstruktion, Lieferschema.
-- Nur die **zugewiesenen IDs** bearbeiten. T/E-Szenen nie mit dem alten „neuere 30 Produktionsstätten“-Auftrag verwechseln; P-Bilder bleiben bei Projektleitung.
-- Pro Motiv institutionelle/archivarische Quellen, Ort und alte/historische Staatsform, produktive/historische Kernhandlung, mindestens zwei plausible Orte-/Zeitmerkmale, Anachronismen; dann echte 3D-Szene, Bilder, perspektivische QA und Browser-Review. **Kein 2:1-Foto als echten 360°-Raum ausgeben.**
-- Für Ereignisse mit Opfern oder Konflikten keine scheinbar authentischen, erfundenen Augenzeugenbilder, Gewalt- oder Opferbilder; respektvolle **klar als KI-Rekonstruktion** gekennzeichnete historische Schauplätze.
-- Die **drei existierenden Pilotszenen** `gb-1840-textile-mill`, `gt-1910-banana-packing`, `cn-2015-electronics-assembly` im Repo sind unverändert weiterzuverwenden, aber **nicht freigegeben**. Weitere vier P-Motive haben Bildkandidaten aus dem Chat (NL/Murano/Jingdezhen/Barbados); technische und historische Abnahme offen.
-- `approved_panorama_count=0`; `target_scenes=30`. Weder `scene_status=ready` noch Deployment oder Merge ohne Review.
-- Kollegen-Branchnamen `colleague/T01-...` bzw. `colleague/E01-...`, Claude-Code-Branchnamen `claude/...`. Keine parallele direkte Änderung an `public/data/scenes.json` ohne Koordination.
+- **[Aktiver Gesamtplan: 30 Szenen](docs/SCENE_MASTERPLAN_30.md)** · [aktuelle Bildliste mit Dateinamen](docs/IMAGE_PRODUCTION_STATUS_30.md) · [JSON](docs/team/ACTIVE_SCENES_30.json) · [Gemini-Briefing für 18 offene Bilder](docs/team/GEMINI_IMAGE_HANDOFF_CURRENT.md) · [GitHub Issue #18](https://github.com/Matteo-Winter/FactoryGuessr/issues/18).
+- **12 visuell akzeptiert:** `P01,P02,P03,P04,P05,P09,P10,P13,T01,T03,T04,E01`. E01 wurde im Folgechat mit „okay passt, nächstes bild“ visuell akzeptiert; **keinen technischen Kugel-PASS daraus folgern**.
+- **5 explizit neu:** `T05,E03,E04,E05,E07`. **E03:** [3D-first Suez-Versuch und nicht bestandene Foto-Naht](docs/scene-research/E03_Suez_1869_REWORK_QA.md); neue Original-/3D-/QA-Binärdateien im Chat-ZIP, nicht automatisch im Repo. `suezkanal.png` weiter ersetzt werden müssen.
+- **13 ohne aktuelles Prüfurteil:** `P06,P07,P08,P11,P12,P14,P15,P16,T02,T06,E02,E06,E08`. Vorhandene Kandidaten erst zur Prüfung einreichen, keine Ablehnung behaupten.
+- Zusatzreview: `review-perlfluss-alternative.png` ist zweite akzeptierte T04-Variante, `review-venedig.webp` abgelehnte P02-Alternative. Marktplatz/Machu Picchu/Regenwald/Eisenbahn sind keine zusätzlichen aktiven Level.
+- Keine Änderungen an `public/data/scenes.json` ohne separate historische/technische Browser-QA. `approved_panorama_count=0`, `target_scenes=30`. Kein eigenmächtiger Merge, Deploy oder bezahlter API-Aufruf.
+- Jede neue Szene quellenbasiert, 3D-/360°-Rückseite, Ufer/Schiffe/Balken/Zenit/Nadir im echten perspektivischen Viewer prüfen. Zahl `0,0×` kann durch unnütze Spiegelung entstehen und ist kein visueller PASS.
 
 ## Lokaler Start
 

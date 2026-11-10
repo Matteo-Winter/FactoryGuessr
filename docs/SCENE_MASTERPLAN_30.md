@@ -1,6 +1,13 @@
 # Made in Time – AKTIVER MASTERPLAN: 30 Szenen (ZuWi)
 
-**Aktuell beschlossen am 09.11.2026.** **16 Produktionsstätten (Projektleitung) + 6 Handels-/Machtzentren (Kollege) + 8 historische Wendepunkte (Kollege) = 30 Szenen insgesamt.**
+## Aktueller Bildstand nach E04 und E05 (09.11.2026)
+
+- **13 visuell „Passt“, 4 „Neu machen“, 13 ohne aktuelles Urteil**. Gesamtumfang unverändert 30; Freigabe im Spiel unverändert 0/30.
+- **E04 Wall Street:** neue Bildfassung vom Nutzer akzeptiert; **E05 Guatemala:** neue 3D-first-Fotofassung erzeugt, Nutzerreview und historischer Fassadenabgleich offen. Siehe [E05 Qualitätsbericht](scene-research/E05_Guatemala_1954_3D_photo_QA.md).
+- [Aktueller Bildstatus](IMAGE_PRODUCTION_STATUS_30.md) · [Gemini-Prompt für 17 offene](team/GEMINI_IMAGE_HANDOFF_CURRENT.md). Ältere 12/5- und 4/26-Zwischenstände sind ersetzt.
+
+
+**Aktuell beschlossen am 09.11.2026.** **16 Produktionsstätten + 6 Handels-/Machtzentren + 8 historische Wendepunkte = 30 Szenen insgesamt. Die Bildproduktion wird nach offener Bildliste verteilt.**
 
 **Dieser Plan ersetzt den alten Entwurf mit 60 Fabriken, die alte 30/30-Personenteilung und die kurz diskutierte 55er-Aufteilung.** Historische Dateien werden aus Gründen der Nachvollziehbarkeit nicht gelöscht, sind aber **nicht mehr aktive Produktionsaufträge**. **0/30 offizielle Abnahmen**; bestehende KI-Panoramen bleiben Kandidaten, bis ihre geometrische und historische QA wirklich bestanden ist.
 
@@ -10,34 +17,35 @@
 
 **Spiel:** Ein fester 360°-Standpunkt, freies Umsehen wie Street View. Erst heutiges Land und historische Epoche schätzen, optional eine dritte Frage nach dem Ereignis / der Machtstruktur. Die komplexen Fakten folgen **nach** der Auflösung, nicht als notwendige Voraussetzung fürs einfache Raten.
 
-## Zuständigkeit
+## AKTUELLER Bildstand nach E01 Boston und E03 Suez (09.11.2026)
 
-- **Projektleitung / Nutzer:** P01–P16 = 16 Produktionsstätten. Bestehende historischen Quellen-/Bildkandidaten für die alten IDs 01, 02, 03, 04, 07, 17 und 51 **behalten**.
-- **Kollege:** T01–T06 = sechs Handels-/Machtorte und E01–E08 = acht Wendepunkte, **14 Bilder**. Kein Eingriff in die P-Szenen.
-- **Alte Master-IDs bleiben erhalten** als Legacy-Verweis. Die neuen P/T/E-IDs steuern die Aufgabenverteilung. Bei Änderungen immer beide Kennungen erhalten.
-- **Quellenprüfung vor Bild:** Die unten genannten Jahre und Motive sind ein **redaktionell begründeter Arbeitsplan**, keine schon durchgängig historisch geprüfte Rekonstruktion. Institutionelle/archivische Quellen je Szene gesondert sammeln.
-- **Keine Änderung bestehender produktiver Pilotszenen** bis QA und Review. Erst dann Dateien in `public/`, `scene_status: ready`, Zähler anpassen, nie automatisch.
+**[Verbindliche Bildstatusliste 12/5/13](IMAGE_PRODUCTION_STATUS_30.md)** · [Gemini-Auftrag 5 Remakes + 13 offene](team/GEMINI_IMAGE_HANDOFF_CURRENT.md) · [JSON](team/ACTIVE_SCENES_30.json).
 
-## A. 16 Produktionsstätten – Projektleitung
+- **12 akzeptierte visuelle Bildfassungen:** `P01,P02,P03,P04,P05,P09,P10,P13,T01,T03,T04,E01`; E01 Boston wurde nach dem neuen Bild vom Nutzer als „passt“ bestätigt.
+- **5 zu ersetzen:** `T05,E03,E04,E05,E07`. E03 Suez wurde in echter 3D-Raumvorlage sowie fotorealistisch neu erzeugt, aber **die Foto-Naht besteht den 360°-Test nicht**. [Detaillierter E03-Report](scene-research/E03_Suez_1869_REWORK_QA.md).
+- **13 ohne aktuelles Urteil:** `P06,P07,P08,P11,P12,P14,P15,P16,T02,T06,E02,E06,E08`. Genau **18 offene Bildarbeiten** beim Kollegen mit Gemini.
+- Unverändert: 30 verschiedene historische Schauplätze, Szenen-IDs, **0/30 formale Spiel-Level-Freigaben**. Weitere Alternativen außerhalb der 30 werden nicht automatisch zu Leveln.
+
+## A. 16 Produktionsstätten – 8 visuell akzeptiert, 8 noch offen
 
 | Neue ID | Alte Master-Nr. | Jahr | Land und Region | Hauptprodukt | Was auf dem Bild erkennbar sein soll | Stand |
 |---|---:|---:|---|---|---|---|
-| P01 | **01** | 1660 | Niederlande, Zaandam/Zaanstreek | Holzbretter | Windgetriebenes Sägewerk, Baumstämme im Kanal, flaches Polderland, Segelschiffe | Kandidat vorhanden |
-| P02 | **02** | 1680 | Italien, Murano bei Venedig | Glasgefäße | Glasbläser am Ofen, glühende Glasmasse, Laguneninsel mit Werkstätten | Kandidat vorhanden |
-| P03 | **03** | 1700 | China, Jingdezhen | Porzellan | Blau-weißes Geschirr, Tonformen, Holzbrennöfen, chinesischer Werkstatthof | Kandidat vorhanden |
-| P04 | **04** | 1700 | Barbados, St. James / Zuckerrohrgürtel | Rohrzucker | Zuckerrohr, walzenbetriebene Presse, große Kochkessel, tropische Felder | Kandidat vorhanden |
-| P05 | **07** | 1840 | Großbritannien, Manchester / Lancashire (Pilot) | Baumwollgarn und Stoff | Eisenstützen, Spinnmaschinen, Riemenantrieb, Backsteinhalle, Baumwollballen | Kandidat vorhanden |
-| P06 | **18** | 1880 | Japan, Tomioka, Gunma | Rohseide | Seidenkokons, Haspelmaschinen, Ziegel-/Holzarchitektur aus Meiji-Zeit | Recherche + Bild offen |
-| P07 | **15** | 1890 | Deutschland, Ruhrgebiet | Stahl | Hochöfen, Gießpfannen, Schienen, Schornsteine, Backsteinindustrie | Recherche + Bild offen |
-| P08 | **20** | 1900 | DR Kongo (heutiges Staatsgebiet), Äquatorregion / Kongobecken | Naturkautschuk | Wald-Kautschukranken, Latexgefäße, Sammelstellen am Fluss; **keine** Plantagenreihen aus Südostasien | Recherche + Bild offen |
-| P09 | **17** | 1910 | Guatemala, Karibikküste / Puerto-Barrios-Region (Pilot) | Bananen für den Export | Bananenstauden, Waschbecken, Holzkisten, kleine Bahngleise und tropische Landschaft | Kandidat vorhanden |
-| P10 | **16** | 1913 | USA, Highland Park / Detroit | Automobile | Frühe Model-T-artige Autos, bewegtes Montageband, Tageslicht-Fabrikhalle | Recherche + Bild offen |
-| P11 | **44** | 1970 | Ghana, Takoradi / Tema | Kakaomasse und Kakaobutter | Kakaoschoten und Bohnen, Röst-/Mahlmaschinen, tropischer Fabrikhof | Recherche + Bild offen |
-| P12 | **42** | 1975 | Saudi-Arabien, Ostprovinz / Dhahran | Erdöl | Ölförderanlagen, Pipeline, Wüstenhorizont, schwere Fahrzeuge der 1970er | Recherche + Bild offen |
-| P13 | **51** | 2015 | China, Shenzhen / Perlflussdelta (Pilot) | Elektronikgeräte | Leiterplatten, ESD-Arbeitsplätze, optische Qualitätskontrolle, moderne Fließbänder | Kandidat vorhanden |
-| P14 | **52** | 2018 | Bangladesch, Dhaka | T-Shirts und Kleidung | Große Nähhallen, Stoffzuschnitt, Packtische, urbane Umgebung | Recherche + Bild offen |
-| P15 | **53** | 2023 | Taiwan, Hsinchu | Halbleiterchips | Wafer und Reinraum, Robotik, Halbleiterfertigung; keine beliebigen Laptop-Montagen | Recherche + Bild offen |
-| P16 | **55** | 2023 | Chile, Salar de Atacama | Lithiumsalz-Vorprodukte | Türkisfarbene Solebecken, Salzfläche, Anden, Pumpstationen | Recherche + Bild offen |
+| P01 | **01** | 1660 | Niederlande, Zaandam/Zaanstreek | Holzbretter | Windgetriebenes Sägewerk, Baumstämme im Kanal, flaches Polderland, Segelschiffe | **Passt (visuell), QA offen** |
+| P02 | **02** | 1680 | Italien, Murano bei Venedig | Glasgefäße | Glasbläser am Ofen, glühende Glasmasse, Laguneninsel mit Werkstätten | **Passt (visuell), QA offen** |
+| P03 | **03** | 1700 | China, Jingdezhen | Porzellan | Blau-weißes Geschirr, Tonformen, Holzbrennöfen, chinesischer Werkstatthof | **Passt (visuell), QA offen** |
+| P04 | **04** | 1700 | Barbados, St. James / Zuckerrohrgürtel | Rohrzucker | Zuckerrohr, walzenbetriebene Presse, große Kochkessel, tropische Felder | **Passt (visuell), QA offen** |
+| P05 | **07** | 1840 | Großbritannien, Manchester / Lancashire (Pilot) | Baumwollgarn und Stoff | Eisenstützen, Spinnmaschinen, Riemenantrieb, Backsteinhalle, Baumwollballen | **Passt (visuell), QA offen** |
+| P06 | **18** | 1880 | Japan, Tomioka, Gunma | Rohseide | Seidenkokons, Haspelmaschinen, Ziegel-/Holzarchitektur aus Meiji-Zeit | **Offen, kein aktuelles Review** |
+| P07 | **15** | 1890 | Deutschland, Ruhrgebiet | Stahl | Hochöfen, Gießpfannen, Schienen, Schornsteine, Backsteinindustrie | **Offen, kein aktuelles Review** |
+| P08 | **20** | 1900 | DR Kongo (heutiges Staatsgebiet), Äquatorregion / Kongobecken | Naturkautschuk | Wald-Kautschukranken, Latexgefäße, Sammelstellen am Fluss; **keine** Plantagenreihen aus Südostasien | **Offen, kein aktuelles Review** |
+| P09 | **17** | 1910 | Guatemala, Karibikküste / Puerto-Barrios-Region (Pilot) | Bananen für den Export | Bananenstauden, Waschbecken, Holzkisten, kleine Bahngleise und tropische Landschaft | **Passt (visuell), QA offen** |
+| P10 | **16** | 1913 | USA, Highland Park / Detroit | Automobile | Frühe Model-T-artige Autos, bewegtes Montageband, Tageslicht-Fabrikhalle | **Passt (visuell), QA offen** |
+| P11 | **44** | 1970 | Ghana, Takoradi / Tema | Kakaomasse und Kakaobutter | Kakaoschoten und Bohnen, Röst-/Mahlmaschinen, tropischer Fabrikhof | **Offen, kein aktuelles Review** |
+| P12 | **42** | 1975 | Saudi-Arabien, Ostprovinz / Dhahran | Erdöl | Ölförderanlagen, Pipeline, Wüstenhorizont, schwere Fahrzeuge der 1970er | **Offen, kein aktuelles Review** |
+| P13 | **51** | 2015 | China, Shenzhen / Perlflussdelta (Pilot) | Elektronikgeräte | Leiterplatten, ESD-Arbeitsplätze, optische Qualitätskontrolle, moderne Fließbänder | **Passt (visuell), QA offen** |
+| P14 | **52** | 2018 | Bangladesch, Dhaka | T-Shirts und Kleidung | Große Nähhallen, Stoffzuschnitt, Packtische, urbane Umgebung | **Offen, kein aktuelles Review** |
+| P15 | **53** | 2023 | Taiwan, Hsinchu | Halbleiterchips | Wafer und Reinraum, Robotik, Halbleiterfertigung; keine beliebigen Laptop-Montagen | **Offen, kein aktuelles Review** |
+| P16 | **55** | 2023 | Chile, Salar de Atacama | Lithiumsalz-Vorprodukte | Türkisfarbene Solebecken, Salzfläche, Anden, Pumpstationen | **Offen, kein aktuelles Review** |
 
 **Auswahlprinzip:** Enthält die bereits vorbereiteten sieben Bildmotive und neun weitere mit starken Verbindungen zu Kolonialarbeit, Mechanisierung, multinationalen Lieferketten und Rohstoffmacht. Bewusst **keine** 16 nahezu identischen Fabrikhallen.
 
@@ -96,6 +104,4 @@
 
 ## Nächster Schritt
 
-- Nutzer: die bestehenden 7 Kandidaten gezielt abschließen und die weiteren 9 P-Szenen nach historischen Quellen erstellen.
-- Kollege: **T01 (Amsterdam/VOC, um 1670)** als erste Handels-/Machtszene, **E01 (Boston Tea Party 1773)** als erste Ereignisszene; *vor Massenproduktion je eine Testszene beider Typen* und dieselbe Qualitätsprüfung anwenden.
-- **Produktion nicht als Marketing-Visualisierung verkaufen:** Aussagen über Arbeitsbedingungen und historische Macht erst nach unabhängiger Sachprüfung in Lerntext aufnehmen.
+Kollege übernimmt **fünf** Remakes (T05/E03/E04/E05/E07) und **13** noch offene Bewertungen. Die Projektleitung prüft Stil und echte 360°-Geometrie getrennt. Kein ungefragter `ready`-Status, Merge oder Deployment.

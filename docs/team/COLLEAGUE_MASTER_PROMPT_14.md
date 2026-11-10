@@ -1,5 +1,8 @@
 # VOLLSTÄNDIGER MASTER-PROMPT — 14 Handels-/Machtzentren und historische Wendepunkte in 3D und 360°
 
+> **AKTUELLER HINWEIS (Bildprüfung 09.11.2026):** Dieses Dokument ist ausschließlich eine **technische und historische Spezialanleitung** für T/E-Szenen. Der neue Nutzerstatus lautet **11 akzeptierte Bilder, 6 neu zu erstellende Versionen und 13 weitere offene Szenen**. Für den Kollegen sind **[aktuelle 19 Bildarbeiten](GEMINI_IMAGE_HANDOFF_CURRENT.md)** und **[der Bildstatus aller 30](../IMAGE_PRODUCTION_STATUS_30.md)** maßgeblich. Nachfolgende ältere personelle „nur 14 T/E“- oder 26er-Aufgaben zählen nicht mehr als Arbeitsliste.
+
+
 **Version:** 2.0 · 09.11.2026 · **Zuständigkeit: Kollege, ausschließlich T01–T06 und E01–E08 (14 Szenen)**. Der ursprüngliche 60er- und 30/30-Plan ist ARCHIV. Nur der aktive 30er-Plan gilt.
 
 > **Diesen gesamten Text als Arbeitsauftrag an eine KI mit Recherche-, Datei- und Code-/3D-Werkzeugen geben.** Danach **genau eine** Szene aus [COLLEAGUE_14_SCENES.md](COLLEAGUE_14_SCENES.md) bearbeiten. Ohne GitHub-Zugang die Liste und dieses Dokument als Dateien/Text beilegen. Das Ergebnis muss **eine wirklich erzeugte Datei mit nachvollziehbarer QA** sein, nicht nur ein Prompt oder ein schöner, gewöhnlicher Breitbildentwurf.
