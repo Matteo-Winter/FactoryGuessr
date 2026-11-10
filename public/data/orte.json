@@ -475,6 +475,29 @@
    "group": "P08",
    "panorama_path": "assets/orte/kongo-kautschuk.jpg",
    "source_file": "kongo-kautschuk.png"
+  },
+  {
+   "id": "P11",
+   "block": "production",
+   "title_de": "Kakaofabrik in Ghana, um 1970",
+   "place_de": "Hafen- und Industriestadt Tema bei Accra",
+   "country_de": "Ghana",
+   "year": 1970,
+   "lat": 5.6698,
+   "lon": -0.0166,
+   "overview_de": "In einer offenen Halle unter Wellblechdach werden Kakaobohnen sortiert, in einer Trommel geröstet und zu flüssiger Kakaomasse gemahlen; eine Presse trennt die hellgelbe Kakaobutter ab, übrig bleibt braunes Kakaopulver. Draußen lädt ein Lastwagen Jutesäcke. Ghana war damals der größte Kakaoproduzent der Welt.",
+   "learning_de": "Nach der Unabhängigkeit 1957 wollte Ghana Kakao nicht mehr nur als Rohstoff verkaufen, sondern selbst verarbeiten und so mehr am Weltmarkt verdienen. In Tema und Takoradi entstanden staatliche Fabriken für Kakaomasse und Kakaobutter. Die fertige Schokolade wurde aber weiter meist in Europa hergestellt; der größte Teil des Gewinns blieb dort.",
+   "visual_clues": [
+    "Kakaobohnen in Jutesäcken",
+    "gelbe Blöcke Kakaobutter und Kakaopulver",
+    "Röst- und Mahlmaschinen",
+    "Palmen und Wellblechbauten",
+    "Lastwagen der 1960er/70er"
+   ],
+   "historical_status": "composite_reconstruction",
+   "group": "P11",
+   "panorama_path": "assets/orte/ghana-kakao.jpg",
+   "source_file": "ghana-kakao.png"
   }
  ]
 }
