@@ -363,6 +363,28 @@
    "group": "E08",
    "panorama_path": "assets/orte/ever-given-2021.jpg",
    "source_file": "ever-given-2021.png"
+  },
+  {
+   "id": "X01",
+   "block": "production",
+   "title_de": "Kupfermine in Katanga, Belgisch-Kongo, um 1912",
+   "place_de": "Mine Étoile du Congo bei Élisabethville (heute Lubumbashi), Katanga",
+   "country_de": "DR Kongo",
+   "year": 1912,
+   "lat": -11.634,
+   "lon": 27.583,
+   "overview_de": "Afrikanische Arbeiter brechen grünlich schimmerndes Kupfererz aus dem Hang und schieben es in Loren zu Förderturm und Schmelzhütte; ein europäischer Aufseher mit Tropenhelm überwacht sie. Ab 1911 baute die belgische Gesellschaft Union Minière du Haut-Katanga hier im Süden der Kolonie Kupfer im großen Stil ab.",
+   "learning_de": "Katanga besitzt einige der reichsten Kupfervorkommen der Welt. Den Gewinn machten europäische Aktionäre, die Arbeit leisteten Afrikaner, die oft zwangsweise angeworben wurden, für sehr wenig Lohn und unter gefährlichen Bedingungen. Kupfer wurde für Stromkabel und Elektrotechnik in Europa und Amerika gebraucht. Bis heute ist die Region für Rohstoffe wie Kupfer und Kobalt wichtig.",
+   "visual_clues": [
+    "grünliches Kupfererz (Malachit)",
+    "Förderturm, Loren und Schmelzhütte",
+    "Savanne mit Akazienbäumen und roter Erde",
+    "europäischer Aufseher mit Tropenhelm"
+   ],
+   "historical_status": "composite_reconstruction",
+   "group": "X01",
+   "panorama_path": "assets/orte/katanga-kupfer.jpg",
+   "source_file": "katanga-kupfer.png"
   }
  ]
 }
