@@ -543,6 +543,28 @@
    "group": "P15",
    "panorama_path": "assets/orte/taiwan-chips.jpg",
    "source_file": "taiwan-chips.jpg"
+  },
+  {
+   "id": "P16",
+   "block": "production",
+   "title_de": "Lithium-Verdunstungsbecken in der Atacama, 2023",
+   "place_de": "Salar de Atacama, Region Antofagasta",
+   "country_de": "Chile",
+   "year": 2023,
+   "lat": -23.5,
+   "lon": -68.25,
+   "overview_de": "Auf einer weißen Salzfläche in über 2.000 Metern Höhe liegen türkis- und gelbfarbene Becken, umgeben von den Vulkanbergen der Anden. Pumpen holen salzhaltiges Grundwasser (Sole) an die Oberfläche; in der Wüstensonne verdunstet es über viele Monate, bis eine lithiumreiche Lösung übrig bleibt. Die Salar de Atacama ist eines der größten Lithiumvorkommen der Welt.",
+   "learning_de": "Lithium steckt in den Akkus von Handys und Elektroautos; mit der Energiewende stieg die Nachfrage stark. Chile gehört zu den größten Förderländern, abgebaut wird von Konzernen wie SQM und Albemarle. Die Verdunstung verbraucht in einer der trockensten Gegenden der Erde enorme Mengen Wasser – zum Nachteil indigener Gemeinden und der Natur. 2023 kündigte Chiles Regierung an, die Lithiumförderung stärker unter staatliche Kontrolle zu bringen.",
+   "visual_clues": [
+    "türkisfarbene Verdunstungsbecken",
+    "weiße Salzkruste",
+    "Vulkanberge der Anden",
+    "moderne Pick-ups, Bagger und Pumpen"
+   ],
+   "historical_status": "composite_reconstruction",
+   "group": "P16",
+   "panorama_path": "assets/orte/chile-lithium.jpg",
+   "source_file": "chile-lithium.jpg"
   }
  ]
 }
