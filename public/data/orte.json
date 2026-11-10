@@ -434,25 +434,25 @@
   {
    "id": "P07",
    "block": "production",
-   "title_de": "Stahlwerk im Ruhrgebiet, um 1890",
+   "title_de": "Kohle und Eisen im Ruhrgebiet, um 1890",
    "place_de": "Essen, Ruhrgebiet (Königreich Preußen, Deutsches Kaiserreich)",
    "country_de": "Deutschland",
    "year": 1890,
    "lat": 51.4556,
    "lon": 6.993,
-   "overview_de": "Hinter Kohlehalden und Gleisen ragen Hochöfen und rauchende Schlote auf. Arbeiter gießen glühenden Stahl aus einer Gießpfanne in Kokillen, eine kleine Dampflok zieht Wagen mit Kohle heran, daneben liegen fertige Stahlträger. Um 1890 war das Ruhrgebiet mit Werken wie Krupp in Essen eines der größten Industriegebiete Europas.",
-   "learning_de": "Kohle aus dem Ruhrgebiet lieferte die Energie für Hochöfen und Stahlwerke. Stahl wurde für Eisenbahnschienen, Brücken, Maschinen, Schiffe und Waffen gebraucht. Große Konzerne wie Krupp beschäftigten zehntausende Arbeiter, viele zugewandert aus dem Osten Preußens und aus Polen. Lange Schichten, Hitze und Unfälle prägten die Arbeit; zugleich entstanden Gewerkschaften und Arbeitersiedlungen.",
+   "overview_de": "Zwischen Backsteinhallen, Wassertürmen und rauchenden Schloten werden Kohlewagen entladen, Dampfloks rangieren auf dem Werksgelände, im Hintergrund liegen Kanal, Lastkähne und weitere Zechen und Hütten. In der offenen Halle schmieden Arbeiter glühendes Eisen. Um 1890 war das Ruhrgebiet mit Werken wie Krupp in Essen eines der größten Industriegebiete Europas.",
+   "learning_de": "Die Steinkohle aus dem Ruhrgebiet lieferte die Energie für Hochöfen, Stahlwerke und Dampfmaschinen; Eisenbahnen und Kanäle brachten Kohle und Stahl ins ganze Reich und zu den Häfen. Stahl wurde für Schienen, Brücken, Maschinen, Schiffe und Waffen gebraucht. Konzerne wie Krupp beschäftigten zehntausende Arbeiter, viele zugewandert aus dem Osten Preußens und aus Polen. Lange Schichten, Staub und Unfälle prägten die Arbeit; zugleich entstanden Gewerkschaften und Arbeitersiedlungen.",
    "visual_clues": [
-    "Hochöfen und rauchende Schlote",
-    "Gießpfanne mit glühendem Stahl",
-    "Kohlehalden und Dampflok",
-    "Backsteinhallen",
-    "Schiebermützen und Lederschürzen"
+    "Kohlehalden und Kohlewagen",
+    "Dampfloks und Werksbahn",
+    "Backsteinhallen, Wassertürme und Schlote",
+    "Schmiede mit glühendem Eisen",
+    "Kanal mit Lastkähnen"
    ],
    "historical_status": "composite_reconstruction",
    "group": "P07",
    "panorama_path": "assets/orte/ruhr-stahl.jpg",
-   "source_file": "ruhr-stahl.png"
+   "source_file": "ruhr-stahl.jpg"
   },
   {
    "id": "P08",
