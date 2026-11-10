@@ -14,4 +14,12 @@ for f in files:
     sol['id']=oid;sol['group']=re.sub(r'(\d)[a-z]$',r'\1',oid);sol.setdefault('block','production')
     sol['panorama_path']='assets/orte/'+base+'.jpg';sol['source_file']=f
     orte.append(sol);print(f'{oid:5} {sol["group"]:4} {im.width}x{im.height} {os.path.getsize(out)//1024} KB')
+# Pilot scenes from scenes.json keep their image there; _local/pilots/<scene id>.json adds the full solution text.
+scenes={x['id']:x for x in json.load(open('public/data/scenes.json'))['scenes']}
+pd=src+'pilots/'
+for f in sorted(os.listdir(pd)) if os.path.isdir(pd) else []:
+    if not f.endswith('.json'): continue
+    sol=json.load(open(pd+f));sc=scenes[sol.pop('pilot_of')]
+    sol.update(year=sc['year'],country_de=sc['country_de'],panorama_path=sc['panorama_path'],group=sol['id'],scene_id=sc['id'])
+    orte.append(sol);print(f'{sol["id"]:5} pilot {sc["id"]}')
 json.dump({"schema_version":1,"note":"Spielbare Orte (KI-Rekonstruktionen, nicht historisch freigegeben). Gleiche 'group' = Varianten desselben Orts; pro Runde höchstens eine.","orte":orte},open('public/data/orte.json','w'),ensure_ascii=False,indent=1)

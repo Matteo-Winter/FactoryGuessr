@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Wo &amp; Wann?</title>
+  <meta name="description" content="Wo & Wann? – ein 360°-Geschichtsrätsel: Schau dich um und rate Land und Jahr historischer Orte der Weltwirtschaft.">
   <link rel="icon" href="data:,">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -473,7 +474,7 @@ async function buildPool(blocks){const q=new URLSearchParams(location.search).ge
   if(q&&/^assets\/[\w\/.-]+$/.test(q)&&IMG.test(q))return [pool.find(o=>o.panorama_path===q)||await localScene(q)];
   if(DEV)try{const r=await fetch(LOCAL_DIR+'index.json');if(r.ok){const l=await r.json();
     if(Array.isArray(l))for(const f of l)if(/^[\w.-]+$/.test(f)&&IMG.test(f)&&!pool.some(o=>o.source_file===f))pool.push(await localScene(LOCAL_DIR+f));}}catch(e){}
-  for(const s of scenes)if(s.panorama_path)pool.push(s);
+  for(const s of scenes)if(s.panorama_path&&!pool.some(o=>o.panorama_path===s.panorama_path))pool.push(s); // pilots with a text in orte.json come from there
   // theme filter; scenes without a block are production sites (all current pilots are)
   const f=pool.filter(s=>blocks.includes(s.block||'production'));return f.length?f:pool;}
 function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
@@ -724,6 +725,8 @@ function revShow(i){revIdx=(i+revList.length)%revList.length;const it=revList[re
     meta.textContent=it.block+' · '+file+' · '+w+'×'+h;if(warn.length){const sp=document.createElement('span');sp.className='warn';sp.textContent=' · '+warn.join(', ');meta.appendChild(sp);}});
   if(revViewer){revViewer.destroy();revViewer=null;}
   if(window.pannellum)revViewer=pannellum.viewer('reviewPano',{type:'equirectangular',panorama:it.path,autoLoad:true,showControls:false,compass:false,hfov:100,minHfov:30,maxHfov:120});}
+// The review tool shows every image with its solution, so players online don't see it: only on localhost or with ?review.
+if(!(DEV||/[?&]review\b/.test(location.search)))$('reviewLink').closest('.start-tools').style.display='none';
 $('reviewLink').addEventListener('click',async()=>{revList=await buildReviewList();if(!revList.length)return;$('start').hidden=true;$('review').hidden=false;revShow(0);$('revNext').focus();});
 $('revBack').addEventListener('click',()=>{if(revViewer){revViewer.destroy();revViewer=null;}$('review').hidden=true;$('start').hidden=false;});
 $('revPrev').addEventListener('click',()=>revShow(revIdx-1));$('revNext').addEventListener('click',()=>revShow(revIdx+1));
