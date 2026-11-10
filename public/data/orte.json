@@ -498,6 +498,29 @@
    "group": "P11",
    "panorama_path": "assets/orte/ghana-kakao.jpg",
    "source_file": "ghana-kakao.png"
+  },
+  {
+   "id": "P12",
+   "block": "production",
+   "title_de": "Ölfeld in der Ostprovinz Saudi-Arabiens, um 1975",
+   "place_de": "Ölfelder bei Dhahran, Ostprovinz",
+   "country_de": "Saudi-Arabien",
+   "year": 1975,
+   "lat": 26.2361,
+   "lon": 50.0393,
+   "overview_de": "In der flachen Wüste nahe der Golfküste stehen ein Bohrturm, Pumpen und große Öltanks, eine Gasfackel brennt, Pipelines führen zum Hafen. Ingenieure mit Schutzhelm sprechen mit Männern in weißem Thobe, daneben Lastwagen, Geländewagen und Wohncontainer. Um Dhahran wurde 1938 das erste Öl des Landes gefunden.",
+   "learning_de": "Gefördert wurde das Öl von Aramco, ursprünglich einer Gesellschaft amerikanischer Ölkonzerne. Nach dem Ölpreisschock von 1973, als arabische Förderländer ihre Lieferungen drosselten, vervielfachte sich der Ölpreis; Saudi-Arabien übernahm ab 1973 schrittweise Aramco und besaß sie 1980 vollständig. Öl wurde zum wichtigsten Rohstoff der Weltwirtschaft – und machte die Förderländer reich und mächtig.",
+   "visual_clues": [
+    "Bohrturm, Pferdekopfpumpen und Öltanks",
+    "brennende Gasfackel",
+    "flache Wüste an der Küste",
+    "weiße Thobes und Kopftücher",
+    "Lastwagen und Geländewagen der 1970er"
+   ],
+   "historical_status": "composite_reconstruction",
+   "group": "P12",
+   "panorama_path": "assets/orte/saudi-oel.jpg",
+   "source_file": "saudi-oel.jpg"
   }
  ]
 }
