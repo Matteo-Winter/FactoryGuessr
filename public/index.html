@@ -3,85 +3,765 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Made in Time — Guess where. Guess when.</title>
+  <title>Wo &amp; Wann?</title>
+  <meta name="description" content="Wo & Wann? – ein 360°-Geschichtsrätsel: Schau dich um und rate Land und Jahr historischer Orte der Weltwirtschaft.">
   <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.7/build/pannellum.css">
   <style>
-    :root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;color-scheme:dark;background:#11171c;color:#f4f1e9}
-    *{box-sizing:border-box}body{margin:0}header{padding:22px clamp(16px,4vw,60px);display:flex;justify-content:space-between;gap:20px;align-items:center;border-bottom:1px solid #2d363c}
-    h1{font-weight:800;letter-spacing:-.05em;margin:0;font-size:clamp(27px,3vw,40px)}header p,.muted{color:#aab3b9;margin:4px 0 0;font-size:14px}
-    main{display:grid;grid-template-columns:minmax(0,1fr) 350px;min-height:calc(100vh - 91px)}
-    #stage{min-height:550px;position:relative;background:radial-gradient(circle at 45% 35%,#293640,#10171b)}
-    #panorama{width:100%;height:100%;min-height:550px}
-    #empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;pointer-events:none}
-    #empty>div{max-width:460px;background:#101820dc;border:1px solid #43515b;border-radius:18px;padding:24px}
-    aside{padding:26px;background:#192127;border-left:1px solid #344047;display:flex;flex-direction:column;gap:17px}
-    label{font-size:13px;font-weight:700;display:block;margin-bottom:8px;color:#d6dcdf}
-    select,input,button{width:100%;background:#252f36;color:#f4f1e9;border:1px solid #4b5b66;border-radius:9px;padding:12px;font:inherit}
-    button{background:#e1b06c;color:#152027;font-weight:750;border:0;cursor:pointer}
-    button:hover{background:#f3c184}h2{font-size:19px;margin:0}#result{background:#27343c;border:1px solid #465b67;padding:15px;border-radius:10px;line-height:1.5;display:none}
-    #result.show{display:block}.pill{display:inline-block;font-size:12px;color:#ffdea3;border:1px solid #906e3e;padding:4px 9px;border-radius:20px}
-    .small{font-size:13px;color:#bbc4c9;line-height:1.5}.file-input{font-size:12px}
-    #seam{position:absolute;z-index:4;right:18px;bottom:18px;width:auto;background:#182329ec;color:#f0d6a4;border:1px solid #6d7980;font-size:13px;padding:10px 13px}
-    #seam:disabled{opacity:.35;cursor:not-allowed}
-    #stage{overflow:hidden}
-    @media(max-width:920px){main{grid-template-columns:1fr}aside{border-left:0;border-top:1px solid #344047}#stage,#panorama{min-height:400px}}
+    :root{color-scheme:dark;background:#0a0a0a;color:#fafafa}
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;font-family:"Hanken Grotesk",Inter,ui-sans-serif,system-ui,sans-serif}
+    h1{margin:0}button{font:inherit;border:0;cursor:pointer}
+    /* Start screen */
+    #start{--bg:#0a0a0a;--text:#fafafa;--muted:#a3a3a3;--line:#262626;--line-strong:#fafafa;--surface:#141414;
+      font-family:"Hanken Grotesk",Inter,ui-sans-serif,system-ui,sans-serif;background:var(--bg);color:var(--text);
+      min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;padding:72px 24px max(24px,env(safe-area-inset-bottom));
+      position:relative;overflow:hidden;isolation:isolate}
+    #start[hidden],#game[hidden]{display:none}
+    .start-inner{width:100%;max-width:400px;margin:auto;display:flex;flex-direction:column;position:relative;z-index:1}
+    .brand{margin:0 0 48px;text-align:center}
+    .brand h1{font-size:44px;line-height:1;letter-spacing:-.035em;font-weight:700}
+    .logo-wrap{position:relative;width:min(560px,calc(100vw - 32px));left:50%;transform:translateX(-50%)}
+    .brand .logo{display:block;width:100%;height:auto}
+    /* Last-round sticker, slightly overlapping the start button */
+    .start-wrap{position:relative;margin-top:28px}
+    .start-wrap #startBtn{margin-top:0}
+    .score{position:absolute;z-index:1;right:-8px;top:-18px;margin:0;display:flex;flex-direction:column;align-items:center;padding:5px 10px 6px;border-radius:9px;
+      background:#ffd43b;color:#0a0a0a;transform:rotate(-6deg);box-shadow:0 2px 0 rgba(0,0,0,.35);text-align:center;line-height:1;pointer-events:none;
+      animation:pop 280ms cubic-bezier(.2,0,0,1) both 120ms}
+    .score small{font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+    .score strong{margin-top:2px;font-size:16px;font-weight:700;font-variant-numeric:tabular-nums}
+    .score.empty strong{font-size:12px}
+    @keyframes pop{from{opacity:0;transform:rotate(-6deg) scale(.85)}}
+    #start fieldset{border:0;margin:0;padding:0}
+    #start legend{padding:0;margin:0 0 10px;font-size:13px;font-weight:500;color:var(--muted)}
+    .themes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .theme{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:104px;padding:14px 6px;margin:0;
+      border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--muted);font-size:15px;font-weight:500;line-height:1.25;text-align:center;cursor:pointer;
+      transition:border-color 150ms cubic-bezier(.2,0,0,1),background-color 150ms cubic-bezier(.2,0,0,1),color 150ms cubic-bezier(.2,0,0,1),transform 120ms cubic-bezier(.2,0,0,1)}
+    .theme:hover{background:var(--surface)}
+    .theme:active{transform:scale(.985)}
+    .theme input{position:absolute;opacity:0;pointer-events:none}
+    .theme:has(input:checked){border-color:var(--line-strong);color:var(--text)}
+    .theme:has(input:focus-visible){outline:2px solid var(--text);outline-offset:2px}
+    .rounds{margin-top:28px}
+    .rounds-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+    .rounds-head label{margin:0;font-size:13px;font-weight:500;color:var(--muted)}
+    .rounds-head output{font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
+    #rounds{-webkit-appearance:none;appearance:none;width:100%;height:44px;margin:0;padding:0;border:0;background:transparent;cursor:pointer;--p:50%}
+    #rounds::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(to right,var(--text) var(--p),#404040 var(--p))}
+    #rounds::-moz-range-track{height:4px;border-radius:2px;background:#404040}
+    #rounds::-moz-range-progress{height:4px;border-radius:2px;background:var(--text)}
+    #rounds::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;margin-top:-10px;border-radius:50%;background:var(--text);border:0;transition:transform 120ms cubic-bezier(.2,0,0,1)}
+    #rounds::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--text);border:0}
+    #rounds:active::-webkit-slider-thumb{transform:scale(1.1)}
+    #rounds:focus-visible{outline:2px solid var(--text);outline-offset:4px;border-radius:4px}
+    .ticks{display:flex;justify-content:space-between;margin-top:-6px;font-size:12px;color:#737373}
+    #startBtn:disabled{background:#262626;color:#737373;opacity:1;cursor:not-allowed;transform:none}
+    #startBtn{width:100%;margin-top:24px;height:56px;border-radius:12px;background:var(--text);color:var(--bg);font:600 17px/1 "Hanken Grotesk",Inter,sans-serif;
+      transition:transform 120ms cubic-bezier(.2,0,0,1),opacity 120ms}
+    #startBtn:hover{background:var(--text);opacity:.9}
+    #startBtn:active{transform:scale(.985)}
+    #startBtn:focus-visible{outline:2px solid var(--text);outline-offset:3px}
+    /* Background: placeholder tiles on the inside of a slowly turning cylinder */
+    .bg{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+    .bg::after{content:"";position:absolute;inset:0;/* scrim: darker behind the menu for legibility */
+      background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(10,10,10,.9) 40%,rgba(10,10,10,.6) 100%)}
+    .ring{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;animation:spin 200s linear infinite}
+    .bg.still .ring{animation-play-state:paused}
+    @keyframes spin{to{transform:rotateY(-360deg)}}
+    .tile{position:absolute;border-radius:6px;backface-visibility:hidden;background:#2b2b2b center/cover no-repeat}
+    /* Settings */
+    .icon-btn{position:absolute;z-index:2;top:max(16px,env(safe-area-inset-top));right:16px;width:44px;height:44px;padding:0;display:grid;place-items:center;
+      background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:12px;transition:background-color 120ms cubic-bezier(.2,0,0,1),transform 120ms cubic-bezier(.2,0,0,1)}
+    .icon-btn:hover{background:var(--surface)}
+    .icon-btn:active{transform:scale(.96)}
+    .icon-btn:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+    #settings{--bg:#0a0a0a;--text:#fafafa;--muted:#8a8a8a;--line:#262626;font-family:"Hanken Grotesk",Inter,ui-sans-serif,system-ui,sans-serif;
+      background:var(--bg);color:var(--text);border:1px solid var(--line);padding:24px;width:100%;max-width:400px;border-radius:16px}
+    #settings[open]{animation:sheet 260ms cubic-bezier(.2,0,0,1)}
+    #settings::backdrop{background:rgba(0,0,0,.6)}
+    @keyframes sheet{from{opacity:0;transform:translateY(16px)}}
+    #settings h2{font-size:20px;font-weight:600;margin:0 0 8px}
+    .row{display:flex;align-items:center;justify-content:space-between;min-height:56px;border-bottom:1px solid var(--line);font-size:17px;margin:0;font-weight:500;color:var(--text)}
+    .row .val{color:var(--muted)}
+    .switch{appearance:none;-webkit-appearance:none;width:44px;height:26px;padding:0;margin:0;border-radius:13px;border:0;background:#3a3a3a;position:relative;cursor:pointer;transition:background-color 150ms cubic-bezier(.2,0,0,1)}
+    .switch::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--text);transition:transform 150ms cubic-bezier(.2,0,0,1)}
+    .switch:checked{background:#fafafa}.switch:checked::after{background:#0a0a0a;transform:translateX(18px)}
+    .switch:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+    #settingsDone{width:100%;margin-top:24px;height:56px;border-radius:12px;background:var(--text);color:var(--bg);font:600 17px/1 "Hanken Grotesk",Inter,sans-serif}
+    #settingsDone:hover{background:var(--text);opacity:.9}
+    @media(max-width:639px){#settings{margin:auto 0 0;max-width:none;border-radius:16px 16px 0 0;border-width:1px 0 0;padding-bottom:max(24px,env(safe-area-inset-bottom))}}
+    .start-foot{position:relative;z-index:1;margin:32px auto 0;max-width:960px;text-align:center;font-size:14px;line-height:1.45;color:var(--muted);text-wrap:balance}
+    @media(min-width:640px){.brand h1{font-size:56px}}
+    @media(max-height:640px){.start-tools{margin-top:8px}#start{padding-top:64px}.theme{min-height:80px;padding:10px 6px;gap:6px}.brand{margin-bottom:20px}.rounds{margin-top:14px}.start-wrap{margin-top:22px}.start-foot{margin-top:14px}}
+    @media(prefers-reduced-motion:reduce){.score{animation:none}#start *,#settings,#settings *{transition:none!important}#settings[open]{animation:none}}
+    /* Game screen: full-screen panorama, dock with timeline + map */
+    #game{--bg:#0a0a0a;--text:#fafafa;--muted:#a3a3a3;--line:#262626;--surface:#141414;--card:rgba(10,10,10,.88);
+      position:fixed;inset:0;background:var(--bg);color:var(--text);overflow:hidden}
+    #panorama{position:absolute;inset:0}
+    #panorama .pnlm-load-box{background:var(--card);border-radius:12px;font-family:inherit}
+    #backBtn{left:16px;right:auto;background:var(--card)}
+    .round-pill{position:absolute;z-index:2;top:max(16px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);height:44px;padding:0 16px;display:flex;align-items:center;
+      border-radius:12px;background:var(--card);border:1px solid var(--line);font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
+    .dock{position:absolute;z-index:2;left:50%;bottom:max(24px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(960px,calc(100% - 344px));
+      display:flex;align-items:flex-end;gap:12px;pointer-events:none}
+    .dock>*{pointer-events:auto}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px}
+    .timeline{flex:1;min-width:0;height:120px;padding:14px 20px 12px}
+    .timeline-head{display:flex;justify-content:space-between;align-items:baseline}
+    .timeline-head label{margin:0;font-size:13px;font-weight:500;color:var(--muted)}
+    .timeline-head output{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+    .timeline-head span{font-size:13px;font-weight:500;color:var(--muted)}
+    .timeline-head output.empty{font-size:15px;font-weight:500;color:#737373}
+    /* Ruler: vertical ticks every 10 years, longer every 50, labelled every 100 */
+    .ruler{position:relative;height:62px;margin:4px 0 0;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none}
+    .ruler:focus-visible{outline:2px solid var(--text);outline-offset:4px;border-radius:6px}
+    .ruler-track{position:absolute;left:12px;right:12px;top:0;bottom:0}
+    .ruler-track::after{content:"";position:absolute;left:0;right:0;top:32px;height:1px;background:#404040}
+    .tick{position:absolute;top:32px;width:1px;height:8px;margin-top:-8px;background:#525252}
+    .tick.mid{height:14px;margin-top:-14px;background:#737373}
+    .tick.major{height:24px;margin-top:-24px;background:#a3a3a3}
+    .tick-label{position:absolute;top:38px;transform:translateX(-50%);font-size:12px;color:#8a8a8a;font-variant-numeric:tabular-nums}
+    .marker,.ghost{position:absolute;top:0;height:40px;width:2px;margin-left:-1px;pointer-events:none}
+    .marker{background:#ffd43b;border-radius:1px}
+    .marker::before{content:"";position:absolute;left:50%;top:-3px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:#ffd43b}
+    .ghost{background:rgba(250,250,250,.35)}
+    .timeline-head output.preview{color:#737373}
+    .marker[hidden],.ghost[hidden]{display:none}
+    @media(hover:none){.ghost{display:none}}
+    .map-slot{position:relative;flex:none;width:200px;height:120px}
+    /* The card frame animates its size (cheap: a rounded rect). The map itself always renders at full size
+       and is only scaled with a GPU transform, so opening/closing never re-rasterises the SVG. */
+    .map{position:absolute;right:0;bottom:0;width:200px;height:120px;overflow:hidden;cursor:pointer;background:var(--card);
+      transition:width 240ms cubic-bezier(.2,0,0,1),height 240ms cubic-bezier(.2,0,0,1),background-color 240ms}
+    .map.open{z-index:3;background:#0f0f0f;cursor:crosshair;width:var(--ow);height:var(--oh)}
+    .map.panning{cursor:grabbing}
+    .map-label{position:absolute;z-index:1;left:12px;top:10px;font-size:13px;font-weight:500;color:var(--muted);pointer-events:none;white-space:nowrap}
+    .map-label b{margin-left:6px;color:#ffd43b;font-weight:600}
+    .map-stage{position:absolute;right:8px;bottom:8px;width:var(--iw);height:var(--ih);overflow:hidden;touch-action:none;
+      transform:scale(var(--s));transform-origin:right bottom;transition:transform 240ms cubic-bezier(.2,0,0,1);will-change:transform}
+    .map.open .map-stage{transform:none}
+    .map-layers{position:absolute;inset:0;transform-origin:0 0;will-change:transform}
+    .map-layers svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+    .map-layers .countries path{fill:#4a4a4a;stroke:#141414;stroke-width:.6px;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+    .map-layers .countries path.sel{fill:#ffd43b}
+    .map-top{pointer-events:none;opacity:0;transition:opacity 160ms;will-change:opacity}
+    .map.open .map-top{opacity:1}
+    .map-top .labels{fill:#e5e5e5;font-family:inherit;font-weight:500;text-anchor:middle;dominant-baseline:middle;paint-order:stroke;stroke:rgba(10,10,10,.85);stroke-linejoin:round}
+    .map-top .labels text.off{display:none}
+    .map-top .pin{fill:#fafafa;stroke:#0a0a0a;stroke-width:1.25px;vector-effect:non-scaling-stroke}
+    .zoom{position:absolute;z-index:1;right:12px;bottom:12px;display:none;flex-direction:column;gap:6px}
+    .map.open .zoom{display:flex}
+    .zoom button{width:40px;height:40px;border-radius:10px;background:var(--bg);color:var(--text);border:1px solid var(--line);font-size:20px;line-height:1;
+      transition:background-color 120ms cubic-bezier(.2,0,0,1),transform 120ms cubic-bezier(.2,0,0,1)}
+    .zoom button:hover{background:var(--surface)}
+    .zoom button:active{transform:scale(.96)}
+    /* Guess button: grey until year and country are chosen, then lights up yellow once */
+    .guess{position:absolute;z-index:1;right:24px;bottom:max(24px,env(safe-area-inset-bottom));width:136px;height:120px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
+    .guess-status{display:flex;align-items:center;justify-content:center;gap:6px;height:28px;border-radius:10px;background:var(--card);border:1px solid var(--line);
+      font-size:13px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+    .guess-status i{width:6px;height:6px;border-radius:50%;background:#404040;transition:background-color 160ms cubic-bezier(.2,0,0,1)}
+    .guess-status i.on{background:#ffd43b}
+    .guess-status.done{color:var(--text)}
+    #guessBtn{width:100%;height:56px;border-radius:12px;background:#ffd43b;color:#0a0a0a;font-size:17px;font-weight:700;
+      transition:background-color 200ms cubic-bezier(.2,0,0,1),color 200ms cubic-bezier(.2,0,0,1),transform 120ms cubic-bezier(.2,0,0,1)}
+    #guessBtn:hover{background:#ffdc5c}
+    #guessBtn:active{transform:scale(.985)}
+    #guessBtn:focus-visible{outline:2px solid var(--text);outline-offset:3px}
+    #guessBtn:disabled{background:#262626;color:#737373;cursor:not-allowed;transform:none}
+    #guessBtn.lit{animation:lit 420ms cubic-bezier(.2,0,0,1)}
+    @keyframes lit{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
+    /* Result */
+    #game.resolved .dock,#game.resolved .guess{display:none}
+    .result{position:absolute;z-index:4;left:50%;bottom:max(24px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(1280px,calc(100% - 48px));
+      max-height:calc(100% - 96px);overflow:hidden;display:grid;grid-template-columns:1.15fr .85fr 1fr;gap:28px;padding:20px;
+      font-size:clamp(13px,1.75vh,15px);background:rgba(10,10,10,.94);border:1px solid var(--line);border-radius:20px;animation:resIn 280ms cubic-bezier(.2,0,0,1)}
+    .result[hidden]{display:none}
+    @keyframes resIn{from{opacity:0;transform:translate(-50%,16px)}}
+    .res-visual,.res-scores,.res-explain{min-width:0;min-height:0}
+    .res-map{position:relative;aspect-ratio:4/3;max-height:calc(100vh - 260px);width:100%;border-radius:12px;overflow:hidden;background:#0f0f0f}
+    .res-map svg{position:absolute;inset:0;width:100%;height:100%}
+    .res-map .countries path{fill:#3a3a3a;stroke:#141414;stroke-width:.6px;vector-effect:non-scaling-stroke}
+    .res-map .countries path.sel{fill:#ffd43b}
+    .res-map .countries path.guess{fill:#737373}
+    .res-map .labels{fill:#fafafa;font-weight:600;text-anchor:middle;dominant-baseline:middle;paint-order:stroke;stroke:rgba(10,10,10,.85);stroke-linejoin:round}
+    .res-map .pin{fill:#fafafa;stroke:#0a0a0a;stroke-width:1.25px;vector-effect:non-scaling-stroke}
+    .res-line{stroke:#fafafa;stroke-width:2px;stroke-dasharray:6 5;vector-effect:non-scaling-stroke;fill:none}
+    .res-true{fill:#0a0a0a;stroke:#ffd43b;stroke-width:3px;vector-effect:non-scaling-stroke}
+    .res-timeline{position:relative;height:56px;margin-top:10px}
+    .res-timeline .marker{height:40px;top:0}
+    .res-timeline .marker.mine{background:#fafafa}.res-timeline .marker.mine::before{background:#fafafa}
+    .res-span{position:absolute;top:28px;height:4px;margin-top:-2px;background:rgba(255,212,59,.35);border-radius:2px}
+    .res-legend{display:flex;gap:16px;font-size:13px;color:var(--muted)}
+    .res-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+    .lg-mine{background:#fafafa}.lg-true{background:#ffd43b}
+    .res-scores{display:flex;flex-direction:column}
+    .res-total{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+    .res-total span{flex-basis:100%;font-size:13px;font-weight:500;color:var(--muted)}
+    .res-total strong{font-size:44px;line-height:1;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+    .res-total small{font-size:15px;color:var(--muted)}
+    .res-row{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+    .res-row-head{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;font-weight:600}
+    .res-row-head b{font-variant-numeric:tabular-nums}
+    .res-bar{height:4px;margin:8px 0 10px;border-radius:2px;background:#262626;overflow:hidden}
+    .res-bar i{display:block;height:100%;width:0;background:#ffd43b;transition:width 700ms cubic-bezier(.2,0,0,1)}
+    .res-row dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin:0}
+    .res-scores .res-row:last-of-type{margin-bottom:16px}
+    .res-row dt{color:var(--muted)}.res-row dd{margin:0;font-variant-numeric:tabular-nums}
+    #resNext{width:100%;height:56px;margin-top:auto;border-radius:12px;background:var(--text);color:var(--bg);font-size:17px;font-weight:600;
+      transition:opacity 120ms,transform 120ms cubic-bezier(.2,0,0,1)}
+    #resNext:hover{opacity:.9}#resNext:active{transform:scale(.985)}
+    #resNext:focus-visible{outline:2px solid var(--text);outline-offset:3px}
+    /* never taller than the panel can be, so the grid row cannot push the button out of view */
+    .res-explain{position:relative;line-height:1.5;overflow:hidden;max-height:calc(100vh - 136px)}
+    .res-explain.open{overflow:visible}
+    .result.expanded{overflow:auto}
+    .res-explain h3{margin:0 0 8px;font-size:1.13em;font-weight:700}
+    .res-explain p{margin:0 0 10px}.res-explain .muted{color:#c4c4c4}
+    .res-explain .clues{color:#c4c4c4}.res-explain .clues span:first-child{color:var(--muted)}
+    .res-explain .clues[hidden]{display:none}
+    .res-explain .note{margin:0;font-size:12px;color:#8a8a8a}
+    /* shown only when the explanation is cut off: sits on a fade at the bottom of the column */
+    .more{position:absolute;left:0;right:0;bottom:0;height:56px;padding:24px 0 0;text-align:left;color:var(--text);font-size:14px;font-weight:600;
+      background:linear-gradient(to bottom,rgba(10,10,10,0),rgba(10,10,10,.97) 45%)}
+    .more span{text-decoration:underline;text-underline-offset:3px}
+    .more[hidden]{display:none}
+    /* short windows (or browser zoom): tighter scores column */
+    @media(min-width:640px) and (max-height:640px){.result{padding:16px;gap:20px;max-height:calc(100% - 84px)}
+      .res-total strong{font-size:32px}.res-row{margin-top:10px;padding-top:10px}.res-bar{margin:5px 0 6px}.res-row dl{gap:1px 12px}
+      .res-scores .res-row:last-of-type{margin-bottom:10px}#resNext{height:48px}.res-timeline{height:50px;margin-top:6px}}
+    .summary{position:absolute;z-index:4;left:50%;top:50%;transform:translate(-50%,-50%);width:min(440px,calc(100% - 32px));max-height:calc(100% - 96px);overflow:auto;
+      padding:24px;background:rgba(10,10,10,.94);border:1px solid var(--line);border-radius:20px;animation:sumIn 280ms cubic-bezier(.2,0,0,1)}
+    .summary[hidden]{display:none}
+    @keyframes sumIn{from{opacity:0;transform:translate(-50%,calc(-50% + 16px))}}
+    .summary>span{font-size:13px;font-weight:500;color:var(--muted)}
+    .sum-total{display:flex;align-items:baseline;gap:10px;margin-top:6px}
+    .sum-total strong{font-size:48px;line-height:1;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:#ffd43b}
+    .sum-total small{font-size:15px;color:var(--muted)}
+    .summary ol{list-style:none;margin:18px 0 0;padding:0;border-top:1px solid var(--line)}
+    .summary li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+    .summary li span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;white-space-collapse:preserve}
+    .summary li b{font-variant-numeric:tabular-nums}
+    #sumDone{width:100%;height:56px;margin-top:20px;border-radius:12px;background:var(--text);color:var(--bg);font-size:17px;font-weight:600;transition:opacity 120ms,transform 120ms cubic-bezier(.2,0,0,1)}
+    #sumDone:hover{opacity:.9}#sumDone:active{transform:scale(.985)}#sumDone:focus-visible{outline:2px solid var(--text);outline-offset:3px}
+    /* Start screen: quiet tool link */
+    .start-tools{position:relative;z-index:1;margin:20px 0 0;text-align:center}
+    .link{position:relative;height:32px;padding:0;background:none;color:var(--muted);font-size:14px;font-weight:500}
+    .link::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:1px;background:var(--line)}
+    .link::before{content:"";position:absolute;left:0;bottom:6px;height:1px;width:0;background:var(--text);z-index:1;transition:width 200ms cubic-bezier(.2,0,0,1)}
+    .link:hover,.link:focus-visible{color:var(--text)}.link:hover::before,.link:focus-visible::before{width:100%}
+    .link:focus-visible{outline:none}
+    /* Image review */
+    #review{--bg:#0a0a0a;--text:#fafafa;--muted:#a3a3a3;--line:#262626;--surface:#141414;--card:rgba(10,10,10,.9);
+      position:fixed;inset:0;background:var(--bg);color:var(--text);overflow:hidden}
+    #review[hidden]{display:none}
+    #reviewPano{position:absolute;inset:0}
+    #revBack{left:16px;right:auto;background:var(--card)}
+    .rev-card{position:absolute;z-index:2;left:50%;bottom:max(16px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(560px,calc(100% - 32px));
+      padding:16px;border-radius:16px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+    .rev-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+    .rev-title{display:flex;flex-direction:column;gap:2px;min-width:0}
+    .rev-title b{font-size:16px;font-weight:600}
+    .rev-title small{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+    .rev-title small .warn{color:#ffd43b}
+    .rev-badge{flex:none;height:26px;padding:0 10px;border-radius:13px;display:none;align-items:center;font-size:13px;font-weight:600}
+    .rev-badge.ok{display:flex;background:#fafafa;color:#0a0a0a}.rev-badge.redo{display:flex;background:#ffd43b;color:#0a0a0a}
+    .rev-note{margin:0;font-size:13px;color:#c4c4c4}.rev-note:empty{display:none}
+    .rev-views,.rev-verdict,.rev-nav{display:flex;gap:8px}
+    .rev-views button{flex:1;height:36px;border-radius:10px;background:var(--surface);color:var(--text);border:1px solid var(--line);font-size:14px;transition:background-color 120ms}
+    .rev-views button:hover{background:#1f1f1f}
+    .rev-verdict button{flex:1;height:48px;border-radius:12px;font-size:16px;font-weight:600;border:1px solid var(--line);background:var(--bg);color:var(--text);
+      transition:background-color 150ms cubic-bezier(.2,0,0,1),color 150ms,border-color 150ms,transform 120ms cubic-bezier(.2,0,0,1)}
+    .rev-verdict button:active{transform:scale(.985)}
+    #revOk.on{background:#fafafa;color:#0a0a0a;border-color:#fafafa}
+    #revRedo.on{background:#ffd43b;color:#0a0a0a;border-color:#ffd43b}
+    #revComment{width:100%;height:40px;padding:0 12px;border-radius:10px;background:var(--surface);border:1px solid var(--line);color:var(--text);font:inherit;font-size:14px}
+    #revComment:focus{outline:2px solid var(--text);outline-offset:1px}
+    .rev-nav button{height:44px;border-radius:12px;background:var(--surface);color:var(--text);border:1px solid var(--line);font-size:16px}
+    #revPrev,#revNext{width:56px}#revCopy{flex:1;font-size:15px;font-weight:600}
+    .rev-views button:focus-visible,.rev-verdict button:focus-visible,.rev-nav button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+    @media(max-height:640px){.rev-card{gap:8px;padding:12px}.rev-verdict button{height:42px}.rev-nav button{height:40px}}
+    /* medium widths: map + scores side by side, explanation below across both */
+    @media(max-width:899px){.result{grid-template-columns:1fr 1fr;gap:20px}.res-explain{grid-column:1/-1;max-height:9.2em}.res-map{aspect-ratio:16/10}}
+    /* phones: one column; explanation clamped with "Weiterlesen", expanded text may scroll */
+    @media(max-width:639px){
+      .result{grid-template-columns:1fr;gap:10px;padding:14px;width:calc(100% - 32px);max-height:calc(100% - 84px);bottom:16px}
+      .res-map{aspect-ratio:2.8/1}.res-timeline{height:54px;margin-top:2px}.res-legend{display:none}
+      .res-total strong{font-size:30px}.res-row{margin-top:8px;padding-top:8px}.res-bar{margin:5px 0 5px}
+      .res-scores{display:contents}.res-visual{order:1}.res-total,.res-row{order:2}.res-explain{order:3}#resNext{order:4;margin-top:0;height:48px}
+      .res-scores .res-row:last-of-type{margin-bottom:0}.res-row dl{gap:2px 12px}
+      .res-explain{max-height:5.6em}.res-explain h3{margin-bottom:4px}
+      .res-explain.open{max-height:none}
+    }
+    @media(max-width:639px){
+      .dock{width:calc(100% - 32px);flex-direction:column;align-items:stretch;gap:8px}
+      .guess{left:16px;right:auto;width:calc(100% - 172px);height:80px;flex-direction:row;align-items:stretch;gap:8px}
+      .guess-status{height:auto;width:56px;flex-direction:column;gap:4px}
+      #guessBtn{height:auto}
+      .map-slot{align-self:flex-end;width:132px;height:80px}
+      .map{width:132px;height:80px}
+      .map:not(.open) .map-label{opacity:0}
+      .timeline{height:auto;padding:12px 16px 10px}
+    }
+    @media(prefers-reduced-motion:reduce){.map,#game *{transition:none!important}#guessBtn.lit,.result,.summary{animation:none}}
   </style>
 </head>
 <body>
-<header><div><h1>MADE IN TIME</h1><p>Guess where. Guess when.</p></div><span class="pill">360° PILOT · 0/60 FREIGEGEBEN</span></header>
-<main>
-  <section id="stage"><div id="panorama"></div><button id="seam" type="button" disabled title="Zum Panorama-Übergang bei 0/360° drehen">Naht prüfen · 180°</button><div id="empty"><div><h2>Noch kein Panorama verfügbar</h2><p class="small">Die ersten drei historischen Szenen sind vorbereitet. Lade ein lokales 360°-Testpanorama (equirectangular, 2:1) hoch, um dich schon jetzt umzusehen.</p></div></div></section>
-  <aside>
-    <div><label for="scene">Pilot-Szene</label><select id="scene"></select></div>
-    <div><label for="upload">Eigenes 360°-Testbild laden</label><input class="file-input" id="upload" type="file" accept="image/jpeg,image/png,image/webp"><p class="small" id="imageStatus">Keine Bilddatei geladen.</p></div>
-    <div><label for="country">Welches Land?</label><select id="country"><option value="">Land wählen</option><option>Großbritannien</option><option>Guatemala</option><option>China</option><option>Indien</option><option>Brasilien</option><option>Deutschland</option><option>Japan</option></select></div>
-    <div><label for="period">Welche Epoche?</label><select id="period"><option value="">Epoche wählen</option><option value="1600">1600–1749</option><option value="1750">1750–1849</option><option value="1850">1850–1913</option><option value="1914">1914–1945</option><option value="1946">1946–1989</option><option value="1990">1990–2026</option></select></div>
-    <button id="guess">Antwort überprüfen</button>
-    <div id="result" role="status" aria-live="polite"></div>
-    <div class="small">Dies ist ein Test-Viewer, noch keine fertige Partie. Die Pilot-Szenen sind fiktive, historisch inspirierte Kompositszenen. Ein hochgeladenes Testbild ist nicht automatisch die gewählte Szene.</div>
-  </aside>
-</main>
+<section id="start" aria-labelledby="startTitle">
+  <div class="bg" id="bg" aria-hidden="true"><div class="ring" id="ring"></div></div>
+  <button class="icon-btn" id="settingsBtn" type="button" aria-label="Einstellungen" aria-haspopup="dialog">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+  </button>
+  <div class="start-inner">
+    <div class="brand"><div class="logo-wrap"><h1 id="startTitle"><img class="logo" src="assets/logo-wo-und-wann.png" width="1200" height="228" alt="Wo &amp; Wann?"></h1></div></div>
+    <form id="startForm">
+      <!-- Theme blocks (docs/SCENE_MASTERPLAN_30.md) and images per round are stored and exposed as body[data-blocks] / body[data-rounds]; gameplay does not use them yet. -->
+      <fieldset>
+        <legend>Themen</legend>
+        <div class="themes">
+          <label class="theme"><input type="checkbox" name="block" value="production" checked><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V9l5 3V9l5 3V9l5 3V4h3v16z"/><path d="M7 16h2M12 16h2"/></svg><span>Produktion</span></label>
+          <label class="theme"><input type="checkbox" name="block" value="trade" checked><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"/><path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/><path d="M12 10v4"/><path d="M12 2v3"/></svg><span>Handel &amp; Macht</span></label>
+          <label class="theme"><input type="checkbox" name="block" value="events" checked><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg><span>Wendepunkte</span></label>
+        </div>
+      </fieldset>
+      <div class="rounds">
+        <div class="rounds-head"><label for="rounds">Bilder pro Runde</label><output id="roundsOut" for="rounds">5 · Mittel</output></div>
+        <input id="rounds" name="rounds" type="range" min="1" max="9" step="1" value="5">
+        <div class="ticks" aria-hidden="true"><span>Leicht</span><span>Mittel</span><span>Schwer</span></div>
+      </div>
+      <div class="start-wrap">
+        <button id="startBtn" type="submit">Spiel starten</button>
+        <p class="score empty" id="score" role="status"><small>Highscore</small><strong id="scoreValue">Noch keine Runde</strong></p>
+      </div>
+    </form>
+  </div>
+  <p class="start-tools"><button type="button" class="link" id="reviewLink">Bilder prüfen</button></p>
+  <p class="start-foot">Ein ZuWi Creative Assignment von Matteo Winter &amp; Niklas Meller unter Aufsicht von Wolfgang Gruber</p>
+</section>
+<dialog id="settings" aria-labelledby="settingsTitle">
+  <h2 id="settingsTitle">Einstellungen</h2>
+  <label class="row" for="motion">Hintergrund bewegen<input class="switch" id="motion" type="checkbox" role="switch" checked></label>
+  <div class="row">Sprache<span class="val">Deutsch</span></div>
+  <form method="dialog"><button id="settingsDone">Fertig</button></form>
+</dialog>
+<div id="game" hidden>
+  <div id="panorama" aria-label="360°-Ansicht: ziehen zum Umsehen"></div>
+  <button class="icon-btn" id="backBtn" type="button" aria-label="Zurück zum Start">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+  </button>
+  <div class="round-pill" id="roundPill">Bild 1 / 5</div>
+  <div class="dock">
+    <div class="card timeline">
+      <div class="timeline-head"><span id="whenLabel">Wann?</span><output id="yearOut" class="empty">Jahr antippen</output></div>
+      <div class="ruler" id="ruler" role="slider" tabindex="0" aria-labelledby="whenLabel" aria-valuemin="1600" aria-valuemax="2025" aria-valuetext="kein Jahr gewählt">
+        <div class="ruler-track" id="rulerTrack"><div class="ghost" id="ghost" hidden></div><div class="marker" id="marker" hidden></div></div>
+      </div>
+    </div>
+    <div class="map-slot"><div class="card map" id="map" role="button" tabindex="0" aria-label="Weltkarte: Ort markieren">
+      <span class="map-label" id="mapLabel">Wo?</span>
+      <div class="map-stage" id="mapStage"><div class="map-layers" id="mapLayers"></div></div>
+      <div class="zoom"><button type="button" id="zoomIn" aria-label="Hineinzoomen">+</button><button type="button" id="zoomOut" aria-label="Herauszoomen">−</button></div>
+    </div></div>
+  </div>
+  <div class="guess">
+    <div class="guess-status" id="guessStatus" aria-live="polite"><i id="dotWhen"></i><i id="dotWhere"></i><span id="guessCount">0/2</span></div>
+    <button type="button" id="guessBtn" disabled>Raten</button>
+  </div>
+  <section class="result" id="result" hidden aria-labelledby="resHead">
+    <div class="res-visual">
+      <div class="res-map" id="resMap"></div>
+      <div class="res-timeline"><div class="ruler-track" id="resTrack"></div></div>
+      <div class="res-legend"><span><i class="lg-mine"></i>Dein Tipp</span><span><i class="lg-true"></i>Richtig</span></div>
+    </div>
+    <div class="res-scores">
+      <div class="res-total"><span id="resHead">Punkte</span><strong id="resTotal">0</strong><small>von 10.000</small></div>
+      <div class="res-row">
+        <div class="res-row-head"><span>Wo?</span><b id="resWherePts">0</b></div>
+        <div class="res-bar"><i id="resWherePtsBar"></i></div>
+        <dl><dt>Richtig</dt><dd id="resWhereRight"></dd><dt>Dein Tipp</dt><dd id="resWhereMine"></dd><dt>Abweichung</dt><dd id="resWhereDiff"></dd></dl>
+      </div>
+      <div class="res-row">
+        <div class="res-row-head"><span>Wann?</span><b id="resWhenPts">0</b></div>
+        <div class="res-bar"><i id="resWhenPtsBar"></i></div>
+        <dl><dt>Richtig</dt><dd id="resWhenRight"></dd><dt>Dein Tipp</dt><dd id="resWhenMine"></dd><dt>Abweichung</dt><dd id="resWhenDiff"></dd></dl>
+      </div>
+      <button type="button" id="resNext">Weiter</button>
+    </div>
+    <div class="res-explain" id="resExplain">
+      <h3 id="resTitle"></h3>
+      <p id="resOverview"></p>
+      <p id="resLearning" class="muted"></p>
+      <p id="resCluesWrap" class="clues"><span>Hinweise im Bild:</span> <span id="resClues"></span></p>
+      <p id="resNote" class="note"></p>
+      <button type="button" id="resMore" class="more" hidden><span>Weiterlesen</span></button>
+    </div>
+  </section>
+  <section class="summary" id="summary" hidden aria-labelledby="sumHead">
+    <span id="sumHead">Runde beendet</span>
+    <div class="sum-total"><strong id="sumTotal">0</strong><small id="sumMax"></small></div>
+    <ol id="sumList"></ol>
+    <button type="button" id="sumDone">Zurück zum Start</button>
+  </section>
+</div>
+<section id="review" hidden aria-label="Bilder prüfen">
+  <div id="reviewPano"></div>
+  <button class="icon-btn" id="revBack" type="button" aria-label="Zurück zum Start">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+  </button>
+  <div class="round-pill" id="revCount">–</div>
+  <div class="rev-card">
+    <div class="rev-head"><div class="rev-title"><b id="revTitle"></b><small id="revMeta"></small></div><span class="rev-badge" id="revBadge"></span></div>
+    <p class="rev-note" id="revNote"></p>
+    <div class="rev-views" role="group" aria-label="Blickrichtung">
+      <button type="button" data-view="front">Vorne</button><button type="button" data-view="seam">Naht</button><button type="button" data-view="up">Oben</button><button type="button" data-view="down">Unten</button>
+    </div>
+    <div class="rev-verdict"><button type="button" id="revOk">Passt</button><button type="button" id="revRedo">Neu machen</button></div>
+    <input id="revComment" type="text" placeholder="Notiz (optional), z. B. Naht sichtbar" aria-label="Notiz">
+    <div class="rev-nav"><button type="button" id="revPrev" aria-label="Vorheriges Bild">←</button><button type="button" id="revCopy">Liste kopieren</button><button type="button" id="revNext" aria-label="Nächstes Bild">→</button></div>
+  </div>
+</section>
+<script>
+// Start-screen background: historical images (public domain / CC0, see docs/START_SCREEN_IMAGES.md)
+// on the inside of a cylinder.
+// Tiles at the sides are close to the camera, the middle ones far behind.
+(()=>{
+const bg=document.getElementById('bg'),ring=document.getElementById('ring');
+const imgs=["e01-boston-tea-party", "e03-suez-1869", "e04-nyse-crowd-1929", "e06-gdansk-gate-1980", "p01-zaandam-mills-1871", "p02-glassworks-encyclopedie", "p03-porcelain-vase-1650", "p04-boiling-house-1823", "p05-powerloom-1835", "p06-tomioka-1872", "p07-krupp-essen-1901", "p10-ford-line-1913", "p12-dammam-7-1938", "p16-atacama-ponds-2018", "t01-voc-oostenburg-1805", "t02-cape-coast-1806", "t03-calcutta-1835", "t04-canton-factories-1806"];
+function build(){
+  const w=innerWidth,h=innerHeight,N=14,R=Math.max(w*.55,480);
+  const cw=2*R*Math.tan(Math.PI/N)*.9,ch=cw*.72,gap=ch*1.1,step=360/N;
+  const rows=Math.min(9,Math.ceil(h/(gap*.55))+1);
+  bg.style.perspective=(R*1.35)+'px';
+  ring.replaceChildren();
+  for(let r=0;r<rows;r++)for(let i=0;i<N;i++){
+    const t=document.createElement('div');t.className='tile';
+    const y=(r-(rows-1)/2)*gap;
+    t.style.cssText='width:'+cw+'px;height:'+ch+'px;left:'+(-cw/2)+'px;top:'+(y-ch/2)+'px;background-image:url(assets/start/'+imgs[(i+r*5)%imgs.length]+'.jpg)'+
+      ';transform:rotateY('+(i*step+(r%2)*step/2)+'deg) translateZ('+(-R)+'px)';
+    ring.appendChild(t);}
+}
+let still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+try{const v=localStorage.getItem('mit-motion');if(v!==null)still=v==='off';}catch(e){}
+const sw=document.getElementById('motion');sw.checked=!still;bg.classList.toggle('still',still);
+sw.addEventListener('change',()=>{bg.classList.toggle('still',!sw.checked);try{localStorage.setItem('mit-motion',sw.checked?'on':'off');}catch(e){}});
+document.getElementById('settingsBtn').addEventListener('click',()=>document.getElementById('settings').showModal());
+document.getElementById('settings').addEventListener('click',e=>{if(e.target===e.currentTarget)e.currentTarget.close();});
+let t;addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(build,150);});
+build();
+})();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.7/build/pannellum.js"></script>
 <script>
 (async ()=>{
-let scenes=[],viewer=null,uploadedUrl=null,hasImage=false;
+let scenes=[],viewer=null;
 const $=id=>document.getElementById(id);
-const periods=[[1600,1749],[1750,1849],[1850,1913],[1914,1945],[1946,1989],[1990,2026]];
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function current(){return scenes.find(s=>s.id===$('scene').value);}
-// Status is only reported after Pannellum's own load/error events, so a missing file or missing WebGL is never shown as "loaded".
-function showImage(url,loadedMsg){if(!window.pannellum){$('imageStatus').textContent='Pannellum konnte nicht geladen werden (Internetverbindung prüfen).';return false;}
-if(viewer){viewer.destroy();viewer=null;}
-hasImage=false;$('seam').disabled=true;$('imageStatus').textContent='Panorama wird geladen …';
-$('empty').style.display='none'; const v=viewer=pannellum.viewer('panorama',{type:'equirectangular',panorama:url,autoLoad:true,showControls:true,compass:false,mouseZoom:true});
-v.on('load',()=>{if(v!==viewer)return;hasImage=true;$('seam').disabled=false;$('imageStatus').textContent=loadedMsg;});
-v.on('error',()=>{if(v!==viewer)return;hasImage=false;$('seam').disabled=true;$('imageStatus').textContent='Panorama konnte nicht angezeigt werden (Datei fehlt oder Browser ohne WebGL).';});
-return true;}
-function openScene(){
-$('result').classList.remove('show');$('country').value='';$('period').value='';
-if(uploadedUrl){URL.revokeObjectURL(uploadedUrl);uploadedUrl=null;}
-$('upload').value='';hasImage=false;$('seam').disabled=true;const s=current();if(!s)return;
-if(!s.panorama_path){if(viewer){viewer.destroy();viewer=null;}$('empty').style.display='flex';$('imageStatus').textContent='Für diese Szene ist noch kein Panorama vorhanden.';return;}
-showImage(s.panorama_path,'Testpanorama geladen – Rundumblick möglich; Naht und Geometrie noch ungeprüft.');
-}
-try {const r=await fetch('data/scenes.json');if(!r.ok)throw Error('JSON fehlt');const data=await r.json();scenes=data.scenes||[];
-scenes.forEach((s,i)=>{const o=document.createElement('option');o.value=s.id;o.textContent='Szene '+String(i+1).padStart(2,'0')+' · '+(s.industry||'Produktionsort');$('scene').appendChild(o);});
-$('scene').addEventListener('change',openScene);if(scenes.length)openScene();}
-catch(e){$('imageStatus').textContent='Szenenliste nicht verfügbar. Bitte lokalen HTTP-Server starten.';}
-$('upload').addEventListener('change',e=>{const f=e.target.files?.[0];if(!f)return;
-if(!/^image\/(jpeg|png|webp)$/.test(f.type)){$('imageStatus').textContent='Bitte JPG, PNG oder WebP wählen.';return;}
-const im=new Image();const u=URL.createObjectURL(f);im.onload=()=>{if(im.width!==im.height*2){$('imageStatus').textContent='Ungültiges 2:1-Bild ('+im.width+'×'+im.height+'). Es wird kein Panorama angezeigt.';URL.revokeObjectURL(u);return;}
-if(uploadedUrl)URL.revokeObjectURL(uploadedUrl);uploadedUrl=u;showImage(u,'Lokales Testpanorama: '+f.name+' ('+im.width+'×'+im.height+').');};
-im.onerror=()=>{URL.revokeObjectURL(u);$('imageStatus').textContent='Bild konnte nicht gelesen werden.';};im.src=u;});
-$('seam').addEventListener('click',()=>{if(viewer)viewer.setYaw(180);});
-$('guess').addEventListener('click',()=>{const s=current();if(!s)return;
-const p=periods.find(([a,b])=>s.year>=a&&s.year<=b);const entered=$('period').value;
-const countryOk=$('country').value===s.country_de,yearOk=p&&entered===String(p[0]);
-const msg=!hasImage?'Hinweis: Es wurde noch kein freigegebenes Szenenpanorama geladen. Das Ergebnis ist nur eine Testauswertung. ':'';
-$('result').innerHTML='<strong>'+escapeHtml(msg)+(countryOk&&yearOk?'Beide Antworten richtig!':countryOk?'Land richtig, Epoche falsch.':yearOk?'Epoche richtig, Land falsch.':'Noch nicht richtig.')+'</strong><p><strong>Auflösung:</strong> '+escapeHtml(s.country_de)+', ca. '+s.year+'.</p><p>'+escapeHtml(s.learning_de)+'</p><p class="small">KI-Komposit / historisch inspirierte Beispielszene, kein Originalfoto eines belegten Betriebs.</p>';
-$('result').classList.add('show');
-});
+// Widest view that still looks natural: about 100° vertical, at most 130° horizontal. Zoom is locked to it.
+function fov(){const a=innerWidth/innerHeight;return Math.min(130,2*Math.atan(Math.tan(50*Math.PI/180)*a)*180/Math.PI);}
+// ---------- Orte ----------
+// Playable Orte come from data/orte.json (images in assets/orte/, solution fields inline) plus every
+// scenes.json pilot that has a panorama. Orte with the same "group" are variants of one place/event:
+// a round contains at most one of them.
+// Dev only: images in the git-excluded assets/panoramas/_local/ (listed in its index.json, solution in a
+// .json next to each image) are added if they are not in orte.json yet. ?pano=assets/... shows one image.
+const LOCAL_DIR='assets/panoramas/_local/',DEV=/^(localhost|127\.0\.0\.1)$/.test(location.hostname),IMG=/\.(jpe?g|png|webp)$/i;
+let scene=null,round=[],roundIdx=0,roundResults=[],orte=null;
+async function localScene(url){let sol={};try{const r=await fetch(url.replace(/\.\w+$/,'.json'));if(r.ok)sol=await r.json();}catch(e){}return {...sol,panorama_path:url};}
+async function loadOrte(){if(orte)return orte;orte=[];try{const r=await fetch('data/orte.json');if(r.ok)orte=((await r.json()).orte||[]).filter(o=>o.panorama_path);}catch(e){}return orte;}
+async function buildPool(blocks){const q=new URLSearchParams(location.search).get('pano'),pool=[...await loadOrte()];
+  if(q&&/^assets\/[\w\/.-]+$/.test(q)&&IMG.test(q))return [pool.find(o=>o.panorama_path===q)||await localScene(q)];
+  if(DEV)try{const r=await fetch(LOCAL_DIR+'index.json');if(r.ok){const l=await r.json();
+    if(Array.isArray(l))for(const f of l)if(/^[\w.-]+$/.test(f)&&IMG.test(f)&&!pool.some(o=>o.source_file===f))pool.push(await localScene(LOCAL_DIR+f));}}catch(e){}
+  for(const s of scenes)if(s.panorama_path&&!pool.some(o=>o.panorama_path===s.panorama_path))pool.push(s); // pilots with a text in orte.json come from there
+  // theme filter; scenes without a block are production sites (all current pilots are)
+  const f=pool.filter(s=>blocks.includes(s.block||'production'));return f.length?f:pool;}
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+// Random rounds, new Orte for as long as possible. localStorage "ww-played" keeps per Ort (group) how often
+// it was shown ("n:") and when last ("g:", a running counter; same for single images with "i:"/"c:").
+// A round is filled tier by tier: Orte shown least often first, so every Ort of the chosen themes comes once
+// before any comes twice. Within a tier the pick is random, Orte from the previous round go last, and the
+// themes take turns, so with several themes a round mixes them. The final order avoids two of the same
+// theme in a row where possible.
+const PLAYED_KEY='ww-played',gkey=s=>s.group||s.id||s.panorama_path,blockOf=s=>s.block||'production';
+function played(){try{return JSON.parse(localStorage.getItem(PLAYED_KEY))||{};}catch(e){return {};}}
+function markPlayed(s){const p=played(),k=gkey(s),i=s.panorama_path;p._n=(p._n||0)+1;
+  p['n:'+k]=(p['n:'+k]??(p['g:'+k]?1:0))+1;p['g:'+k]=p._n;p['b:'+blockOf(s)]=p._n;p['c:'+i]=(p['c:'+i]||0)+1;p['i:'+i]=p._n;
+  try{localStorage.setItem(PLAYED_KEY,JSON.stringify(p));}catch(e){}}
+function pickRound(pool,n){const p=played(),groups=new Map(),recent=(p._n||0)-n;n=Math.max(1,n);
+  for(const s of pool){const k=gkey(s);if(!groups.has(k))groups.set(k,[]);groups.get(k).push(s);}
+  const tiers=new Map();
+  for(const [k,v] of groups){
+    // variant: shown least often, then longest ago
+    const s=shuffle(v).sort((a,b)=>((p['c:'+a.panorama_path]||0)-(p['c:'+b.panorama_path]||0))||((p['i:'+a.panorama_path]||0)-(p['i:'+b.panorama_path]||0)))[0];
+    const last=p['g:'+k]||0,t=2*(p['n:'+k]??(last?1:0))+(last&&last>recent?1:0);
+    if(!tiers.has(t))tiers.set(t,[]);tiers.get(t).push(s);}
+  const segs=[];let count=0;
+  for(const t of [...tiers.keys()].sort((a,b)=>a-b)){const seg=[];segs.push(seg);
+    const byBlock=new Map();for(const s of shuffle(tiers.get(t))){const b=blockOf(s);if(!byBlock.has(b))byBlock.set(b,[]);byBlock.get(b).push(s);}
+    // themes take turns, the one shown longest ago first (matters for short rounds)
+    while(count<n&&byBlock.size)for(const b of shuffle([...byBlock.keys()]).sort((x,y)=>(p['b:'+x]||0)-(p['b:'+y]||0))){if(count>=n)break;
+      const a=byBlock.get(b);seg.push(a.pop());count++;if(!a.length)byBlock.delete(b);}
+    if(count>=n)break;}
+  // order: new Orte before repeats; inside that random, but no two of the same theme in a row if avoidable
+  const ord=[];
+  for(const seg of segs){const rest=shuffle(seg);
+    while(rest.length){const prev=ord.length?blockOf(ord[ord.length-1]):null;let j=rest.findIndex(s=>blockOf(s)!==prev);if(j<0)j=0;ord.push(rest.splice(j,1)[0]);}}
+  return ord;}
+function loadImage(i){roundIdx=i;scene=round[i];$('roundPill').textContent='Bild '+(i+1)+' / '+round.length;
+  if(!scene||!window.pannellum)return;markPlayed(scene);
+  if(round[i+1]){const pre=new Image();pre.src=round[i+1].panorama_path;} // next image loads in the background
+  if(viewer){viewer.destroy();viewer=null;}const h=fov();
+  viewer=pannellum.viewer('panorama',{type:'equirectangular',panorama:scene.panorama_path,autoLoad:true,showControls:false,compass:false,
+    mouseZoom:false,keyboardZoom:false,hfov:h,minHfov:h,maxHfov:h,pitch:0,yaw:0});}
+async function startGame(blocks,n){const pool=await buildPool(blocks);round=pickRound(pool,n);roundResults=[];loadImage(0);}
+addEventListener('resize',()=>{if(!viewer)return;const h=fov();viewer.setHfovBounds([h,h]);viewer.setHfov(h,false);});
+try{const r=await fetch('data/scenes.json');if(r.ok)scenes=(await r.json()).scenes||[];}catch(e){}
+// Timeline
+// Timeline ruler: click or drag to pick a year; arrow keys ±1, Shift ±10.
+const Y0=1600,Y1=2025,ruler=$('ruler'),track=$('rulerTrack'),marker=$('marker'),ghost=$('ghost');let guessYear=null;
+const pct=y=>(y-Y0)/(Y1-Y0)*100;
+for(let y=Y0;y<=Y1;y+=10){const t=document.createElement('div');t.className='tick'+(y%100===0?' major':y%50===0?' mid':'');t.style.left=pct(y)+'%';track.appendChild(t);
+  if(y%100===0){const l=document.createElement('span');l.className='tick-label';l.textContent=y;l.style.left=pct(y)+'%';track.appendChild(l);}}
+const yearAt=x=>{const r=track.getBoundingClientRect();return Math.round(Y0+Math.min(1,Math.max(0,(x-r.left)/r.width))*(Y1-Y0));};
+const yearOut=$('yearOut');
+// Header shows the chosen year; while hovering it previews the year under the pointer in grey.
+function showYear(preview){if(preview!=null){yearOut.textContent=preview;yearOut.className='preview';return;}
+  if(guessYear==null){yearOut.textContent='Jahr antippen';yearOut.className='empty';}else{yearOut.textContent=guessYear;yearOut.className='';}}
+function setYear(y){guessYear=Math.min(Y1,Math.max(Y0,y));marker.style.left=pct(guessYear)+'%';marker.hidden=false;showYear();
+  ruler.setAttribute('aria-valuenow',guessYear);ruler.setAttribute('aria-valuetext',String(guessYear));updateGuess();}
+let dragging=false;
+// Guess progress: 0/2, 1/2, 2/2 (year + country). The button lights up when both are set.
+function updateGuess(){const w=guessYear!=null,c=guessCountry!=null,n=w+c,btn=$('guessBtn'),was=!btn.disabled;
+  $('dotWhen').classList.toggle('on',w);$('dotWhere').classList.toggle('on',c);$('guessCount').textContent=n+'/2';
+  $('guessStatus').classList.toggle('done',n===2);$('guessStatus').setAttribute('aria-label',n+' von 2 gewählt'+(w?'':', Jahr fehlt')+(c?'':', Land fehlt'));
+  btn.disabled=n<2;if(n===2&&!was){btn.classList.remove('lit');void btn.offsetWidth;btn.classList.add('lit');}}
+ruler.addEventListener('pointerdown',e=>{dragging=true;ghost.hidden=true;ruler.setPointerCapture(e.pointerId);setYear(yearAt(e.clientX));});
+ruler.addEventListener('pointermove',e=>{const y=yearAt(e.clientX);if(dragging){setYear(y);return;}
+  if(e.pointerType!=='mouse')return;ghost.style.left=pct(y)+'%';ghost.hidden=false;showYear(y);});
+ruler.addEventListener('pointerup',()=>{dragging=false;});
+ruler.addEventListener('pointerleave',()=>{ghost.hidden=true;showYear();});
+ruler.addEventListener('keydown',e=>{const d={ArrowRight:1,ArrowUp:1,ArrowLeft:-1,ArrowDown:-1}[e.key];if(!d)return;e.preventDefault();
+  setYear((guessYear??1810)+d*(e.shiftKey?10:1));});
+// Map: countries with German names (Natural Earth, public domain). Opens on hover (tap on touch),
+// zoom with wheel / pinch / +−, drag to pan, click on a country to pin it (country turns yellow).
+// Smoothness: during a gesture only a CSS transform moves the already-rendered map; the SVG viewBox,
+// labels and pin are recomputed once the gesture pauses.
+const map=$('map'),stage=$('mapStage'),layers=$('mapLayers');
+let svgC=null,svgT=null,labels=null,pinG=null,selPath=null,guessLL=null,guessCountry=null,IW=0,IH=0,commitT=0;
+const FULL={x:0,y:6,w:360,h:142},vb={...FULL},vbC={...FULL},MAXZ=12;
+const isOpen=()=>map.classList.contains('open');
+function sizes(){const vw=innerWidth,vh=innerHeight,mob=vw<640;
+  const OW=Math.min(880,vw-32),OH=Math.max(160,mob?Math.min(420,vh-220):Math.min(500,vh-150,(vw-32)*.62));
+  IW=OW-16;IH=OH-38;const CW=mob?116:184,CH=mob?64:82;
+  for(const [k,v] of [['--ow',OW+'px'],['--oh',OH+'px'],['--iw',IW+'px'],['--ih',IH+'px'],['--s',Math.min(CW/IW,CH/IH)]])map.style.setProperty(k,v);}
+const upx=v=>Math.max(v.w/IW,v.h/IH);                                   // svg units per CSS pixel (meet)
+const off=v=>{const u=upx(v);return [(IW-v.w/u)/2,(IH-v.h/u)/2];};       // letterbox offset in px
+function clampVb(){vb.w=Math.min(FULL.w,Math.max(FULL.w/MAXZ,vb.w));vb.h=vb.w*FULL.h/FULL.w;
+  vb.x=Math.min(FULL.x+FULL.w-vb.w,Math.max(FULL.x,vb.x));vb.y=Math.min(FULL.y+FULL.h-vb.h,Math.max(FULL.y,vb.y));}
+// works while the map is still scaling open: divide by the stage's current on-screen scale
+function toSvg(cx,cy){const r=stage.getBoundingClientRect(),sc=r.width/IW||1,u=upx(vb),[ox,oy]=off(vb);return {x:vb.x+((cx-r.left)/sc-ox)*u,y:vb.y+((cy-r.top)/sc-oy)*u};}
+function preview(){clampVb();const uC=upx(vbC),k=vbC.w/vb.w,[ox,oy]=off(vbC);
+  layers.style.transform='translate('+(ox*(1-k)+k*(vbC.x-vb.x)/uC)+'px,'+(oy*(1-k)+k*(vbC.y-vb.y)/uC)+'px) scale('+k+')';
+  clearTimeout(commitT);commitT=setTimeout(commit,140);}
+function commit(){if(!svgC||!IW)return;clampVb();Object.assign(vbC,vb);const v=vb.x+' '+vb.y+' '+vb.w+' '+vb.h;
+  svgC.setAttribute('viewBox',v);svgT.setAttribute('viewBox',v);layers.style.transform='';
+  const u=upx(vb),fs=12*u;labels.style.fontSize=fs+'px';labels.style.strokeWidth=(fs*.28)+'px';
+  // Which names fit: rank threshold grows with pixels per degree, then overlapping or clipped names are dropped.
+  const thr=Math.max(1.8,2.2+1.7*Math.log2((1/u)/2.4)),boxes=[];
+  for(const t of [...labels.children].sort((a,b)=>a.dataset.min-b.dataset.min)){let show=+t.dataset.min<=thr;
+    if(show){const x=+t.getAttribute('x'),y=+t.getAttribute('y'),hw=t.textContent.length*fs*.29+fs*.3,hh=fs*.65;
+      if(x-hw<vb.x||x+hw>vb.x+vb.w||y-hh<vb.y||y+hh>vb.y+vb.h)show=false;
+      else if(boxes.some(b=>Math.abs(b[0]-x)<b[2]+hw&&Math.abs(b[1]-y)<b[3]+hh))show=false;else boxes.push([x,y,hw,hh]);}
+    t.classList.toggle('off',!show);}
+  if(guessLL){const k=28/24*u;pinG.setAttribute('transform','translate('+(guessLL.lon+180)+' '+(90-guessLL.lat)+') scale('+k+') translate(-12 -22)');pinG.style.display='';}}
+function zoomAt(cx,cy,f){const p=toSvg(cx,cy),nw=Math.min(FULL.w,Math.max(FULL.w/MAXZ,vb.w/f)),k=nw/vb.w;
+  vb.x=p.x-(p.x-vb.x)*k;vb.y=p.y-(p.y-vb.y)*k;vb.w=nw;vb.h=nw*FULL.h/FULL.w;preview();}
+const NS='http://www.w3.org/2000/svg';
+let mapText='';
+fetch('assets/map/countries.svg').then(r=>r.text()).then(t=>{mapText=t;
+  layers.innerHTML=t;svgC=layers.querySelector('svg');svgC.setAttribute('preserveAspectRatio','xMidYMid meet');
+  // labels + pin live in a second SVG on top, so they can fade in/out without repainting the countries
+  svgT=document.createElementNS(NS,'svg');svgT.setAttribute('class','map-top');svgT.setAttribute('preserveAspectRatio','xMidYMid meet');
+  labels=svgC.querySelector('.labels');svgT.appendChild(labels);
+  pinG=document.createElementNS(NS,'path');pinG.setAttribute('class','pin');pinG.style.display='none';pinG.setAttribute('fill-rule','evenodd');
+  pinG.setAttribute('d','M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12zM12 12.6a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2z');
+  svgT.appendChild(pinG);layers.appendChild(svgT);sizes();commit();});
+function selectCountry(path,p){if(selPath)selPath.classList.remove('sel');selPath=path;path.classList.add('sel');
+  guessCountry=path.dataset.name;guessLL={lon:p.x-180,lat:90-p.y};
+  const lab=$('mapLabel');lab.textContent='Wo?';const b=document.createElement('b');b.textContent=guessCountry;lab.appendChild(b);commit();updateGuess();}
+// ---------- Result ----------
+// Scoring follows GeoGuessr's world-map curve: 5000 · e^(−d / 1492.7 km) for the place
+// (full 5000 when the country is right), and the same idea for time: 5000 · e^(−Δyears / 40).
+const ALIAS={'vereinigte staaten':'usa','vereinigte staaten von amerika':'usa','united states':'usa','vereinigtes königreich':'großbritannien',
+  'united kingdom':'großbritannien','volksrepublik china':'china','republik china':'taiwan','demokratische republik kongo':'dr kongo'};
+const norm=n=>{n=String(n||'').trim().toLowerCase();return ALIAS[n]||n;};
+const placeScore=(d,ok)=>ok?5000:Math.round(5000*Math.exp(-d/1492.7));
+const timeScore=dy=>Math.round(5000*Math.exp(-Math.abs(dy)/40));
+function km(a,b){const R=6371,r=Math.PI/180,dl=(b.lat-a.lat)*r,dn=(b.lon-a.lon)*r;
+  const h=Math.sin(dl/2)**2+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h));}
+const fmt=n=>n.toLocaleString('de-DE');
+function solutionPoint(){if(Number.isFinite(scene?.lat)&&Number.isFinite(scene?.lon))return {lat:scene.lat,lon:scene.lon};
+  // fallback: the country's label point on the map
+  const t=[...(labels?.children||[])].find(t=>norm(t.textContent)===norm(scene?.country_de));
+  return t?{lon:+t.getAttribute('x')-180,lat:90-+t.getAttribute('y')}:null;}
+function countUp(el,to){if(matchMedia('(prefers-reduced-motion: reduce)').matches){el.textContent=fmt(to);return;}
+  const t0=performance.now();const step=t=>{const k=Math.min(1,(t-t0)/700),e=1-Math.pow(1-k,3);el.textContent=fmt(Math.round(to*e));if(k<1)requestAnimationFrame(step);};requestAnimationFrame(step);}
+function drawResultMap(sol){const box=$('resMap');box.innerHTML=mapText;const sv=box.querySelector('svg');if(!sv)return;
+  sv.setAttribute('preserveAspectRatio','xMidYMid meet');
+  const right=norm(scene.country_de),mine=norm(guessCountry);
+  for(const p of sv.querySelectorAll('.countries path')){const n=norm(p.dataset.name);if(n===right)p.classList.add('sel');else if(n===mine)p.classList.add('guess');}
+  const g={x:guessLL.lon+180,y:90-guessLL.lat},S=sol?{x:sol.lon+180,y:90-sol.lat}:g;
+  const r=box.getBoundingClientRect(),asp=r.height/r.width||.56;
+  let w=Math.max(Math.abs(g.x-S.x)*1.8,Math.abs(g.y-S.y)*1.8/asp,40),h=w*asp;
+  const vb={x:(g.x+S.x)/2-w/2,y:(g.y+S.y)/2-h/2,w,h};sv.setAttribute('viewBox',vb.x+' '+vb.y+' '+vb.w+' '+vb.h);
+  const u=Math.max(vb.w/r.width,vb.h/r.height),NS='http://www.w3.org/2000/svg',el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);sv.appendChild(e);return e;};
+  const lab=sv.querySelector('.labels');lab.style.fontSize=(12*u)+'px';lab.style.strokeWidth=(12*u*.28)+'px';
+  for(const t of [...lab.children]){const n=norm(t.textContent);if(n!==right&&n!==mine)t.remove();}
+  if(sol){el('line',{x1:g.x,y1:g.y,x2:S.x,y2:S.y,class:'res-line'});
+    el('circle',{cx:S.x,cy:S.y,r:7*u,class:'res-true'});}
+  el('path',{class:'pin',d:'M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12zM12 12.6a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2z','fill-rule':'evenodd',
+    transform:'translate('+g.x+' '+g.y+') scale('+(26/24*u)+') translate(-12 -22)'});
+  sv.appendChild(lab);}
+function drawResultTimeline(y,Y){const tr=$('resTrack');tr.replaceChildren();const P=v=>pct(v)+'%';
+  for(let v=Y0;v<=Y1;v+=50){const t=document.createElement('div');t.className='tick'+(v%100===0?' major':' mid');t.style.left=P(v);tr.appendChild(t);
+    if(v%100===0){const l=document.createElement('span');l.className='tick-label';l.textContent=v;l.style.left=P(v);tr.appendChild(l);}}
+  if(Y!=null){const sp=document.createElement('div');sp.className='res-span';sp.style.left=P(Math.min(y,Y));sp.style.width=(Math.abs(pct(y)-pct(Y)))+'%';tr.appendChild(sp);
+    const m=document.createElement('div');m.className='marker';m.style.left=P(Y);tr.appendChild(m);}
+  const g=document.createElement('div');g.className='marker mine';g.style.left=P(y);tr.appendChild(g);}
+$('guessBtn').addEventListener('click',()=>{if(guessYear==null||!guessCountry)return;
+  const sol=solutionPoint(),hasYear=Number.isFinite(scene?.year),okC=!!scene?.country_de&&norm(guessCountry)===norm(scene.country_de);
+  const d=sol?Math.round(km(guessLL,sol)):null,dy=hasYear?guessYear-scene.year:null;
+  const ps=sol||okC?placeScore(d??0,okC):0,ts=hasYear?timeScore(dy):0;
+  window.lastGuess={year:guessYear,country:guessCountry,lon:guessLL.lon,lat:guessLL.lat,distanceKm:d,yearDiff:dy,points:{place:ps,time:ts}};
+  roundResults[roundIdx]={title:scene?.title_de||[scene?.site_type,scene?.year].filter(Boolean).join(', ')||'Bild '+(roundIdx+1),points:ps+ts};
+  $('resNext').textContent=roundIdx<round.length-1?'Weiter':'Ergebnis der Runde';
+  $('game').classList.add('resolved');$('result').hidden=false;$('result').scrollTop=0;
+  // where
+  $('resWhereRight').textContent=scene?.country_de?(scene.country_de+(scene.place_de?' · '+scene.place_de:'')):'keine Lösung hinterlegt';
+  $('resWhereMine').textContent=guessCountry+(okC?' ✓':'');
+  $('resWhereDiff').textContent=okC?'Richtiges Land'+(d!=null&&Number.isFinite(scene?.lat)?' · '+fmt(d)+' km vom Ort':''):(d!=null?fmt(d)+' km entfernt':'–');
+  // when
+  $('resWhenRight').textContent=hasYear?scene.year:'–';$('resWhenMine').textContent=guessYear+(dy===0?' ✓':'');
+  $('resWhenDiff').textContent=dy==null?'–':dy===0?'Genau richtig':Math.abs(dy)+(Math.abs(dy)===1?' Jahr ':' Jahre ')+(dy<0?'zu früh':'zu spät');
+  for(const [id,v] of [['resWherePts',ps],['resWhenPts',ts]]){countUp($(id),v);$(id+'Bar').style.width=(v/50)+'%';}
+  countUp($('resTotal'),ps+ts);
+  // explanation
+  $('resTitle').textContent=scene?.title_de||scene?.site_type||scene?.industry||'Auflösung';
+  $('resOverview').textContent=scene?.overview_de||'';$('resLearning').textContent=scene?.learning_de||'';
+  const clues=scene?.visual_clues||[];$('resClues').textContent=clues.join(' · ');$('resCluesWrap').hidden=!clues.length;
+  // phones: explanation is clamped so the result fits on one screen; "Weiterlesen" expands it
+  const ex=$('resExplain');ex.classList.remove('open');$('result').classList.remove('expanded');requestAnimationFrame(()=>{$('resMore').hidden=ex.scrollHeight<=ex.clientHeight+2;});
+  $('resNote').textContent=scene?.historical_status==='composite_reconstruction'||!scene?.historical_status?'KI-Rekonstruktion eines historisch belegten Schauplatzes – kein Originalfoto.':'';
+  requestAnimationFrame(()=>{drawResultMap(sol);drawResultTimeline(guessYear,hasYear?scene.year:null);});
+  $('resNext').focus({preventScroll:true});});
+function resetGuess(){guessYear=null;marker.hidden=true;ruler.removeAttribute('aria-valuenow');ruler.setAttribute('aria-valuetext','kein Jahr gewählt');showYear();
+  if(selPath)selPath.classList.remove('sel');selPath=null;guessCountry=null;guessLL=null;if(pinG)pinG.style.display='none';$('mapLabel').textContent='Wo?';updateGuess();}
+$('resMore').addEventListener('click',()=>{$('resExplain').classList.add('open');$('result').classList.add('expanded');$('resMore').hidden=true;});
+$('resNext').addEventListener('click',()=>{resetGuess();$('result').hidden=true;$('game').classList.remove('resolved');
+  if(roundIdx<round.length-1){loadImage(roundIdx+1);return;}
+  showSummary();});
+function showSummary(){const total=roundResults.reduce((a,r)=>a+(r?.points||0),0),max=round.length*10000;
+  try{localStorage.setItem('mit-last-round',JSON.stringify({points:total,max}));}catch(e){}
+  updateSticker();$('game').classList.add('resolved');
+  $('sumTotal').textContent=fmt(total);$('sumMax').textContent='von '+fmt(max);
+  const ul=$('sumList');ul.replaceChildren();
+  roundResults.forEach((r,i)=>{const li=document.createElement('li'),a=document.createElement('span'),b=document.createElement('b');
+    a.textContent=(i+1)+'  '+r.title;b.textContent=fmt(r.points);li.append(a,b);ul.appendChild(li);});
+  $('summary').hidden=false;$('sumDone').focus({preventScroll:true});}
+$('sumDone').addEventListener('click',()=>{$('summary').hidden=true;$('game').classList.remove('resolved');$('game').hidden=true;$('start').hidden=false;});
+// open / close
+let closeT;
+function openMap(){clearTimeout(closeT);map.classList.add('open');}
+function closeMap(){map.classList.remove('open');}
+map.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')openMap();});
+map.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse'&&!pointers.size)closeT=setTimeout(closeMap,300);});
+document.addEventListener('pointerdown',e=>{if(!map.contains(e.target)&&isOpen())closeMap();});
+const centre=()=>{const r=stage.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2];};
+map.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();isOpen()?closeMap():openMap();}
+  else if(isOpen()&&(e.key==='+'||e.key==='-'))zoomAt(...centre(),e.key==='+'?1.6:1/1.6);});
+for(const [id,f] of [['zoomIn',1.6],['zoomOut',1/1.6]])$(id).addEventListener('click',e=>{e.stopPropagation();zoomAt(...centre(),f);});
+stage.addEventListener('wheel',e=>{if(!isOpen()||!svgC)return;e.preventDefault();zoomAt(e.clientX,e.clientY,Math.pow(1.0018,-e.deltaY));},{passive:false});
+// pan, pinch, click
+const pointers=new Map();let moved=false,pinchD=0;
+stage.addEventListener('pointerdown',e=>{if(!svgC)return;if(!isOpen()){openMap();return;}
+  stage.setPointerCapture(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});moved=false;
+  if(pointers.size===2){const [a,b]=[...pointers.values()];pinchD=Math.hypot(a.x-b.x,a.y-b.y);}});
+stage.addEventListener('pointermove',e=>{const prev=pointers.get(e.pointerId);if(!prev)return;const cur={x:e.clientX,y:e.clientY};
+  if(pointers.size===1){const dx=cur.x-prev.x,dy=cur.y-prev.y;if(!moved&&Math.hypot(dx,dy)<4)return;
+    moved=true;map.classList.add('panning');const u=upx(vb);vb.x-=dx*u;vb.y-=dy*u;pointers.set(e.pointerId,cur);preview();return;}
+  pointers.set(e.pointerId,cur);const [a,b]=[...pointers.values()],d=Math.hypot(a.x-b.x,a.y-b.y);moved=true;
+  if(pinchD)zoomAt((a.x+b.x)/2,(a.y+b.y)/2,d/pinchD);pinchD=d;});
+function endPointer(e){if(!pointers.has(e.pointerId))return;pointers.delete(e.pointerId);pinchD=0;map.classList.remove('panning');
+  if(e.type==='pointerup'&&!moved&&!pointers.size){
+    const path=document.elementFromPoint(e.clientX,e.clientY)?.closest('#mapStage .countries path');
+    if(path)selectCountry(path,toSvg(e.clientX,e.clientY));}}
+stage.addEventListener('pointerup',endPointer);stage.addEventListener('pointercancel',endPointer);
+addEventListener('resize',()=>{sizes();commit();});
+$('backBtn').addEventListener('click',()=>{resetGuess();$('result').hidden=true;$('summary').hidden=true;$('game').classList.remove('resolved');$('game').hidden=true;$('start').hidden=false;});
+// ---------- Image review (start screen → "Bilder prüfen") ----------
+// Walks through every Ort (scenes.json + local) and extra local candidates (_local/review.json).
+// Verdicts and notes are kept in this browser (localStorage "ww-review") and can be copied as a list.
+let revList=[],revIdx=0,revViewer=null;const REV_KEY='ww-review';
+const revStore=()=>{try{return JSON.parse(localStorage.getItem(REV_KEY))||{};}catch(e){return {};}};
+function revSave(path,patch){const st=revStore();st[path]={...(st[path]||{}),...patch};try{localStorage.setItem(REV_KEY,JSON.stringify(st));}catch(e){}}
+const imgSize={};
+function sizeOf(url){return imgSize[url]||(imgSize[url]=new Promise(res=>{const i=new Image();i.onload=()=>res([i.naturalWidth,i.naturalHeight]);i.onerror=()=>res(null);i.src=url;}));}
+async function buildReviewList(){const pool=await buildPool(['production','trade','events']);
+  const BL={production:'Produktion',trade:'Handel & Macht',events:'Wendepunkte'};
+  const list=pool.map(s=>({path:s.panorama_path,title:s.title_de||[s.site_type||s.industry,s.year].filter(Boolean).join(', ')||s.panorama_path.split('/').pop(),
+    id:(s.id||'').replace(/-local(-test)?$/,''),block:BL[s.block||'production'],note:scenes.includes(s)?'Pilotszene aus scenes.json':s.panorama_path.includes('/_local/')?'nur lokal, noch nicht in orte.json':''}));
+  if(DEV)try{const r=await fetch(LOCAL_DIR+'review.json');if(r.ok)for(const x of await r.json())if(/^[\w.-]+\.(jpe?g|png|webp)$/i.test(x.file||''))
+    list.push({path:LOCAL_DIR+x.file,title:x.title||x.file,id:'',block:'nicht spielbar',note:x.note||''});}catch(e){}
+  return list;}
+function revShow(i){revIdx=(i+revList.length)%revList.length;const it=revList[revIdx],st=revStore()[it.path]||{};
+  $('revCount').textContent=(revIdx+1)+' / '+revList.length;$('revTitle').textContent=(it.id?it.id+' · ':'')+it.title;
+  $('revNote').textContent=it.note;$('revComment').value=st.note||'';
+  $('revOk').classList.toggle('on',st.v==='ok');$('revRedo').classList.toggle('on',st.v==='redo');
+  const b=$('revBadge');b.className='rev-badge'+(st.v?' '+st.v:'');b.textContent=st.v==='ok'?'Passt':st.v==='redo'?'Neu machen':'';
+  const meta=$('revMeta'),file=it.path.split('/').pop();meta.textContent=it.block+' · '+file;
+  sizeOf(it.path).then(sz=>{if(revList[revIdx]!==it||!sz)return;const [w,h]=sz,warn=[];if(w<4096)warn.push('unter 4K');if(Math.abs(w/h-2)>.01)warn.push('nicht 2:1');
+    meta.textContent=it.block+' · '+file+' · '+w+'×'+h;if(warn.length){const sp=document.createElement('span');sp.className='warn';sp.textContent=' · '+warn.join(', ');meta.appendChild(sp);}});
+  if(revViewer){revViewer.destroy();revViewer=null;}
+  if(window.pannellum)revViewer=pannellum.viewer('reviewPano',{type:'equirectangular',panorama:it.path,autoLoad:true,showControls:false,compass:false,hfov:100,minHfov:30,maxHfov:120});}
+// The review tool shows every image with its solution, so players online don't see it: only on localhost or with ?review.
+if(!(DEV||/[?&]review\b/.test(location.search)))$('reviewLink').closest('.start-tools').style.display='none';
+$('reviewLink').addEventListener('click',async()=>{revList=await buildReviewList();if(!revList.length)return;$('start').hidden=true;$('review').hidden=false;revShow(0);$('revNext').focus();});
+$('revBack').addEventListener('click',()=>{if(revViewer){revViewer.destroy();revViewer=null;}$('review').hidden=true;$('start').hidden=false;});
+$('revPrev').addEventListener('click',()=>revShow(revIdx-1));$('revNext').addEventListener('click',()=>revShow(revIdx+1));
+for(const [id,v] of [['revOk','ok'],['revRedo','redo']])$(id).addEventListener('click',()=>{const it=revList[revIdx],cur=(revStore()[it.path]||{}).v;revSave(it.path,{v:cur===v?null:v});revShow(revIdx);});
+$('revComment').addEventListener('input',e=>revSave(revList[revIdx].path,{note:e.target.value}));
+for(const b of document.querySelectorAll('.rev-views button'))b.addEventListener('click',()=>{if(!revViewer)return;
+  const v={front:[0,0],seam:[0,180],up:[90,0],down:[-90,0]}[b.dataset.view];revViewer.lookAt(v[0],v[1],100,600);});
+document.addEventListener('keydown',e=>{if($('review').hidden||e.target.tagName==='INPUT')return;
+  if(e.key==='ArrowRight')revShow(revIdx+1);else if(e.key==='ArrowLeft')revShow(revIdx-1);else if(e.key==='1')$('revOk').click();else if(e.key==='2')$('revRedo').click();});
+$('revCopy').addEventListener('click',async()=>{const st=revStore();
+  const lines=revList.map(it=>{const r=st[it.path]||{};return [(it.id||'–'),it.title,it.path.split('/').pop(),r.v==='ok'?'Passt':r.v==='redo'?'Neu machen':'offen',r.note||''].join(' | ');});
+  const txt='Bildprüfung '+new Date().toLocaleDateString('de-DE')+'\n'+lines.join('\n');
+  let ok=false;try{await navigator.clipboard.writeText(txt);ok=true;}catch(e){}
+  if(!ok){const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{ok=document.execCommand('copy');}catch(e){}t.remove();}
+  const b=$('revCopy');b.textContent=ok?'Kopiert ✓':'Kopieren nicht möglich';setTimeout(()=>b.textContent='Liste kopieren',1600);});
+const blockInputs=[...document.querySelectorAll('#startForm input[name=block]')];
+function syncStart(){const n=blockInputs.filter(i=>i.checked).length;$('startBtn').disabled=!n;$('startBtn').textContent=n?'Spiel starten':'Mindestens ein Thema wählen';}
+try{const saved=JSON.parse(localStorage.getItem('mit-blocks'));if(Array.isArray(saved)&&saved.length)blockInputs.forEach(i=>i.checked=saved.includes(i.value));}catch(e){}
+blockInputs.forEach(i=>i.addEventListener('change',syncStart));syncStart();
+// Last-round sticker: points of the last finished round (mit-last-round = {"points":n,"max":m}). ?demo=score shows a sample.
+function updateSticker(){let last=null;try{last=JSON.parse(localStorage.getItem('mit-last-round'));}catch(e){}
+  if(/[?&]demo=score\b/.test(location.search))last={points:23450,max:30000};
+  if(!(last&&Number.isFinite(last.points)))return;
+  const el=$('score');el.classList.remove('empty');el.querySelector('small').textContent='Letzte Runde';$('scoreValue').textContent=fmt(last.points);}
+updateSticker();
+const rounds=$('rounds');
+function syncRounds(){const v=+rounds.value;rounds.style.setProperty('--p',((v-1)/8*100)+'%');
+  $('roundsOut').textContent=v+' · '+(v<=3?'Leicht':v<=6?'Mittel':'Schwer');}
+try{const r=+localStorage.getItem('mit-rounds');if(r>=1&&r<=9)rounds.value=r;}catch(e){}
+rounds.addEventListener('input',syncRounds);syncRounds();
+$('startForm').addEventListener('submit',e=>{e.preventDefault();const blocks=new FormData(e.target).getAll('block');if(!blocks.length)return;
+try{localStorage.setItem('mit-blocks',JSON.stringify(blocks));}catch(err){}
+document.body.dataset.blocks=blocks.join(' ');document.body.dataset.rounds=rounds.value;
+try{localStorage.setItem('mit-rounds',rounds.value);}catch(err){}resetGuess();$('result').hidden=true;$('summary').hidden=true;$('game').classList.remove('resolved');
+$('start').hidden=true;$('game').hidden=false;sizes();commit();startGame(blocks,+rounds.value);});
 })();
 </script>
 </body>
