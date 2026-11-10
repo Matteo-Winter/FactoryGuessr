@@ -565,6 +565,28 @@
    "group": "P16",
    "panorama_path": "assets/orte/chile-lithium.jpg",
    "source_file": "chile-lithium.jpg"
+  },
+  {
+   "id": "X03",
+   "block": "events",
+   "title_de": "Attentat von Sarajevo, 28. Juni 1914",
+   "place_de": "Lateinerbrücke am Appel-Kai, Sarajevo (Österreich-Ungarn)",
+   "country_de": "Bosnien und Herzegowina",
+   "year": 1914,
+   "lat": 43.8579,
+   "lon": 18.4289,
+   "overview_de": "An der Ecke bei der Lateinerbrücke über die Miljacka hält ein offenes Automobil mit dem Thronfolgerpaar, ein junger Mann zielt mit einer Pistole, Passanten ducken sich. Hier erschoss am 28. Juni 1914 der bosnisch-serbische Nationalist Gavrilo Princip den österreichischen Thronfolger Franz Ferdinand und dessen Frau Sophie. Rekonstruktion, kein echtes Foto.",
+   "learning_de": "Bosnien war seit 1908 von Österreich-Ungarn annektiert, viele Serben wollten einen gemeinsamen Staat mit Serbien. Nach dem Attentat stellte Wien Serbien ein Ultimatum; über die Bündnisse der Großmächte wurde daraus innerhalb weniger Wochen der Erste Weltkrieg. Der Krieg zerstörte Handelsnetze, die Europa vor 1914 eng mit der Welt verbunden hatten.",
+   "visual_clues": [
+    "Minarett und Häuser am Hang",
+    "Steinbrücke über einen Fluss",
+    "offenes Automobil und Straßenbahn",
+    "Uniformen und Kleidung um 1910"
+   ],
+   "historical_status": "composite_reconstruction",
+   "group": "X03",
+   "panorama_path": "assets/orte/sarajevo-1914.jpg",
+   "source_file": "sarajevo-1914.png"
   }
  ]
 }
