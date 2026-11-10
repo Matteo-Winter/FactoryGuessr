@@ -407,6 +407,29 @@
    "group": "X02",
    "panorama_path": "assets/orte/kristallpalast-1851.jpg",
    "source_file": "kristallpalast-1851.png"
+  },
+  {
+   "id": "P06",
+   "block": "production",
+   "title_de": "Seidenspinnerei Tomioka, Japan, um 1880",
+   "place_de": "Tomioka, Präfektur Gunma",
+   "country_de": "Japan",
+   "year": 1880,
+   "lat": 36.2553,
+   "lon": 138.8875,
+   "overview_de": "In einer langen Halle mit Holzdachstuhl und Ziegelwänden sitzen junge Frauen an Haspelmaschinen. Sie ziehen den Faden von Seidenkokons ab, die in Becken mit heißem Wasser liegen, und wickeln ihn auf Spulen; Körbe voller weißer Kokons stehen bereit. Die staatliche Seidenspinnerei Tomioka wurde 1872 eröffnet.",
+   "learning_de": "Nach der Meiji-Restauration wollte Japan schnell zu den westlichen Industriestaaten aufschließen. Die Regierung baute Tomioka mit französischen Maschinen und Fachleuten als Musterfabrik; dort ausgebildete Arbeiterinnen gaben ihr Wissen in anderen Fabriken weiter. Rohseide wurde zu Japans wichtigstem Exportgut und finanzierte die Industrialisierung. Die Fabrik ist heute UNESCO-Welterbe.",
+   "visual_clues": [
+    "Seidenkokons in Körben",
+    "Haspelmaschinen mit dampfenden Wasserbecken",
+    "Arbeiterinnen in Kimono",
+    "Holzdachstuhl und Ziegelwände",
+    "Aufseher im westlichen Anzug"
+   ],
+   "historical_status": "composite_reconstruction",
+   "group": "P06",
+   "panorama_path": "assets/orte/tomioka-seide.jpg",
+   "source_file": "tomioka-seide.png"
   }
  ]
 }
