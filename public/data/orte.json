@@ -453,6 +453,28 @@
    "group": "P07",
    "panorama_path": "assets/orte/ruhr-stahl.jpg",
    "source_file": "ruhr-stahl.png"
+  },
+  {
+   "id": "P08",
+   "block": "production",
+   "title_de": "Kautschuk-Sammelstelle im Kongo-Freistaat, um 1900",
+   "place_de": "Regenwald am Fluss, Äquatorregion bei Coquilhatville (heute Mbandaka)",
+   "country_de": "DR Kongo",
+   "year": 1900,
+   "lat": 0.0487,
+   "lon": 18.2603,
+   "overview_de": "Im Regenwald an einem Fluss zapfen Männer milchigen Kautschuksaft in Schalen, formen ihn zu dunklen Ballen und tragen ihn in Körben zu Booten; ein europäischer Agent mit Tropenhelm überwacht die Abgabe. Um 1900 war der Kongo das Privateigentum des belgischen Königs Leopold II., der „Kongo-Freistaat“.",
+   "learning_de": "Fahrradreifen, Autoreifen und Kabelisolierungen ließen die Nachfrage nach Kautschuk explodieren. Im Kongo wurde er aus wilden Lianen gewonnen. Konzessionsgesellschaften verlangten von den Dörfern feste Mengen und setzten sie mit Geiselnahmen, Gewalt und Verstümmelungen durch; Millionen Menschen kamen ums Leben. Internationale Proteste führten 1908 dazu, dass Belgien den Kongo als Kolonie übernahm. Rekonstruktion, kein echtes Foto.",
+   "visual_clues": [
+    "Kautschuksaft und dunkle Kautschukballen",
+    "tropischer Regenwald mit Lianen",
+    "Einbäume am Fluss",
+    "europäischer Aufseher mit Tropenhelm"
+   ],
+   "historical_status": "composite_reconstruction",
+   "group": "P08",
+   "panorama_path": "assets/orte/kongo-kautschuk.jpg",
+   "source_file": "kongo-kautschuk.png"
   }
  ]
 }
