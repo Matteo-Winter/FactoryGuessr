@@ -565,6 +565,28 @@
    "group": "P16",
    "panorama_path": "assets/orte/chile-lithium.jpg",
    "source_file": "chile-lithium.jpg"
+  },
+  {
+   "id": "X03",
+   "block": "events",
+   "title_de": "Bau der ersten transkontinentalen Eisenbahn, USA, um 1868",
+   "place_de": "Strecke der Central Pacific durch die Wüste von Nevada",
+   "country_de": "USA",
+   "year": 1868,
+   "lat": 40.973,
+   "lon": -117.7357,
+   "overview_de": "In einer weiten Wüstenebene vor kahlen Bergen verlegen Arbeiter Schwellen und Schienen, daneben stehen Zelte, Planwagen, Pferde und Stapel von Holzschwellen; die Telegrafenleitung folgt der Strecke. Ab 1863 bauten zwei Gesellschaften die erste Eisenbahn quer durch die USA – die Central Pacific von Westen, die Union Pacific von Osten.",
+   "learning_de": "Am 10. Mai 1869 trafen sich beide Strecken in Promontory (Utah). Die Reise von New York nach San Francisco dauerte statt Monaten nur noch etwa eine Woche, Waren aus Asien konnten über den Pazifik und dann per Bahn quer durch den Kontinent transportiert werden. Gebaut wurde die Westseite vor allem von über 10.000 chinesischen Arbeitern, schlechter bezahlt als weiße Arbeiter; die Bahn verdrängte zudem indigene Völker aus ihrem Land.",
+   "visual_clues": [
+    "Schienen und Holzschwellen in der Wüste",
+    "Zelte, Planwagen und Pferde",
+    "Telegrafenmasten entlang der Strecke",
+    "Kleidung der 1860er"
+   ],
+   "historical_status": "composite_reconstruction",
+   "group": "X03",
+   "panorama_path": "assets/orte/usa-eisenbahn-1869.jpg",
+   "source_file": "usa-eisenbahn-1869.png"
   }
  ]
 }
