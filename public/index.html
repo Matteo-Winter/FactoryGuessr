@@ -94,46 +94,6 @@
     #settingsDone{width:100%;margin-top:24px;height:56px;border-radius:12px;background:var(--text);color:var(--bg);font:600 17px/1 "Hanken Grotesk",Inter,sans-serif}
     #settingsDone:hover{background:var(--text);opacity:.9}
     @media(max-width:639px){#settings{margin:auto 0 0;max-width:none;border-radius:16px 16px 0 0;border-width:1px 0 0;padding-bottom:max(24px,env(safe-area-inset-bottom))}}
-    /* Name + leaderboard sheets (same look as settings) */
-    #boardBtn{left:16px;right:auto}
-    .sheet{--bg:#0a0a0a;--text:#fafafa;--muted:#8a8a8a;--line:#262626;--surface:#141414;font-family:"Hanken Grotesk",Inter,ui-sans-serif,system-ui,sans-serif;
-      background:var(--bg);color:var(--text);border:1px solid var(--line);padding:24px;width:100%;max-width:400px;border-radius:16px}
-    .sheet[open]{animation:sheet 260ms cubic-bezier(.2,0,0,1)}
-    .sheet::backdrop{background:rgba(0,0,0,.6)}
-    .sheet h2{font-size:20px;font-weight:600;margin:0}
-    .sheet .sub{margin:6px 0 0;font-size:14px;line-height:1.45;color:var(--muted)}
-    .sheet .cta{width:100%;margin-top:20px;height:56px;border-radius:12px;background:var(--text);color:var(--bg);font:600 17px/1 "Hanken Grotesk",Inter,sans-serif;transition:opacity 120ms,transform 120ms cubic-bezier(.2,0,0,1)}
-    .sheet .cta:hover{opacity:.9}.sheet .cta:active{transform:scale(.985)}.sheet .cta:focus-visible{outline:2px solid var(--text);outline-offset:3px}
-    .sheet .cta:disabled{background:#262626;color:#737373;opacity:1;cursor:not-allowed;transform:none}
-    #nameInput{display:block;width:100%;height:56px;margin-top:20px;padding:0 16px;border-radius:12px;border:1px solid #404040;background:var(--surface);color:var(--text);
-      font:500 17px/1 "Hanken Grotesk",Inter,sans-serif;transition:border-color 150ms cubic-bezier(.2,0,0,1)}
-    #nameInput::placeholder{color:#737373}
-    #nameInput:focus{outline:none;border-color:var(--text)}
-    #nameInput[aria-invalid=true]{border-color:#ff6b6b}
-    .name-err{min-height:20px;margin:8px 0 0;font-size:14px;line-height:1.4;color:#ff6b6b}
-    .name-err:empty{min-height:0;margin:0}
-    .row-btn{width:100%;padding:0;background:none;text-align:left;cursor:pointer;transition:background-color 120ms cubic-bezier(.2,0,0,1)}
-    .row-btn .val{display:flex;align-items:center;gap:6px;max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-    .row-btn .val::after{content:"";flex:none;width:7px;height:7px;margin:0 2px 0 4px;border:solid currentColor;border-width:1.75px 1.75px 0 0;transform:rotate(45deg)}
-    .row-btn:hover .val,.row-btn:focus-visible .val{color:var(--text)}
-    .row-btn:focus-visible{outline:2px solid var(--text);outline-offset:2px;border-radius:4px}
-    #board{max-height:min(640px,calc(100dvh - 48px));display:none;flex-direction:column}
-    #board[open]{display:flex}
-    .board-head{display:flex;justify-content:space-between;align-items:baseline;margin:20px 0 0;padding:0 0 8px;border-bottom:1px solid var(--line);font-size:12px;font-weight:500;color:var(--muted)}
-    #boardList{list-style:none;margin:0;padding:0;overflow:auto;min-height:0;flex:1}
-    #boardList li{display:grid;grid-template-columns:32px 1fr auto;align-items:center;gap:8px;min-height:48px;border-bottom:1px solid var(--line);font-size:16px}
-    #boardList .rk{font-size:14px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
-    #boardList .nm{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
-    #boardList b{font-weight:600;font-variant-numeric:tabular-nums}
-    #boardList li:nth-child(-n+3) .rk{color:var(--text)}
-    #boardList li.me{background:var(--surface);margin:0 -8px;padding:0 8px;border-radius:8px}
-    #boardList li.me .rk{color:#ffd43b}
-    #boardList li.gap{min-height:24px;border:0;color:#525252;display:block;text-align:center;font-size:14px}
-    .board-status{margin:16px 0 0;font-size:15px;line-height:1.45;color:var(--muted)}
-    .board-status:empty{display:none}
-    @media(max-width:639px){.sheet{margin:auto 0 0;max-width:none;border-radius:16px 16px 0 0;border-width:1px 0 0;padding-bottom:max(24px,env(safe-area-inset-bottom))}
-      #board{max-height:calc(100dvh - 64px)}}
-    @media(prefers-reduced-motion:reduce){.sheet[open]{animation:none}.sheet *{transition:none!important}}
     .start-foot{position:relative;z-index:1;margin:32px auto 0;max-width:960px;text-align:center;font-size:14px;line-height:1.45;color:var(--muted);text-wrap:balance}
     @media(min-width:640px){.brand h1{font-size:56px}}
     @media(max-height:640px){.start-tools{margin-top:8px}#start{padding-top:64px}.theme{min-height:80px;padding:10px 6px;gap:6px}.brand{margin-bottom:20px}.rounds{margin-top:14px}.start-wrap{margin-top:22px}.start-foot{margin-top:14px}}
@@ -285,10 +245,6 @@
     .summary li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
     .summary li span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;white-space-collapse:preserve}
     .summary li b{font-variant-numeric:tabular-nums}
-    .sum-board{margin:10px 0 0;font-size:15px;line-height:1.45;color:var(--muted)}
-    .sum-board:empty{display:none}
-    .sum-board b{color:var(--text);font-weight:600}
-    .sum-tools{margin:12px 0 0;text-align:center}
     #sumDone{width:100%;height:56px;margin-top:20px;border-radius:12px;background:var(--text);color:var(--bg);font-size:17px;font-weight:600;transition:opacity 120ms,transform 120ms cubic-bezier(.2,0,0,1)}
     #sumDone:hover{opacity:.9}#sumDone:active{transform:scale(.985)}#sumDone:focus-visible{outline:2px solid var(--text);outline-offset:3px}
     /* Start screen: quiet tool link */
@@ -359,9 +315,6 @@
   <button class="icon-btn" id="settingsBtn" type="button" aria-label="Einstellungen" aria-haspopup="dialog">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
   </button>
-  <button class="icon-btn" id="boardBtn" type="button" aria-label="Rangliste" aria-haspopup="dialog">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
-  </button>
   <div class="start-inner">
     <div class="brand"><div class="logo-wrap"><h1 id="startTitle"><img class="logo" src="assets/logo-wo-und-wann.png" width="1200" height="228" alt="Wo &amp; Wann?"></h1></div></div>
     <form id="startForm">
@@ -391,26 +344,8 @@
 <dialog id="settings" aria-labelledby="settingsTitle">
   <h2 id="settingsTitle">Einstellungen</h2>
   <label class="row" for="motion">Hintergrund bewegen<input class="switch" id="motion" type="checkbox" role="switch" checked></label>
-  <button type="button" class="row row-btn" id="nameRow">Name<span class="val" id="nameVal">Nicht festgelegt</span></button>
   <div class="row">Sprache<span class="val">Deutsch</span></div>
   <form method="dialog"><button id="settingsDone">Fertig</button></form>
-</dialog>
-<dialog id="nameSheet" class="sheet" aria-labelledby="nameTitle">
-  <form id="nameForm" novalidate>
-    <h2 id="nameTitle">Wie heißt du?</h2>
-    <p class="sub">Dein Name erscheint in der Rangliste. Jeden Namen gibt es nur einmal.</p>
-    <input id="nameInput" type="text" maxlength="20" autocomplete="nickname" autocapitalize="words" spellcheck="false" placeholder="Name" aria-label="Name" aria-describedby="nameErr">
-    <p class="name-err" id="nameErr" role="alert"></p>
-    <button type="submit" class="cta" id="nameBtn">Weiter</button>
-  </form>
-</dialog>
-<dialog id="board" class="sheet" aria-labelledby="boardTitle">
-  <h2 id="boardTitle">Rangliste</h2>
-  <p class="sub">Beste Runde pro Spieler, Punkte im Schnitt pro Bild. Es zählen Runden ab 5 Bildern.</p>
-  <div class="board-head"><span>Spieler</span><span>Ø pro Bild</span></div>
-  <ol id="boardList"></ol>
-  <p class="board-status" id="boardStatus" role="status"></p>
-  <form method="dialog"><button class="cta">Schließen</button></form>
 </dialog>
 <div id="game" hidden>
   <div id="panorama" aria-label="360°-Ansicht: ziehen zum Umsehen"></div>
@@ -467,10 +402,8 @@
   <section class="summary" id="summary" hidden aria-labelledby="sumHead">
     <span id="sumHead">Runde beendet</span>
     <div class="sum-total"><strong id="sumTotal">0</strong><small id="sumMax"></small></div>
-    <p class="sum-board" id="sumBoard" role="status"></p>
     <ol id="sumList"></ol>
     <button type="button" id="sumDone">Zurück zum Start</button>
-    <p class="sum-tools"><button type="button" class="link" id="sumBoardBtn">Rangliste ansehen</button></p>
   </section>
 </div>
 <section id="review" hidden aria-label="Bilder prüfen">
@@ -736,8 +669,7 @@ function showSummary(){const total=roundResults.reduce((a,r)=>a+(r?.points||0),0
   const ul=$('sumList');ul.replaceChildren();
   roundResults.forEach((r,i)=>{const li=document.createElement('li'),a=document.createElement('span'),b=document.createElement('b');
     a.textContent=(i+1)+'  '+r.title;b.textContent=fmt(r.points);li.append(a,b);ul.appendChild(li);});
-  $('summary').hidden=false;$('sumDone').focus({preventScroll:true});
-  submitScore(roundResults.map(r=>r?.points||0));}
+  $('summary').hidden=false;$('sumDone').focus({preventScroll:true});}
 $('sumDone').addEventListener('click',()=>{$('summary').hidden=true;$('game').classList.remove('resolved');$('game').hidden=true;$('start').hidden=false;});
 // open / close
 let closeT;
@@ -825,69 +757,7 @@ function syncRounds(){const v=+rounds.value;rounds.style.setProperty('--p',((v-1
   $('roundsOut').textContent=v+' · '+(v<=3?'Leicht':v<=6?'Mittel':'Schwer');}
 try{const r=+localStorage.getItem('mit-rounds');if(r>=1&&r<=9)rounds.value=r;}catch(e){}
 rounds.addEventListener('input',syncRounds);syncRounds();
-// ---------- Player name + leaderboard (api/leaderboard.js) ----------
-// localStorage "ww-player" = {token, name, ok}. The token proves which browser owns a name; ok = the server confirmed the name.
-// Without a reachable server (local python server, store not set up) the game still runs; scores are just not sent.
-const API='/api/leaderboard',PLAYER_KEY='ww-player',MIN_IMAGES=5;
-const NAME_RE=/^[\p{L}\p{N}][\p{L}\p{N} ._'-]*$/u;
-let me=(()=>{try{const p=JSON.parse(localStorage.getItem(PLAYER_KEY));if(p&&/^[a-f0-9]{32}$/.test(p.token))return p;}catch(e){}
-  const a=new Uint8Array(16);crypto.getRandomValues(a);return {token:[...a].map(b=>b.toString(16).padStart(2,'0')).join(''),name:'',ok:false};})();
-const savePlayer=()=>{try{localStorage.setItem(PLAYER_KEY,JSON.stringify(me));}catch(e){}$('nameVal').textContent=me.name||'Nicht festgelegt';};
-savePlayer();
-async function api(body){const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),8000);
-  try{const r=await fetch(body?API:API+(me.name?'?me='+encodeURIComponent(me.name):''),body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:ctl.signal}:{signal:ctl.signal});
-    let data=null;try{data=await r.json();}catch(e){}return {status:r.status,data:data||{}};}
-  catch(e){return {status:0,data:{}};}finally{clearTimeout(t);}}
-const cleanName=s=>s.normalize('NFKC').replace(/\s+/g,' ').trim();
-// → 'ok' | 'taken' | 'invalid' | 'rate' | 'offline'
-async function claimName(name){const {status,data}=await api({action:'claim',name,token:me.token});
-  if(status===200){me.name=data.name||name;me.ok=true;savePlayer();return 'ok';}
-  if(status===409)return 'taken';if(status===400)return 'invalid';if(status===429)return 'rate';
-  me.name=name;me.ok=false;savePlayer();return 'offline';}
-// Name sheet: opened before the first game and from settings. onDone runs after a name is set.
-let nameDone=null;
-const NAME_MSG={taken:'Diesen Namen gibt es schon. Bitte nimm einen anderen.',invalid:'2 bis 20 Zeichen: Buchstaben, Zahlen, Leerzeichen und . _ \' -. Beleidigungen sind nicht erlaubt.',rate:'Zu viele Versuche. Bitte warte kurz.'};
-function askName(onDone,err){nameDone=onDone||null;const inp=$('nameInput');inp.value=me.name||'';
-  $('nameErr').textContent=err?NAME_MSG[err]||'':'';inp.setAttribute('aria-invalid',err?'true':'false');
-  $('nameBtn').disabled=false;$('nameBtn').textContent='Weiter';$('nameSheet').showModal();inp.focus();inp.select();}
-$('nameInput').addEventListener('input',()=>{$('nameErr').textContent='';$('nameInput').setAttribute('aria-invalid','false');});
-$('nameForm').addEventListener('submit',async e=>{e.preventDefault();const name=cleanName($('nameInput').value),btn=$('nameBtn');
-  const fail=code=>{$('nameErr').textContent=NAME_MSG[code];$('nameInput').setAttribute('aria-invalid','true');$('nameInput').focus();};
-  if([...name].length<2||[...name].length>20||!NAME_RE.test(name))return fail('invalid');
-  if(name===me.name&&me.ok){$('nameSheet').close();nameDone?.();return;}
-  btn.disabled=true;const slow=setTimeout(()=>btn.textContent='Prüfen …',600);
-  const res=await claimName(name);clearTimeout(slow);btn.disabled=false;btn.textContent='Weiter';
-  if(res==='ok'||res==='offline'){$('nameSheet').close();const f=nameDone;nameDone=null;f?.();}else fail(res);});
-$('nameSheet').addEventListener('close',()=>{nameDone=null;});
-$('nameSheet').addEventListener('click',e=>{if(e.target===e.currentTarget)e.currentTarget.close();});
-$('nameRow').addEventListener('click',()=>{$('settings').close();askName();});
-// Score after each round. Only rounds with ≥5 images count; the server keeps the best average per player.
-async function submitScore(points){const el=$('sumBoard');el.replaceChildren();
-  if(!me.name)return;
-  if(points.length<MIN_IMAGES){el.textContent='Für die Rangliste zählen Runden ab '+MIN_IMAGES+' Bildern.';return;}
-  if(!me.ok&&(await claimName(me.name))!=='ok'){el.textContent='Rangliste gerade nicht erreichbar, diese Runde wurde nicht eingetragen.';return;}
-  const {status,data}=await api({action:'score',name:me.name,token:me.token,points});
-  if(status!==200){if(status===403){me.ok=false;savePlayer();}el.textContent='Rangliste gerade nicht erreichbar, diese Runde wurde nicht eingetragen.';return;}
-  const b=t=>{const x=document.createElement('b');x.textContent=t;return x;},place=data.rank?' · Platz '+data.rank+' von '+data.total:'';
-  if(data.improved)el.append(b('Neuer Bestwert: Ø '+fmt(data.avg)+' pro Bild'),place);
-  else el.append('Ø '+fmt(data.avg)+' pro Bild · dein Bestwert ',b('Ø '+fmt(data.best)),place);}
-async function openBoard(){const list=$('boardList'),st=$('boardStatus');list.replaceChildren();st.textContent='';$('board').showModal();
-  const slow=setTimeout(()=>st.textContent='Lädt …',600);const {status,data}=await api();clearTimeout(slow);
-  if(status!==200){st.textContent='Die Rangliste ist gerade nicht erreichbar.';return;}
-  const row=(e,mine)=>{const li=document.createElement('li'),rk=document.createElement('span'),nm=document.createElement('span'),v=document.createElement('b');
-    rk.className='rk';nm.className='nm';rk.textContent=e.rank;nm.textContent=e.name;v.textContent=fmt(e.avg);if(mine)li.className='me';li.append(rk,nm,v);return li;};
-  const mine=data.me&&data.me.rank;
-  for(const e of data.top||[])list.appendChild(row(e,mine===e.rank));
-  if(mine&&!(data.top||[]).some(e=>e.rank===mine)){const g=document.createElement('li');g.className='gap';g.textContent='…';list.append(g,row(data.me,true));}
-  if(!(data.top||[]).length)st.textContent='Noch keine Einträge. Spiel eine Runde mit mindestens '+MIN_IMAGES+' Bildern.';
-  else if(me.name&&!mine)st.textContent='Du bist noch nicht drin: spiel eine Runde mit mindestens '+MIN_IMAGES+' Bildern.';
-  list.querySelector('.me')?.scrollIntoView({block:'nearest'});}
-$('boardBtn').addEventListener('click',openBoard);$('sumBoardBtn').addEventListener('click',openBoard);
-$('board').addEventListener('click',e=>{if(e.target===e.currentTarget)e.currentTarget.close();});
-// Start needs a name. A name that could not be confirmed earlier (offline) is claimed again first.
-$('startForm').addEventListener('submit',async e=>{e.preventDefault();const blocks=new FormData(e.target).getAll('block');if(!blocks.length)return;
-if(!me.name)return askName(()=>$('startForm').requestSubmit());
-if(!me.ok){const res=await claimName(me.name);if(res==='taken'||res==='invalid')return askName(()=>$('startForm').requestSubmit(),res);}
+$('startForm').addEventListener('submit',e=>{e.preventDefault();const blocks=new FormData(e.target).getAll('block');if(!blocks.length)return;
 try{localStorage.setItem('mit-blocks',JSON.stringify(blocks));}catch(err){}
 document.body.dataset.blocks=blocks.join(' ');document.body.dataset.rounds=rounds.value;
 try{localStorage.setItem('mit-rounds',rounds.value);}catch(err){}resetGuess();$('result').hidden=true;$('summary').hidden=true;$('game').classList.remove('resolved');
