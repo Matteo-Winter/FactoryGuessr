@@ -521,6 +521,28 @@
    "group": "P12",
    "panorama_path": "assets/orte/saudi-oel.jpg",
    "source_file": "saudi-oel.jpg"
+  },
+  {
+   "id": "P15",
+   "block": "production",
+   "title_de": "Halbleiterfabrik in Hsinchu, Taiwan, 2023",
+   "place_de": "Hsinchu Science Park",
+   "country_de": "Taiwan",
+   "year": 2023,
+   "lat": 24.7738,
+   "lon": 121.0108,
+   "overview_de": "Im Reinraum einer Chipfabrik arbeiten Menschen in Schutzanzügen an Maschinen, in denen Siliziumscheiben (Wafer) belichtet und bearbeitet werden; Wafer-Behälter fahren an Schienen unter der Decke. Der gelb beleuchtete Bereich ist die Lithografie: Gelbes Licht schützt den lichtempfindlichen Fotolack. In Hsinchu sitzt die Zentrale von TSMC, dem größten Auftragsfertiger für Chips der Welt.",
+   "learning_de": "Fast alle modernen Geräte brauchen Chips – Handys, Autos, Computer. Firmen wie Apple oder Nvidia entwerfen ihre Chips selbst, lassen sie aber bei TSMC in Taiwan fertigen; dort entsteht der größte Teil der weltweit modernsten Chips. Als während der Corona-Pandemie Chips knapp wurden, standen in Europa Autofabriken still. Die Abhängigkeit von Taiwan ist deshalb ein großes wirtschaftliches und politisches Thema.",
+   "visual_clues": [
+    "Reinraum mit Schutzanzügen",
+    "gelb beleuchteter Lithografie-Bereich",
+    "Wafer-Behälter an Deckenschienen",
+    "moderne Computerbildschirme"
+   ],
+   "historical_status": "composite_reconstruction",
+   "group": "P15",
+   "panorama_path": "assets/orte/taiwan-chips.jpg",
+   "source_file": "taiwan-chips.jpg"
   }
  ]
 }
