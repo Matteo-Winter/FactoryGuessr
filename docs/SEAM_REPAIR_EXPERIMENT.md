@@ -1,0 +1,119 @@
+# Experiment: lokale 360°-Nahtreparatur (nl-1660-wind-sawmill)
+
+Stand 09.11.2026 · Refs #6 · **Ergebnis: Naht farblich repariert, strukturell INCONCLUSIVE; Motiv historisch FAIL (kein Paltrok). Bild nicht freigegeben.**
+
+## Verfahren
+
+`scripts/experimental_seam_repair.py` ist kostenlos und läuft lokal mit NumPy, SciPy und Pillow, ohne KI-Modell und ohne Netzwerk.
+
+1. Das Bild wird zyklisch um die halbe Breite verschoben, sodass die Naht bei ±180° in der Bildmitte liegt.
+2. Pro Zeile und Farbkanal wird der Sprung über die Naht gemessen, abzüglich des natürlichen lokalen Gradienten.
+3. Die Korrektur ±Sprung/2 wird als harmonisches Feld (Laplace-Lösung, DCT entlang der Höhe) in ein Band von ±`--band` Pixeln verteilt. Sie gilt exakt an der Naht und läuft am Bandrand auf 0 aus. Feine Anteile klingen nach wenigen Pixeln ab, Farb- und Helligkeitsversätze verteilen sich weich. Konturen und Textur im Band bleiben erhalten, außerhalb des Bands bleibt das Bild bitgleich (das Skript prüft das).
+4. Das Bild wird zurückverschoben und verlustfrei als PNG gespeichert.
+
+```bash
+python3 scripts/experimental_seam_repair.py qa-candidates/<bild>.jpg qa-candidates/<bild>-seamfix.png --band 160
+python3 scripts/check_panorama.py qa-candidates/<bild>-seamfix.png
+python3 scripts/export_panorama_views.py qa-candidates/<bild>-seamfix.png
+```
+
+**Grenze:** Das Verfahren erfindet oder verschiebt keine Inhalte. Formen, die auf beiden Seiten verschieden sind (Wolkenumriss, abgeschnittenes Objekt), bleiben als Bruch sichtbar.
+
+## Messung: Kandidat `nl-1660-wind-sawmill-upscaled-4096x2048.jpg`
+
+SHA-256 `37bb3c94…dacdd`, 4096×2048, hochskaliert, kein Original-PNG verfügbar. Der Kandidat bleibt unverändert, die Reparatur ist eine separate Datei.
+
+| Messung | Vorher | Nachher (Band 64 / 160 / 320) |
+|---|---|---|
+| `check_panorama.py`: Naht/normal | 3,739 (`SEAM_COLOR_DISCONTINUITY`) | 0,367 (keine Warnung) |
+| `export_panorama_views.py`: Nahtsprung/normal | 3,962 | 0,252 |
+| Unabhängiger Kontrollwert: geglättete Spalten 7 px auseinander, Naht/normal (1,0 = typisch) | 1,39 | 1,14 |
+| Polzeilen-Kennwert | 4,646 / 9,274 | unverändert (±0,03) |
+
+Die ersten beiden Metriken messen genau den Pixelsprung, den das Verfahren ausgleicht. Ihr Wert unter 1 ist deshalb **kein Qualitätsnachweis**. Der Kontrollwert misst über 7 px hinweg. Er sinkt von 1,39 auf 1,14, der Rest von etwa 14 % entspricht dem verbleibenden inhaltlichen Bruch. Die Bandbreite ändert die Werte kaum. 160 px sehen am natürlichsten aus, bei 64 px bleibt im Himmel ein leichter Helligkeitsverlauf sichtbar.
+
+## Sichtprüfung (Vorher/Nachher, auch 1:1 und dreifach vergrößert)
+
+- **Himmel:** Die harte Helligkeits- und Farbkante ist verschwunden. Eine Wolke endet allerdings genau an der Naht, in der Vergrößerung bleibt der Umriss sichtbar.
+- **Ufer, Wiese, Horizont:** Sie laufen jetzt durchgehend weiter. Horizont und Uferlinie lagen schon vorher auf gleicher Höhe.
+- **Boot und Stämme:** Die Farbkante ist weg, die Stammenden sind leicht versetzt. Bei normalem Blickfeld fällt das kaum auf.
+- **Fass:** Der linke Rand des Fasses ist exakt an der Naht senkrecht abgeschnitten. Dieser Formbruch bleibt.
+- **Boden:** Die Diele läuft weiter, es gibt keine Streifen-Artefakte.
+- **Zenit und Nadir:** unverändert, ohne neue Fehler.
+- **Windrad und Säge:** Sie liegen außerhalb des Bands und sind unverändert. Der verformte Flügel bleibt.
+
+**Bewertung Naht: INCONCLUSIVE.** Farbe und Helligkeit sind repariert, im Viewer fällt die Naht bei normalem Blickfeld kaum noch auf. Zwei inhaltliche Formbrüche (Wolke, Fass) bleiben bei Nahsicht erkennbar. Für eine saubere Naht bräuchte es ein Inpainting der Formen, also ein lokales KI-Modell. Ein solches ist hier nicht installiert (kein torch, kein OpenCV), und eine Installation ist nicht freigegeben.
+
+## Historische Prüfung der Bauform: FAIL
+
+Laut Faktenkarte (`docs/scene-research/nl-1660-wind-sawmill.md`) und Zaanse Schans (*Sawmill De Gekroonde Poelenburg*: „The entire 'paltrok mill' turns on a ring of rollers“, Arbeitsboden „open on three sides“) sitzt bei einem Paltrok der Mühlenkörper mit den Flügeln **direkt auf** dem Sägeboden. Der ganze Bau dreht sich gemeinsam auf einem Rollenkranz, die Kurbelwelle unter den Flügeln treibt die Sägerahmen an.
+
+Im Kandidaten ist das nicht so:
+- Die Sägehalle ist ein **separater** Holzschuppen mit gebogenem Dach.
+- Die grüne Windmühle steht **daneben** auf eigenem Bock wie eine Bockwindmühle (Standerdmolen) und hat keine sichtbare mechanische Verbindung zur Säge.
+- Die Zahnräder im Schuppen haben keine nachvollziehbare Antriebsquelle.
+- Ein Flügel ist verformt.
+
+Das Bild zeigt also keine zusammenhängende Paltrokmühle. Die Nahtreparatur ändert daran nichts. **Empfehlung: Motiv neu erzeugen** mit einem Prompt, der Mühlenkörper, Flügel und offenen Sägeboden als *ein* Gebäude festlegt. Die Nahtreparatur kann danach auf den neuen Kandidaten angewendet werden.
+
+## Status
+
+- `public/` und `scenes.json` sind unverändert, weiter 0/60 `ready`.
+- Kandidat und Reparaturergebnisse liegen nur lokal in `qa-candidates/` und `qa-output/` (von git ignoriert).
+- Tests: `tests/test_experimental_seam_repair.py` mit 5 Tests (Farbsprung entfernt, nur das Band verändert, nahtloses Bild bleibt praktisch gleich, Fehlereingaben, CLI). Gesamte Suite: 21/21 OK.
+
+## Zweiter Kandidat: `nl-1660-paltrok-v2.png` (Neugenerierung, 09.11.2026)
+
+SHA-256 `412ee73f…5aa11e`, **1774×887 (unter 4K)**. Nahtreparatur mit `--band 70`, weil die Bandbreite zur Bildbreite passen muss.
+
+| Messung | Vorher | Nachher |
+|---|---|---|
+| `check_panorama.py`: Naht/normal | 4,493 (`BELOW_4K`, `SEAM_COLOR_DISCONTINUITY`) | 0,666 (`BELOW_4K`) |
+| `export_panorama_views.py`: Nahtsprung/normal | 9,276 | 1,161 |
+| Kontrollwert über 7 px | 1,65 | 0,97 |
+
+**Naht: FAIL, und die Reparatur ist hier ungeeignet.** Links der Naht liegen Himmel, Wiese und Kanal, rechts beginnen abrupt ein Haus mit Ziegeldach und ein Bretterstapel. Hier stoßen zwei Bildinhalte gegeneinander, das ist kein Farbversatz. Die Korrektur verschmiert diesen Unterschied als **orangen Schleier in den Himmel** und als blassen Streifen über die Bretter. Das Bild wird dadurch sichtbar schlechter, obwohl **alle drei Kennwerte besser aussehen**. Auch der Kontrollwert fällt auf 0,97 und lässt sich also täuschen.
+
+**Folgerung:** Das Verfahren taugt nur, wenn an der Naht inhaltlich dasselbe auf beiden Seiten liegt und nur Farbe oder Helligkeit abweichen (wie beim ersten Kandidaten). Liegt ein Objekt quer zur Naht, ist nur eine Neugenerierung oder ein Inpainting sinnvoll. Über das Ergebnis entscheidet immer der Blick auf Nahtansicht und Nahaufnahme, keine der Metriken.
+
+**Bauform: deutlich näher am Paltrok, aber noch nicht freigegeben.**
+- **Plausibel:** sichtbarer Rollenkranz mit Holzrollen unter der Plattform (das Gebäude dreht sich als Ganzes), offener Sägeboden, senkrechter Sägerahmen, große Zahnrad- und Wellenmechanik, Stamm auf dem Sägeschlitten, Kanal mit Stammfloß, Polder mit Windmühlen am Horizont.
+- **Fraglich:**
+  - Der Mühlenkörper ist ein runder Pavillon mit geschwungenem Kegeldach, die Flügel sitzen auf der Dachspitze. Ein historischer Paltrok hat einen hohen, rechteckigen Holzkörper mit Flügeln an der Stirnseite und Seitenanbauten. Das muss gegen Abbildungen geprüft werden.
+  - Die Flügel sind verbogen und liegen nicht in einer starren Ebene.
+  - Die Verbindung von der Flügelwelle oben zur Kurbelwelle unten ist nicht sichtbar.
+
+## Dritter Kandidat: `nl-1660-paltrok-v3-upscaled-4096x2048.jpg`
+
+SHA-256 `d75fbe8f…26df4`, 4096×2048, laut Dateiname hochskaliert. Nahtreparatur mit `--band 160`.
+
+| Messung | Vorher | Nachher |
+|---|---|---|
+| `check_panorama.py`: Naht/normal | 2,233 (`SEAM_COLOR_DISCONTINUITY`, `POLE_ROW_VARIATION`) | 0,189 (`POLE_ROW_VARIATION`) |
+| `export_panorama_views.py`: Nahtsprung/normal | 6,173 | 0,465 |
+| Polzeilen-Kennwert oben/unten | 12,52 / 9,29 | 12,55 / 9,31 |
+
+**Naht: nach Reparatur visuell PASS.** Bei 180° liegen nur Himmel, Wiese und Kanal auf beiden Seiten, ohne Objekt quer zur Naht. Die Linie ist danach auch in dreifacher Vergrößerung in Himmel und Wasser nicht mehr zu sehen, es gibt weder Schleier noch Streifen. Damit ist das der in Kandidat 2 beschriebene Fall, in dem das Verfahren taugt.
+
+**Zenit: FAIL.** Beim Blick senkrecht nach oben laufen die Wolken sternförmig zusammen (Warnung `POLE_ROW_VARIATION`), und der obere Flügel läuft bis in den Pol. Die Nahtreparatur ändert daran nichts, weil der Fehler außerhalb des Bands liegt. Reparieren ließe er sich nur durch Retusche der Polkappe oder durch eine Neugenerierung mit mehr freiem Himmel über der Mühle.
+
+**Geometrie der Flügel: fraglich.** In den perspektivischen Ansichten nach oben (pitch 35–40°) erscheinen die Flügelruten als Bögen. Starre Ruten müssten dort gerade sein. Das spricht dafür, dass der obere Bildteil nicht exakt equirectangular gezeichnet ist.
+
+**Bauform: deutlich näher am Paltrok.**
+- ✅ Hoher, rechteckiger Holzkörper mit vier Flügeln an der Stirnseite, darunter der offene Sägeboden mit Seitenanbauten (ruimen-artig), Rollenkranz, Kurbelwelle mit Zahnrad und Sägerahmen. Im Umfeld Zaan-typische Holzhäuser, Polder und Kanal.
+- ⚠️ Zu prüfen: Die Pfosten der Seitendächer stehen außerhalb des Rollenkranzes auf dem festen Steg. Bei einem Paltrok dreht sich der ganze Bau mit, die Anbauten müssten also mitdrehen können. Der Sägerahmen zeigt nur ein einzelnes Blatt, historisch üblich sind Gatter mit mehreren Blättern.
+
+## Vierter Kandidat: `nl-1660-paltrok-v4.png`
+
+SHA-256 `2020ef8c…dffdc98c3`, **1774×887 (unter 4K)**. Nahtreparatur mit `--band 70`.
+
+| Messung | Vorher | Nachher |
+|---|---|---|
+| `check_panorama.py`: Naht/normal | 1,529 (`BELOW_4K`, `SEAM_COLOR_DISCONTINUITY`, `POLE_ROW_VARIATION`) | 0,431 (`BELOW_4K`, `POLE_ROW_VARIATION`) |
+| `export_panorama_views.py`: Nahtsprung/normal | 4,546 | 0,882 |
+| Polzeilen-Kennwert oben/unten | 11,74 / 12,61 | 11,72 / 12,59 |
+
+- **Naht: nach Reparatur visuell PASS.** Bei 180° liegen nur Himmel, Wiese und Kanal, die Linie ist danach nicht mehr zu sehen.
+- **Bauform: ✅ deutlich verbessert.** Sägegatter mit mehreren Blättern, die Seitendächer stehen auf der Plattform über dem Rollenkranz, die Mühle liegt komplett unter freiem Himmel.
+- **Zenit: kleiner, aber noch vorhanden.** Der sternförmige Wolkenwirbel ist kleiner und liegt im freien Himmel, der Flügel reicht nicht mehr in den Pol.
+- **Flügel: FAIL.** Die Ruten sind im Panorama als gerades, achsparalleles Kreuz gezeichnet. Für eine gerade Rute oberhalb des Horizonts ist das in einer equirectangularen Projektion falsch, sie müsste dort gekrümmt erscheinen. Im Viewer biegen sich die waagerechten Flügel deshalb deutlich nach oben („Bananenform“), sobald man zur Mühle hochschaut. Weil das das Hauptmotiv bei yaw 0° ist, fällt der Fehler sofort auf und lässt sich mit lokaler Retusche nicht beheben.
